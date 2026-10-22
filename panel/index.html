@@ -1014,13 +1014,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 </div>
                 <div id="scythed-account-actions" class="hidden flex flex-wrap gap-2 pt-1">
                     <button type="button" onclick="window.scythedApp.accountLogin()" id="scythed-account-login-button" class="hidden px-2.5 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-[10px] font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition items-center gap-1.5" title="Zaloguj konto SCYTHED hasłem z Cloudflare D1"><i class="fas fa-user-lock"></i><span>ZALOGUJ KONTO</span></button>
-                    <button type="button" onclick="window.scythedApp.openAdminPanel()" id="scythed-admin-panel-button" class="hidden px-2.5 py-1.5 bg-red-600/10 hover:bg-red-600/20 text-brand-red text-[10px] font-bold rounded-lg border border-red-500/40 transition items-center gap-1.5" title="Panel administracyjny SCYTHED"><i class="fas fa-shield-halved"></i><span>PANEL ADMINA</span></button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2">
+    <div class="fixed bottom-4 right-4 z-40 flex flex-row-reverse items-center gap-2">
+        <button type="button" onclick="window.scythedApp.openAdminPanel()" id="scythed-admin-panel-button" class="hidden w-12 h-12 rounded-2xl bg-red-600/10 border border-red-500/40 text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md items-center justify-center text-lg transition-all glow-effect" title="Panel admina" aria-label="Panel admina"><i class="fas fa-shield-halved"></i></button>
         <button onclick="window.scythedApp.openSettingsModal()" class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" title="Ustawienia & System">
             <i class="fas fa-gear"></i>
         </button>
@@ -1052,6 +1052,11 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <button onclick="window.scythedApp.openChangeMasterModal()" class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-800 hover:bg-brand-red hover:text-white text-brand-red text-xs font-bold rounded-xl border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5">
                     Zmień Hasło Master
                 </button>
+            </div>
+
+            <div id="general-admin-button-setting-wrap" class="hidden flex items-start justify-between gap-3 p-3 rounded-xl border border-red-500/30 bg-red-500/5">
+                <div><div class="text-xs font-bold">Widoczność przycisku panelu admina</div><p class="text-[10px] text-zinc-500 mt-1">Dostępne tylko dla kont z uprawnieniami właściciela lub administratora.</p></div>
+                <input id="general-admin-button-setting" type="checkbox" class="mt-1 accent-red-600" onchange="window.scythedApp.adminSaveSettings()" aria-label="Pokaż przycisk panelu admina">
             </div>
 
             <div class="space-y-2">
@@ -3769,7 +3774,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     betaBadge.setAttribute('aria-label', 'Beta Tester');
                 }
                 if (verifiedIcon) verifiedIcon.classList.toggle('hidden', profile.verified !== true);
-                updateAccountActionButtons({ verified: profile.verified === true, hasAdminBadge: isAdmin, username: u });
+                updateAccountActionButtons({ verified: profile.verified === true, hasAdminBadge: isAdmin, hasOwnerBadge: isOwner, username: u });
                 if (isOwner) [adminBadge, paragonBadge, bugHunterBadge, moderatorBadge, betaBadge].forEach(el => { if (el) el.classList.add('hidden'); });
             }
 
@@ -5600,7 +5605,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             let scythedShowAdminButton = true;
             function updateAccountActionButtons(profile = {}) {
                 const name = String(profile.username ?? username ?? '').trim().replace(/^@/, '').toLowerCase();
-                const eligible = !!name && (profile.verified === true || profile.hasAdminBadge === true || name === 'szymon');
+                const eligible = !!name && (profile.hasAdminBadge === true || profile.hasOwnerBadge === true || name === 'szymon');
                 const actions = document.getElementById('scythed-account-actions');
                 const loginButton = document.getElementById('scythed-account-login-button');
                 const panelButton = document.getElementById('scythed-admin-panel-button');
@@ -5639,7 +5644,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     if (!data.canSeeAdmin) throw new Error('To konto nie ma dostępu do panelu admina. Wymagane jest konto szymon albo odznaka admin przy włączonym dostępie.');
                     scythedAdminSession = data.token;
                     scythedAccountUsername = data.username;
-                    scythedCanManageAdminSettings = data.isSzymon === true;
+                    scythedCanManageAdminSettings = data.canManageSettings === true || data.isSzymon === true;
                     scythedCanSeeAdmin = data.canSeeAdmin === true;
                     if (scythedAdminExpiryTimer) clearTimeout(scythedAdminExpiryTimer);
                     scythedAdminExpiryTimer = setTimeout(adminLogout, Math.max(1000, (data.expiresAt * 1000) - Date.now()));
@@ -5647,7 +5652,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         const { response: settingsResponse, data: settingsData } = await adminApi('/api/admin/settings', null, 'GET');
                         if (settingsResponse.ok) scythedShowAdminButton = settingsData.showAdminPanelButton !== false;
                     }
-                    updateAccountActionButtons({ username: usernameToLogin, verified: true, hasAdminBadge: false });
+                    updateAccountActionButtons({ username: usernameToLogin, verified: true, hasAdminBadge: data.canSeeAdmin === true });
                     openAdminPanel();
                     if (!scythedShowAdminButton) showToast('Przycisk panelu jest ukryty w ustawieniach; panel otwarto po zalogowaniu.', 'info');
                 } catch (e) { showToast(e.message || 'Nie udało się zalogować konta SCYTHED.', 'error'); }
@@ -5677,22 +5682,37 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             async function adminLoadSettings() {
                 const wrap = document.getElementById('admin-settings-section'); if (!wrap || !scythedCanManageAdminSettings) return;
                 wrap.classList.remove('hidden');
+                document.getElementById('general-admin-button-setting-wrap')?.classList.remove('hidden');
                 const { response, data } = await adminApi('/api/admin/settings', null, 'GET');
                 if (!response.ok) return adminMessage('Nie udało się pobrać ustawień panelu.', true);
                 document.getElementById('admin-allow-badge-users').checked = data.allowAdminBadgeUsers === true;
                 const showButton = document.getElementById('admin-show-panel-button'); if (showButton) showButton.checked = data.showAdminPanelButton !== false;
+                const generalShowButton = document.getElementById('general-admin-button-setting'); if (generalShowButton) generalShowButton.checked = data.showAdminPanelButton !== false;
                 scythedShowAdminButton = data.showAdminPanelButton !== false;
-                updateAccountActionButtons({ username: username, verified: true, hasAdminBadge: false });
+                updateAccountActionButtons({ username: username, verified: true, hasAdminBadge: scythedCanSeeAdmin });
             }
             async function adminSaveSettings() {
                 if (!scythedCanManageAdminSettings) return;
                 const allowAdminBadgeUsers = document.getElementById('admin-allow-badge-users').checked;
-                const showAdminPanelButton = document.getElementById('admin-show-panel-button')?.checked !== false;
+                const showAdminPanelButton = document.getElementById('general-admin-button-setting') ? document.getElementById('general-admin-button-setting').checked : document.getElementById('admin-show-panel-button')?.checked !== false;
+                const panelSetting = document.getElementById('admin-show-panel-button'); if (panelSetting) panelSetting.checked = showAdminPanelButton;
                 const { response, data } = await adminApi('/api/admin/settings', { allowAdminBadgeUsers, showAdminPanelButton });
                 if (!response.ok) return adminMessage(`Nie udało się zapisać ustawień: ${data.error || 'błąd API'}`, true);
                 scythedShowAdminButton = showAdminPanelButton;
-                updateAccountActionButtons({ username: username, verified: true, hasAdminBadge: false });
+                const generalSetting = document.getElementById('general-admin-button-setting'); if (generalSetting) generalSetting.checked = showAdminPanelButton;
+                updateAccountActionButtons({ username: username, verified: true, hasAdminBadge: scythedCanSeeAdmin });
                 adminMessage(`Dostęp dla odznaki admin: ${allowAdminBadgeUsers ? 'włączony' : 'wyłączony'}. Przycisk panelu: ${showAdminPanelButton ? 'widoczny' : 'ukryty'}.`);
+            }
+            let scythedAdminUsersCache = [];
+            function adminFilterUsers() {
+                const q = String(document.getElementById("admin-protected-name-search")?.value || "").trim().toLowerCase();
+                const filtered = scythedAdminUsersCache.filter(u => { const badges = (u.badges || []).map(b => b.badge === "larp" ? "mod" : b.badge).join(" "); return `${u.username} ${u.displayName || ""} ${u.verified ? "zweryfikowane zabezpieczona" : "niezweryfikowane"} ${badges}`.toLowerCase().includes(q); });
+                adminRenderUsers(filtered);
+            }
+            function adminRenderUsers(users) {
+                const tbody = document.getElementById("admin-users-list");
+                if (!users.length) { tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-zinc-500">Brak pasujących kont / zabezpieczonych nazw.</td></tr>'; return; }
+                tbody.innerHTML = users.map(u => { const name = String(u.username); const badges = (u.badges || []).map(b => `${escapeHtml(b.badge === "larp" ? "MOD" : b.badge)}${b.badge === "bug_hunter" ? ` (${Number(b.level) || 1})` : ""}`).join(", ") || "—"; const verify = name === "szymon" ? "" : `<button onclick="window.scythedApp.adminSetVerified('${name}', ${!u.verified})" class="px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700">${u.verified ? "COFNIJ WERYF." : "ZWERYFIKUJ"}</button>`; const del = name === "szymon" ? '<span class="text-zinc-500">konto chronione</span>' : `<button onclick="window.scythedApp.adminDeleteUser('${name}')" class="px-2 py-1 rounded border border-red-500/40 text-red-500">USUŃ</button>`; return `<tr class="border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(name)}<div class="text-[10px] font-normal text-zinc-500">${escapeHtml(u.displayName || name)}</div></td><td class="p-2">${u.verified ? '<span class="text-green-600">Zweryfikowane</span>' : '<span class="text-amber-600">Niezweryfikowane</span>'}</td><td class="p-2 min-w-[140px]">${badges}</td><td class="p-2"><div class="flex flex-wrap gap-1.5">${verify}<button onclick="window.scythedApp.adminChangePassword('${name}')" class="px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700">HASŁO</button><button onclick="window.scythedApp.adminRevokeBadgePrompt('${name}')" class="px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700">USUŃ ODZNAKĘ</button>${del}</div></td></tr>`; }).join("");
             }
             async function adminRefreshUsers() {
                 if (!scythedAdminSession) return;
@@ -5700,21 +5720,16 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 try {
                     const { response, data } = await adminApi('/api/admin/users', null, 'GET');
                     if (!response.ok) { if (response.status === 401) adminLogout(); throw new Error('Nie udało się pobrać kont.'); }
-                    if (!data.users.length) { tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-zinc-500">Brak kont.</td></tr>'; return; }
-                    tbody.innerHTML = data.users.map(u => {
-                        const name = String(u.username); const badges = (u.badges || []).map(b => `${escapeHtml(b.badge)} (${Number(b.level)})`).join(', ') || '—';
-                        const verify = name === 'szymon' ? '' : `<button onclick="window.scythedApp.adminSetVerified('${name}', ${!u.verified})" class="px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700">${u.verified ? 'COFNIJ WERYF.' : 'ZWERYFIKUJ'}</button>`;
-                        const del = name === 'szymon' ? '<span class="text-zinc-500">konto chronione</span>' : `<button onclick="window.scythedApp.adminDeleteUser('${name}')" class="px-2 py-1 rounded border border-red-500/40 text-red-500">USUŃ</button>`;
-                        return `<tr class="border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(name)}<div class="text-[10px] font-normal text-zinc-500">${escapeHtml(u.displayName || name)}</div></td><td class="p-2">${u.verified ? '<span class="text-green-600">Zweryfikowane</span>' : '<span class="text-amber-600">Niezweryfikowane</span>'}</td><td class="p-2 min-w-[140px]">${badges}</td><td class="p-2"><div class="flex flex-wrap gap-1.5">${verify}<button onclick="window.scythedApp.adminChangePassword('${name}')" class="px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700">HASŁO</button><button onclick="window.scythedApp.adminRevokeBadgePrompt('${name}')" class="px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700">USUŃ ODZNAKĘ</button>${del}</div></td></tr>`;
-                    }).join('');
+                    scythedAdminUsersCache = Array.isArray(data.users) ? data.users : [];
+                    adminFilterUsers();
                 } catch (e) { tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-red-500">${escapeHtml(e.message || 'Błąd API')}</td></tr>`; }
             }
             async function adminCreateUser(event) {
                 event.preventDefault();
-                const username = document.getElementById('admin-new-username').value.trim(), password = document.getElementById('admin-new-password').value, verified = document.getElementById('admin-new-verified').checked;
+                const username = document.getElementById('admin-new-username').value.trim(), password = document.getElementById('admin-new-password').value, verified = true;
                 const { response, data } = await adminApi('/api/admin/create-user', { username, password, verified });
                 if (!response.ok) return adminMessage(`Nie udało się utworzyć konta: ${data.error || 'błąd API'}`, true);
-                document.getElementById('admin-new-username').value = ''; document.getElementById('admin-new-password').value = ''; document.getElementById('admin-new-verified').checked = false;
+                document.getElementById('admin-new-username').value = ''; document.getElementById('admin-new-password').value = '';
                 adminMessage(`Utworzono konto ${data.username}.`); await adminRefreshUsers();
             }
             async function adminSetVerified(username, verified) {
@@ -5735,22 +5750,24 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 if (!response.ok) return adminMessage(`Zmiana hasła nieudana: ${data.error || 'błąd API'}`, true);
                 adminMessage(`Zmieniono hasło konta ${username}.`);
             }
+            function adminBadgeTypeChanged() { const badge = document.getElementById("admin-badge-key")?.value; const level = document.getElementById("admin-badge-level"); if (!level) return; const enabled = badge === "bug_hunter"; level.disabled = !enabled; level.classList.toggle("opacity-50", !enabled); }
             async function adminAssignBadge(event) {
                 event.preventDefault();
-                const username = document.getElementById('admin-badge-username').value.trim(), badge = document.getElementById('admin-badge-key').value, level = Number(document.getElementById('admin-badge-level').value);
+                const username = document.getElementById('admin-badge-username').value.trim(), badge = document.getElementById('admin-badge-key').value, level = badge === 'bug_hunter' ? Number(document.getElementById('admin-badge-level').value) : 1;
                 const { response, data } = await adminApi('/api/admin/assign-badge', { username, badge, level });
                 if (!response.ok) return adminMessage(`Nie udało się nadać odznaki: ${data.error || 'błąd API'}`, true);
-                adminMessage(`Nadano odznakę ${badge} poziomu ${level} dla ${username}.`); await adminRefreshUsers();
+                adminMessage(`Nadano odznakę ${badge === 'larp' ? 'MOD' : badge}${badge === 'bug_hunter' ? ` poziomu ${level}` : ''} dla ${username}.`); await adminRefreshUsers();
             }
             async function adminRevokeBadgePrompt(username) {
-                const badge = prompt(`Którą odznakę odebrać kontu ${username}? (owner, admin, larp, bug_hunter, paragon, beta_tester)`); if (!badge) return;
+                let badge = prompt(`Którą odznakę odebrać kontu ${username}? (owner, admin, mod, bug_hunter, paragon, beta_tester)`); if (!badge) return;
+                if (badge.trim().toLowerCase() === 'mod') badge = 'larp';
                 const { response, data } = await adminApi('/api/admin/revoke-badge', { username, badge });
                 if (!response.ok) return adminMessage(`Nie udało się odebrać odznaki: ${data.error || 'błąd API'}`, true);
                 adminMessage(`Zaktualizowano odznaki konta ${username}.`); await adminRefreshUsers();
             }
 
             window.scythedApp = {
-                openAdminPanel, closeAdminPanel, accountLogin, adminLogout, adminRefreshUsers, adminLoadSettings, adminSaveSettings, adminCreateUser, adminSetVerified, adminDeleteUser, adminChangePassword, adminAssignBadge, adminRevokeBadgePrompt,
+                openAdminPanel, closeAdminPanel, accountLogin, adminLogout, adminRefreshUsers, adminFilterUsers, adminBadgeTypeChanged, adminLoadSettings, adminSaveSettings, adminCreateUser, adminSetVerified, adminDeleteUser, adminChangePassword, adminAssignBadge, adminRevokeBadgePrompt,
                 handleAuthSubmit,
                 lockVault,
                 confirmResetApp,
@@ -5836,13 +5853,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             <div class="md:col-span-4 font-bold text-sm">UTWÓRZ KONTO</div>
             <input id="admin-new-username" maxlength="16" required placeholder="Nazwa użytkownika" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm">
             <input id="admin-new-password" type="password" minlength="12" required placeholder="Hasło (min. 12 znaków)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm">
-            <label class="flex items-center gap-2 text-xs"><input id="admin-new-verified" type="checkbox"> Konto zweryfikowane</label>
+            <div class="flex items-center text-xs text-green-600"><i class="fas fa-circle-check mr-1"></i> Konto automatycznie zweryfikowane</div>
             <button type="submit" class="rounded-lg bg-red-600 text-white p-2 text-xs font-bold">UTWÓRZ</button>
           </form>
           <div id="admin-settings-section" class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">USTAWIENIA DOSTĘPU ADMINA</h3><label class="flex items-start gap-3 text-sm"><input id="admin-allow-badge-users" type="checkbox" class="mt-1" onchange="window.scythedApp.adminSaveSettings()"><span><b>Pozwól kontom z odznaką admin otwierać panel</b><span class="block text-xs text-zinc-500 mt-1">Dotyczy kont innych niż szymon. Zmiana jest egzekwowana przez API; szymon zachowuje dostęp zawsze.</span></span></label><label class="flex items-start gap-3 text-sm"><input id="admin-show-panel-button" type="checkbox" class="mt-1" checked onchange="window.scythedApp.adminSaveSettings()"><span><b>Pokaż przycisk PANEL ADMINA w lewym dolnym rogu</b><span class="block text-xs text-zinc-500 mt-1">Odznaczenie ukrywa sam przycisk; nie odbiera uprawnień kontu szymon ani kontom dopuszczonym przez ustawienia.</span></span></label></div>
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
-          <div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div>
-          <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm"><select id="admin-badge-key" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm"><option value="admin">Admin</option><option value="owner">Owner</option><option value="paragon">Paragon</option><option value="bug_hunter">Bug Hunter</option><option value="beta_tester">Beta Tester</option><option value="larp">LARP</option></select><select id="admin-badge-level" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm">${Array.from({length:10},(_,i)=>`<option value="${i+1}">Poziom ${i+1}</option>`).join('')}</select><button class="rounded-lg bg-red-600 text-white p-2 text-xs font-bold">NADAJ / ZAKTUALIZUJ</button></form></div>
+          <div class="space-y-2"><input id="admin-protected-name-search" type="search" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
+          <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm"><option value="admin">Admin</option><option value="owner">Owner</option><option value="paragon">Paragon</option><option value="bug_hunter">Bug Hunter</option><option value="beta_tester">Beta Tester</option><option value="larp">MOD</option></select><select id="admin-badge-level" disabled class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm opacity-50" aria-label="Poziom odznaki">${Array.from({length:2},(_,i)=>`<option value="${i+1}">Poziom ${i+1}</option>`).join('')}</select><button class="rounded-lg bg-red-600 text-white p-2 text-xs font-bold">NADAJ / ZAKTUALIZUJ</button></form></div>
         </div>
       </section>
     </div>
