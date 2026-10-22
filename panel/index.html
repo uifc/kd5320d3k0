@@ -129,6 +129,11 @@
             box-shadow: 0 0 15px var(--brand-red-glow, rgba(255, 0, 51, 0.35));
         }
 
+        #scythed-admin-modal .text-brand-red { color: var(--brand-red) !important; }
+        #scythed-admin-modal .bg-brand-red { background-color: var(--brand-red) !important; }
+        #scythed-admin-modal .border-brand-red { border-color: var(--brand-red) !important; }
+        #scythed-admin-modal button:focus-visible, #scythed-admin-modal input:focus-visible, #scythed-admin-modal select:focus-visible { outline: 2px solid var(--brand-red); outline-offset: 2px; }
+        .scythed-theme-control { accent-color: var(--brand-red) !important; }
         .hover-brand-dynamic:hover { color: var(--brand-hover-red) !important; }
         .hover-bg-brand-dynamic:hover { background-color: var(--brand-hover-red) !important; }
         .hover-border-brand-dynamic:hover { border-color: var(--brand-hover-red) !important; }
@@ -1018,7 +1023,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     </div>
 
     <div class="fixed bottom-4 right-4 z-40 flex flex-row-reverse items-center gap-2">
-        <button type="button" onclick="window.scythedApp.adminButtonClick()" id="scythed-admin-panel-button" class="hidden w-12 h-12 rounded-2xl bg-red-600/10 border border-red-500/40 text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md items-center justify-center text-lg transition-all glow-effect" title="Panel admina" aria-label="Panel admina"><i class="fas fa-shield-halved"></i></button>
+        <button type="button" onclick="window.scythedApp.adminButtonClick()" id="scythed-admin-panel-button" class="hidden w-12 h-12 rounded-2xl border hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md items-center justify-center text-lg transition-all glow-effect" style="color:var(--brand-red);background:color-mix(in srgb,var(--brand-red) 12%,transparent);border-color:color-mix(in srgb,var(--brand-red) 48%,transparent)" title="Panel admina" aria-label="Panel admina"><i class="fas fa-shield-halved"></i></button>
         <button onclick="window.scythedApp.openSettingsModal()" class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" title="Ustawienia & System">
             <i class="fas fa-gear"></i>
         </button>
@@ -1054,7 +1059,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
             <div id="general-admin-button-setting-wrap" class="hidden flex items-start justify-between gap-3 p-3 rounded-xl border border-red-500/30 bg-red-500/5">
                 <div><div class="text-xs font-bold">Widoczność przycisku panelu admina</div><p class="text-[10px] text-zinc-500 mt-1">Dostępne tylko dla kont z uprawnieniami właściciela lub administratora.</p></div>
-                <input id="general-admin-button-setting" type="checkbox" class="mt-1" style="accent-color:var(--brand-red)" onchange="window.scythedApp.adminSaveSettings()" aria-label="Pokaż przycisk panelu admina">
+                <input id="general-admin-button-setting" type="checkbox" class="mt-1 scythed-theme-control" style="accent-color:var(--brand-red)" onchange="window.scythedApp.adminSaveSettings()" aria-label="Pokaż przycisk panelu admina">
             </div>
 
             <div class="space-y-2">
@@ -5204,6 +5209,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     }
                     if (settings.backupReminderDays !== undefined) backupReminderDays = Math.max(0, parseInt(settings.backupReminderDays,10)||0);
                     if (settings.backupLastAt) backupLastAt = settings.backupLastAt;
+                    if (typeof settings.showAdminPanelButton === 'boolean') {
+                        scythedShowAdminButton = settings.showAdminPanelButton;
+                        try { localStorage.setItem('scythed_admin_panel_button_visible', String(scythedShowAdminButton)); } catch {}
+                        if (scythedAdminSession && scythedCanManageAdminSettings) {
+                            try { const current = await adminApi('/api/admin/settings', null, 'GET'); if (current.response.ok) await adminApi('/api/admin/settings', { allowAdminBadgeUsers: current.data.allowAdminBadgeUsers === true, showAdminPanelButton: scythedShowAdminButton }); } catch {}
+                        }
+                    }
                 }
                 if (importedData.backupLastAt) backupLastAt = importedData.backupLastAt;
                 localStorage.setItem(STORAGE_KEYS.BACKUP_LAST, backupLastAt || '');
@@ -5347,7 +5359,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         generalActivityEnabled: generalActivityEnabled,
                         headerAnimationSpeed: headerAnimationSpeed,
                         backupReminderDays,
-                        backupLastAt
+                        backupLastAt,
+                        showAdminPanelButton: scythedShowAdminButton
                     }
                 };
 
@@ -5600,14 +5613,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             let scythedAccountUsername = null;
             let scythedCanManageAdminSettings = false;
             let scythedCanSeeAdmin = false;
-            let scythedShowAdminButton = true;
+            let scythedShowAdminButton = (() => { try { return localStorage.getItem('scythed_admin_panel_button_visible') !== 'false'; } catch { return true; } })();
             function updateAccountActionButtons(profile = {}) {
                 const name = String(profile.username ?? username ?? '').trim().replace(/^@/, '').toLowerCase();
                 const eligible = !!name && (profile.hasAdminBadge === true || profile.hasOwnerBadge === true || name === 'szymon');
                 window.scythedProfileHasAdminBadge = profile.hasAdminBadge === true; window.scythedProfileHasOwnerBadge = profile.hasOwnerBadge === true;
                 const panelButton = document.getElementById('scythed-admin-panel-button');
-                const sessionMatches = !!scythedAdminSession && scythedAccountUsername === name && scythedCanSeeAdmin;
-                const canShowPanel = eligible && (sessionMatches || !scythedAdminSession) && scythedShowAdminButton;
+                const canShowPanel = eligible && scythedShowAdminButton;
                 if (panelButton) {
                     panelButton.classList.toggle('hidden', !canShowPanel);
                     panelButton.classList.toggle('flex', canShowPanel);
@@ -5623,11 +5635,14 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 }
                 openAdminPanel();
             }
-            function adminApi(path, payload, method = 'POST') {
+            async function adminApi(path, payload, method = 'POST') {
                 const headers = { 'Content-Type': 'application/json' };
                 if (scythedAdminSession) headers.Authorization = `Bearer ${scythedAdminSession}`;
-                return fetch(`${SCYTHED_API_BASE}${path}`, { method, mode: 'cors', credentials: 'omit', cache: 'no-store', headers, ...(method === 'GET' ? {} : { body: JSON.stringify(payload || {}) }) })
-                    .then(async response => ({ response, data: await response.json().catch(() => ({})) }));
+                const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 15000);
+                try {
+                    const response = await fetch(`${SCYTHED_API_BASE}${path}`, { method, mode: 'cors', credentials: 'omit', cache: 'no-store', headers, ...(method === 'GET' ? {} : { body: JSON.stringify(payload || {}) }), signal: controller.signal });
+                    return { response, data: await response.json().catch(() => ({})) };
+                } finally { clearTimeout(timer); }
             }
             function adminMessage(text, error = false) {
                 const el = document.getElementById('admin-action-message'); if (!el) return;
@@ -5692,7 +5707,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const showButton = document.getElementById('admin-show-panel-button'); if (showButton) showButton.checked = data.showAdminPanelButton !== false;
                 const generalShowButton = document.getElementById('general-admin-button-setting'); if (generalShowButton) generalShowButton.checked = data.showAdminPanelButton !== false;
                 scythedShowAdminButton = data.showAdminPanelButton !== false;
-                updateAccountActionButtons({ username: username, verified: true, hasAdminBadge: scythedCanSeeAdmin });
+                try { localStorage.setItem('scythed_admin_panel_button_visible', String(scythedShowAdminButton)); } catch {}
+                updateAccountActionButtons({ username: username, verified: true, hasAdminBadge: window.scythedProfileHasAdminBadge === true, hasOwnerBadge: window.scythedProfileHasOwnerBadge === true });
             }
             async function adminSaveSettings() {
                 if (!scythedCanManageAdminSettings) return;
@@ -5702,17 +5718,21 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const { response, data } = await adminApi('/api/admin/settings', { allowAdminBadgeUsers, showAdminPanelButton });
                 if (!response.ok) return adminMessage(`Nie udało się zapisać ustawień: ${data.error || 'błąd API'}`, true);
                 scythedShowAdminButton = showAdminPanelButton;
+                try { localStorage.setItem('scythed_admin_panel_button_visible', String(showAdminPanelButton)); } catch {}
                 const generalSetting = document.getElementById('general-admin-button-setting'); if (generalSetting) generalSetting.checked = showAdminPanelButton;
-                updateAccountActionButtons({ username: username, verified: true, hasAdminBadge: scythedCanSeeAdmin });
+                updateAccountActionButtons({ username: username, verified: true, hasAdminBadge: window.scythedProfileHasAdminBadge === true, hasOwnerBadge: window.scythedProfileHasOwnerBadge === true });
                 adminMessage(`Dostęp dla odznaki admin: ${allowAdminBadgeUsers ? 'włączony' : 'wyłączony'}. Przycisk panelu: ${showAdminPanelButton ? 'widoczny' : 'ukryty'}.`);
             }
             async function adminLoadLogs() {
                 const section = document.getElementById('admin-logs-section'), list = document.getElementById('admin-logs-list');
                 section?.classList.remove('hidden'); if (list) list.innerHTML = '<p class="text-zinc-500">Ładowanie logów…</p>';
-                const { response, data } = await adminApi('/api/admin/logs', null, 'GET');
-                if (!response.ok) { if (list) list.textContent = `Nie udało się pobrać logów: ${data.error || response.status}`; return; }
+                let response, data;
+                try { ({ response, data } = await adminApi('/api/admin/logs', null, 'GET')); }
+                catch (error) { if (list) list.textContent = `Błąd połączenia podczas pobierania logów z ${SCYTHED_API_BASE}: ${error?.name === 'AbortError' ? 'przekroczono limit czasu' : 'sprawdź domenę API i CORS'}.`; return; }
+                if (!response.ok) { if (list) list.textContent = `Nie udało się pobrać logów (HTTP ${response.status}): ${data.error || data.message || 'błąd API'}`; return; }
                 if (!Array.isArray(data.logs) || !data.logs.length) { if (list) list.textContent = 'Brak zarejestrowanych zmian.'; return; }
-                if (list) list.innerHTML = data.logs.map(log => `<div class="border-b border-zinc-200 dark:border-zinc-800 pb-2"><div class="font-bold text-brand-red">${escapeHtml(log.actor || 'nieznane')} · ${escapeHtml(log.action || 'zmiana')}</div><div>${escapeHtml(log.details || '')}</div><div class="text-zinc-500 mt-1">${escapeHtml(log.created_at || '')}</div></div>`).join('');
+                const actionNames = { account_created: 'Utworzono konto', account_deleted: 'Usunięto konto', password_changed: 'Zmieniono hasło', verification_changed: 'Zmieniono weryfikację', badge_assigned: 'Nadano odznakę', badge_revoked: 'Odebrano odznakę', settings_updated: 'Zmieniono ustawienia' };
+                if (list) list.innerHTML = data.logs.map(log => `<div class="border-b border-zinc-200 dark:border-zinc-800 pb-2"><div class="font-bold text-brand-red">${escapeHtml(log.actor || 'nieznane')} · ${escapeHtml(actionNames[log.action] || log.action || 'zmiana')}</div><div>${escapeHtml(log.details || '')}</div><div class="text-zinc-500 mt-1">${escapeHtml(log.created_at || '')}</div></div>`).join('');
             }
             let scythedAdminUsersCache = [];
             function adminFilterUsers() {
@@ -5739,7 +5759,15 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 event.preventDefault();
                 const username = document.getElementById('admin-new-username').value.trim(), password = document.getElementById('admin-new-password').value, verified = true;
                 const submit = event.submitter; if (submit) { submit.disabled = true; submit.dataset.originalText = submit.textContent; submit.textContent = 'TWORZENIE…'; }
-                let response, data; try { ({ response, data } = await adminApi('/api/admin/create-user', { username, password, verified })); } catch (error) { if (submit) { submit.disabled = false; submit.textContent = submit.dataset.originalText || 'UTWÓRZ'; } adminMessage('Błąd połączenia z API. Sprawdź adres API i konfigurację Cloudflare.', true); return; }
+                let response, data;
+                try { ({ response, data } = await adminApi('/api/admin/create-user', { username, password, verified })); }
+                catch (error) {
+                    if (submit) { submit.disabled = false; submit.textContent = submit.dataset.originalText || 'UTWÓRZ'; }
+                    let diagnostic = '';
+                    try { const health = await fetch(`${SCYTHED_API_BASE}/api/health`, { method: 'GET', mode: 'cors', credentials: 'omit', cache: 'no-store' }); const healthData = await health.json().catch(() => ({})); diagnostic = health.ok ? ` API odpowiada (${SCYTHED_API_BASE}), ale żądanie admina nie przechodzi przez CORS lub połączenie.` : ` API health zwróciło HTTP ${health.status}: ${healthData.message || healthData.error || 'błąd usługi'}.`; }
+                    catch { diagnostic = ` Nie można osiągnąć ${SCYTHED_API_BASE}/api/health. Sprawdź wdrożenie Workera i przypisanie domeny api.scythed.xyz.`; }
+                    adminMessage(`Błąd połączenia z API.${diagnostic}`, true); return;
+                }
                 if (submit) { submit.disabled = false; submit.textContent = submit.dataset.originalText || 'UTWÓRZ'; }
                 if (!response.ok) return adminMessage(`Nie udało się utworzyć konta (${response.status}): ${data.error || data.message || 'błąd API'}`, true);
                 document.getElementById('admin-new-username').value = ''; document.getElementById('admin-new-password').value = '';
