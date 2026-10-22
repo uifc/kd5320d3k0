@@ -1266,7 +1266,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     Zmień hasło główne
                 </button>
             </div>
-<div id="general-admin-open-panel-wrap" class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i>Panel Administracyjny</span><button type="button" onclick="window.scythedApp.adminButtonClick()" class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition flex items-center gap-1.5"><i class="fas fa-arrow-up-right-from-square admin-access-logo" aria-hidden="true"></i>Otwórz panel administracyjny</button></div>
+<div id="general-admin-open-panel-wrap" class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i>Panel Administracyjny</span><button type="button" onclick="window.scythedApp.adminButtonClick()" class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition">Otwórz panel</button></div>
 
             <div class="space-y-2">
                 <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
@@ -1689,14 +1689,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 { id: 'epic', name: 'Epic Games', icon: 'fa-solid fa-shield-cat', color: '#ffffff', logo: 'assets/logos/epic.png', themeAdaptive: true },
                 { id: 'facebook', name: 'Facebook', icon: 'fa-brands fa-facebook', color: '#1877F2', logo: 'assets/logos/facebook.png' },
                 { id: 'gmail', name: 'Gmail', icon: 'fa-brands fa-google', color: '#ea4335', logo: 'assets/logos/gmail.png' },
+                { id: 'poczta', name: 'Poczta', icon: 'fa-solid fa-envelope', color: '#2563eb', logo: 'assets/logos/poczta.png' },
                 { id: 'gog', name: 'GOG Galaxy', icon: 'fa-solid fa-compact-disc', color: '#8a2be2', logo: 'assets/logos/gog.png' },
                 { id: 'icloud', name: 'iCloud Mail', icon: 'fa-brands fa-apple', color: '#a6b4c9', logo: 'assets/logos/icloud.png' },
                 { id: 'instagram', name: 'Instagram', icon: 'fa-brands fa-instagram', color: '#E4405F', logo: 'assets/logos/instagram.png' },
-                { id: 'interia', name: 'Interia Poczta', icon: 'fa-solid fa-at', color: '#0055a5', logo: 'assets/logos/interia.png' },
                 { id: 'minecraft', name: 'Minecraft', icon: 'fa-solid fa-cubes', color: '#5b8731', logo: 'assets/logos/minecraft.png' },
                 { id: 'netflix', name: 'Netflix', icon: 'fa-solid fa-tv', color: '#E50914', logo: 'assets/logos/netflix.png' },
-                { id: 'o2', name: 'o2 Poczta', icon: 'fa-solid fa-mail-bulk', color: '#27aae1', logo: 'assets/logos/o2.png' },
-                { id: 'onet', name: 'Onet Poczta', icon: 'fa-solid fa-paper-plane', color: '#f7931e', logo: 'assets/logos/onet.png' },
                 { id: 'outlook', name: 'Outlook', icon: 'fa-solid fa-envelope', color: '#0078d4', logo: 'assets/logos/outlook.png' },
                 { id: 'proton', name: 'ProtonMail', icon: 'fa-solid fa-lock', color: '#6d4aff', logo: 'assets/logos/proton.png' },
                 { id: 'riot', name: 'Riot Games', icon: 'fa-solid fa-crown', color: '#d00c14', logo: 'assets/logos/riot.png' },
@@ -1709,32 +1707,29 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 { id: 'twitch', name: 'Twitch', icon: 'fa-brands fa-twitch', color: '#9146FF', logo: 'assets/logos/twitch.png' },
                 { id: 'ubisoft', name: 'Ubisoft Connect', icon: 'fa-solid fa-ghost', color: '#0070ff', logo: 'assets/logos/ubisoft.png' },
                 { id: 'whatsapp', name: 'WhatsApp', icon: 'fa-brands fa-whatsapp', color: '#25D366', logo: 'assets/logos/whatsapp.png' },
-                { id: 'wp', name: 'WP Poczta', icon: 'fa-solid fa-envelope-open-text', color: '#e00000', logo: 'assets/logos/wp.png' },
                 { id: 'x', name: 'X (Twitter)', icon: 'fa-brands fa-x-twitter', color: '#ffffff', logo: 'assets/logos/x.png', themeAdaptive: true },
                 { id: 'yahoo', name: 'Yahoo Mail', icon: 'fa-brands fa-yahoo', color: '#6001d2', logo: 'assets/logos/yahoo.png' },
-                { id: 'metamask', name: 'MetaMask', icon: 'fa-solid fa-mask', color: '#f6851b', logo: 'assets/logos/metamask.png' },
-                { id: 'ledger', name: 'Ledger Live', icon: 'fa-solid fa-hard-drive', color: '#e5b80b', logo: 'assets/logos/ledger.png' },
-                { id: 'trezor', name: 'Trezor Suite', icon: 'fa-solid fa-lock', color: '#008559', logo: 'assets/logos/trezor.png' },
-                { id: 'phantom', name: 'Phantom', icon: 'fa-solid fa-ghost', color: '#ab9ff2', logo: 'assets/logos/phantom.png' },
-                { id: 'trustwallet', name: 'Trust Wallet', icon: 'fa-solid fa-shield-halved', color: '#3375bb', logo: 'assets/logos/trustwallet.png' },
-                { id: 'exodus', name: 'Exodus', icon: 'fa-solid fa-cube', color: '#262933', logo: 'assets/logos/exodus.png' },
-                { id: 'coinbase_wallet', name: 'Coinbase Wallet', icon: 'fa-solid fa-wallet', color: '#0052FF', logo: 'assets/logos/coinbase_wallet.png' },
+
+
+
+
+
+
+
                 { id: 'binance', name: 'Binance', icon: 'fa-solid fa-coins', color: '#F3BA2F', logo: 'assets/logos/binance.png' },
 
                 { id: 'g2a', name: 'G2A', icon: 'fa-solid fa-gamepad', color: '#ff5a00', logo: 'assets/logos/g2a.png' },
                 { id: 'eldorado', name: 'Eldorado', icon: 'fa-solid fa-coins', color: '#f5b942', logo: 'assets/logos/eldorado.png' },
                 { id: 'eneba', name: 'Eneba', icon: 'fa-solid fa-gamepad', color: '#6f3cff', logo: 'assets/logos/eneba.png' },
-                { id: 'g2g', name: 'G2G', icon: 'fa-solid fa-gamepad', color: '#00a8ff', logo: 'assets/logos/g2g.png' },
                 { id: 'kinguin', name: 'Kinguin', icon: 'fa-solid fa-crown', color: '#00a651', logo: 'assets/logos/kinguin.png' },
                 { id: 'other', name: 'Inne', icon: 'fa-solid fa-folder', color: '#9ca3af' },
 
                 { id: 'primevideo', name: 'Prime Video', icon: 'fa-solid fa-play', color: '#00A8E1', logo: 'assets/logos/primevideo.png' },
                 { id: 'disney', name: 'Disney', icon: 'fa-solid fa-wand-magic-sparkles', color: '#113CCF', logo: 'assets/logos/disney.png' },
                 { id: 'hbo', name: 'HBO', icon: 'fa-solid fa-tv', color: '#ffffff', logo: 'assets/logos/hbo.png', themeAdaptive: true },
-                { id: 'polsatboxgo', name: 'Polsat Box Go', icon: 'fa-solid fa-tv', color: '#e30613', logo: 'assets/logos/polsatboxgo.png' },
-                { id: 'player', name: 'Player', icon: 'fa-solid fa-play', color: '#ff6b00', logo: 'assets/logos/player.png' },
-                { id: 'tvpvod', name: 'TVP VOD', icon: 'fa-solid fa-tv', color: '#0077c8', logo: 'assets/logos/tvpvod.png' },
-                { id: 'cda', name: 'CDA', icon: 'fa-solid fa-film', color: '#111111', logo: 'assets/logos/cda.png', themeAdaptive: true },
+
+
+
 
                 { id: 'youtube', name: 'YouTube', icon: 'fa-brands fa-youtube', color: '#FF0000', logo: 'assets/logos/youtube.png' },
                 { id: 'google', name: 'Google', icon: 'fa-brands fa-google', color: '#4285F4', logo: 'assets/logos/google.png' },
