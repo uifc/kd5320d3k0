@@ -1823,6 +1823,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             let saveQueue = Promise.resolve();
             let saveRevision = 0;
             let username = 'USER';
+            let privilegedNameGateRunning = false;
             let avatarUrl = 'assets/logos/avatar.png';
             let bannerUrl = null;
             let appBgUrl = null;
@@ -3035,6 +3036,70 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 }
             }
 
+            async function enforcePrivilegedNamePassword() {
+                if (privilegedNameGateRunning || !isVaultUnlocked()) return;
+                const accountName = badgeAccountKey(username);
+                if (!accountName || accountName === 'user') return;
+                privilegedNameGateRunning = true;
+                try {
+                    let profile;
+                    try {
+                        const response = await fetch(`${SCYTHED_API_BASE}/api/badges?username=${encodeURIComponent(accountName)}`, {
+                            method: 'GET', mode: 'cors', credentials: 'omit', cache: 'no-store'
+                        });
+                        if (!response.ok) throw new Error('badge_api_unavailable');
+                        profile = await response.json();
+                    } catch (_) {
+                        // Fail closed: if the role cannot be checked, do not keep a privileged name unverified.
+                        await resetProfileNameToUser('Nie można sprawdzić odznak w Cloudflare. Nazwa profilu została ustawiona na USER.');
+                        return;
+                    }
+                    const badges = Array.isArray(profile.badges) ? profile.badges : [];
+                    const privilegedBadge = badges.find(item => ['admin', 'moderator'].includes(String(item.badge_key || '').toLowerCase()));
+                    if (!privilegedBadge) return;
+
+                    const roleName = String(privilegedBadge.badge_key).toLowerCase() === 'admin' ? 'Administratora' : 'Moderatora';
+                    const password = await appPrompt(
+                        `To konto ma odznakę ${roleName}. Podaj hasło przypisane do nazwy „${accountName}”, aby zachować tę nazwę. Jeśli pominiesz hasło lub wpiszesz je nieprawidłowo, nazwa zostanie ustawiona na USER.`,
+                        '', { title: 'WERYFIKACJA NAZWY', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'WERYFIKUJ', cancelText: 'USTAW USER' }
+                    );
+                    if (password === null || !String(password).length) {
+                        await resetProfileNameToUser('Nie podano hasła do nazwy. Nazwa profilu została ustawiona na USER.');
+                        return;
+                    }
+                    try {
+                        const { response, data } = await scythedApi('/api/verify-privileged-name', { username: accountName, password: String(password) });
+                        if (!response.ok || data.ok !== true || data.verified !== true) {
+                            await resetProfileNameToUser('Hasło do nazwy jest nieprawidłowe. Nazwa profilu została ustawiona na USER.');
+                            return;
+                        }
+                    } catch (_) {
+                        await resetProfileNameToUser('Nie udało się zweryfikować hasła w Cloudflare. Nazwa profilu została ustawiona na USER.');
+                        return;
+                    }
+                    showToast('Potwierdzono nazwę konta z odznaką.', 'success');
+                } finally {
+                    privilegedNameGateRunning = false;
+                }
+            }
+
+            async function resetProfileNameToUser(message) {
+                username = 'USER';
+                const input = document.getElementById('username-input');
+                if (input) {
+                    input.value = 'USER';
+                    input.readOnly = true;
+                    input.classList.remove('cursor-text', 'username-editing');
+                    input.classList.add('cursor-default');
+                    updateUsernameEditButton();
+                    syncUsernameInputWidth();
+                }
+                await saveEncryptedState();
+                startTabTitleAnimation();
+                updateBadgesDisplay();
+                showToast(message, 'warning');
+            }
+
             function unlockAppUI() {
                 applyVaultLockUI(false);
                 document.getElementById('auth-overlay').classList.add('hidden');
@@ -3047,6 +3112,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 renderVaultEntries();
                 startActivityMonitoring();
                 playSound('save');
+                // Every successful Master Password unlock re-checks privileged names.
+                void enforcePrivilegedNamePassword();
             }
 
             function clearSensitiveRuntimeState() {
@@ -6012,6 +6079,31 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     adminFilterUsers();
                 } catch (e) { tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-red-500">${escapeHtml(e.message || 'Błąd API')}</td></tr>`; }
             }
+            async function adminCreateUser(event) {
+                event.preventDefault();
+                if (!scythedAdminSession || !scythedCanSeeAdmin) return adminMessage('Zaloguj się do panelu administratora.', true);
+                const username = String(document.getElementById('admin-create-username')?.value || '').trim().replace(/^@/, '');
+                const password = String(document.getElementById('admin-create-password')?.value || '');
+                const confirmation = String(document.getElementById('admin-create-password-confirm')?.value || '');
+                if (!username || username.length > 16 || !/^[A-Za-z0-9_. ]+$/.test(username)) return adminMessage('Nazwa może mieć maksymalnie 16 znaków i zawierać litery, cyfry, spacje, kropki oraz podkreślenia.', true);
+                if (password.length < 12) return adminMessage('Hasło musi mieć co najmniej 12 znaków.', true);
+                if (password !== confirmation) return adminMessage('Wpisane hasła nie są identyczne.', true);
+                const submit = document.querySelector('#admin-create-user-form button[type="submit"]');
+                if (submit) submit.disabled = true;
+                try {
+                    const { response, data } = await adminApi('/api/admin/create-user', { username, password });
+                    if (!response.ok) {
+                        const messages = { account_exists: 'Konto o takiej nazwie już istnieje.', invalid_input: 'Nieprawidłowa nazwa lub hasło.', unauthorized: 'Sesja administratora wygasła. Zaloguj się ponownie.', rate_limited: 'Wykonano zbyt wiele akcji. Spróbuj później.' };
+                        return adminMessage(messages[data.error] || data.message || `Nie udało się utworzyć konta: ${data.error || 'błąd API'}`, true);
+                    }
+                    document.getElementById('admin-create-user-form')?.reset();
+                    adminMessage(`Utworzono konto „${data.username || username}”. Konto jest zweryfikowane.`);
+                    await adminRefreshUsers();
+                } catch (error) {
+                    adminMessage(`Nie udało się utworzyć konta: ${error.message || 'błąd połączenia z API'}`, true);
+                } finally { if (submit) submit.disabled = false; }
+            }
+
             async function adminSetVerified(username, verified) {
                 if (verified !== true) return adminMessage('Cofanie weryfikacji jest wyłączone.', true);
                 if (!await appConfirm(`Zweryfikować konto ${username}?`, {title:'WERYFIKACJA KONTA', icon:'fa-circle-check', confirmText:'ZWERYFIKUJ'})) return;
@@ -6091,7 +6183,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             }
 
             window.scythedApp = {
-                openAdminPanel, closeAdminPanel, accountLogin, adminButtonClick, adminLogout, adminLoadLogs, adminToggleLogs, adminRefreshUsers, adminFilterUsers, adminBadgeTypeChanged, adminClearLogs, adminSetVerified, adminDeleteUser, adminUndoLastAction, adminChangePassword, adminAssignBadge, adminRevokeBadge, adminRevokeBadgePrompt,
+                openAdminPanel, closeAdminPanel, accountLogin, adminButtonClick, adminLogout, adminLoadLogs, adminToggleLogs, adminRefreshUsers, adminFilterUsers, adminBadgeTypeChanged, adminClearLogs, adminCreateUser, adminSetVerified, adminDeleteUser, adminUndoLastAction, adminChangePassword, adminAssignBadge, adminRevokeBadge, adminRevokeBadgePrompt,
                 handleAuthSubmit,
                 lockVault,
                 confirmResetApp,
@@ -6174,7 +6266,15 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
         <div id="admin-content-view" class="hidden p-4 md:p-6 space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-3"><p class="text-xs text-brand-red">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button onclick="window.scythedApp.adminToggleLogs()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="px-3 py-2 rounded-lg border border-brand-red/40 text-brand-red text-xs font-bold">WYLOGUJ</button></div></div>
           <section id="admin-logs-section" class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold text-sm">DZIENNIK ZMIAN</h3><div class="flex gap-2"><button id="admin-clear-logs-button" onclick="window.scythedApp.adminClearLogs()" class="hidden text-xs px-2 py-1 rounded border border-brand-red/40 text-brand-red">WYCZYŚĆ LOGI</button><button onclick="document.getElementById('admin-logs-section').classList.add('hidden')" class="text-xs text-brand-red">ZAMKNIJ</button></div></div><div id="admin-logs-list" class="space-y-2 text-xs"><p class="text-zinc-500">Ładowanie logów…</p></div><div id="admin-logs-pagination" class="flex flex-wrap items-center justify-center gap-1 pt-2"></div></section>
-          <div class="p-4 rounded-xl border border-brand-red/25 bg-brand-red/5 text-sm"><h3 class="font-bold text-brand-red"><i class="fas fa-terminal mr-2"></i>ZABEZPIECZANIE NAZW</h3><p class="mt-2 text-zinc-600 dark:text-zinc-300">Tworzenie kont jest dostępne wyłącznie przez PowerShell i endpoint API. W panelu nie można dodawać nazw użytkowników.</p></div>
+          <section class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3">
+            <div><h3 class="font-bold text-sm"><i class="fas fa-user-plus text-brand-red mr-2"></i>DODAJ NOWĄ NAZWĘ / KONTO</h3><p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Tworzy konto przez ten sam endpoint API co Worker. Nazwa zostanie zweryfikowana automatycznie; hasło musi mieć co najmniej 12 znaków.</p></div>
+            <form id="admin-create-user-form" autocomplete="off" onsubmit="window.scythedApp.adminCreateUser(event)" class="grid grid-cols-1 md:grid-cols-3 gap-2">
+              <input id="admin-create-username" name="scythed-new-username" type="text" required minlength="1" maxlength="16" pattern="[A-Za-z0-9_. ]+" placeholder="Nowa nazwa / login" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="off" autocapitalize="off" spellcheck="false">
+              <input id="admin-create-password" name="scythed-new-password" type="password" required minlength="12" maxlength="1024" placeholder="Hasło (min. 12 znaków)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="new-password">
+              <input id="admin-create-password-confirm" name="scythed-new-password-confirm" type="password" required minlength="12" maxlength="1024" placeholder="Powtórz hasło" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="new-password">
+              <button type="submit" class="md:col-span-3 rounded-lg bg-brand-red hover:bg-brand-hoverRed text-white p-2.5 text-xs font-bold transition"><i class="fas fa-plus mr-2"></i>UTWÓRZ KONTO</button>
+            </form>
+          </section>
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
           <div class="space-y-2"><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw" autocomplete="off" autocorrect="off" spellcheck="false"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
           <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="moderator">Moderator</option><option value="zasluzony">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
