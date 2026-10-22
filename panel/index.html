@@ -896,6 +896,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
   }
   #general-admin-open-panel-wrap .admin-access-action,
   #modal-settings .admin-master-action {
+    width: 9.5rem;
+    min-width: 9.5rem;
+    min-height: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgb(228 228 231);
     border-color: transparent !important;
     color: var(--brand-readable-accent, var(--brand-red, #ef4444)) !important;
@@ -1261,10 +1267,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             </div>
 
             <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800">
-                <span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-lock text-brand-red" aria-hidden="true"></i>Zarządzanie Zabezpieczeniami</span>
-                <button onclick="window.scythedApp.openChangeMasterModal()" class="admin-master-action px-3 py-1.5 text-xs font-bold rounded-xl border transition flex items-center gap-1.5">
-                    Zmień hasło główne
-                </button>
+                <span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-lock text-brand-red" aria-hidden="true"></i>Zmień hasło główne</span>
+                <button type="button" onclick="window.scythedApp.openChangeMasterModal()" class="admin-master-action px-3 py-1.5 text-xs font-bold rounded-xl border transition flex items-center gap-1.5">Zmień hasło</button>
             </div>
 <div id="general-admin-open-panel-wrap" class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i>Panel Administracyjny</span><button type="button" onclick="window.scythedApp.adminButtonClick()" class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition">Otwórz panel</button></div>
 
@@ -1458,32 +1462,36 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     </div>
 
     <div id="modal-change-master" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-md w-full p-6 space-y-4 glow-effect backdrop-blur-md shadow-2xl">
+        <div class="bg-white/95 dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-md w-full p-6 space-y-6 glow-effect backdrop-blur-md shadow-2xl">
             <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
-                <h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white">ZMIEŃ HASŁO MASTER</h3>
+                <h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white flex items-center gap-2"><i class="fas fa-lock text-brand-red"></i> ZMIEŃ HASŁO GŁÓWNE</h3>
                 <button onclick="window.scythedApp.closeModal('modal-change-master')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times"></i></button>
             </div>
             <form autocomplete="off" onsubmit="window.scythedApp.handleChangeMasterSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Obecne Hasło Master</label>
+                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Obecne hasło główne</label>
                     <div class="relative">
-                        <input type="password" id="change-old-pass" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono" autocomplete="off" autocorrect="off" spellcheck="false">
+                        <input type="password" id="change-old-pass" required placeholder="Wpisz obecne hasło główne..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
+                        <button type="button" onclick="window.scythedApp.togglePasswordVisibility('change-old-pass')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż lub ukryj obecne hasło główne" title="Pokaż lub ukryj obecne hasło główne"><i class="fas fa-eye"></i></button>
                     </div>
                     <p id="change-old-pass-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left"></p>
                 </div>
                 <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nowe Hasło Master</label>
+                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nowe hasło główne</label>
                     <div class="relative">
-                        <input type="password" id="change-new-pass" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono" autocomplete="off" autocorrect="off" spellcheck="false">
-                        <button type="button" onclick="window.scythedApp.togglePasswordVisibility('change-new-pass')" class="absolute right-3 top-2.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż/ukryj nowe Hasło Master" title="Pokaż/ukryj nowe Hasło Master">
+                        <input type="password" id="change-new-pass" required placeholder="Wpisz nowe hasło główne..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
+                        <button type="button" onclick="window.scythedApp.togglePasswordVisibility('change-new-pass')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż lub ukryj nowe hasło główne" title="Pokaż lub ukryj nowe hasło główne">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
                     <p id="change-password-strength" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500"></p>
                 </div>
                 <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Potwierdź Nowe Hasło Master</label>
-                    <input type="password" id="change-confirm-pass" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono" autocomplete="off" autocorrect="off" spellcheck="false">
+                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Potwierdź nowe hasło główne</label>
+                    <div class="relative">
+                        <input type="password" id="change-confirm-pass" required placeholder="Wpisz ponownie nowe hasło..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
+                        <button type="button" onclick="window.scythedApp.togglePasswordVisibility('change-confirm-pass')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż lub ukryj potwierdzone hasło główne" title="Pokaż lub ukryj potwierdzone hasło główne"><i class="fas fa-eye"></i></button>
+                    </div>
                     <p id="change-confirm-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left"></p>
                 </div>
                 <div id="entry-history-row" class="hidden">
@@ -1492,8 +1500,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     </button>
                 </div>
                 <div class="pt-2 flex gap-3">
-                    <button type="button" onclick="window.scythedApp.closeModal('modal-change-master')" class="flex-1 py-3 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-300 font-bold rounded-lg text-xs transition">ANULUJ</button>
-                    <button type="submit" class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-lg text-xs transition glow-effect">ZAPISZ HASŁO</button>
+                    <button type="button" onclick="window.scythedApp.closeModal('modal-change-master')" class="flex-1 py-3 bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-900 text-zinc-700 dark:text-gray-300 font-bold rounded-xl border border-zinc-300 dark:border-zinc-800 text-xs transition">ANULUJ</button>
+                    <button type="submit" class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAPISZ HASŁO</button>
                 </div>
             </form>
         </div>
@@ -3228,6 +3236,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 document.getElementById('change-confirm-pass').value = '';
                 document.getElementById('change-old-pass').type = 'password';
                 document.getElementById('change-new-pass').type = 'password';
+                document.getElementById('change-confirm-pass').type = 'password';
                 resetMasterPasswordStrengthUI('change-password-strength');
                 updatePasswordMatchUI('', '', 'change-confirm-status');
                 updateChangeOldPasswordStatus('');
