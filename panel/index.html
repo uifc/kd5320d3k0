@@ -322,7 +322,7 @@
 
         .fixed-owner-badge,
         #badge-admin,
-        #badge-paragon,
+        #badge-zasluzony,
         .moderator-badge {
             position: relative;
             overflow: hidden;
@@ -353,7 +353,7 @@
             border-color: rgba(248, 113, 113, 0.88) !important;
         }
 
-        #badge-paragon {
+        #badge-zasluzony {
             
             box-sizing: border-box !important;
             padding: 0.375rem !important;
@@ -367,7 +367,7 @@
             border-color: rgba(74, 222, 128, 0.92) !important;
             color: #86efac !important;
         }
-        #badge-paragon i { color: #4ade80 !important; }
+        #badge-zasluzony i { color: #4ade80 !important; }
 
         .moderator-badge {
             background: linear-gradient(
@@ -383,7 +383,7 @@
 
         .fixed-owner-badge::after,
         #badge-admin::after,
-        #badge-paragon::after,
+        #badge-zasluzony::after,
         .moderator-badge::after {
             content: "";
             position: absolute;
@@ -405,7 +405,7 @@
             background: linear-gradient(110deg, transparent 42%, rgba(248, 113, 113, 0.04) 47%, rgba(248, 113, 113, 0.42) 50%, rgba(220, 38, 38, 0.06) 53%, transparent 58%);
         }
 
-        #badge-paragon::after {
+        #badge-zasluzony::after {
             background: linear-gradient(110deg, transparent 42%, rgba(187, 247, 208, 0.05) 47%, rgba(74, 222, 128, 0.58) 50%, rgba(34, 197, 94, 0.10) 53%, transparent 58%);
         }
 
@@ -415,7 +415,7 @@
 
         .fixed-owner-badge > *,
         #badge-admin > *,
-        #badge-paragon > *,
+        #badge-zasluzony > *,
         .moderator-badge > * {
             position: relative;
             z-index: 1;
@@ -449,11 +449,11 @@
         @media (prefers-reduced-motion: reduce) {
             .fixed-owner-badge,
             #badge-admin,
-            #badge-paragon,
+            #badge-zasluzony,
             .moderator-badge,
             .fixed-owner-badge::after,
             #badge-admin::after,
-            #badge-paragon::after,
+            #badge-zasluzony::after,
             .moderator-badge::after {
                 animation: none !important;
             }
@@ -721,8 +721,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
       .admin-list-owner>i{color:#facc15!important}
       .admin-list-admin{background:linear-gradient(120deg,rgba(69,10,10,.32),rgba(185,28,28,.56),rgba(127,29,29,.28),rgba(220,38,38,.62))!important;border-color:rgba(248,113,113,.92)!important;color:#f87171!important}
       .admin-list-admin>i{color:#f87171!important}
-      .admin-list-paragon{background:linear-gradient(120deg,rgba(20,83,45,.42),rgba(34,197,94,.62),rgba(21,128,61,.42),rgba(74,222,128,.68))!important;border-color:rgba(74,222,128,.92)!important;color:#86efac!important}
-      .admin-list-paragon>i{color:#4ade80!important}
+      .admin-list-zasluzony{background:linear-gradient(120deg,rgba(20,83,45,.42),rgba(34,197,94,.62),rgba(21,128,61,.42),rgba(74,222,128,.68))!important;border-color:rgba(74,222,128,.92)!important;color:#86efac!important}
+      .admin-list-zasluzony>i{color:#4ade80!important}
       .admin-list-moderator{background:linear-gradient(120deg,rgba(23,37,84,.34),rgba(30,64,125,.42),rgba(29,58,115,.32),rgba(59,95,150,.44))!important;border-color:rgba(96,135,190,.68)!important;color:#a0bce3!important}
       .admin-list-moderator>i{color:#60a5fa!important}
       .admin-list-bug{background:rgba(34,197,94,.14)!important;border-color:rgba(34,197,94,.65)!important;color:#4ade80!important}
@@ -739,8 +739,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
       /* Panel odznak używa kolorów identycznych z odznakami profilu. */
       .admin-list-badge.admin-list-owner{background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55))!important;border-color:rgba(250,204,21,.9)!important;color:#facc15!important}
       .admin-list-badge.admin-list-owner>i{color:#facc15!important}
-      .admin-list-badge.admin-list-paragon{background:linear-gradient(120deg,rgba(20,83,45,.42),rgba(34,197,94,.62),rgba(21,128,61,.42),rgba(74,222,128,.68))!important;border-color:rgba(74,222,128,.92)!important;color:#86efac!important}
-      .admin-list-badge.admin-list-paragon>i{color:#4ade80!important}
+      .admin-list-badge.admin-list-zasluzony{background:linear-gradient(120deg,rgba(20,83,45,.42),rgba(34,197,94,.62),rgba(21,128,61,.42),rgba(74,222,128,.68))!important;border-color:rgba(74,222,128,.92)!important;color:#86efac!important}
+      .admin-list-badge.admin-list-zasluzony>i{color:#4ade80!important}
       .admin-verified-status{display:inline-flex;align-items:center;white-space:nowrap;padding:.25rem .5rem;border:1px solid #3b82f6;border-radius:.5rem;color:#60a5fa!important;background:rgba(59,130,246,.12);font-size:10px;font-weight:900}
       .admin-moderator-status{display:inline-flex;align-items:center;white-space:nowrap;padding:.25rem .5rem;border:1px solid #3b82f6;border-radius:.5rem;color:#60a5fa!important;background:rgba(59,130,246,.12);font-size:10px;font-weight:900}
       .admin-admin-status{border-color:#ef4444!important;color:#ef4444!important;background:rgba(239,68,68,.12)!important}
@@ -1222,7 +1222,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         <i class="fas fa-hammer text-[10px]"></i>
                     </div>
 
-                    <div id="badge-paragon" class="profile-badge-tooltip hidden fixed-owner-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Zasłużony" aria-label="Paragon">
+                    <div id="badge-zasluzony" class="profile-badge-tooltip hidden fixed-owner-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Zasłużony" aria-label="Zasłużony">
                         <i class="fas fa-award text-[10px]"></i>
                     </div>
 <div id="badge-bug-hunter" class="profile-badge-tooltip hidden bug-hunter-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm" data-tooltip="Łowca błędów poziom 1" aria-label="Łowca błędów poziom 1">
@@ -3928,11 +3928,11 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const bugHunterBadge = document.getElementById('badge-bug-hunter');
                 const ownerBadge = document.getElementById('badge-owner');
                 const adminBadge = document.getElementById('badge-admin');
-                const paragonBadge = document.getElementById('badge-paragon');
+                const zasluzonyBadge = document.getElementById('badge-zasluzony');
                 const verifiedIcon = document.getElementById('profile-verified-icon');
                 const u = String(username || '').toLowerCase().trim().replace(/^@/, '');
 
-                [betaBadge, initialBetaBadge, moderatorBadge, bugHunterBadge, ownerBadge, adminBadge, paragonBadge, verifiedIcon]
+                [betaBadge, initialBetaBadge, moderatorBadge, bugHunterBadge, ownerBadge, adminBadge, zasluzonyBadge, verifiedIcon]
                     .forEach(el => { if (el) el.classList.add('hidden'); });
                 if (!u) return;
 
@@ -3951,9 +3951,9 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     .map(item => [String(item.badge_key || ''), Number(item.badge_level) || 1]));
                 const isOwner = badges.has('owner');
                 const isAdmin = badges.has('admin');
-                const isParagon = badges.has('paragon');
+                const isZasluzony = badges.has('zasluzony');
                 const bugLevel = badges.get('bug_hunter');
-                const isLarp = badges.has('larp');
+                const isModerator = badges.has('moderator');
                 let showBeta = badges.has('beta_tester');
 
                 if (!showBeta && !isOwner && accountCreatedDate) {
@@ -3968,7 +3968,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
                 if (ownerBadge) ownerBadge.classList.toggle('hidden', !isOwner);
                 if (adminBadge) adminBadge.classList.toggle('hidden', !isAdmin || isOwner);
-                if (paragonBadge) paragonBadge.classList.toggle('hidden', !isParagon || isOwner);
+                if (zasluzonyBadge) zasluzonyBadge.classList.toggle('hidden', !isZasluzony || isOwner);
                 if (bugHunterBadge) {
                     bugHunterBadge.classList.toggle('hidden', !bugLevel || isOwner);
                     bugHunterBadge.classList.toggle('bug-hunter-level-2', bugLevel === 2);
@@ -3977,7 +3977,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     bugHunterBadge.setAttribute('aria-label', label);
                 }
                 if (moderatorBadge) {
-                    moderatorBadge.classList.toggle('hidden', !isLarp || isOwner);
+                    moderatorBadge.classList.toggle('hidden', !isModerator || isOwner);
                     moderatorBadge.setAttribute('data-tooltip', 'Moderator SCYTHED');
                     moderatorBadge.setAttribute('aria-label', 'Moderator SCYTHED');
                 }
@@ -3988,7 +3988,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 }
                 if (verifiedIcon) verifiedIcon.classList.toggle('hidden', profile.verified !== true);
                 updateAccountActionButtons({ verified: profile.verified === true, hasAdminBadge: isAdmin, hasOwnerBadge: isOwner, username: u });
-                if (isOwner) [adminBadge, paragonBadge, bugHunterBadge, moderatorBadge, betaBadge].forEach(el => { if (el) el.classList.add('hidden'); });
+                if (isOwner) [adminBadge, zasluzonyBadge, bugHunterBadge, moderatorBadge, betaBadge].forEach(el => { if (el) el.classList.add('hidden'); });
             }
 
             function playSound(type) {
@@ -4351,11 +4351,11 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     playSound('click');
                     if (btn && icon) {
                         btn.classList.add('bg-red-500/20', 'text-red-500');
-                        btn.title = "Kliknij ponownie, aby potwierdzić zmianę widoczności maili";
+                        btn.title = "Kliknij ponownie, aby potwierdzić zmianę widoczności loginów";
                         icon.className = 'fas fa-circle-question text-xs text-red-500 animate-pulse';
                         const text = document.getElementById('global-emails-text');
                         if (text) text.innerText = 'KLIKNIJ PONOWNIE';
-                        showToast('Kliknij ponownie, aby pokazać/ukryć wszystkie maile.', 'info');
+                        showToast('Kliknij ponownie, aby pokazać/ukryć wszystkie loginy.', 'info');
                     }
 
                     globalEmailsConfirmTimer = setTimeout(() => {
@@ -5948,8 +5948,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             let scythedAdminUsersCache = [];
             function adminFilterUsers() {
                 const q = String(document.getElementById("admin-protected-name-search")?.value || "").trim().toLowerCase();
-                const rank = { owner: 0, admin: 1, larp: 2, paragon: 3, bug_hunter: 4, beta_tester: 5 };
-                const filtered = scythedAdminUsersCache.filter(u => { const badges = (u.badges || []).map(b => b.badge === "mod" ? "larp" : b.badge).join(" "); return `${u.username} ${u.displayName || ""} ${u.verified ? "zweryfikowane zabezpieczona" : "niezweryfikowane"} ${badges}`.toLowerCase().includes(q); });
+                const rank = { owner: 0, admin: 1, moderator: 2, zasluzony: 3, bug_hunter: 4, beta_tester: 5 };
+                const filtered = scythedAdminUsersCache.filter(u => { const badges = (u.badges || []).map(b => b.badge === "mod" ? "moderator" : b.badge).join(" "); return `${u.username} ${u.displayName || ""} ${u.verified ? "zweryfikowane zabezpieczona" : "niezweryfikowane"} ${badges}`.toLowerCase().includes(q); });
                 filtered.sort((a,b) => {
                     const getRank = u => { const keys=(u.badges||[]).map(x=>x.badge); return Math.min(...keys.map(k=>rank[k] ?? 99), 99); };
                     const ar=getRank(a), br=getRank(b); return ar-br || String(a.username).localeCompare(String(b.username), 'pl');
@@ -5960,12 +5960,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const tbody = document.getElementById("admin-users-list");
                 if (!tbody) return;
                 if (!users.length) { tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-zinc-500">Brak pasujących kont / zabezpieczonych nazw.</td></tr>'; return; }
-                const rank = { owner: 0, admin: 1, larp: 2, paragon: 3, bug_hunter: 4, beta_tester: 5 };
+                const rank = { owner: 0, admin: 1, moderator: 2, zasluzony: 3, bug_hunter: 4, beta_tester: 5 };
                 const badgeMeta = {
                     owner: { label: 'Właściciel', icon: 'fa-crown', cls: 'admin-list-badge admin-list-owner' },
                     admin: { label: 'Administrator', icon: 'fa-shield-halved', cls: 'admin-list-badge admin-list-admin fixed-owner-badge' },
-                    larp: { label: 'Moderator', icon: 'fa-hammer', cls: 'admin-list-badge admin-list-moderator moderator-badge' },
-                    paragon: { label: 'Zasłużony', icon: 'fa-award', cls: 'admin-list-badge admin-list-paragon' },
+                    moderator: { label: 'Moderator', icon: 'fa-hammer', cls: 'admin-list-badge admin-list-moderator moderator-badge' },
+                    zasluzony: { label: 'Zasłużony', icon: 'fa-award', cls: 'admin-list-badge admin-list-zasluzony' },
                     bug_hunter: { label: 'Łowca błędów', icon: 'fa-network-wired', cls: 'admin-list-badge admin-list-bug bug-hunter-badge' },
                     beta_tester: { label: 'Beta Tester', icon: 'fa-certificate', cls: 'admin-list-badge admin-list-beta beta-tester-badge' }
                 };
@@ -5985,7 +5985,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         const levelClass = b.badge === 'bug_hunter' && Number(b.level) === 2 ? ' bug-hunter-level-2' : '';
                         return `<span title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}" data-tooltip="${escapeHtml(label)}" class="${m.cls}${levelClass}" role="img"><i class="fas ${m.icon}"></i></span>`;
                     }).join(' ') || '-';
-                    const hasModeratorBadge = (u.badges || []).some(b => b.badge === 'larp' || b.badge === 'mod');
+                    const hasModeratorBadge = (u.badges || []).some(b => b.badge === 'moderator' || b.badge === 'mod');
                     const verifiedBox = u.verified ? '<span class="admin-verified-status" title="Konto zweryfikowane"><i class="fas fa-circle-check mr-1"></i>ZWERYFIKOWANE</span>' : '<span class="text-zinc-500">Niezweryfikowane</span>';
                     const status = isOwnerProfile
                         ? `<div class="flex flex-wrap items-center gap-1"><span class="admin-owner-status" title="Właściciel zweryfikowany"><i class="fas fa-crown mr-1"></i>WŁAŚCICIEL</span>${verifiedBox}</div>`
@@ -5994,11 +5994,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                             : hasModeratorBadge
                                 ? `<div class="flex flex-wrap items-center gap-1"><span class="admin-moderator-status"><i class="fas fa-hammer mr-1"></i>MODERATOR</span>${verifiedBox}</div>`
                                 : verifiedBox;
-                    const passwordButton = `<button onclick="window.scythedApp.adminChangePassword('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ZMIANA HASŁA</button>`;
-                    const del = !isOwnerProfile ? `<button onclick="window.scythedApp.adminDeleteUser('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">USUŃ KONTO</button>` : '';
+                    const canManageTarget = scythedIsOwner || name.toLowerCase() === String(scythedAccountUsername || '').toLowerCase();
+                    const passwordButton = canManageTarget ? `<button onclick="window.scythedApp.adminChangePassword('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ZMIANA HASŁA</button>` : '<span class="text-xs text-zinc-500">Hasło może zmienić właściciel lub sam użytkownik.</span>';
+                    const del = !isOwnerProfile && (scythedIsOwner || !isAdminAccount) ? `<button onclick="window.scythedApp.adminDeleteUser('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">USUŃ KONTO</button>` : '';
                     const badgeOptions = orderedBadges.map(b => `<option value="${escapeHtml(b.badge)}">${escapeHtml(badgeLabel(b))}</option>`).join('');
-                    const revoke = badgeOptions && !isOwnerProfile ? `<div class="flex flex-wrap gap-1 mt-1"><select id="revoke-badge-${escapeHtml(name)}" class="admin-badge-select max-w-[170px] rounded border px-2 py-1 text-xs" aria-label="Wybierz odznakę do odebrania">${badgeOptions}</select><button onclick="window.scythedApp.adminRevokeBadge('${escapeHtml(name)}', document.getElementById('revoke-badge-${escapeHtml(name)}').value)" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ODBIERZ</button></div>` : (isOwnerProfile ? '<span class="text-xs text-zinc-500">Profil właściciela - dostępna tylko zmiana hasła.</span>' : '<span class="text-zinc-500">Brak odznak</span>');
-                    return `<tr class="admin-user-row ${isOwnerProfile ? 'admin-owner-row' : ''} border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(isOwnerProfile ? 'Szymon' : name)}${isOwnerProfile ? '<div class="text-[10px] font-normal text-zinc-500">Właściciel projektu</div>' : ''}</td><td class="p-2">${status}</td><td class="p-2 min-w-[140px]"><div class="flex flex-wrap items-center gap-1.5">${badges}</div></td><td class="p-2"><div class="flex flex-col items-start gap-1.5">${isOwnerProfile ? (scythedIsOwner ? passwordButton : '<span class="text-xs text-zinc-500">Zmiana hasła właściciela dostępna wyłącznie właścicielowi.</span>') : `<div class="flex flex-wrap gap-1.5">${passwordButton}${del}</div>${revoke}`}</div></td></tr>`;
+                    const revoke = badgeOptions && !isOwnerProfile && canManageTarget ? `<div class="flex flex-wrap gap-1 mt-1"><select id="revoke-badge-${escapeHtml(name)}" class="admin-badge-select max-w-[170px] rounded border px-2 py-1 text-xs" aria-label="Wybierz odznakę do odebrania">${badgeOptions}</select><button onclick="window.scythedApp.adminRevokeBadge('${escapeHtml(name)}', document.getElementById('revoke-badge-${escapeHtml(name)}').value)" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ODBIERZ</button></div>` : (isOwnerProfile ? '<span class="text-xs text-zinc-500">Profil właściciela — dostępna tylko zmiana hasła.</span>' : (canManageTarget ? '<span class="text-zinc-500">Brak odznak</span>' : '<span class="text-xs text-zinc-500">Odznaki innych kont może edytować wyłącznie właściciel.</span>'));
+                    return `<tr class="admin-user-row ${isOwnerProfile ? 'admin-owner-row' : ''} border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(isOwnerProfile ? 'Właściciel' : name)}${isOwnerProfile ? '<div class="text-[10px] font-normal text-zinc-500">Właściciel projektu</div>' : ''}</td><td class="p-2">${status}</td><td class="p-2 min-w-[140px]"><div class="flex flex-wrap items-center gap-1.5">${badges}</div></td><td class="p-2"><div class="flex flex-col items-start gap-1.5">${isOwnerProfile ? (scythedIsOwner ? passwordButton : '<span class="text-xs text-zinc-500">Zmiana hasła właściciela dostępna wyłącznie właścicielowi.</span>') : `<div class="flex flex-wrap gap-1.5">${passwordButton}${del}</div>${revoke}`}</div></td></tr>`;
                 }).join('');
             }
             async function adminRefreshUsers() {
@@ -6043,21 +6044,23 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 await adminRefreshUsers();
             }
             async function adminChangePassword(username) {
+                if (!scythedIsOwner && String(username || '').toLowerCase() !== String(scythedAccountUsername || '').toLowerCase()) return adminMessage('Administrator może zmienić wyłącznie własne hasło.', true);
                 if (String(username || '').toLowerCase() === 'szymon' && !scythedIsOwner) return adminMessage('Zmiana hasła właściciela jest dostępna wyłącznie właścicielowi.', true);
                 const password = prompt(`Nowe hasło dla ${username} (minimum 12 znaków):`); if (password === null) return;
                 const { response, data } = await adminApi('/api/admin/set-password', { username, password });
                 if (!response.ok) return adminMessage(`Zmiana hasła nieudana: ${data.error || 'błąd API'}`, true);
                 adminMessage(`Zmieniono hasło konta ${username}.`);
             }
-            function adminBadgeTypeChanged() { const badgeSelect = document.getElementById("admin-badge-key"); const level = document.getElementById("admin-badge-level"); if (!badgeSelect || !level) return; for (const option of badgeSelect.options) { if (option.value === "owner" || option.value === "admin") option.disabled = !scythedIsOwner; } if (badgeSelect.selectedOptions[0]?.disabled) badgeSelect.value = "larp"; const enabled = badgeSelect.value === "bug_hunter"; level.disabled = !enabled; level.classList.toggle("opacity-50", !enabled); }
+            function adminBadgeTypeChanged() { const badgeSelect = document.getElementById("admin-badge-key"); const level = document.getElementById("admin-badge-level"); if (!badgeSelect || !level) return; for (const option of badgeSelect.options) { if (option.value === "owner" || option.value === "admin") option.disabled = !scythedIsOwner; } if (badgeSelect.selectedOptions[0]?.disabled) badgeSelect.value = "moderator"; const enabled = badgeSelect.value === "bug_hunter"; level.disabled = !enabled; level.classList.toggle("opacity-50", !enabled); }
             async function adminAssignBadge(event) {
                 event.preventDefault();
                 const username = document.getElementById('admin-badge-username').value.trim(), badge = document.getElementById('admin-badge-key').value, level = badge === 'bug_hunter' ? Number(document.getElementById('admin-badge-level').value) : 1;
+                if (!scythedIsOwner && username.toLowerCase() !== String(scythedAccountUsername || '').toLowerCase()) return adminMessage('Administrator może edytować wyłącznie własne odznaki.', true);
                 const account = scythedAdminUsersCache.find(item => String(item.username).toLowerCase() === username.toLowerCase());
                 const previous = (account?.badges || []).find(item => item.badge === badge);
                 const { response, data } = await adminApi('/api/admin/assign-badge', { username, badge, level });
                 if (!response.ok) return adminMessage(`Nie udało się nadać odznaki: ${data.error || 'błąd API'}`, true);
-                const label = ({owner:'Właściciel',admin:'Administrator',larp:'Moderator',paragon:'Zasłużony',bug_hunter:'Łowca błędów',beta_tester:'Beta Tester'})[badge] || badge;
+                const label = ({owner:'Właściciel',admin:'Administrator',moderator:'Moderator',zasluzony:'Zasłużony',bug_hunter:'Łowca błędów',beta_tester:'Beta Tester'})[badge] || badge;
                 showAdminUndo(`Nadano odznakę ${label}${badge === 'bug_hunter' ? ` Poziom ${level}` : ''} dla ${username}.`, async () => {
                     if (previous) { const restored = await adminApi('/api/admin/assign-badge', { username, badge, level: Number(previous.level) || 1 }); if (!restored.response.ok) throw new Error(restored.data.message || restored.data.error || 'nie udało się przywrócić poprzedniej odznaki'); }
                     else { const undone = await adminApi('/api/admin/revoke-badge', { username, badge }); if (!undone.response.ok) throw new Error(undone.data.message || undone.data.error || 'nie udało się odebrać odznaki'); }
@@ -6065,8 +6068,9 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 await adminRefreshUsers();
             }
             async function adminRevokeBadge(username, badge) {
+                if (!scythedIsOwner && String(username || '').toLowerCase() !== String(scythedAccountUsername || '').toLowerCase()) return adminMessage('Administrator nie może odbierać odznak innym kontom.', true);
                 if (!badge) return adminMessage('Wybierz odznakę do odebrania.', true);
-                const label = ({owner:'Właściciel',admin:'Administrator',larp:'Moderator',bug_hunter:'Łowca błędów',paragon:'Zasłużony',beta_tester:'Beta tester'})[badge] || badge;
+                const label = ({owner:'Właściciel',admin:'Administrator',moderator:'Moderator',bug_hunter:'Łowca błędów',zasluzony:'Zasłużony',beta_tester:'Beta tester'})[badge] || badge;
                 if (!confirm(`Odebrać odznakę „${label}” kontu ${username}?`)) return;
                 const account = scythedAdminUsersCache.find(item => String(item.username).toLowerCase() === username.toLowerCase());
                 const previous = (account?.badges || []).find(item => item.badge === badge);
@@ -6173,7 +6177,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
           <div class="p-4 rounded-xl border border-brand-red/25 bg-brand-red/5 text-sm"><h3 class="font-bold text-brand-red"><i class="fas fa-terminal mr-2"></i>ZABEZPIECZANIE NAZW</h3><p class="mt-2 text-zinc-600 dark:text-zinc-300">Tworzenie kont jest dostępne wyłącznie przez PowerShell i endpoint API. W panelu nie można dodawać nazw użytkowników.</p></div>
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
           <div class="space-y-2"><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw" autocomplete="off" autocorrect="off" spellcheck="false"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
-          <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="larp">Moderator</option><option value="paragon">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
+          <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="moderator">Moderator</option><option value="zasluzony">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
         </div>
       </section>
     </div>
