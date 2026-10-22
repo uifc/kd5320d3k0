@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta property="og:title" content="SCYTHED">
-    <meta property="og:description" content="MENADŻER HASEŁ - publiczne wydanie 4.">
+    <meta property="og:description" content="MENADŻER HASEŁ - wer. 5.0.">
     <meta property="og:image" content="https://i.imgur.com/jIS4wrD.png">
     <meta property="og:url" content="https://scythed.xyz">
     <meta property="og:type" content="website">
@@ -1090,7 +1090,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-white/90 dark:bg-brand-card backdrop-blur-md p-4 border border-zinc-200 dark:border-brand-border rounded-2xl shadow-xl transition-colors duration-300">
             <div class="flex items-center justify-between bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 px-4 py-2.5 rounded-xl">
-                <span class="text-xs font-mono uppercase text-zinc-700 dark:text-gray-300">Wszystkie maile/loginy</span>
+                <span class="text-xs font-mono uppercase text-zinc-700 dark:text-gray-300">Wszystkie loginy</span>
                 <button id="global-toggle-emails" onclick="window.scythedApp.toggleGlobalEmails()" class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-brand-red border border-zinc-300 dark:border-zinc-700 text-xs font-bold rounded-lg transition flex items-center gap-1.5">
                     <i id="global-emails-icon" class="fas fa-eye-slash"></i>
                     <span id="global-emails-text">UKRYJ WSZYSTKIE</span>
@@ -1243,7 +1243,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
         <button onclick="window.scythedApp.openSettingsModal()" class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" title="Ustawienia & System">
             <i class="fas fa-gear"></i>
         </button>
-        <span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">publiczne wydanie 4</span>
+        <span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">wer. 5.0</span>
     </div>
 
     <footer class="w-full max-w-xl mx-auto text-center px-4 mt-8 space-y-1 relative z-10">
@@ -1405,12 +1405,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <div class="flex items-center justify-between gap-4 p-4 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
                     <div class="flex items-center gap-2 min-w-0">
                         <i class="fas fa-bell text-xs shrink-0" style="color: var(--brand-red, #ff0033);" aria-hidden="true"></i>
-                        <div class="flex flex-col gap-1 min-w-0"><span class="text-sm font-bold">Automatyczna blokada</span><span class="text-xs text-zinc-500 dark:text-zinc-400">Wybierz sposób blokowania</span></div>
+                        <div class="flex flex-col min-w-0"><span class="text-sm font-bold">Automatyczna blokada</span></div>
                     </div>
-                    <select id="auto-lock-mode" onchange="window.scythedApp.setAutoLockMode(this.value)" class="max-w-[58%] px-3 py-2 bg-white dark:bg-zinc-900 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-brand-red">
+                    <select id="auto-lock-mode" onchange="window.scythedApp.setAutoLockMode(this.value)" class="w-auto max-w-[60%] shrink-0 px-3 py-2 bg-white dark:bg-zinc-900 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-brand-red">
                         <option value="hidden">Po opuszczeniu strony</option>
                         <option value="timed">Po 10 minutach</option>
-                        <option value="off">Wyłączone</option>
+                        <option value="off">Wyłączona</option>
                     </select>
                 </div>
             </div>
@@ -1530,7 +1530,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 </div>
 
                 <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Login / Email / Nazwa użytkownika</label>
+                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">LOGIN</label>
                     <input type="text" id="entry-account" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="user@example.com lub nick" autocomplete="off" autocorrect="off" spellcheck="false">
                 </div>
 
@@ -4876,7 +4876,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                                 </div>
                             </div>
                             <div class="space-y-3">
-                                <div><span class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block mb-1">Login / Email</span>
+                                <div><span class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block mb-1">LOGIN</span>
                                     <div class="bg-zinc-100 dark:bg-black/80 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs">
                                         <span id="acc-text-${safeId}" data-masked="${!showAcc}" onclick="window.scythedApp.copyEntryField('${safeId}', 'account')" class="font-mono font-semibold text-zinc-800 dark:text-gray-200 truncate mr-2 cursor-pointer select-none">${showAcc ? escapeHtml(entry.account) : '••••••••••••'}</span>
                                         <div class="flex items-center gap-3 flex-shrink-0">
@@ -6020,10 +6020,11 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             }
             let scythedAdminUndoAction = null;
             function showAdminUndo(message, undoAction) {
-                scythedAdminUndoAction = undoAction;
+                // Panel admina pokazuje wyłącznie wynik operacji — bez przycisku cofania.
+                scythedAdminUndoAction = null;
                 const el = document.getElementById('admin-action-message'); if (!el) return;
-                el.className = 'text-sm rounded-lg p-3 bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-100 flex flex-wrap items-center gap-3';
-                el.innerHTML = `<span>${escapeHtml(message)}</span><button type="button" class="admin-theme-button rounded border px-3 py-1 font-bold text-xs" onclick="window.scythedApp.adminUndoLastAction()">COFNIJ</button>`;
+                el.className = 'text-sm rounded-lg p-3 bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-100';
+                el.textContent = message;
             }
             async function adminUndoLastAction() {
                 const action = scythedAdminUndoAction; if (!action) return;
@@ -6032,7 +6033,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 catch (error) { adminMessage(`Nie udało się cofnąć operacji: ${error.message || 'błąd API'}`, true); }
             }
             async function adminDeleteUser(username) {
-                if (!await appConfirm(`Usunąć konto ${username} i jego odznaki? Przez chwilę będzie dostępna opcja cofnięcia.`, {title:'USUWANIE KONTA', icon:'fa-trash', confirmText:'USUŃ KONTO'})) return;
+                if (!await appConfirm(`Usunąć konto ${username} i jego odznaki? Tej operacji nie będzie można cofnąć z panelu.`, {title:'USUWANIE KONTA', icon:'fa-trash', confirmText:'USUŃ KONTO'})) return;
                 const { response, data } = await adminApi('/api/admin/delete-user', { username });
                 if (!response.ok) return adminMessage(`Usuwanie nieudane: ${data.error || 'błąd API'}`, true);
                 showAdminUndo(`Usunięto konto ${username}.`, async () => {
