@@ -838,6 +838,45 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 })();
 </script>
 
+<style id="admin-theme-final-tune">
+  /* Akcje korzystają z koloru głównego ustawionego przez użytkownika. */
+  #scythed-admin-modal .admin-theme-button {
+    background: var(--brand-red, #ff0033) !important;
+    border-color: var(--brand-red, #ff0033) !important;
+    color: #fff !important;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease, filter .15s ease;
+  }
+  #scythed-admin-modal .admin-theme-button:hover {
+    background: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
+    border-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
+    color: #fff !important;
+    filter: brightness(.96);
+  }
+  /* Pola wyboru są neutralne i zależą od jasnego/ciemnego motywu, nie od koloru akcentu. */
+  #scythed-admin-modal .admin-badge-select,
+  #scythed-admin-modal .admin-badge-select option {
+    background: #e4e4e7 !important;
+    color: #27272a !important;
+    border-color: #a1a1aa !important;
+    color-scheme: light;
+  }
+  html.dark #scythed-admin-modal .admin-badge-select,
+  html.dark #scythed-admin-modal .admin-badge-select option {
+    background: #27272a !important;
+    color: #f4f4f5 !important;
+    border-color: #52525b !important;
+    color-scheme: dark;
+  }
+  /* Łowca błędów poziom 2 ma niebieską odznakę w panelu administracyjnym. */
+  #scythed-admin-modal .admin-list-bug.bug-hunter-level-2 {
+    background: rgba(59,130,246,.14) !important;
+    border-color: rgba(96,165,250,.78) !important;
+    color: #60a5fa !important;
+  }
+  #scythed-admin-modal .admin-list-bug.bug-hunter-level-2 > i {
+    color: #3b82f6 !important;
+  }
+</style>
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-zinc-100 dark:bg-black text-zinc-900 dark:text-white selection:bg-brand-red selection:text-white pb-24 md:pb-28 transition-colors duration-300 relative overflow-x-hidden" style="isolation:isolate">
 
@@ -5880,7 +5919,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     bug_hunter: { label: 'Łowca błędów', icon: 'fa-network-wired', cls: 'admin-list-badge admin-list-bug bug-hunter-badge' },
                     beta_tester: { label: 'Beta Tester', icon: 'fa-certificate', cls: 'admin-list-badge admin-list-beta beta-tester-badge' }
                 };
-                const badgeLabel = b => `${(badgeMeta[b.badge] || {label:b.badge}).label}${b.badge === 'bug_hunter' ? ` Poziom +${Number(b.level) === 2 ? 2 : 1}` : ''}`;
+                const badgeLabel = b => `${(badgeMeta[b.badge] || {label:b.badge}).label}${b.badge === 'bug_hunter' ? ` Poziom ${Number(b.level) === 2 ? 2 : 1}` : ''}`;
                 const sorted = [...users].sort((a,b) => {
                     const getRank = u => Math.min(...(u.badges || []).map(x => rank[x.badge] ?? 99), 99);
                     return getRank(a) - getRank(b) || String(a.username).localeCompare(String(b.username), 'pl');
@@ -5893,7 +5932,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     const badges = orderedBadges.map(b => {
                         const m = badgeMeta[b.badge] || {label:b.badge, icon:'fa-award', cls:'admin-list-badge'};
                         const label = badgeLabel(b);
-                        return `<span title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}" data-tooltip="${escapeHtml(label)}" class="${m.cls}" role="img"><i class="fas ${m.icon}"></i></span>`;
+                        const levelClass = b.badge === 'bug_hunter' && Number(b.level) === 2 ? ' bug-hunter-level-2' : '';
+                        return `<span title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}" data-tooltip="${escapeHtml(label)}" class="${m.cls}${levelClass}" role="img"><i class="fas ${m.icon}"></i></span>`;
                     }).join(' ') || '-';
                     const hasModeratorBadge = (u.badges || []).some(b => b.badge === 'larp' || b.badge === 'mod');
                     const verifiedBox = u.verified ? '<span class="admin-verified-status" title="Konto zweryfikowane"><i class="fas fa-circle-check mr-1"></i>ZWERYFIKOWANE</span>' : '<span class="text-zinc-500">Niezweryfikowane</span>';
@@ -5967,7 +6007,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const { response, data } = await adminApi('/api/admin/assign-badge', { username, badge, level });
                 if (!response.ok) return adminMessage(`Nie udało się nadać odznaki: ${data.error || 'błąd API'}`, true);
                 const label = ({owner:'Właściciel',admin:'Administrator',larp:'Moderator',paragon:'Zasłużony',bug_hunter:'Łowca błędów',beta_tester:'Beta Tester'})[badge] || badge;
-                showAdminUndo(`Nadano odznakę ${label}${badge === 'bug_hunter' ? ` Poziom +${level}` : ''} dla ${username}.`, async () => {
+                showAdminUndo(`Nadano odznakę ${label}${badge === 'bug_hunter' ? ` Poziom ${level}` : ''} dla ${username}.`, async () => {
                     if (previous) { const restored = await adminApi('/api/admin/assign-badge', { username, badge, level: Number(previous.level) || 1 }); if (!restored.response.ok) throw new Error(restored.data.message || restored.data.error || 'nie udało się przywrócić poprzedniej odznaki'); }
                     else { const undone = await adminApi('/api/admin/revoke-badge', { username, badge }); if (!undone.response.ok) throw new Error(undone.data.message || undone.data.error || 'nie udało się odebrać odznaki'); }
                 });
@@ -6082,7 +6122,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
           <div class="p-4 rounded-xl border border-brand-red/25 bg-brand-red/5 text-sm"><h3 class="font-bold text-brand-red"><i class="fas fa-terminal mr-2"></i>ZABEZPIECZANIE NAZW</h3><p class="mt-2 text-zinc-600 dark:text-zinc-300">Tworzenie kont jest dostępne wyłącznie przez PowerShell i endpoint API. W panelu nie można dodawać nazw użytkowników.</p></div>
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
           <div class="space-y-2"><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw" autocomplete="off" autocorrect="off" spellcheck="false"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
-          <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="larp">Moderator</option><option value="paragon">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom +1</option><option value="2">Poziom +2</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
+          <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="larp">Moderator</option><option value="paragon">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
         </div>
       </section>
     </div>
