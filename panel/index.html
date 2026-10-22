@@ -736,9 +736,97 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
       .admin-badge-select{background:#09090b;color:#f4f4f5;border-color:var(--brand-red,#ef4444)}
       .admin-badge-select option{background:#09090b;color:#f4f4f5}
       .admin-owner-row{background:linear-gradient(90deg,rgba(234,179,8,.09),transparent 75%)}
+      /* Panel odznak używa kolorów identycznych z odznakami profilu. */
+      .admin-list-badge.admin-list-owner{background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55))!important;border-color:rgba(250,204,21,.9)!important;color:#facc15!important}
+      .admin-list-badge.admin-list-owner>i{color:#facc15!important}
+      .admin-list-badge.admin-list-paragon{background:linear-gradient(120deg,rgba(20,83,45,.42),rgba(34,197,94,.62),rgba(21,128,61,.42),rgba(74,222,128,.68))!important;border-color:rgba(74,222,128,.92)!important;color:#86efac!important}
+      .admin-list-badge.admin-list-paragon>i{color:#4ade80!important}
+      .admin-verified-status{display:inline-flex;align-items:center;white-space:nowrap;padding:.25rem .5rem;border:1px solid #3b82f6;border-radius:.5rem;color:#60a5fa!important;background:rgba(59,130,246,.12);font-size:10px;font-weight:900}
+      .admin-moderator-status{display:inline-flex;align-items:center;white-space:nowrap;padding:.25rem .5rem;border:1px solid #3b82f6;border-radius:.5rem;color:#60a5fa!important;background:rgba(59,130,246,.12);font-size:10px;font-weight:900}
+      .admin-admin-status{border-color:#ef4444!important;color:#ef4444!important;background:rgba(239,68,68,.12)!important}
+      #admin-session-countdown{font-variant-numeric:tabular-nums;font-weight:800}
       html:not(.dark) .admin-badge-select,html:not(.dark) .admin-badge-select option{background:#18181b;color:#fff}
       @media(prefers-reduced-motion:reduce){.admin-list-badge,.admin-owner-status{animation:none!important}}
     </style>
+
+
+<style id="admin-theme-accessibility-fixes">
+  /* Odznaki administracyjne zachowują obrys symbolu tak jak odznaki profilu. */
+  #scythed-admin-modal .admin-list-badge > i {
+    -webkit-text-stroke: .45px rgba(255,255,255,.9);
+    text-shadow: 0 0 1px rgba(255,255,255,.65), 0 0 2px rgba(0,0,0,.3);
+    filter: drop-shadow(0 0 .7px rgba(255,255,255,.45));
+  }
+  html.dark #scythed-admin-modal .admin-list-badge > i {
+    -webkit-text-stroke: .45px rgba(0,0,0,.85);
+    text-shadow: 0 0 1px rgba(0,0,0,.8), 0 0 2px rgba(255,255,255,.2);
+    filter: drop-shadow(0 0 .7px rgba(0,0,0,.55));
+  }
+  /* Tła kontrolek bazują na kolorze motywu zamiast pozostawać czarne. */
+  #scythed-admin-modal .admin-badge-select,
+  #scythed-admin-modal .admin-badge-select option {
+    background-color: color-mix(in srgb, var(--brand-red, #ff0033) 20%, #09090b) !important;
+    color: #f4f4f5 !important;
+    border-color: var(--brand-red, #ff0033) !important;
+  }
+  #scythed-admin-modal .admin-theme-button {
+    border-color: var(--brand-red, #ff0033) !important;
+    color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+    background-color: color-mix(in srgb, var(--brand-red, #ff0033) 10%, transparent) !important;
+  }
+  #scythed-admin-modal .admin-theme-button:hover {
+    background-color: var(--brand-red, #ff0033) !important;
+    color: var(--brand-contrast-text, #fff) !important;
+  }
+  #scythed-admin-modal button[class*="bg-black"],
+  #scythed-admin-modal button[class*="bg-zinc-950"],
+  #scythed-admin-modal button[class*="bg-zinc-900"] {
+    background-color: color-mix(in srgb, var(--brand-red, #ff0033) 22%, #09090b) !important;
+    border-color: color-mix(in srgb, var(--brand-red, #ff0033) 48%, #52525b) !important;
+    color: var(--brand-contrast-text, #fff) !important;
+  }
+  /* Jeśli kolor akcentu jest biały/jasny, tekst i obramowania pozostają czytelne. */
+  #scythed-admin-modal .text-brand-red,
+  #scythed-admin-modal .text-red-500,
+  #scythed-admin-modal .text-red-600 { color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important; }
+  #scythed-admin-modal .border-brand-red,
+  #scythed-admin-modal [class*="border-brand-red/"] { border-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important; }
+  #scythed-admin-modal input:-webkit-autofill,
+  #scythed-admin-modal input:-webkit-autofill:hover,
+  #scythed-admin-modal input:-webkit-autofill:focus {
+    -webkit-text-fill-color: inherit !important;
+    transition: background-color 99999s ease-out 0s;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+  }
+</style>
+<script id="disable-browser-autofill">
+(function () {
+  function disableAutofill(root) {
+    if (!root || !root.querySelectorAll) return;
+    if (root.matches && root.matches('input, textarea, select, form')) {
+      if (root.matches('form')) root.setAttribute('autocomplete', 'off');
+      else {
+        root.setAttribute('autocomplete', 'off');
+        root.setAttribute('autocorrect', 'off');
+        root.setAttribute('spellcheck', 'false');
+      }
+    }
+    root.querySelectorAll('form').forEach(el => el.setAttribute('autocomplete', 'off'));
+    root.querySelectorAll('input, textarea, select').forEach(el => {
+      el.setAttribute('autocomplete', 'off');
+      el.setAttribute('autocorrect', 'off');
+      el.setAttribute('spellcheck', 'false');
+    });
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    disableAutofill(document);
+    const observer = new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+      if (node.nodeType === 1) disableAutofill(node);
+    })));
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  });
+})();
+</script>
 
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-zinc-100 dark:bg-black text-zinc-900 dark:text-white selection:bg-brand-red selection:text-white pb-24 md:pb-28 transition-colors duration-300 relative overflow-x-hidden" style="isolation:isolate">
@@ -756,9 +844,9 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <p id="auth-subtitle" class="text-xs text-zinc-600 dark:text-gray-400">Próbujesz zalogować się hasłem master (<span id="auth-username-placeholder" class="text-brand-red font-bold">@USER</span>)</p>
             </div>
 
-            <form id="auth-form" autocomplete="off" onsubmit="window.scythedApp.handleAuthSubmit(event)" class="space-y-4">
+            <form autocomplete="off" id="auth-form" onsubmit="window.scythedApp.handleAuthSubmit(event)" class="space-y-4">
                 <div class="relative">
-                    <input type="password" id="auth-master-password" required placeholder="Wpisz Hasło Master..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner">
+                    <input type="password" id="auth-master-password" required placeholder="Wpisz Hasło Master..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
                     <p id="auth-password-strength" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500 text-left"></p>
                     <button type="button" onclick="window.scythedApp.togglePasswordVisibility('auth-master-password')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white">
                         <i class="fas fa-eye"></i>
@@ -766,7 +854,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 </div>
 
                 <div id="auth-confirm-container" class="relative hidden">
-                    <input type="password" id="auth-master-password-confirm" placeholder="Potwierdź Hasło Master..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner">
+                    <input type="password" id="auth-master-password-confirm" placeholder="Potwierdź Hasło Master..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
                     <p id="auth-confirm-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left"></p>
                 </div>
 
@@ -774,7 +862,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     <button type="button" onclick="document.getElementById('auth-backup-file-input').click()" class="w-full py-2.5 bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-900 text-zinc-800 dark:text-gray-200 font-orbitron font-bold text-xs rounded-xl border border-zinc-300 dark:border-zinc-800 transition flex items-center justify-center gap-2">
                         <i class="fas fa-upload text-brand-red"></i> WCZYTAJ BACKUP PRZY TWORZENIU HASŁA
                     </button>
-                    <input type="file" id="auth-backup-file-input" accept=".scythed,.json" class="hidden" onchange="window.scythedApp.importBackup(event)">
+                    <input type="file" id="auth-backup-file-input" accept=".scythed,.json" class="hidden" onchange="window.scythedApp.importBackup(event)" autocomplete="off" autocorrect="off" spellcheck="false">
                     <p id="auth-backup-status" class="text-[10px] text-zinc-500 dark:text-gray-500">Możesz najpierw wczytać zaszyfrowany backup, a następnie ustawić nowe Hasło Master.</p>
                 </div>
 
@@ -822,7 +910,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         <div id="app-dialog-message" class="mt-3 text-xs md:text-sm leading-relaxed text-zinc-600 dark:text-gray-300"></div>
                         <div id="app-dialog-input-wrap" class="hidden mt-4">
                             <div class="relative">
-                                <input id="app-dialog-input" type="text" autocomplete="off" class="w-full bg-zinc-50 dark:bg-black/70 border border-zinc-300 dark:border-zinc-800 rounded-xl px-4 py-3 pr-11 text-zinc-900 dark:text-white text-sm font-mono shadow-inner">
+                                <input id="app-dialog-input" type="text" autocomplete="off" class="w-full bg-zinc-50 dark:bg-black/70 border border-zinc-300 dark:border-zinc-800 rounded-xl px-4 py-3 pr-11 text-zinc-900 dark:text-white text-sm font-mono shadow-inner" autocorrect="off" spellcheck="false">
                                 <button id="app-dialog-toggle-password" type="button" class="hidden absolute right-3 top-3 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż/ukryj wartość">
                                     <i class="fas fa-eye"></i>
                                 </button>
@@ -862,7 +950,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             <label class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 cursor-pointer transition flex items-center gap-1.5 shadow-sm" title="Wczytaj zaszyfrowany backup SCYTHED">
                 <i class="fas fa-upload text-brand-red"></i>
                 <span class="hidden sm:inline">WCZYTAJ BACKUP</span>
-                <input type="file" id="backup-file-input" accept=".scythed,.json" class="hidden" onchange="window.scythedApp.importBackup(event)">
+                <input type="file" id="backup-file-input" accept=".scythed,.json" class="hidden" onchange="window.scythedApp.importBackup(event)" autocomplete="off" autocorrect="off" spellcheck="false">
             </label>
             <button type="button"
                     onclick="window.location.href='https://scythed.xyz'"
@@ -921,7 +1009,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center pointer-events-none text-brand-red" aria-hidden="true">
                             <i class="fas fa-search text-brand-red text-sm transition-colors duration-300" aria-hidden="true"></i>
                         </span>
-                        <input type="text" id="vault-search-input" onfocus="window.scythedApp.toggleSearchFocus(true)" onblur="window.scythedApp.toggleSearchFocus(false)" oninput="window.scythedApp.renderVaultEntries()" placeholder="Szukaj..." class="w-full bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none shadow-xl transition-colors duration-300">
+                        <input type="text" id="vault-search-input" onfocus="window.scythedApp.toggleSearchFocus(true)" onblur="window.scythedApp.toggleSearchFocus(false)" oninput="window.scythedApp.renderVaultEntries()" placeholder="Szukaj..." class="w-full bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none shadow-xl transition-colors duration-300" autocomplete="off" autocorrect="off" spellcheck="false">
                     </div>
                     <select id="vault-filter-platform" onchange="window.scythedApp.renderVaultEntries()" class="vault-filter-control bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none min-w-[150px] shadow-xl transition-colors duration-300">
                         <option value="ALL">Platforma: Wszystkie</option>
@@ -992,7 +1080,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     <button id="corner-reset-banner-btn" onclick="window.scythedApp.resetBannerToDefault()" class="p-1.5 bg-red-600/70 hover-bg-brand-dynamic text-white text-xs rounded-lg border border-white/20 transition hidden" title="Przywróć domyślny banner">
                         <i class="fas fa-rotate-left"></i>
                     </button>
-                    <input type="file" id="corner-banner-input" accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" class="hidden" onchange="window.scythedApp.handleBannerUpload(event)">
+                    <input type="file" id="corner-banner-input" accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" class="hidden" onchange="window.scythedApp.handleBannerUpload(event)" autocomplete="off" autocorrect="off" spellcheck="false">
                 </div>
             </div>
 
@@ -1005,12 +1093,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         <div class="absolute inset-0 bg-black/60 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                             <i class="fas fa-camera text-white text-xs"></i>
                         </div>
-                        <input type="file" id="corner-avatar-input" accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" class="hidden" onchange="window.scythedApp.handleAvatarUpload(event)">
+                        <input type="file" id="corner-avatar-input" accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" class="hidden" onchange="window.scythedApp.handleAvatarUpload(event)" autocomplete="off" autocorrect="off" spellcheck="false">
                     </div>
 
                     <div class="overflow-hidden flex-grow">
                         <div class="flex items-center gap-1 min-w-0 relative" id="username-row">
-                            <input type="text" id="username-input" name="scythed-profile-name" value="USER" readonly autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other"  oninput="window.scythedApp.syncUsernameInputWidth()" onkeydown="if(event.key==='Enter') { event.preventDefault(); window.scythedApp.toggleUsernameEdit(); } if(event.key==='Escape') { event.preventDefault(); window.scythedApp.cancelUsernameEdit(); }" maxlength="16" title="Kliknij ołówek, aby zmienić nazwę" class="profile-username-input font-orbitron font-extrabold text-sm animated-gradient-text bg-transparent focus:outline-none min-w-0 cursor-default" style="width:1px">
+                            <input type="text" id="username-input" name="scythed-profile-name" value="USER" readonly autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other"  oninput="window.scythedApp.syncUsernameInputWidth()" onkeydown="if(event.key==='Enter') { event.preventDefault(); window.scythedApp.toggleUsernameEdit(); } if(event.key==='Escape') { event.preventDefault(); window.scythedApp.cancelUsernameEdit(); }" maxlength="16" title="Kliknij ołówek, aby zmienić nazwę" class="profile-username-input font-orbitron font-extrabold text-sm animated-gradient-text bg-transparent focus:outline-none min-w-0 cursor-default" style="width:1px" autocorrect="off">
                             <i id="profile-verified-icon" class="hidden fas fa-circle-check profile-verified-icon text-[13px]" title="Zweryfikowane konto" aria-label="Zweryfikowane konto"></i>
                             <button type="button" id="username-edit-btn" onclick="window.scythedApp.toggleUsernameEdit()" class="inline-flex items-center justify-center self-center h-4 leading-none text-zinc-400 hover-brand-dynamic transition flex-shrink-0" title="Edytuj nazwę użytkownika" aria-label="Edytuj nazwę użytkownika"><i class="fas fa-pen text-[10px]"></i></button>
                             <span id="username-width-measure" class="font-orbitron font-extrabold text-sm">USER</span>
@@ -1112,7 +1200,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                             <label for="header-animation-speed" class="text-xs font-semibold">Szybkość Animacji Nagłówka</label>
                             <span id="header-animation-speed-label" class="text-[10px] font-mono font-bold text-brand-red">1.0× (normalnie)</span>
                         </div>
-                        <input type="range" id="header-animation-speed" min="0" max="20" step="1" value="10" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" class="w-full accent-brand-red cursor-pointer">
+                        <input type="range" id="header-animation-speed" min="0" max="20" step="1" value="10" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
                         <div class="flex justify-between text-[9px] text-zinc-500 dark:text-gray-400"><span>Wolniej</span><span>Szybciej</span></div>
                     </div>
 
@@ -1129,7 +1217,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                             <button id="remove-app-bg-btn" onclick="window.scythedApp.removeAppCustomBackground()" class="hidden theme-accent-action px-2.5 py-1.5 text-xs font-bold rounded-lg border transition">
                                 <i class="fas fa-trash"></i>
                             </button>
-                            <input type="file" id="app-bg-input" accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" class="hidden" onchange="window.scythedApp.handleAppBackgroundUpload(event)">
+                            <input type="file" id="app-bg-input" accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" class="hidden" onchange="window.scythedApp.handleAppBackgroundUpload(event)" autocomplete="off" autocorrect="off" spellcheck="false">
                         </div>
                     </div>
 
@@ -1140,20 +1228,20 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <div class="space-y-1">
                                 <label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Rozmycie (Blur): <span id="bg-blur-val" class="font-bold text-brand-red">0%</span></label>
-                                <input type="range" id="bg-blur-slider" min="0" max="100" value="0" oninput="window.scythedApp.updateBgBlur(this.value)" class="w-full accent-brand-red cursor-pointer">
+                                <input type="range" id="bg-blur-slider" min="0" max="100" value="0" oninput="window.scythedApp.updateBgBlur(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
                             </div>
 
                             <div class="space-y-1">
                                 <label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Kolor Nakładki</label>
                                 <div class="flex items-center gap-2">
-                                    <input type="color" id="bg-overlay-color" value="#000000" onchange="window.scythedApp.updateBgOverlayColor(this.value)" class="w-8 h-8 rounded border-0 bg-transparent cursor-pointer">
+                                    <input type="color" id="bg-overlay-color" value="#000000" onchange="window.scythedApp.updateBgOverlayColor(this.value)" class="w-8 h-8 rounded border-0 bg-transparent cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
                                     <span class="text-xs font-mono" id="bg-overlay-hex">#000000</span>
                                 </div>
                             </div>
 
                             <div class="space-y-1">
                                 <label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Krycie Koloru: <span id="bg-opacity-val" class="font-bold text-brand-red">40%</span></label>
-                                <input type="range" id="bg-opacity-slider" min="0" max="100" value="40" oninput="window.scythedApp.updateBgOverlayOpacity(this.value)" class="w-full accent-brand-red cursor-pointer">
+                                <input type="range" id="bg-opacity-slider" min="0" max="100" value="40" oninput="window.scythedApp.updateBgOverlayOpacity(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
                             </div>
                         </div>
                     </div>
@@ -1161,8 +1249,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     <div class="flex items-center justify-between order-1 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
                         <span class="text-xs font-semibold">Kolor Główny</span>
                         <div class="flex items-center gap-1 bg-white dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 px-2 py-1 rounded-lg">
-                            <input type="color" id="brand-color-picker" value="#ff0033" onchange="window.scythedApp.changeBrandColor(this.value)" class="w-5 h-5 bg-transparent border-0 cursor-pointer">
-                            <input type="text" id="brand-hex-input" value="#ff0033" onblur="window.scythedApp.changeBrandColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" class="w-16 bg-transparent text-[11px] font-mono text-zinc-800 dark:text-gray-200 focus:outline-none uppercase text-center">
+                            <input type="color" id="brand-color-picker" value="#ff0033" onchange="window.scythedApp.changeBrandColor(this.value)" class="w-5 h-5 bg-transparent border-0 cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
+                            <input type="text" id="brand-hex-input" value="#ff0033" onblur="window.scythedApp.changeBrandColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" class="w-16 bg-transparent text-[11px] font-mono text-zinc-800 dark:text-gray-200 focus:outline-none uppercase text-center" autocomplete="off" autocorrect="off" spellcheck="false">
                         </div>
                     </div>
 
@@ -1180,7 +1268,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     <div class="flex items-center justify-between order-2 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
                         <span class="text-xs font-semibold">Rozmiar Czcionki</span>
                         <div class="flex items-center gap-2">
-                            <input type="range" id="ui-scale-slider" min="1" max="3" step="1" value="2" onchange="window.scythedApp.updateUIScale(this.value)" class="w-16 accent-brand-red cursor-pointer">
+                            <input type="range" id="ui-scale-slider" min="1" max="3" step="1" value="2" onchange="window.scythedApp.updateUIScale(this.value)" class="w-16 accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
                             <span id="scale-label-text" class="text-[10px] font-mono font-bold text-brand-red w-12 text-center">ŚREDNI</span>
                         </div>
                     </div>
@@ -1280,18 +1368,18 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white">ZMIEŃ HASŁO MASTER</h3>
                 <button onclick="window.scythedApp.closeModal('modal-change-master')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times"></i></button>
             </div>
-            <form onsubmit="window.scythedApp.handleChangeMasterSubmit(event)" class="space-y-4">
+            <form autocomplete="off" onsubmit="window.scythedApp.handleChangeMasterSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Obecne Hasło Master</label>
                     <div class="relative">
-                        <input type="password" id="change-old-pass" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono">
+                        <input type="password" id="change-old-pass" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono" autocomplete="off" autocorrect="off" spellcheck="false">
                     </div>
                     <p id="change-old-pass-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left"></p>
                 </div>
                 <div>
                     <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nowe Hasło Master</label>
                     <div class="relative">
-                        <input type="password" id="change-new-pass" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono">
+                        <input type="password" id="change-new-pass" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono" autocomplete="off" autocorrect="off" spellcheck="false">
                         <button type="button" onclick="window.scythedApp.togglePasswordVisibility('change-new-pass')" class="absolute right-3 top-2.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż/ukryj nowe Hasło Master" title="Pokaż/ukryj nowe Hasło Master">
                             <i class="fas fa-eye"></i>
                         </button>
@@ -1300,7 +1388,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 </div>
                 <div>
                     <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Potwierdź Nowe Hasło Master</label>
-                    <input type="password" id="change-confirm-pass" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono">
+                    <input type="password" id="change-confirm-pass" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono" autocomplete="off" autocorrect="off" spellcheck="false">
                     <p id="change-confirm-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left"></p>
                 </div>
                 <div id="entry-history-row" class="hidden">
@@ -1323,8 +1411,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <button onclick="window.scythedApp.closeModal('modal-entry')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times"></i></button>
             </div>
 
-            <form id="form-entry" onsubmit="window.scythedApp.handleSaveEntry(event)" class="space-y-4">
-                <input type="hidden" id="entry-id">
+            <form autocomplete="off" id="form-entry" onsubmit="window.scythedApp.handleSaveEntry(event)" class="space-y-4">
+                <input type="hidden" id="entry-id" autocomplete="off" autocorrect="off" spellcheck="false">
 
                 <div>
                     <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Platforma / Serwis</label>
@@ -1334,13 +1422,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
                 <div id="entry-custom-platform-container" class="hidden">
                     <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nazwa aplikacji</label>
-                    <input type="text" id="entry-custom-platform" maxlength="80" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="Wpisz własną nazwę aplikacji">
+                    <input type="text" id="entry-custom-platform" maxlength="80" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="Wpisz własną nazwę aplikacji" autocomplete="off" autocorrect="off" spellcheck="false">
                     <p class="text-[10px] text-zinc-500 dark:text-gray-500 mt-1">Ta nazwa jest używana tylko dla tej pozycji. Logo: blank.png.</p>
                 </div>
 
                 <div>
                     <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Login / Email / Nazwa użytkownika</label>
-                    <input type="text" id="entry-account" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="user@example.com lub nick">
+                    <input type="text" id="entry-account" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="user@example.com lub nick" autocomplete="off" autocorrect="off" spellcheck="false">
                 </div>
 
                 <div>
@@ -1349,7 +1437,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         <button type="button" onclick="window.scythedApp.generateAndSetPassword()" class="text-xs text-brand-red hover:underline"><i class="fas fa-wand-magic-sparkles mr-1"></i> Generuj Hasło</button>
                     </div>
                     <div class="relative">
-                        <input type="password" id="entry-password" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono">
+                        <input type="password" id="entry-password" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono" autocomplete="off" autocorrect="off" spellcheck="false">
                         <button type="button" onclick="window.scythedApp.togglePasswordVisibility('entry-password')" class="absolute right-3 top-2.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white">
                             <i class="fas fa-eye"></i>
                         </button>
@@ -1364,19 +1452,19 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <div class="grid grid-cols-1 gap-3">
                     <div>
                         <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Tagi</label>
-                        <input type="text" id="entry-tags" oninput="window.scythedApp.updateEntryLimitCounters()" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="#przykładowy tag, #tag" aria-describedby="entry-tags-help entry-tags-counter">
+                        <input type="text" id="entry-tags" oninput="window.scythedApp.updateEntryLimitCounters()" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="#przykładowy tag, #tag" aria-describedby="entry-tags-help entry-tags-counter" autocomplete="off" autocorrect="off" spellcheck="false">
                         <p id="entry-tags-help" class="text-[10px] text-zinc-500 mt-1">Maksymalnie 3 tagi na platformę, do 16 znaków każdy (łącznie ze znakiem #). Oddzielaj przecinkami; brakujący # zostanie dodany automatycznie.</p>
-                        <p id="entry-tags-counter" class="text-[10px] text-zinc-500 mt-1 text-right" aria-live="polite">0/3 tagi · długość tagów: —</p>
+                        <p id="entry-tags-counter" class="text-[10px] text-zinc-500 mt-1 text-right" aria-live="polite">0/3 tagi · długość tagów: -</p>
                         <p id="entry-tags-error" class="hidden text-[10px] text-red-500 mt-1" role="alert"></p>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-5 pt-1">
                     <label class="inline-flex items-center gap-2 text-xs font-semibold cursor-pointer">
-                        <input type="checkbox" id="entry-favorite" class="accent-brand-red"> <span>Ulubione</span>
+                        <input type="checkbox" id="entry-favorite" class="accent-brand-red" autocomplete="off" autocorrect="off" spellcheck="false"> <span>Ulubione</span>
                     </label>
                     <label class="inline-flex items-center gap-2 text-xs font-semibold cursor-pointer">
-                        <input type="checkbox" id="entry-pinned" class="accent-brand-red"> <span>Przypnij na górze</span>
+                        <input type="checkbox" id="entry-pinned" class="accent-brand-red" autocomplete="off" autocorrect="off" spellcheck="false"> <span>Przypnij na górze</span>
                     </label>
                 </div>
 
@@ -2520,7 +2608,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     if (empty) empty.classList.add('hidden');
                     const count = document.getElementById('vault-count-badge');
                     const platform = document.getElementById('vault-platform-count');
-                    if (count) count.innerText = '—';
+                    if (count) count.innerText = '-';
                     if (platform) platform.innerText = 'ZABLOKOWANE';
                 }
             }
@@ -4342,7 +4430,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     const validation = getEntryTagValidation(tagsInput.value);
                     const lengths = validation.tags.length
                         ? validation.tags.map(tag => `${tag.length}/16`).join(', ')
-                        : '—';
+                        : '-';
                     tagsCounter.textContent = `${validation.tags.length}/3 tagi · długość tagów: ${lengths}`;
                     tagsCounter.classList.toggle('text-red-500', !validation.valid);
                     tagsCounter.classList.toggle('text-zinc-500', validation.valid);
@@ -4666,7 +4754,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         <div id="entry-card-${safeId}" data-entry-id="${safeId}" class="bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-brand-border rounded-2xl p-5 card-scale shadow-xl flex flex-col space-y-4 hover-border-brand-dynamic/50 transition-all duration-300 ${checked ? 'entry-selected' : ''}">
                             <div class="flex items-start justify-between gap-2">
                                 <div class="flex items-center space-x-3 overflow-hidden">
-                                    ${bulkMode ? `<input type="checkbox" ${checked ? 'checked' : ''} onchange="window.scythedApp.toggleEntrySelection('${safeId}', this.checked)" class="accent-brand-red w-4 h-4 flex-shrink-0">` : ''}
+                                    ${bulkMode ? `<input type="checkbox" ${checked ? 'checked' : ''} onchange="window.scythedApp.toggleEntrySelection('${safeId}', this.checked)" class="accent-brand-red w-4 h-4 flex-shrink-0" autocomplete="off" autocorrect="off" spellcheck="false">` : ''}
                                     <div class="w-12 h-12 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-black/60 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-inner">${iconHtml}</div>
                                     <div class="overflow-hidden">
                                         <div class="flex items-center gap-2">
@@ -5625,6 +5713,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
             let scythedAdminSession = null;
             let scythedAdminExpiryTimer = null;
+            let scythedAdminCountdownInterval = null;
+            let scythedAdminExpiresAt = 0;
             let scythedAccountUsername = null;
             let scythedCanManageAdminSettings = false;
             let scythedCanSeeAdmin = false;
@@ -5684,7 +5774,17 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     scythedIsOwner = data.isSzymon === true || data.hasOwnerBadge === true;
                     scythedCanSeeAdmin = data.canSeeAdmin === true;
                     if (scythedAdminExpiryTimer) clearTimeout(scythedAdminExpiryTimer);
-                    scythedAdminExpiryTimer = setTimeout(adminLogout, Math.max(1000, (data.expiresAt * 1000) - Date.now()));
+                    if (scythedAdminCountdownInterval) clearInterval(scythedAdminCountdownInterval);
+                    scythedAdminExpiresAt = Number(data.expiresAt) * 1000;
+                    scythedAdminExpiryTimer = setTimeout(() => adminLogout(true), Math.max(1000, scythedAdminExpiresAt - Date.now()));
+                    const updateCountdown = () => {
+                        const el = document.getElementById('admin-session-countdown');
+                        const remaining = Math.max(0, Math.ceil((scythedAdminExpiresAt - Date.now()) / 1000));
+                        if (el) el.textContent = `${String(Math.floor(remaining / 60)).padStart(2,'0')}:${String(remaining % 60).padStart(2,'0')}`;
+                        if (remaining <= 0) adminLogout(true);
+                    };
+                    updateCountdown();
+                    scythedAdminCountdownInterval = setInterval(updateCountdown, 1000);
                     updateAccountActionButtons({ username: usernameToLogin, verified: true, hasAdminBadge: data.hasAdminBadge === true, hasOwnerBadge: data.hasOwnerBadge === true || data.isSzymon === true });
                     openAdminPanel();
                 } catch (e) { showToast(e.message || 'Nie udało się zalogować konta SCYTHED.', 'error'); }
@@ -5702,6 +5802,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             function adminLogout(showMessage = true) {
                 scythedAdminSession = null; scythedAccountUsername = null; scythedCanManageAdminSettings = false; scythedCanSeeAdmin = false; scythedIsOwner = false;
                 if (scythedAdminExpiryTimer) clearTimeout(scythedAdminExpiryTimer); scythedAdminExpiryTimer = null;
+                if (scythedAdminCountdownInterval) clearInterval(scythedAdminCountdownInterval); scythedAdminCountdownInterval = null; scythedAdminExpiresAt = 0;
+                const countdown = document.getElementById('admin-session-countdown'); if (countdown) countdown.textContent = '10:00';
                 const panelButton = document.getElementById('scythed-admin-panel-button');
                 if (panelButton) { panelButton.classList.add('hidden'); panelButton.classList.remove('flex'); }
                 updateAccountActionButtons({ username: username, verified: false, hasAdminBadge: window.scythedProfileHasAdminBadge === true, hasOwnerBadge: window.scythedProfileHasOwnerBadge === true });
@@ -5716,6 +5818,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             async function adminSaveSettings() { return; }
             let scythedAdminLogsPage = 1;
             let scythedAdminLogsPages = 1;
+            async function adminToggleLogs() {
+                const section = document.getElementById('admin-logs-section');
+                if (!section) return;
+                if (!section.classList.contains('hidden')) { section.classList.add('hidden'); return; }
+                await adminLoadLogs(1);
+            }
             async function adminLoadLogs(page = 1) {
                 const section = document.getElementById('admin-logs-section'), list = document.getElementById('admin-logs-list'), pager = document.getElementById('admin-logs-pagination');
                 section?.classList.remove('hidden'); scythedAdminLogsPage = Math.max(1, Number(page) || 1);
@@ -5755,10 +5863,10 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 if (!users.length) { tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-zinc-500">Brak pasujących kont / zabezpieczonych nazw.</td></tr>'; return; }
                 const rank = { owner: 0, admin: 1, larp: 2, paragon: 3, bug_hunter: 4, beta_tester: 5 };
                 const badgeMeta = {
-                    owner: { label: 'Właściciel', icon: 'fa-crown', cls: 'admin-list-badge admin-list-owner fixed-owner-badge' },
+                    owner: { label: 'Właściciel', icon: 'fa-crown', cls: 'admin-list-badge admin-list-owner' },
                     admin: { label: 'Administrator', icon: 'fa-shield-halved', cls: 'admin-list-badge admin-list-admin fixed-owner-badge' },
                     larp: { label: 'Moderator', icon: 'fa-hammer', cls: 'admin-list-badge admin-list-moderator moderator-badge' },
-                    paragon: { label: 'Zasłużony', icon: 'fa-award', cls: 'admin-list-badge admin-list-paragon fixed-owner-badge' },
+                    paragon: { label: 'Zasłużony', icon: 'fa-award', cls: 'admin-list-badge admin-list-paragon' },
                     bug_hunter: { label: 'Łowca błędów', icon: 'fa-network-wired', cls: 'admin-list-badge admin-list-bug bug-hunter-badge' },
                     beta_tester: { label: 'Beta Tester', icon: 'fa-certificate', cls: 'admin-list-badge admin-list-beta beta-tester-badge' }
                 };
@@ -5776,17 +5884,21 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         const m = badgeMeta[b.badge] || {label:b.badge, icon:'fa-award', cls:'admin-list-badge'};
                         const label = badgeLabel(b);
                         return `<span title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}" data-tooltip="${escapeHtml(label)}" class="${m.cls}" role="img"><i class="fas ${m.icon}"></i></span>`;
-                    }).join(' ') || '—';
+                    }).join(' ') || '-';
+                    const hasModeratorBadge = (u.badges || []).some(b => b.badge === 'larp' || b.badge === 'mod');
+                    const verifiedBox = u.verified ? '<span class="admin-verified-status" title="Konto zweryfikowane"><i class="fas fa-circle-check mr-1"></i>ZWERYFIKOWANE</span>' : '<span class="text-zinc-500">Niezweryfikowane</span>';
                     const status = isOwnerProfile
-                        ? '<span class="admin-owner-status" title="Właściciel zweryfikowany"><i class="fas fa-circle-check mr-1"></i>WŁAŚCICIEL · ZWERYFIKOWANE</span>'
+                        ? `<div class="flex flex-wrap items-center gap-1"><span class="admin-owner-status" title="Właściciel zweryfikowany"><i class="fas fa-crown mr-1"></i>WŁAŚCICIEL</span>${verifiedBox}</div>`
                         : isAdminAccount
-                            ? '<span class="admin-admin-status"><i class="fas fa-shield-halved mr-1"></i>ADMIN</span>'
-                            : (u.verified ? '<span class="text-blue-500 font-semibold">Zweryfikowane</span>' : '<span class="text-zinc-500">Niezweryfikowane</span>');
+                            ? `<div class="flex flex-wrap items-center gap-1"><span class="admin-admin-status"><i class="fas fa-shield-halved mr-1"></i>ADMIN · ZWERYFIKOWANE</span>${u.verified ? '' : '<span class="text-zinc-500">Niezweryfikowane</span>'}</div>`
+                            : hasModeratorBadge && u.verified
+                                ? '<span class="admin-moderator-status"><i class="fas fa-hammer mr-1"></i>MODERATOR · ZWERYFIKOWANE</span>'
+                                : verifiedBox;
                     const passwordButton = `<button onclick="window.scythedApp.adminChangePassword('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ZMIANA HASŁA</button>`;
                     const del = !isOwnerProfile ? `<button onclick="window.scythedApp.adminDeleteUser('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">USUŃ KONTO</button>` : '';
                     const badgeOptions = orderedBadges.map(b => `<option value="${escapeHtml(b.badge)}">${escapeHtml(badgeLabel(b))}</option>`).join('');
-                    const revoke = badgeOptions && !isOwnerProfile ? `<div class="flex flex-wrap gap-1 mt-1"><select id="revoke-badge-${escapeHtml(name)}" class="admin-badge-select max-w-[170px] rounded border px-2 py-1 text-xs" aria-label="Wybierz odznakę do odebrania">${badgeOptions}</select><button onclick="window.scythedApp.adminRevokeBadge('${escapeHtml(name)}', document.getElementById('revoke-badge-${escapeHtml(name)}').value)" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ODBIERZ</button></div>` : (isOwnerProfile ? '<span class="text-xs text-zinc-500">Profil właściciela — dostępna tylko zmiana hasła.</span>' : '<span class="text-zinc-500">Brak odznak</span>');
-                    return `<tr class="admin-user-row ${isOwnerProfile ? 'admin-owner-row' : ''} border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(isOwnerProfile ? 'Szymon' : name)}${isOwnerProfile ? '<div class="text-[10px] font-normal text-zinc-500">Właściciel projektu</div>' : ''}</td><td class="p-2">${status}</td><td class="p-2 min-w-[140px]"><div class="flex flex-wrap items-center gap-1.5">${badges}</div></td><td class="p-2"><div class="flex flex-col items-start gap-1.5">${isOwnerProfile ? passwordButton : `<div class="flex flex-wrap gap-1.5">${passwordButton}${del}</div>${revoke}`}</div></td></tr>`;
+                    const revoke = badgeOptions && !isOwnerProfile ? `<div class="flex flex-wrap gap-1 mt-1"><select id="revoke-badge-${escapeHtml(name)}" class="admin-badge-select max-w-[170px] rounded border px-2 py-1 text-xs" aria-label="Wybierz odznakę do odebrania">${badgeOptions}</select><button onclick="window.scythedApp.adminRevokeBadge('${escapeHtml(name)}', document.getElementById('revoke-badge-${escapeHtml(name)}').value)" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ODBIERZ</button></div>` : (isOwnerProfile ? '<span class="text-xs text-zinc-500">Profil właściciela - dostępna tylko zmiana hasła.</span>' : '<span class="text-zinc-500">Brak odznak</span>');
+                    return `<tr class="admin-user-row ${isOwnerProfile ? 'admin-owner-row' : ''} border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(isOwnerProfile ? 'Szymon' : name)}${isOwnerProfile ? '<div class="text-[10px] font-normal text-zinc-500">Właściciel projektu</div>' : ''}</td><td class="p-2">${status}</td><td class="p-2 min-w-[140px]"><div class="flex flex-wrap items-center gap-1.5">${badges}</div></td><td class="p-2"><div class="flex flex-col items-start gap-1.5">${isOwnerProfile ? (scythedIsOwner ? passwordButton : '<span class="text-xs text-zinc-500">Zmiana hasła właściciela dostępna wyłącznie właścicielowi.</span>') : `<div class="flex flex-wrap gap-1.5">${passwordButton}${del}</div>${revoke}`}</div></td></tr>`;
                 }).join('');
             }
             async function adminRefreshUsers() {
@@ -5813,6 +5925,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 adminMessage(`Usunięto konto ${username}.`); await adminRefreshUsers();
             }
             async function adminChangePassword(username) {
+                if (String(username || '').toLowerCase() === 'szymon' && !scythedIsOwner) return adminMessage('Zmiana hasła właściciela jest dostępna wyłącznie właścicielowi.', true);
                 const password = prompt(`Nowe hasło dla ${username} (minimum 12 znaków):`); if (password === null) return;
                 const { response, data } = await adminApi('/api/admin/set-password', { username, password });
                 if (!response.ok) return adminMessage(`Zmiana hasła nieudana: ${data.error || 'błąd API'}`, true);
@@ -5842,7 +5955,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             }
 
             window.scythedApp = {
-                openAdminPanel, closeAdminPanel, accountLogin, adminButtonClick, adminLogout, adminLoadLogs, adminRefreshUsers, adminFilterUsers, adminBadgeTypeChanged, adminClearLogs, adminSetVerified, adminDeleteUser, adminChangePassword, adminAssignBadge, adminRevokeBadge, adminRevokeBadgePrompt,
+                openAdminPanel, closeAdminPanel, accountLogin, adminButtonClick, adminLogout, adminLoadLogs, adminToggleLogs, adminRefreshUsers, adminFilterUsers, adminBadgeTypeChanged, adminClearLogs, adminSetVerified, adminDeleteUser, adminChangePassword, adminAssignBadge, adminRevokeBadge, adminRevokeBadgePrompt,
                 handleAuthSubmit,
                 lockVault,
                 confirmResetApp,
@@ -5920,15 +6033,15 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
     <div id="scythed-admin-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm p-3 md:p-6 flex items-center justify-center">
       <section class="w-full max-w-6xl max-h-[92vh] mx-auto bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 rounded-2xl shadow-2xl overflow-y-auto">
-        <header class="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3"><div><h2 class="font-orbitron font-extrabold text-lg text-zinc-900 dark:text-white"><i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL ADMINA</h2><p class="text-xs text-zinc-500 mt-1">Zarządzanie kontami, weryfikacją i odznakami</p></div><button onclick="window.scythedApp.closeAdminPanel()" class="w-9 h-9 rounded-lg border border-zinc-300 dark:border-zinc-700" aria-label="Zamknij panel">✕</button></header>
+        <header class="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3"><div><h2 class="font-orbitron font-extrabold text-lg text-zinc-900 dark:text-white"><i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL ADMINA</h2><p class="text-xs text-zinc-500 mt-1">Zarządzanie kontami i odznakami</p></div><button onclick="window.scythedApp.closeAdminPanel()" class="w-9 h-9 rounded-lg border border-zinc-300 dark:border-zinc-700" aria-label="Zamknij panel"><i class="fas fa-times text-lg" aria-hidden="true"></i></button></header>
         <div id="admin-login-view" class="p-4 md:p-6 max-w-lg mx-auto space-y-4"><p class="text-sm text-zinc-600 dark:text-zinc-300">Panel wymaga aktywnej sesji konta SCYTHED uwierzytelnionego hasłem zapisanym w Cloudflare D1. Otwórz panel z Ustawień ogólnych i potwierdź hasłem konta SCYTHED.</p></div>
         <div id="admin-content-view" class="hidden p-4 md:p-6 space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-3"><p class="text-xs text-brand-red">Sesja administratora aktywna (do 30 minut).</p><div class="flex gap-2"><button onclick="window.scythedApp.adminLoadLogs()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="px-3 py-2 rounded-lg border border-brand-red/40 text-brand-red text-xs font-bold">WYLOGUJ</button></div></div>
+          <div class="flex flex-wrap items-center justify-between gap-3"><p class="text-xs text-brand-red">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button onclick="window.scythedApp.adminToggleLogs()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="px-3 py-2 rounded-lg border border-brand-red/40 text-brand-red text-xs font-bold">WYLOGUJ</button></div></div>
           <section id="admin-logs-section" class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold text-sm">DZIENNIK ZMIAN</h3><div class="flex gap-2"><button id="admin-clear-logs-button" onclick="window.scythedApp.adminClearLogs()" class="hidden text-xs px-2 py-1 rounded border border-brand-red/40 text-brand-red">WYCZYŚĆ LOGI</button><button onclick="document.getElementById('admin-logs-section').classList.add('hidden')" class="text-xs text-brand-red">ZAMKNIJ</button></div></div><div id="admin-logs-list" class="space-y-2 text-xs"><p class="text-zinc-500">Ładowanie logów…</p></div><div id="admin-logs-pagination" class="flex flex-wrap items-center justify-center gap-1 pt-2"></div></section>
           <div class="p-4 rounded-xl border border-brand-red/25 bg-brand-red/5 text-sm"><h3 class="font-bold text-brand-red"><i class="fas fa-terminal mr-2"></i>ZABEZPIECZANIE NAZW</h3><p class="mt-2 text-zinc-600 dark:text-zinc-300">Tworzenie kont jest dostępne wyłącznie przez PowerShell i endpoint API. W panelu nie można dodawać nazw użytkowników.</p></div>
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
-          <div class="space-y-2"><input id="admin-protected-name-search" type="search" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
-          <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="larp">Moderator</option><option value="paragon">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki">${Array.from({length:2},(_,i)=>`<option value="${i+1}">Poziom ${i+1}</option>`).join('')}</select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
+          <div class="space-y-2"><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw" autocomplete="off" autocorrect="off" spellcheck="false"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
+          <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="larp">Moderator</option><option value="paragon">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki">${Array.from({length:2},(_,i)=>`<option value="${i+1}">Poziom ${i+1}</option>`).join('')}</select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
         </div>
       </section>
     </div>
