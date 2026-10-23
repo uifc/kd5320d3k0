@@ -1269,6 +1269,18 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-lock text-brand-red" aria-hidden="true"></i>Zmień hasło główne</span>
                 <button type="button" onclick="window.scythedApp.openChangeMasterModal()" class="admin-master-action px-3 py-1.5 text-xs font-bold rounded-xl border transition flex items-center gap-1.5">Zmień hasło</button>
             </div>
+            <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2">
+                <label class="flex items-start justify-between gap-3 cursor-pointer"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300"><i class="fas fa-shield-halved text-brand-red mr-1"></i>Wymagaj hasła do nazwy zweryfikowanego konta<p class="text-[10px] font-normal text-zinc-500 mt-1">Po włączeniu przy odblokowaniu aplikacji trzeba potwierdzić hasło do nazwy. Możesz to wyłączyć tutaj.</p></span><input id="verified-name-password-toggle" type="checkbox" class="mt-1 accent-red-600" onchange="window.scythedApp.setVerifiedNamePasswordRequired(this.checked)"></label>
+            </div>
+            <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2">
+                <h4 class="text-xs font-bold text-zinc-700 dark:text-gray-300"><i class="fas fa-key text-brand-red mr-1"></i>HASŁO DO NAZWY KONTA</h4>
+                <p class="text-[10px] text-zinc-500">Zmień hasło przypisane do zweryfikowanej nazwy. Nazwa konta musi być zweryfikowana w SCYTHED.</p>
+                <input id="name-password-old" type="password" autocomplete="current-password" placeholder="Obecne hasło do nazwy" class="w-full bg-white dark:bg-black/60 border border-zinc-300 dark:border-zinc-800 rounded-lg px-3 py-2 text-xs">
+                <input id="name-password-new" type="password" autocomplete="new-password" placeholder="Nowe hasło (min. 12 znaków)" class="w-full bg-white dark:bg-black/60 border border-zinc-300 dark:border-zinc-800 rounded-lg px-3 py-2 text-xs">
+                <input id="name-password-confirm" type="password" autocomplete="new-password" placeholder="Powtórz nowe hasło" class="w-full bg-white dark:bg-black/60 border border-zinc-300 dark:border-zinc-800 rounded-lg px-3 py-2 text-xs">
+                <button type="button" onclick="window.scythedApp.changeNamePassword()" class="w-full px-3 py-2 rounded-lg bg-brand-red text-white text-xs font-bold">ZAPISZ NOWE HASŁO DO NAZWY</button>
+                <p id="name-password-status" class="hidden text-[10px]"></p>
+            </div>
 <div id="general-admin-open-panel-wrap" class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i>Panel Administracyjny</span><button type="button" onclick="window.scythedApp.adminButtonClick()" class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition">Otwórz panel</button></div>
 
             <div class="space-y-2">
@@ -3036,54 +3048,31 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 }
             }
 
+            function isVerifiedNamePasswordRequired() {
+                try { return localStorage.getItem('scythed_verified_name_password_required') !== 'false'; } catch (_) { return true; }
+            }
+            function setVerifiedNamePasswordRequired(enabled) {
+                try { localStorage.setItem('scythed_verified_name_password_required', enabled ? 'true' : 'false'); } catch (_) {}
+                showToast(enabled ? 'Włączono wymaganie hasła do nazwy zweryfikowanego konta.' : 'Wyłączono wymaganie hasła do nazwy.', 'success');
+            }
             async function enforcePrivilegedNamePassword() {
-                if (privilegedNameGateRunning || !isVaultUnlocked()) return;
+                if (privilegedNameGateRunning || !isVaultUnlocked() || !isVerifiedNamePasswordRequired()) return;
                 const accountName = badgeAccountKey(username);
                 if (!accountName || accountName === 'user') return;
                 privilegedNameGateRunning = true;
                 try {
-                    let profile;
-                    try {
-                        const response = await fetch(`${SCYTHED_API_BASE}/api/badges?username=${encodeURIComponent(accountName)}`, {
-                            method: 'GET', mode: 'cors', credentials: 'omit', cache: 'no-store'
-                        });
-                        if (!response.ok) throw new Error('badge_api_unavailable');
-                        profile = await response.json();
-                    } catch (_) {
-                        // Fail closed: if the role cannot be checked, do not keep a privileged name unverified.
-                        await resetProfileNameToUser('Nie można sprawdzić odznak w Cloudflare. Nazwa profilu została ustawiona na USER.');
-                        return;
-                    }
-                    const badges = Array.isArray(profile.badges) ? profile.badges : [];
-                    const privilegedBadge = badges.find(item => ['owner', 'admin', 'moderator'].includes(String(item.badge_key || '').toLowerCase()));
-                    if (!privilegedBadge) return;
-
-                    const roleKey = String(privilegedBadge.badge_key).toLowerCase();
-                    const roleName = roleKey === 'owner' ? 'Właściciela' : (roleKey === 'admin' ? 'Administratora' : 'Moderatora');
-                    const password = await appPrompt(
-                        `To konto ma odznakę ${roleName}. Podaj hasło przypisane do nazwy „${accountName}”, aby zachować tę nazwę. Jeśli pominiesz hasło lub wpiszesz je nieprawidłowo, nazwa zostanie ustawiona na USER.`,
-                        '', { title: 'WERYFIKACJA NAZWY', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'WERYFIKUJ', cancelText: 'USTAW USER' }
-                    );
-                    if (password === null || !String(password).length) {
-                        await resetProfileNameToUser('Nie podano hasła do nazwy. Nazwa profilu została ustawiona na USER.');
-                        return;
-                    }
-                    try {
-                        const { response, data } = await scythedApi('/api/verify-privileged-name', { username: accountName, password: String(password) });
-                        if (!response.ok || data.ok !== true || data.verified !== true) {
-                            await resetProfileNameToUser('Hasło do nazwy jest nieprawidłowe. Nazwa profilu została ustawiona na USER.');
-                            return;
-                        }
-                    } catch (_) {
-                        await resetProfileNameToUser('Nie udało się zweryfikować hasła w Cloudflare. Nazwa profilu została ustawiona na USER.');
-                        return;
-                    }
+                    const statusResult = await scythedApi('/api/name-status', { username: accountName });
+                    if (!statusResult.response.ok || statusResult.data.ok !== true || statusResult.data.protected !== true) return;
+                    const password = await appPrompt(`Nazwa „${accountName}” należy do zweryfikowanego konta. Podaj hasło do tej nazwy, aby ją zachować.`, '', { title: 'WERYFIKACJA NAZWY', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'WERYFIKUJ', cancelText: 'USTAW USER' });
+                    if (password === null || !String(password).length) { await resetProfileNameToUser('Nie podano hasła do nazwy. Nazwa profilu została ustawiona na USER.'); return; }
+                    const { response, data } = await scythedApi('/api/verify-name', { username: accountName, password: String(password) });
+                    if (!response.ok || data.ok !== true || data.verified !== true) { await resetProfileNameToUser('Hasło do nazwy jest nieprawidłowe. Nazwa profilu została ustawiona na USER.'); return; }
                     privilegedNameVerifiedFor = accountName;
-                    showToast('Potwierdzono nazwę konta z odznaką.', 'success');
+                    showToast('Potwierdzono nazwę zweryfikowanego konta.', 'success');
                     await updateBadgesDisplay();
-                } finally {
-                    privilegedNameGateRunning = false;
-                }
+                } catch (_) {
+                    showToast('Nie udało się zweryfikować hasła do nazwy. Spróbuj ponownie.', 'error');
+                } finally { privilegedNameGateRunning = false; }
             }
 
             async function resetProfileNameToUser(message) {
@@ -3273,7 +3262,25 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 updateBackupReminderUI();
                 updateHeaderAnimationSpeed(headerSpeedToSliderValue(headerAnimationSpeed));
                 document.getElementById('modal-settings').classList.remove('hidden');
+                const verifiedToggle = document.getElementById('verified-name-password-toggle');
+                if (verifiedToggle) verifiedToggle.checked = isVerifiedNamePasswordRequired();
                 playSound('click');
+            }
+
+            async function changeNamePassword() {
+                const oldPassword = document.getElementById('name-password-old')?.value || '';
+                const newPassword = document.getElementById('name-password-new')?.value || '';
+                const confirmPassword = document.getElementById('name-password-confirm')?.value || '';
+                const status = document.getElementById('name-password-status');
+                const showStatus = (message, error=false) => { if(status){ status.textContent=message; status.className=`text-[10px] ${error?'text-red-500':'text-green-500'}`; } };
+                if (!username || badgeAccountKey(username) === 'user') return showStatus('Najpierw ustaw nazwę zweryfikowanego konta.', true);
+                if (!oldPassword || newPassword.length < 12 || newPassword !== confirmPassword) return showStatus('Wpisz obecne hasło, nowe (min. 12 znaków) i zgodne potwierdzenie.', true);
+                try {
+                    const {response,data} = await scythedApi('/api/account/change-password', {username: badgeAccountKey(username), oldPassword, newPassword});
+                    if (!response.ok || data.ok !== true) throw new Error(data.error === 'verification_failed' ? 'Obecne hasło jest nieprawidłowe.' : (data.message || 'Nie udało się zmienić hasła.'));
+                    ['name-password-old','name-password-new','name-password-confirm'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+                    showStatus('Hasło do nazwy zostało zmienione.'); showToast('Zmieniono hasło do nazwy konta.', 'success');
+                } catch(error) { showStatus(error.message || 'Błąd zmiany hasła.', true); }
             }
 
             function headerSliderValueToSpeed(value) {
@@ -4313,7 +4320,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 }
                 const passwordAccount = val;
 
-                if (newProtected) {
+                if (newProtected && isVerifiedNamePasswordRequired()) {
                     const password = await appPrompt(`Nazwa „${val}” jest chroniona odznaką/weryfikacją.\nPodaj hasło dla konta „${badgeAccountKey(passwordAccount)}”, aby potwierdzić zmianę:`, '', { title: 'WERYFIKACJA NAZWY', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'WERYFIKUJ' });
                     if (password === null) {
                         input.value = username;
@@ -5929,13 +5936,6 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const headers = { 'Content-Type': 'application/json' };
                 if (scythedAdminSession) headers.Authorization = `Bearer ${scythedAdminSession}`;
                 let requestPayload = payload || {};
-                if (method !== 'GET' && /^\/api\/admin\/(?:clear-logs|logs\/clear|create-user|set-verified|delete-user|restore-user|set-password|assign-badge|revoke-badge)(?:\?|$)/.test(path)) {
-                    const accountName = String(scythedAccountUsername || username || '').trim().replace(/^@/, '');
-                    if (!scythedAdminSession || !accountName) throw new Error('Sesja wygasła. Zaloguj się ponownie do profilu.');
-                    const reauthPassword = await appPrompt(`Potwierdź zmianę w bazie D1 hasłem do konta „${accountName}”. Bez poprawnego hasła zmiana nie zostanie wykonana.`, '', { title: 'POTWIERDŹ ZMIANĘ W D1', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'POTWIERDŹ' });
-                    if (reauthPassword === null || !String(reauthPassword)) throw new Error('Anulowano zmianę — nie potwierdzono hasłem konta.');
-                    requestPayload = { ...requestPayload, _reauthPassword: String(reauthPassword) };
-                }
                 const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 15000);
                 try {
                     const response = await fetch(`${SCYTHED_API_BASE}${path}`, { method, mode: 'cors', credentials: 'omit', cache: 'no-store', headers, ...(method === 'GET' ? {} : { body: JSON.stringify(requestPayload) }), signal: controller.signal });
@@ -6243,7 +6243,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 showToast,
                 hideToast,
                 closeModal,
-                openSettingsModal,
+                openSettingsModal, setVerifiedNamePasswordRequired, changeNamePassword,
                 openChangeMasterModal,
                 handleChangeMasterSubmit,
                 toggleTheme,
