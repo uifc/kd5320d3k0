@@ -1636,7 +1636,7 @@ html body #modal-settings button#settings-change-name-password > i {
                             <label for="header-animation-speed" class="text-xs font-semibold">Szybkość Animacji Nagłówka</label>
                             <span id="header-animation-speed-label" class="text-[10px] font-mono font-bold text-brand-red">1.0× (normalnie)</span>
                         </div>
-                        <input type="range" id="header-animation-speed" min="0.5" max="2" step="0.1" value="1.0" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
+                        <input type="range" id="header-animation-speed" min="0.5" max="1.5" step="0.05" value="1.0" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
                         <div class="flex justify-between text-[9px] text-zinc-500 dark:text-gray-400"><span>Wolniej</span><span>Szybciej</span></div>
                     </div>
 
@@ -3722,14 +3722,15 @@ html body #modal-settings button#settings-change-name-password > i {
                 } catch(error) { showStatus(error.message || 'Błąd zmiany hasła.', true); }
             }
 
+            // Slider thumb midpoint is 1.0; map its two halves to 0.5x..1.0x and 1.0x..2.0x.
             function headerSliderValueToSpeed(value) {
-                const parsed = Number(value);
-                return Math.min(2, Math.max(0.5, Number.isFinite(parsed) ? parsed : 1.0));
+                const p = Math.min(1.5, Math.max(0.5, Number.isFinite(Number(value)) ? Number(value) : 1.0));
+                return p <= 1 ? 0.5 + (p - 0.5) : 1 + (p - 1) * 2;
             }
 
             function headerSpeedToSliderValue(speed) {
-                const parsed = Number(speed);
-                return Math.min(2, Math.max(0.5, Number.isFinite(parsed) ? parsed : 1.0));
+                const v = Math.min(2, Math.max(0.5, Number.isFinite(Number(speed)) ? Number(speed) : 1.0));
+                return v <= 1 ? 0.5 + (v - 0.5) : 1 + (v - 1) / 2;
             }
 
             function updateHeaderAnimationSpeed(value) {
@@ -3737,7 +3738,7 @@ html body #modal-settings button#settings-change-name-password > i {
                 localStorage.setItem('scythed_header_animation_speed_v1', String(headerAnimationSpeed));
                 const slider = document.getElementById('header-animation-speed');
                 const label = document.getElementById('header-animation-speed-label');
-                if (slider) slider.value = String(headerAnimationSpeed);
+                if (slider) slider.value = String(headerSpeedToSliderValue(headerAnimationSpeed));
                 const relativeSpeed = headerAnimationSpeed;
                 if (label) label.textContent = `${headerAnimationSpeed.toFixed(1)}×${Math.abs(relativeSpeed - 1) < 0.05 ? ' (normalnie)' : relativeSpeed < 1 ? ' (wolniej)' : ' (szybciej)'}`;
             }
@@ -6863,6 +6864,82 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
       classifyAuthInteraction(event);
     }, true);
   });
+})();
+</script>
+
+
+<style id="scythed-final-v25-accent-and-slider-fix">
+/* Match the bottom settings-close button's appearance, using the live theme accent. */
+#scythed-admin-modal .admin-bottom-close {
+  appearance: none !important; -webkit-appearance: none !important;
+  display: block !important; width: 100% !important; box-sizing: border-box !important;
+  padding: .625rem 1rem !important; border: 0 !important; border-radius: .75rem !important;
+  background: var(--brand-red, #ff0033) !important; background-color: var(--brand-red, #ff0033) !important;
+  color: #fff !important; font-family: Orbitron, sans-serif !important; font-size: .75rem !important;
+  font-weight: 700 !important; line-height: 1.25rem !important; text-transform: none !important;
+  box-shadow: 0 0 15px var(--brand-red-glow, rgba(255,0,51,.35)) !important;
+  transition: background-color .2s ease, box-shadow .2s ease !important;
+}
+#scythed-admin-modal .admin-bottom-close:hover,
+#scythed-admin-modal .admin-bottom-close:focus-visible {
+  background: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
+  background-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
+}
+/* Admin quick actions always follow the same live accent in both light and dark themes. */
+#scythed-admin-modal button.admin-primary-action,
+#scythed-admin-modal button[onclick*="adminToggleLogs"],
+#scythed-admin-modal button[onclick*="adminRefreshUsers"],
+#scythed-admin-modal button[onclick*="adminLogout"] {
+  background: var(--brand-red, #ff0033) !important;
+  background-color: var(--brand-red, #ff0033) !important;
+  color: #fff !important;
+  border-color: var(--brand-red, #ff0033) !important;
+  box-shadow: 0 0 12px var(--brand-red-glow, rgba(255,0,51,.25)) !important;
+}
+#scythed-admin-modal button.admin-primary-action:hover,
+#scythed-admin-modal button[onclick*="adminToggleLogs"]:hover,
+#scythed-admin-modal button[onclick*="adminRefreshUsers"]:hover,
+#scythed-admin-modal button[onclick*="adminLogout"]:hover {
+  background: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
+  background-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
+  border-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
+}
+/* Keep 1.0x at the physical center of the speed slider. */
+#modal-settings #header-animation-speed { min-width: 0; touch-action: pan-y; }
+</style>
+<script id="scythed-final-v25-live-accent-sync">
+(function(){
+  function syncAccentButtons(){
+    const root = document.documentElement;
+    const color = getComputedStyle(root).getPropertyValue('--brand-red').trim() || '#ff0033';
+    const hover = getComputedStyle(root).getPropertyValue('--brand-hover-red').trim() || color;
+    const glow = getComputedStyle(root).getPropertyValue('--brand-red-glow').trim() || 'rgba(255,0,51,.35)';
+    document.querySelectorAll('#scythed-admin-modal .admin-bottom-close, #scythed-admin-modal .admin-primary-action, #scythed-admin-modal button[onclick*="adminToggleLogs"], #scythed-admin-modal button[onclick*="adminRefreshUsers"], #scythed-admin-modal button[onclick*="adminLogout"]').forEach(function(btn){
+      btn.style.setProperty('background-color', color, 'important');
+      btn.style.setProperty('background', color, 'important');
+      btn.style.setProperty('border-color', color, 'important');
+      btn.style.setProperty('color', '#fff', 'important');
+      btn.style.setProperty('box-shadow', '0 0 15px ' + glow, 'important');
+      if (!btn.dataset.scythedAccentHoverBound) {
+        btn.addEventListener('mouseenter', function(){
+          const h = getComputedStyle(document.documentElement).getPropertyValue('--brand-hover-red').trim() || getComputedStyle(document.documentElement).getPropertyValue('--brand-red').trim() || '#ff0033';
+          this.style.setProperty('background-color', h, 'important'); this.style.setProperty('background', h, 'important'); this.style.setProperty('border-color', h, 'important');
+        });
+        btn.addEventListener('mouseleave', function(){
+          const c = getComputedStyle(document.documentElement).getPropertyValue('--brand-red').trim() || '#ff0033';
+          this.style.setProperty('background-color', c, 'important'); this.style.setProperty('background', c, 'important'); this.style.setProperty('border-color', c, 'important');
+        });
+        btn.dataset.scythedAccentHoverBound = '1';
+      }
+    });
+  }
+  syncAccentButtons();
+  const observer = new MutationObserver(syncAccentButtons);
+  observer.observe(document.documentElement, {attributes:true, attributeFilter:['style','class']});
+  const admin = document.getElementById('scythed-admin-modal');
+  if (admin) observer.observe(admin, {subtree:true, childList:true, attributes:true, attributeFilter:['class','style']});
+  document.addEventListener('click', function(){ setTimeout(syncAccentButtons, 0); }, true);
+  document.addEventListener('DOMContentLoaded', syncAccentButtons);
 })();
 </script>
 
