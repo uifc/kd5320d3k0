@@ -1094,6 +1094,56 @@ html.dark #scythed-admin-modal button[class*="bg-red-"]:hover{background:var(--s
 #modal-settings .settings-password-action:disabled{opacity:.48!important;cursor:not-allowed!important;}
 </style>
 
+
+<style id="scythed-security-controls-consistency-v13">
+/* Zabezpieczenia używają dokładnie tej samej neutralnej palety co kontrolki Tryb Wyglądu. */
+#modal-settings #security-settings-category #general-admin-open-panel-wrap,
+#modal-settings #security-settings-category .grid.grid-cols-2 > div.p-3.rounded-xl {
+  background-color: rgb(244 244 245) !important;
+  border-color: rgb(212 212 216) !important;
+  color: rgb(39 39 42) !important;
+}
+html.dark #modal-settings #security-settings-category #general-admin-open-panel-wrap,
+html.dark #modal-settings #security-settings-category .grid.grid-cols-2 > div.p-3.rounded-xl {
+  background-color: rgb(0 0 0 / .60) !important;
+  border-color: rgb(39 39 42) !important;
+  color: rgb(244 244 245) !important;
+}
+#modal-settings #security-settings-category .settings-password-action,
+#modal-settings #security-settings-category .admin-access-action {
+  background-color: rgb(228 228 231) !important;
+  color: rgb(39 39 42) !important;
+  border: 1px solid rgb(212 212 216) !important;
+}
+html.dark #modal-settings #security-settings-category .settings-password-action,
+html.dark #modal-settings #security-settings-category .admin-access-action {
+  background-color: rgb(24 24 27) !important;
+  color: rgb(244 244 245) !important;
+  border-color: rgb(63 63 70) !important;
+}
+#modal-settings #security-settings-category .settings-password-action:hover:not(:disabled),
+#modal-settings #security-settings-category .admin-access-action:hover:not(:disabled) {
+  background-color: rgb(212 212 216) !important;
+  color: rgb(24 24 27) !important;
+  border-color: rgb(161 161 170) !important;
+}
+html.dark #modal-settings #security-settings-category .settings-password-action:hover:not(:disabled),
+html.dark #modal-settings #security-settings-category .admin-access-action:hover:not(:disabled) {
+  background-color: rgb(39 39 42) !important;
+  color: rgb(255 255 255) !important;
+  border-color: rgb(82 82 91) !important;
+}
+#modal-settings #security-settings-category .settings-password-action i,
+#modal-settings #security-settings-category .settings-password-action span,
+#modal-settings #security-settings-category .admin-access-action { color: inherit !important; }
+#modal-settings #security-settings-category .settings-password-action {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  gap: .45rem !important; text-transform: uppercase !important;
+}
+#modal-settings #security-settings-category h5 { text-align:center !important; width:100% !important; }
+#modal-settings #security-settings-category .admin-access-logo { flex-shrink:0; }
+</style>
+
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-zinc-100 dark:bg-black text-zinc-900 dark:text-white selection:bg-brand-red selection:text-white pb-24 md:pb-28 transition-colors duration-300 relative overflow-x-hidden" style="isolation:isolate">
 
@@ -1431,18 +1481,22 @@ html.dark #scythed-admin-modal button[class*="bg-red-"]:hover{background:var(--s
                 <button onclick="window.scythedApp.closeModal('modal-settings')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times text-lg"></i></button>
             </div>
 
+            <div id="security-settings-category" class="space-y-2">
+                <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
+                    <i class="fas fa-shield-halved mr-1" aria-hidden="true"></i> ZABEZPIECZENIA
+                </h4>
             <div id="general-admin-open-panel-wrap" class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i>Panel Administracyjny</span><button type="button" onclick="window.scythedApp.adminButtonClick()" class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition">OTWÓRZ PANEL</button></div>
             <div class="grid grid-cols-2 gap-3 items-stretch">
                 <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
                     <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200">Hasło do aplikacji</h5>
-                    <div class="flex justify-center min-w-0"><button id="settings-change-app-password" type="button" onclick="window.scythedApp.openChangeMasterModal()" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition"><i class="fas fa-lock" aria-hidden="true"></i><span>ZMIEN HASŁO</span></button></div>
+                    <div class="flex justify-center min-w-0"><button id="settings-change-app-password" type="button" onclick="window.scythedApp.openChangeMasterModal()" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition"><i class="fas fa-lock" aria-hidden="true"></i><span>Zmień hasło</span></button></div>
                 </div>
                 <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
                     <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200">Hasło do nazwy</h5>
-                    <div class="flex justify-center min-w-0"><button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled title="Sprawdzanie statusu weryfikacji konta…" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition opacity-50 cursor-not-allowed" aria-disabled="true"><i class="fas fa-user-shield" aria-hidden="true"></i><span>ZMIEN HASŁO</span></button></div>
+                    <div class="flex justify-center min-w-0"><button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled title="Sprawdzanie statusu weryfikacji konta…" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition opacity-50 cursor-not-allowed" aria-disabled="true"><i class="fas fa-user-shield" aria-hidden="true"></i><span>Zmień hasło</span></button></div>
                 </div>
             </div>
-
+            </div><!-- /security-settings-category -->
 
             <div class="space-y-2">
                 <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
