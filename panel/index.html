@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta property="og:title" content="SCYTHED">
-    <meta property="og:description" content="MENADŻER HASEŁ - wer. 5.0.">
+    <meta property="og:description" content="MENADŻER HASEŁ - wer. v6.3.">
     <meta property="og:image" content="https://i.imgur.com/jIS4wrD.png">
     <meta property="og:url" content="https://scythed.xyz">
     <meta property="og:type" content="website">
@@ -1569,7 +1569,7 @@ html body #modal-settings button#settings-change-name-password > i {
         <button onclick="window.scythedApp.openSettingsModal()" class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" title="Ustawienia & System">
             <i class="fas fa-gear"></i>
         </button>
-        <span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">wer. 5.0</span>
+        <span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">wer. v6.3</span>
     </div>
 
     <footer class="w-full max-w-xl mx-auto text-center px-4 mt-8 space-y-1 relative z-10">
@@ -1636,7 +1636,7 @@ html body #modal-settings button#settings-change-name-password > i {
                             <label for="header-animation-speed" class="text-xs font-semibold">Szybkość Animacji Nagłówka</label>
                             <span id="header-animation-speed-label" class="text-[10px] font-mono font-bold text-brand-red">1.0× (normalnie)</span>
                         </div>
-                        <input type="range" id="header-animation-speed" min="0.5" max="2" step="0.1" value="0.7" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
+                        <input type="range" id="header-animation-speed" min="0.5" max="2" step="0.1" value="1.0" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
                         <div class="flex justify-between text-[9px] text-zinc-500 dark:text-gray-400"><span>Wolniej</span><span>Szybciej</span></div>
                     </div>
 
@@ -1744,7 +1744,7 @@ html body #modal-settings button#settings-change-name-password > i {
                 <div class="flex items-center justify-between gap-4 p-4 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
                     <div class="flex items-center gap-2 min-w-0">
                         <i class="fas fa-bell text-xs shrink-0" style="color: var(--brand-red, #ff0033);" aria-hidden="true"></i>
-                        <div class="flex flex-col min-w-0"><span class="text-sm font-bold">AUTOMATYCZNA BLOKADA</span></div>
+                        <div class="flex flex-col min-w-0"><span class="text-xs font-semibold">Automatyczna Blokada</span></div>
                     </div>
                     <select id="auto-lock-mode" onchange="window.scythedApp.setAutoLockMode(this.value)" class="w-auto max-w-[60%] shrink-0 px-3 py-2 bg-white dark:bg-zinc-900 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-brand-red">
                         <option value="hidden">PO OPUSZCZENIU STRONY</option>
@@ -2390,7 +2390,7 @@ html body #modal-settings button#settings-change-name-password > i {
             let themeMode = 'dark';
             let isStreamerMode = false;
             let canvasAnimFrameId = null;
-            let headerAnimationSpeed = Math.min(2, Math.max(0.5, Number(localStorage.getItem('scythed_header_animation_speed_v1')) || 0.7));
+            let headerAnimationSpeed = Math.min(2, Math.max(0.5, Number(localStorage.getItem('scythed_header_animation_speed_v1')) || 1.0));
 
             let audioCtx = null;
 
@@ -3724,12 +3724,12 @@ html body #modal-settings button#settings-change-name-password > i {
 
             function headerSliderValueToSpeed(value) {
                 const parsed = Number(value);
-                return Math.min(2, Math.max(0.5, Number.isFinite(parsed) ? parsed : 0.7));
+                return Math.min(2, Math.max(0.5, Number.isFinite(parsed) ? parsed : 1.0));
             }
 
             function headerSpeedToSliderValue(speed) {
                 const parsed = Number(speed);
-                return Math.min(2, Math.max(0.5, Number.isFinite(parsed) ? parsed : 0.7));
+                return Math.min(2, Math.max(0.5, Number.isFinite(parsed) ? parsed : 1.0));
             }
 
             function updateHeaderAnimationSpeed(value) {
@@ -3738,7 +3738,7 @@ html body #modal-settings button#settings-change-name-password > i {
                 const slider = document.getElementById('header-animation-speed');
                 const label = document.getElementById('header-animation-speed-label');
                 if (slider) slider.value = String(headerAnimationSpeed);
-                const relativeSpeed = headerAnimationSpeed / 0.7;
+                const relativeSpeed = headerAnimationSpeed;
                 if (label) label.textContent = `${headerAnimationSpeed.toFixed(1)}×${Math.abs(relativeSpeed - 1) < 0.05 ? ' (normalnie)' : relativeSpeed < 1 ? ' (wolniej)' : ' (szybciej)'}`;
             }
 
@@ -4067,12 +4067,12 @@ html body #modal-settings button#settings-change-name-password > i {
                         const isLightMode = !document.documentElement.classList.contains('dark');
 
                         for (let i = 0; i < shootingStars.length; i++) {
-                            shootingStars[i].update(headerAnimationSpeed);
+                            shootingStars[i].update(headerAnimationSpeed * 0.6);
                             shootingStars[i].draw(rgb);
                         }
 
                         for (let i = 0; i < particles.length; i++) {
-                            particles[i].update(headerAnimationSpeed);
+                            particles[i].update(headerAnimationSpeed * 0.6);
                             particles[i].draw(rgb, isLightMode);
                         }
 
@@ -4512,6 +4512,10 @@ html body #modal-settings button#settings-change-name-password > i {
 
             function playSound(type) {
                 if (isSoundMuted) return;
+                // Na ekranie logowania/tworzenia hasła dźwięk kliknięcia jest
+                // dozwolony wyłącznie dla świadomej aktywacji przycisku.
+                const authOverlayForSound = document.getElementById('auth-overlay');
+                if (authOverlayForSound && !authOverlayForSound.classList.contains('hidden') && window.__scythedAuthButtonSoundAllowed === false) return;
                 try {
                     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -6815,6 +6819,53 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 })();
 </script>
 
+
+
+<style id="scythed-final-v24-admin-accent-dark">
+/* Przyciski LOGI, ODŚWIEŻ i WYLOGUJ mają zawsze aktywny kolor główny, także w ciemnym motywie. */
+#scythed-admin-modal .admin-primary-action,
+#scythed-admin-modal button[onclick*="adminToggleLogs"],
+#scythed-admin-modal button[onclick*="adminRefreshUsers"],
+#scythed-admin-modal button[onclick*="adminLogout"] {
+  background: var(--brand-red, #ff0033) !important;
+  color: var(--brand-contrast-text, #fff) !important;
+  border-color: var(--brand-red, #ff0033) !important;
+}
+#scythed-admin-modal .admin-primary-action:hover,
+#scythed-admin-modal button[onclick*="adminToggleLogs"]:hover,
+#scythed-admin-modal button[onclick*="adminRefreshUsers"]:hover,
+#scythed-admin-modal button[onclick*="adminLogout"]:hover {
+  background: var(--brand-hoverRed, var(--brand-hover-red, var(--brand-red, #ff0033))) !important;
+  border-color: var(--brand-hoverRed, var(--brand-hover-red, var(--brand-red, #ff0033))) !important;
+}
+</style>
+<script id="scythed-final-v24-auth-button-sounds-only">
+(function () {
+  // Zachowaj dźwięki przycisków, ale wycisz przypadkowe kliknięcia w tło,
+  // logo, tekst, pola i inne nieprzyciskowe elementy ekranu logowania/rejestracji.
+  function classifyAuthInteraction(event) {
+    const overlay = document.getElementById('auth-overlay');
+    if (!overlay || overlay.classList.contains('hidden') || !overlay.contains(event.target)) return;
+    const target = event.target && event.target.nodeType === 1 ? event.target : event.target && event.target.parentElement;
+    if (!target) { window.__scythedAuthButtonSoundAllowed = false; return; }
+    const button = target.closest('button, input[type="submit"], input[type="button"]');
+    window.__scythedAuthButtonSoundAllowed = !!(button && overlay.contains(button));
+  }
+  ['pointerdown', 'click', 'keydown'].forEach(function (type) {
+    document.addEventListener(type, function (event) {
+      if (type === 'keydown') {
+        const overlay = document.getElementById('auth-overlay');
+        if (!overlay || overlay.classList.contains('hidden') || !overlay.contains(event.target)) return;
+        const isEnterSubmit = event.key === 'Enter' && event.target && event.target.closest && event.target.closest('#auth-form');
+        window.__scythedAuthButtonSoundAllowed = !!(isEnterSubmit || (event.target.closest && event.target.closest('button')));
+        return;
+      }
+      classifyAuthInteraction(event);
+    }, true);
+  });
+})();
+</script>
+
 </body>
 </html>
 
@@ -6890,3 +6941,18 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
   });
 })();
 </script>
+
+<style id="scythed-final-v23-requested-tweaks">
+/* Keep the admin close button tied to the live user-selected primary color. */
+#scythed-admin-modal .admin-bottom-close {
+  background-color: var(--brand-red, #ff0033) !important;
+  border-color: var(--brand-red, #ff0033) !important;
+  color: var(--brand-contrast-text, #fff) !important;
+  box-shadow: 0 0 15px var(--brand-red-glow, rgba(255,0,51,.35)) !important;
+}
+#scythed-admin-modal .admin-bottom-close:hover,
+#scythed-admin-modal .admin-bottom-close:focus-visible {
+  background-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
+  border-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
+}
+</style>
