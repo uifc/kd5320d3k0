@@ -1671,8 +1671,13 @@ html.dark #scythed-admin-modal header > button { border-color:rgb(63 63 70); bac
                     <div class="flex items-center justify-between order-2 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
                         <span class="text-xs font-semibold">Wielkość</span>
                         <div class="flex items-center gap-2">
-                            <input type="range" id="ui-scale-slider" min="1" max="3" step="1" value="2" oninput="window.scythedApp.updateUIScale(this.value)" class="w-16 accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
-                            <span id="scale-label-text" class="text-[10px] font-mono font-bold text-brand-red w-12 text-center">ŚREDNI</span>
+                            <div id="ui-scale-options" class="flex items-center gap-1.5" role="group" aria-label="Wielkość interfejsu">
+                                <button type="button" data-scale="1" onclick="window.scythedApp.updateUIScale(1)" class="ui-scale-choice px-2.5 py-1.5 rounded-lg border text-[10px] font-bold transition">MAŁA</button>
+                                <button type="button" data-scale="2" onclick="window.scythedApp.updateUIScale(2)" class="ui-scale-choice px-2.5 py-1.5 rounded-lg border text-[10px] font-bold transition">NORMALNA</button>
+                                <button type="button" data-scale="3" onclick="window.scythedApp.updateUIScale(3)" class="ui-scale-choice px-2.5 py-1.5 rounded-lg border text-[10px] font-bold transition">DUŻA</button>
+                            </div>
+                            <select id="ui-scale-slider" onchange="window.scythedApp.updateUIScale(this.value)" class="sr-only" tabindex="-1" aria-hidden="true"><option value="1">MAŁA</option><option value="2" selected>NORMALNA</option><option value="3">DUŻA</option></select>
+                            <span id="scale-label-text" class="sr-only">NORMALNA</span>
                         </div>
                     </div>
                 </div>
@@ -4584,6 +4589,14 @@ html.dark #scythed-admin-modal header > button { border-color:rgb(63 63 70); bac
 
             function updateUIScale(val) {
                 currentScale = parseInt(val, 10);
+                if (![1, 2, 3].includes(currentScale)) currentScale = 2;
+                const scaleSelect = document.getElementById('ui-scale-slider');
+                if (scaleSelect) scaleSelect.value = String(currentScale);
+                document.querySelectorAll('#ui-scale-options [data-scale]').forEach(btn => {
+                    const active = Number(btn.dataset.scale) === currentScale;
+                    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+                    btn.classList.toggle('ui-scale-choice-active', active);
+                });
                 saveEncryptedState();
                 applyScaleUI(currentScale);
                 playSound('click');
@@ -4593,9 +4606,9 @@ html.dark #scythed-admin-modal header > button { border-color:rgb(63 63 70); bac
                 const html = document.documentElement;
                 const label = document.getElementById('scale-label-text');
                 html.classList.remove('size-small', 'size-medium', 'size-large');
-                if (scale == 1) { html.classList.add('size-small'); if (label) label.innerText = 'MAŁY'; }
-                else if (scale == 3) { html.classList.add('size-large'); if (label) label.innerText = 'DUŻY'; }
-                else { html.classList.add('size-medium'); if (label) label.innerText = 'NORMALNY'; }
+                if (scale == 1) { html.classList.add('size-small'); if (label) label.innerText = 'MAŁA'; }
+                else if (scale == 3) { html.classList.add('size-large'); if (label) label.innerText = 'DUŻA'; }
+                else { html.classList.add('size-medium'); if (label) label.innerText = 'NORMALNA'; }
                 // Font scaling changes layout metrics; refresh pointer-relative canvas effects
                 // so they do not remain offset until the next mouse movement.
                 requestAnimationFrame(() => {
@@ -6747,6 +6760,37 @@ html.dark #scythed-admin-modal header > button { border-color:rgb(63 63 70); bac
         </div>
       </section>
     </div>
+
+
+<style id="scythed-v20-size-buttons-and-range-fix">
+#ui-scale-options .ui-scale-choice{background:var(--control-surface-light, #e4e4e7);color:var(--brand-red,#ef233c);border-color:var(--brand-red,#ef233c);white-space:nowrap}
+.dark #ui-scale-options .ui-scale-choice{background:#18181b;color:var(--brand-red,#ef233c)}
+#ui-scale-options .ui-scale-choice-active{background:var(--brand-red,#ef233c)!important;color:#fff!important;border-color:var(--brand-red,#ef233c)!important;box-shadow:0 0 0 1px var(--brand-red,#ef233c)}
+input[type="range"]{touch-action:none;pointer-events:auto;user-select:none;-webkit-user-select:none;cursor:pointer}
+input[type="range"]::-webkit-slider-thumb{cursor:grab}
+input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
+@media(max-width:420px){#ui-scale-options{gap:3px!important}#ui-scale-options .ui-scale-choice{padding-left:6px;padding-right:6px;font-size:9px!important}}
+</style>
+<script id="scythed-v20-range-interaction-fix">
+(function(){
+  // Keep native range dragging responsive; isolate range pointer events from unrelated app gestures.
+  document.addEventListener('pointerdown', function(e){
+    if(e.target && e.target.matches && e.target.matches('input[type="range"]')) e.stopPropagation();
+  }, true);
+  document.addEventListener('touchstart', function(e){
+    if(e.target && e.target.matches && e.target.matches('input[type="range"]')) e.stopPropagation();
+  }, {capture:true, passive:true});
+  document.addEventListener('DOMContentLoaded', function(){
+    const current = document.getElementById('ui-scale-slider');
+    const value = current ? Number(current.value || 2) : 2;
+    document.querySelectorAll('#ui-scale-options [data-scale]').forEach(btn=>{
+      const active = Number(btn.dataset.scale) === value;
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      btn.classList.toggle('ui-scale-choice-active', active);
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
