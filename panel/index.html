@@ -895,7 +895,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     transition: color .18s ease;
   }
   #general-admin-open-panel-wrap .admin-access-action,
-  #modal-settings .admin-master-action {
+  #modal-settings .admin-master-action,
+  #modal-settings .settings-password-action {
     width: 9.5rem;
     min-width: 9.5rem;
     min-height: 2.25rem;
@@ -908,11 +909,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     transition: background-color .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease, transform .18s ease;
   }
   html.dark #general-admin-open-panel-wrap .admin-access-action,
-  html.dark #modal-settings .admin-master-action {
+  html.dark #modal-settings .admin-master-action,
+  html.dark #modal-settings .settings-password-action {
     background-color: rgb(39 39 42);
   }
   #general-admin-open-panel-wrap .admin-access-action:hover,
-  #modal-settings .admin-master-action:hover {
+  #modal-settings .admin-master-action:hover,
+  #modal-settings .settings-password-action:hover:not(:disabled) {
     background-color: var(--brand-red, #ef4444) !important;
     border-color: transparent !important;
     color: var(--brand-contrast-text, #fff) !important;
@@ -1271,12 +1274,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
                     <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200"><i class="fas fa-lock text-brand-red mr-1"></i>Hasło do aplikacji</h5>
                     <p class="text-[10px] text-zinc-500">Zmień hasło używane do odblokowania aplikacji.</p>
-                    <button id="settings-change-app-password" type="button" onclick="window.scythedApp.openChangeMasterModal()" class="admin-master-action w-full px-3 py-2 text-xs font-bold rounded-xl border transition">Zmień hasło do aplikacji</button>
+                    <div class="flex justify-center"><button id="settings-change-app-password" type="button" onclick="window.scythedApp.openChangeMasterModal()" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition">Zmień hasło do aplikacji</button></div>
                 </div>
                 <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
                     <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200"><i class="fas fa-user-shield text-brand-red mr-1"></i>Hasło do nazwy</h5>
                     <p class="text-[10px] text-zinc-500">Zmień hasło przypisane do nazwy konta.</p>
-                    <button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled title="Sprawdzanie statusu weryfikacji konta…" class="w-full px-3 py-2 text-xs font-bold rounded-xl border border-zinc-300 dark:border-zinc-700 opacity-50 cursor-not-allowed transition">Zmień hasło do nazwy</button>
+                    <div class="flex justify-center"><button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled title="Sprawdzanie statusu weryfikacji konta…" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition opacity-50 cursor-not-allowed" aria-disabled="true">Zmień hasło do nazwy</button></div>
                 </div>
             </div>
 
@@ -4651,7 +4654,20 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             function togglePasswordVisibility(fieldId) {
                 const field = document.getElementById(fieldId);
                 if (!field) return;
-                field.type = field.type === 'password' ? 'text' : 'password';
+                const reveal = field.type === 'password';
+                field.type = reveal ? 'text' : 'password';
+                const button = field.parentElement?.querySelector('button[onclick*="togglePasswordVisibility"]');
+                const icon = button?.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-eye', !reveal);
+                    icon.classList.toggle('fa-eye-slash', reveal);
+                }
+                if (button) {
+                    const fieldLabel = button.getAttribute('aria-label') || `hasło ${fieldId}`;
+                    const baseLabel = fieldLabel.replace(/^(Pokaż|Ukryj) lub ukryj /i, '').replace(/^(Pokaż|Ukryj) /i, '');
+                    button.setAttribute('aria-label', `${reveal ? 'Ukryj' : 'Pokaż'} ${baseLabel}`);
+                    button.setAttribute('title', `${reveal ? 'Ukryj' : 'Pokaż'} ${baseLabel}`);
+                }
                 playSound('click');
             }
 
