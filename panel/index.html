@@ -1205,11 +1205,24 @@ html.dark #scythed-admin-modal header > button { border:0; background:transparen
 #auth-overlay .brand-logo:hover { transform: none !important; }
 #auth-overlay .brand-logo, #auth-overlay .brand-logo * { user-select: none !important; }
 </style>
-<script id="scythed-v17-disable-auth-logo-click-sound">
+<script id="scythed-v21-disable-auth-logo-click-sound">
 (function () {
+  // Logo jest dekoracyjne. pointer-events:none sprawia, że targetem kliknięcia
+  // może być jego kontener, dlatego sprawdzamy cały obszar logo na ekranie auth.
   document.addEventListener('click', function (event) {
-    const logo = event.target && event.target.closest ? event.target.closest('#auth-overlay .brand-logo') : null;
+    const target = event.target;
+    if (!target || !target.closest) return;
+    const auth = target.closest('#auth-overlay');
+    if (!auth) return;
+    const logoArea = target.closest('#auth-overlay .flex.flex-col.items-center.justify-center.space-y-2');
+    if (!logoArea) return;
+    const logo = logoArea.querySelector('.brand-logo');
     if (!logo) return;
+    const rect = logo.getBoundingClientRect();
+    const x = event.clientX, y = event.clientY;
+    // Wycisz wyłącznie kliknięcie w animowane logo i jego bezpośrednią ramkę.
+    const box = logo.parentElement.getBoundingClientRect();
+    if (x < box.left || x > box.right || y < box.top || y > box.bottom) return;
     event.preventDefault();
     event.stopImmediatePropagation();
     event.stopPropagation();
@@ -6756,7 +6769,7 @@ html body #modal-settings button#settings-change-name-password > i {
         <header class="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3"><div><h2 class="font-orbitron font-extrabold text-lg text-zinc-900 dark:text-white"><i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL ADMINA</h2><p class="text-xs text-zinc-500 mt-1">Zarządzanie kontami i odznakami</p></div><button onclick="window.scythedApp.closeAdminPanel()" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Zamknij panel"><i class="fas fa-times text-lg"></i></button></header>
         <div id="admin-login-view" class="p-4 md:p-6 max-w-lg mx-auto space-y-4"><p class="text-sm text-zinc-600 dark:text-zinc-300">Panel wymaga aktywnej sesji konta SCYTHED uwierzytelnionego hasłem zapisanym w Cloudflare D1. Otwórz panel z Ustawień ogólnych i potwierdź hasłem konta SCYTHED.</p></div>
         <div id="admin-content-view" class="hidden p-4 md:p-6 space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-3"><p class="text-xs text-brand-red">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button onclick="window.scythedApp.adminToggleLogs()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="px-3 py-2 rounded-lg border border-brand-red/40 text-brand-red text-xs font-bold">WYLOGUJ</button></div></div>
+          <div class="flex flex-wrap items-center justify-between gap-3"><p class="text-xs text-brand-red">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button onclick="window.scythedApp.adminToggleLogs()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-clock mr-1.5" aria-hidden="true"></i>LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-rotate mr-1.5" aria-hidden="true"></i>ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-right-from-bracket mr-1.5" aria-hidden="true"></i>WYLOGUJ</button></div></div>
           <section id="admin-logs-section" class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold text-sm">DZIENNIK ZMIAN</h3><div class="flex gap-2"><button id="admin-clear-logs-button" onclick="window.scythedApp.adminClearLogs()" class="hidden text-xs px-2 py-1 rounded border border-brand-red/40 text-brand-red">WYCZYŚĆ LOGI</button><button onclick="document.getElementById('admin-logs-section').classList.add('hidden')" class="text-xs text-brand-red">ZAMKNIJ</button></div></div><div id="admin-logs-list" class="space-y-2 text-xs"><p class="text-zinc-500">Ładowanie logów…</p></div><div id="admin-logs-pagination" class="flex flex-wrap items-center justify-center gap-1 pt-2"></div></section>
           <section class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3">
             <div><h3 class="font-bold text-sm"><i class="fas fa-user-plus text-brand-red mr-2"></i>DODAJ NOWĄ NAZWĘ / KONTO</h3><p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Tworzy konto przez ten sam endpoint API co Worker. Nazwa zostanie zweryfikowana automatycznie; hasło musi mieć co najmniej 12 znaków.</p></div>
@@ -6769,7 +6782,7 @@ html body #modal-settings button#settings-change-name-password > i {
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
           <div class="space-y-2"><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw" autocomplete="off" autocorrect="off" spellcheck="false"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
           <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="moderator">Moderator</option><option value="zasluzony">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
-          <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button type="button" onclick="window.scythedApp.closeAdminPanel()" class="w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAMKNIJ PANEL ADMINA</button></div>
+          <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button type="button" onclick="window.scythedApp.closeAdminPanel()" class="admin-bottom-close w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAMKNIJ PANEL ADMINA</button></div>
         </div>
       </section>
     </div>
@@ -6804,3 +6817,76 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 
 </body>
 </html>
+
+
+<style id="scythed-final-v22-admin-and-auth-fixes">
+/* Admin action buttons use the same live primary accent in light and dark themes. */
+#scythed-admin-modal .admin-primary-action,
+#scythed-admin-modal #admin-create-user-form button[type="submit"],
+#scythed-admin-modal button[onclick*="adminLogout"] {
+  background-color: var(--brand-red, #ef4444) !important;
+  color: #fff !important;
+  border: 1px solid var(--brand-red, #ef4444) !important;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+#scythed-admin-modal .admin-primary-action:hover,
+#scythed-admin-modal #admin-create-user-form button[type="submit"]:hover,
+#scythed-admin-modal button[onclick*="adminLogout"]:hover {
+  background-color: var(--brand-hover-red, var(--brand-red, #ef4444)) !important;
+  border-color: var(--brand-hover-red, var(--brand-red, #ef4444)) !important;
+}
+/* Match the settings modal's top-right X: plain, borderless, transparent. */
+#scythed-admin-modal > section > header > button {
+  appearance: none !important; -webkit-appearance: none !important;
+  width: auto !important; height: auto !important; min-width: 0 !important; min-height: 0 !important;
+  padding: 0 !important; margin: 0 !important; border: 0 !important; outline-offset: 3px;
+  border-radius: 0 !important; background: transparent !important; box-shadow: none !important;
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  color: #71717a !important; cursor: pointer;
+}
+html.dark #scythed-admin-modal > section > header > button { color: #9ca3af !important; }
+#scythed-admin-modal > section > header > button:hover { color: #18181b !important; background: transparent !important; border: 0 !important; }
+html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !important; }
+#scythed-admin-modal > section > header > button i { font-size: 1.125rem !important; line-height: 1 !important; }
+/* Same dimensions and typography as the bottom settings close button. */
+#scythed-admin-modal .admin-bottom-close {
+  display: block !important; width: 100% !important; box-sizing: border-box !important;
+  padding: .625rem .75rem !important; background: var(--brand-red, #ef4444) !important;
+  color: #fff !important; border: 0 !important; border-radius: .75rem !important;
+  font-family: Orbitron, sans-serif !important; font-weight: 700 !important; font-size: .75rem !important;
+  line-height: 1.25rem !important; box-shadow: 0 0 15px var(--brand-red-glow, rgba(255,0,51,.35)) !important;
+}
+#scythed-admin-modal .admin-bottom-close:hover { background: var(--brand-hover-red, var(--brand-red, #ef4444)) !important; }
+/* Keep the size dropdown fully visible, including its selected option. */
+#modal-settings #ui-scale-slider {
+  display: block !important; width: auto !important; max-width: 100% !important; min-width: 0 !important;
+  flex: 0 1 11rem !important; box-sizing: border-box !important; white-space: nowrap !important;
+}
+#modal-settings #ui-scale-slider option { max-width: 100%; }
+#modal-settings #ui-scale-slider { color: inherit; }
+</style>
+<script id="scythed-final-v22-auth-logo-silencer">
+(function () {
+  // The animated logo and its frame on login/register are decorative. Intercept
+  // pointer and click events by coordinates because the image may have pointer-events:none.
+  function isAuthLogoFrame(event) {
+    const overlay = document.getElementById('auth-overlay');
+    if (!overlay || overlay.classList.contains('hidden') || !overlay.contains(event.target)) return false;
+    const img = overlay.querySelector('img.brand-logo');
+    if (!img) return false;
+    const frame = img.parentElement;
+    if (!frame) return false;
+    const r = frame.getBoundingClientRect();
+    const x = Number(event.clientX), y = Number(event.clientY);
+    return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+  }
+  ['pointerdown', 'mousedown', 'touchstart', 'click', 'dblclick'].forEach(function (type) {
+    document.addEventListener(type, function (event) {
+      if (!isAuthLogoFrame(event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+    }, true);
+  });
+})();
+</script>
