@@ -1222,6 +1222,20 @@ html.dark #scythed-admin-modal header > button { border-color:rgb(63 63 70); bac
 }
 </style>
 
+
+<style id="scythed-final-corrective-theme-icons-categories">
+/* Ikony przycisków zmiany hasła zawsze śledzą aktualny kolor główny wybrany przez użytkownika. */
+html body #modal-settings button.settings-password-action > i,
+html body #modal-settings button#settings-change-app-password > i,
+html body #modal-settings button#settings-change-name-password > i {
+  color: var(--brand-red, #ff0033) !important;
+  -webkit-text-fill-color: var(--brand-red, #ff0033) !important;
+  opacity: 1 !important;
+  transition: color .2s ease, -webkit-text-fill-color .2s ease !important;
+}
+/* Nagłówki kategorii w spójnym, wielkimi literami zapisanym formacie. */
+#modal-settings h4 { text-transform: uppercase !important; }
+</style>
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-zinc-100 dark:bg-black text-zinc-900 dark:text-white selection:bg-brand-red selection:text-white pb-24 md:pb-28 transition-colors duration-300 relative overflow-x-hidden" style="isolation:isolate">
 
@@ -1685,7 +1699,7 @@ html.dark #scythed-admin-modal header > button { border-color:rgb(63 63 70); bac
 
             <div class="space-y-2">
                 <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                    <i class="fas fa-sliders mr-1"></i> Audio & Preferencje
+                    <i class="fas fa-sliders mr-1"></i> PREFERENCJE
                 </h4>
 
                 <div class="grid grid-cols-2 gap-2">
@@ -1726,7 +1740,7 @@ html.dark #scythed-admin-modal header > button { border-color:rgb(63 63 70); bac
 
             <div class="space-y-2">
                 <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                    <i class="fas fa-database mr-1"></i> Backup & bezpieczeństwo danych
+                    <i class="fas fa-database mr-1"></i> BEZPIECZEŃSTWO DANYCH
                 </h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
