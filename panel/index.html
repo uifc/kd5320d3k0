@@ -998,6 +998,33 @@ html.dark #scythed-admin-modal input::placeholder,html.dark #scythed-admin-modal
 })();
 </script>
 
+<style id="scythed-settings-controls-final-fix">
+/* Neutralne, jednakowe kontrolki — kolor akcentu nie zmienia ich bazowej powierzchni. */
+:root{--control-surface-light:#f4f4f5;--control-surface-dark:#18181b;--control-border-light:#d4d4d8;--control-border-dark:#3f3f46;}
+#modal-settings #general-admin-open-panel-wrap,
+#modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{background:#fafafa!important;border:1px solid #e4e4e7!important;border-radius:11px!important;}
+html.dark #modal-settings #general-admin-open-panel-wrap,
+html.dark #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{background:#09090b!important;border-color:#27272a!important;}
+#modal-settings .settings-password-action,#modal-settings .admin-master-action,#general-admin-open-panel-wrap .admin-access-action{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:.5rem!important;
+ min-height:2.25rem;padding:.45rem .8rem!important;border:1px solid var(--control-border-light)!important;border-radius:.65rem!important;
+ background:var(--control-surface-light)!important;color:#27272a!important;font-size:.7rem!important;font-weight:800!important;letter-spacing:.025em;
+ box-shadow:none!important;transform:none!important;transition:background-color .16s,border-color .16s,color .16s!important;
+}
+html.dark #modal-settings .settings-password-action,html.dark #modal-settings .admin-master-action,html.dark #general-admin-open-panel-wrap .admin-access-action{
+ background:var(--control-surface-dark)!important;color:#f4f4f5!important;border-color:var(--control-border-dark)!important;
+}
+#modal-settings .settings-password-action:hover:not(:disabled),#modal-settings .admin-master-action:hover:not(:disabled),#general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled){
+ background:#e4e4e7!important;border-color:#a1a1aa!important;color:#18181b!important;box-shadow:none!important;transform:none!important;
+}
+html.dark #modal-settings .settings-password-action:hover:not(:disabled),html.dark #modal-settings .admin-master-action:hover:not(:disabled),html.dark #general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled){background:#27272a!important;border-color:#52525b!important;color:#fff!important;}
+#modal-settings .settings-password-action i,#modal-settings .admin-master-action i{color:inherit!important;font-size:.8rem;}
+#general-admin-open-panel-wrap .admin-access-logo{color:var(--brand-readable-accent,var(--brand-red,#ff0033))!important;}
+#modal-settings .settings-password-action:disabled{opacity:.48!important;cursor:not-allowed!important;}
+#modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{display:flex;flex-direction:column;justify-content:space-between;gap:.7rem;}
+#modal-settings .grid.grid-cols-2>div.p-3.rounded-xl h5{font-size:.72rem;}
+@media(max-width:520px){#modal-settings .settings-password-action,#general-admin-open-panel-wrap .admin-access-action{width:100%;min-width:0;white-space:nowrap;font-size:.64rem!important;}}
+</style>
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-zinc-100 dark:bg-black text-zinc-900 dark:text-white selection:bg-brand-red selection:text-white pb-24 md:pb-28 transition-colors duration-300 relative overflow-x-hidden" style="isolation:isolate">
 
@@ -1335,17 +1362,15 @@ html.dark #scythed-admin-modal input::placeholder,html.dark #scythed-admin-modal
                 <button onclick="window.scythedApp.closeModal('modal-settings')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times text-lg"></i></button>
             </div>
 
-            <div id="general-admin-open-panel-wrap" class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i>Panel Administracyjny</span><button type="button" onclick="window.scythedApp.adminButtonClick()" class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition">Otwórz panel</button></div>
+            <div id="general-admin-open-panel-wrap" class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i>Panel Administracyjny</span><button type="button" onclick="window.scythedApp.adminButtonClick()" class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition">OTWÓRZ PANEL</button></div>
             <div class="grid grid-cols-2 gap-3 items-stretch">
                 <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
-                    <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200"><i class="fas fa-lock text-brand-red mr-1"></i>Hasło do aplikacji</h5>
-                    <p class="text-[10px] text-zinc-500">Zmień hasło używane do odblokowania aplikacji.</p>
-                    <div class="flex justify-center min-w-0"><button id="settings-change-app-password" type="button" onclick="window.scythedApp.openChangeMasterModal()" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition">Zmień hasło do aplikacji</button></div>
+                    <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200">Hasło do aplikacji</h5>
+                    <div class="flex justify-center min-w-0"><button id="settings-change-app-password" type="button" onclick="window.scythedApp.openChangeMasterModal()" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition"><i class="fas fa-lock" aria-hidden="true"></i><span>ZMIEN HASŁO</span></button></div>
                 </div>
                 <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
-                    <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200"><i class="fas fa-user-shield text-brand-red mr-1"></i>Hasło do nazwy</h5>
-                    <p class="text-[10px] text-zinc-500">Zmień hasło przypisane do nazwy konta.</p>
-                    <div class="flex justify-center min-w-0"><button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled title="Sprawdzanie statusu weryfikacji konta…" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition opacity-50 cursor-not-allowed" aria-disabled="true">Zmień hasło do nazwy</button></div>
+                    <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200">Hasło do nazwy</h5>
+                    <div class="flex justify-center min-w-0"><button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled title="Sprawdzanie statusu weryfikacji konta…" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition opacity-50 cursor-not-allowed" aria-disabled="true"><i class="fas fa-user-shield" aria-hidden="true"></i><span>ZMIEN HASŁO</span></button></div>
                 </div>
             </div>
 
