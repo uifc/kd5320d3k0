@@ -1617,7 +1617,7 @@ html body #modal-settings button#settings-change-name-password > i {
                             <label for="header-animation-speed" class="text-xs font-semibold">Szybkość Animacji Nagłówka</label>
                             <span id="header-animation-speed-label" class="text-[10px] font-mono font-bold text-brand-red">1.0× (normalnie)</span>
                         </div>
-                        <input type="range" id="header-animation-speed" min="0" max="20" step="1" value="10" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
+                        <input type="range" id="header-animation-speed" min="0.5" max="2" step="0.1" value="0.7" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
                         <div class="flex justify-between text-[9px] text-zinc-500 dark:text-gray-400"><span>Wolniej</span><span>Szybciej</span></div>
                     </div>
 
@@ -1685,12 +1685,9 @@ html body #modal-settings button#settings-change-name-password > i {
                     <div class="flex items-center justify-between order-2 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
                         <span class="text-xs font-semibold">Wielkość</span>
                         <div class="flex items-center gap-2">
-                            <div id="ui-scale-options" class="flex items-center gap-1.5" role="group" aria-label="Wielkość interfejsu">
-                                <button type="button" data-scale="1" onclick="window.scythedApp.updateUIScale(1)" class="ui-scale-choice px-2.5 py-1.5 rounded-lg border text-[10px] font-bold transition">MAŁA</button>
-                                <button type="button" data-scale="2" onclick="window.scythedApp.updateUIScale(2)" class="ui-scale-choice px-2.5 py-1.5 rounded-lg border text-[10px] font-bold transition">NORMALNA</button>
-                                <button type="button" data-scale="3" onclick="window.scythedApp.updateUIScale(3)" class="ui-scale-choice px-2.5 py-1.5 rounded-lg border text-[10px] font-bold transition">DUŻA</button>
-                            </div>
-                            <select id="ui-scale-slider" onchange="window.scythedApp.updateUIScale(this.value)" class="sr-only" tabindex="-1" aria-hidden="true"><option value="1">MAŁA</option><option value="2" selected>NORMALNA</option><option value="3">DUŻA</option></select>
+                            <select id="ui-scale-slider" onchange="window.scythedApp.updateUIScale(this.value)" aria-label="Wielkość interfejsu" class="w-auto max-w-[60%] shrink-0 px-3 py-2 bg-white dark:bg-zinc-900 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-brand-red">
+                                <option value="1">MAŁA</option><option value="2" selected>NORMALNA</option><option value="3">DUŻA</option>
+                            </select>
                             <span id="scale-label-text" class="sr-only">NORMALNA</span>
                         </div>
                     </div>
@@ -2374,7 +2371,7 @@ html body #modal-settings button#settings-change-name-password > i {
             let themeMode = 'dark';
             let isStreamerMode = false;
             let canvasAnimFrameId = null;
-            let headerAnimationSpeed = Math.min(2, Math.max(0.3, Number(localStorage.getItem('scythed_header_animation_speed_v1')) || 0.7));
+            let headerAnimationSpeed = Math.min(2, Math.max(0.5, Number(localStorage.getItem('scythed_header_animation_speed_v1')) || 0.7));
 
             let audioCtx = null;
 
@@ -3707,17 +3704,13 @@ html body #modal-settings button#settings-change-name-password > i {
             }
 
             function headerSliderValueToSpeed(value) {
-                const position = Math.min(20, Math.max(0, Number(value) || 0));
-                return position <= 10
-                    ? 0.3 + (position / 10) * 0.4
-                    : 0.7 + ((position - 10) / 10) * 1.3;
+                const parsed = Number(value);
+                return Math.min(2, Math.max(0.5, Number.isFinite(parsed) ? parsed : 0.7));
             }
 
             function headerSpeedToSliderValue(speed) {
-                const clamped = Math.min(2, Math.max(0.3, Number(speed) || 0.7));
-                return Math.round(clamped <= 0.7
-                    ? ((clamped - 0.3) / 0.4) * 10
-                    : 10 + ((clamped - 0.7) / 1.3) * 10);
+                const parsed = Number(speed);
+                return Math.min(2, Math.max(0.5, Number.isFinite(parsed) ? parsed : 0.7));
             }
 
             function updateHeaderAnimationSpeed(value) {
@@ -3725,9 +3718,9 @@ html body #modal-settings button#settings-change-name-password > i {
                 localStorage.setItem('scythed_header_animation_speed_v1', String(headerAnimationSpeed));
                 const slider = document.getElementById('header-animation-speed');
                 const label = document.getElementById('header-animation-speed-label');
-                if (slider) slider.value = String(Math.min(20, Math.max(0, Number(value) || 0)));
+                if (slider) slider.value = String(headerAnimationSpeed);
                 const relativeSpeed = headerAnimationSpeed / 0.7;
-                if (label) label.textContent = `${relativeSpeed.toFixed(1)}×${Math.abs(relativeSpeed - 1) < 0.05 ? ' (normalnie)' : relativeSpeed < 1 ? ' (wolniej)' : ' (szybciej)'}`;
+                if (label) label.textContent = `${headerAnimationSpeed.toFixed(1)}×${Math.abs(relativeSpeed - 1) < 0.05 ? ' (normalnie)' : relativeSpeed < 1 ? ' (wolniej)' : ' (szybciej)'}`;
             }
 
             function openChangeMasterModal() {
@@ -5957,7 +5950,7 @@ html body #modal-settings button#settings-change-name-password > i {
                     if (settings.mouseActivityEnabled !== undefined) mouseActivityEnabled = Boolean(settings.mouseActivityEnabled);
                     if (settings.generalActivityEnabled !== undefined) generalActivityEnabled = Boolean(settings.generalActivityEnabled);
                     if (settings.headerAnimationSpeed !== undefined && Number.isFinite(Number(settings.headerAnimationSpeed))) {
-                        headerAnimationSpeed = Math.min(2, Math.max(0.3, Number(settings.headerAnimationSpeed)));
+                        headerAnimationSpeed = Math.min(2, Math.max(0.5, Number(settings.headerAnimationSpeed)));
                         localStorage.setItem('scythed_header_animation_speed_v1', String(headerAnimationSpeed));
                     }
                     if (settings.backupReminderDays !== undefined) backupReminderDays = Math.max(0, parseInt(settings.backupReminderDays,10)||0);
@@ -6777,13 +6770,10 @@ html body #modal-settings button#settings-change-name-password > i {
 
 
 <style id="scythed-v20-size-buttons-and-range-fix">
-#ui-scale-options .ui-scale-choice{background:var(--control-surface-light, #e4e4e7);color:var(--brand-red,#ef233c);border-color:var(--brand-red,#ef233c);white-space:nowrap}
-.dark #ui-scale-options .ui-scale-choice{background:#18181b;color:var(--brand-red,#ef233c)}
-#ui-scale-options .ui-scale-choice-active{background:var(--brand-red,#ef233c)!important;color:#fff!important;border-color:var(--brand-red,#ef233c)!important;box-shadow:0 0 0 1px var(--brand-red,#ef233c)}
 input[type="range"]{touch-action:none;pointer-events:auto;user-select:none;-webkit-user-select:none;cursor:pointer}
 input[type="range"]::-webkit-slider-thumb{cursor:grab}
 input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
-@media(max-width:420px){#ui-scale-options{gap:3px!important}#ui-scale-options .ui-scale-choice{padding-left:6px;padding-right:6px;font-size:9px!important}}
+
 </style>
 <script id="scythed-v20-range-interaction-fix">
 (function(){
