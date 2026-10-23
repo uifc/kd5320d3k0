@@ -942,12 +942,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     <img src="assets/logos/logo.gif" alt="SCYTHED Logo" class="brand-logo w-full h-full object-contain">
                 </div>
                 <h2 class="font-orbitron font-black text-2xl tracking-wider text-zinc-900 dark:text-white">SCYTH<span class="text-brand-red">ED</span></h2>
-                <p id="auth-subtitle" class="text-xs text-zinc-600 dark:text-gray-400">Próbujesz zalogować się hasłem master (<span id="auth-username-placeholder" class="text-brand-red font-bold">@USER</span>)</p>
+                <p id="auth-subtitle" class="text-xs text-zinc-600 dark:text-gray-400">Próbujesz zalogować się hasłem do aplikacji (<span id="auth-username-placeholder" class="text-brand-red font-bold">@USER</span>)</p>
             </div>
 
             <form autocomplete="off" id="auth-form" onsubmit="window.scythedApp.handleAuthSubmit(event)" class="space-y-4">
                 <div class="relative">
-                    <input type="password" id="auth-master-password" required placeholder="Wpisz Hasło Master..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
+                    <input type="password" id="auth-master-password" required placeholder="Wpisz Hasło do aplikacji..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
                     <p id="auth-password-strength" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500 text-left"></p>
                     <button type="button" onclick="window.scythedApp.togglePasswordVisibility('auth-master-password')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white">
                         <i class="fas fa-eye"></i>
@@ -955,7 +955,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 </div>
 
                 <div id="auth-confirm-container" class="relative hidden">
-                    <input type="password" id="auth-master-password-confirm" placeholder="Potwierdź Hasło Master..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
+                    <input type="password" id="auth-master-password-confirm" placeholder="Potwierdź Hasło do aplikacji..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
                     <p id="auth-confirm-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left"></p>
                 </div>
 
@@ -964,7 +964,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         <i class="fas fa-upload text-brand-red"></i> WCZYTAJ BACKUP PRZY TWORZENIU HASŁA
                     </button>
                     <input type="file" id="auth-backup-file-input" accept=".scythed,.json" class="hidden" onchange="window.scythedApp.importBackup(event)" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <p id="auth-backup-status" class="text-[10px] text-zinc-500 dark:text-gray-500">Możesz najpierw wczytać zaszyfrowany backup, a następnie ustawić nowe Hasło Master.</p>
+                    <p id="auth-backup-status" class="text-[10px] text-zinc-500 dark:text-gray-500">Możesz najpierw wczytać zaszyfrowany backup, a następnie ustawić nowe Hasło do aplikacji.</p>
                 </div>
 
                 <div id="auth-attempt-status" class="hidden rounded-xl border px-3 py-2 text-[10px] font-semibold text-left leading-relaxed" aria-live="polite"></div>
@@ -1044,7 +1044,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <i class="fas fa-rotate-left text-brand-red"></i>
                 <span class="hidden sm:inline">RESET</span>
             </button>
-            <button onclick="window.scythedApp.exportBackup()" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm" title="Pobierz zaszyfrowany backup Hasłem Master">
+            <button onclick="window.scythedApp.exportBackup()" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm" title="Pobierz zaszyfrowany backup hasłem do aplikacji">
                 <i class="fas fa-download text-brand-red"></i>
                 <span class="hidden sm:inline">POBIERZ BACKUP</span>
             </button>
@@ -1156,7 +1156,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
         <div id="vault-locked-state" class="hidden bg-white/80 dark:bg-brand-card/80 backdrop-blur-md border border-brand-red/30 rounded-2xl shadow-xl p-8 flex-col gap-3">
             <i class="fas fa-lock text-4xl text-brand-red"></i>
             <div class="font-orbitron font-bold text-sm md:text-base">APLIKACJA ZABLOKOWANA</div>
-            <div class="text-xs text-zinc-500 dark:text-gray-400 max-w-md">Konta i dane logowania są ukryte. Wpisz poprawne Hasło Master, aby odszyfrować bazę.</div>
+            <div class="text-xs text-zinc-500 dark:text-gray-400 max-w-md">Konta i dane logowania są ukryte. Wpisz poprawne Hasło do aplikacji, aby odszyfrować bazę.</div>
         </div>
 
         <div id="vault-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -1824,6 +1824,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             let saveRevision = 0;
             let username = 'USER';
             let privilegedNameGateRunning = false;
+            let privilegedNameVerifiedFor = '';
             let avatarUrl = 'assets/logos/avatar.png';
             let bannerUrl = null;
             let appBgUrl = null;
@@ -2693,7 +2694,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
             function requireVaultUnlocked(action = 'wykonania tej operacji') {
                 if (isVaultUnlocked()) return true;
-                showToast(`Aplikacja jest zablokowana. Odblokuj ją Hasłem Master przed próbą ${action}.`, 'error');
+                showToast(`Aplikacja jest zablokowana. Odblokuj ją hasłem do aplikacji przed próbą ${action}.`, 'error');
                 checkMasterPasswordStatus();
                 return false;
             }
@@ -2730,13 +2731,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 if (!isVaultUnlocked()) applyVaultLockUI(true);
 
                 if (!verifier) {
-                    subtitle.innerHTML = "Utwórz główne Hasło Master (minimum 8 znaków), aby lepiej zabezpieczyć aplikację.";
+                    subtitle.innerHTML = "Utwórz główne Hasło do aplikacji (minimum 8 znaków), aby lepiej zabezpieczyć aplikację.";
                     confirmContainer.classList.remove('hidden');
                     if (backupContainer) backupContainer.classList.remove('hidden');
                     if (backupStatus) {
                         backupStatus.innerText = pendingSetupBackupData
-                            ? 'Backup jest przygotowany. Po utworzeniu Hasła Master zostanie zapisany pod nowym kluczem.'
-                            : 'Możesz najpierw wczytać zaszyfrowany backup, a następnie ustawić nowe Hasło Master.';
+                            ? 'Backup jest przygotowany. Po utworzeniu hasła do aplikacji zostanie zapisany pod nowym kluczem.'
+                            : 'Możesz najpierw wczytać zaszyfrowany backup, a następnie ustawić nowe Hasło do aplikacji.';
                         if (pendingSetupBackupData) {
                             backupStatus.classList.remove('text-zinc-500', 'text-gray-500');
                             backupStatus.classList.add('text-green-500');
@@ -2746,7 +2747,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 } else {
                     if (backupContainer) backupContainer.classList.add('hidden');
                     if (backupStatus) backupStatus.innerText = '';
-                    subtitle.innerHTML = `Próbujesz zalogować się hasłem master (<span class="text-brand-red font-bold">@${escapeHtml(username)}</span>)`;
+                    subtitle.innerHTML = `Próbujesz zalogować się hasłem do aplikacji (<span class="text-brand-red font-bold">@${escapeHtml(username)}</span>)`;
                     confirmContainer.classList.add('hidden');
                     resetMasterPasswordStrengthUI('auth-password-strength');
                     submitBtn.innerHTML = '<i class="fas fa-lock-open"></i> ODBLOKUJ APLIKACJĘ';
@@ -2901,11 +2902,11 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         authLockoutTimer = null;
                         authLockoutUntil = 0;
                         if (button) button.disabled = false;
-                        setAuthAttemptStatus('Możesz spróbować ponownie. <strong>Wpisz Hasło Master.</strong>', 'warning');
+                        setAuthAttemptStatus('Możesz spróbować ponownie. <strong>Wpisz Hasło do aplikacji.</strong>', 'warning');
                         return;
                     }
                     if (button) button.disabled = true;
-                    setAuthAttemptStatus(`Hasło Master jest <strong>niepoprawne</strong>.<br>Ze względów bezpieczeństwa odczekaj jeszcze <strong>${left} s</strong> przed kolejną próbą.`, 'error');
+                    setAuthAttemptStatus(`Hasło do aplikacji jest <strong>niepoprawne</strong>.<br>Ze względów bezpieczeństwa odczekaj jeszcze <strong>${left} s</strong> przed kolejną próbą.`, 'error');
                 };
                 tick();
                 authLockoutTimer = setInterval(tick, 250);
@@ -2920,10 +2921,10 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         clearInterval(backupLockoutTimer);
                         backupLockoutTimer = null;
                         backupLockoutUntil = 0;
-                        setBackupStatus('Możesz ponownie spróbować odszyfrować backup. Wpisz Hasło Master użyte przy jego tworzeniu.', 'warning');
+                        setBackupStatus('Możesz ponownie spróbować odszyfrować backup. Wpisz Hasło do aplikacji użyte przy jego tworzeniu.', 'warning');
                         return;
                     }
-                    setBackupStatus(`Hasło Master backupu jest NIEPOPRAWNE. Ze względów bezpieczeństwa odczekaj jeszcze ${left} s przed kolejną próbą.`, 'error');
+                    setBackupStatus(`Hasło do aplikacji backupu jest NIEPOPRAWNE. Ze względów bezpieczeństwa odczekaj jeszcze ${left} s przed kolejną próbą.`, 'error');
                 };
                 tick();
                 backupLockoutTimer = setInterval(tick, 250);
@@ -2936,7 +2937,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 if (now < authLockoutUntil) {
                     const left = Math.ceil((authLockoutUntil - now) / 1000);
                     startAuthLockout(left);
-                    showToast(`Hasło Master jest niepoprawne. Odczekaj jeszcze ${left}s.`, 'error');
+                    showToast(`Hasło do aplikacji jest niepoprawne. Odczekaj jeszcze ${left}s.`, 'error');
                     return;
                 }
                 const passInput = document.getElementById('auth-master-password').value;
@@ -2949,12 +2950,12 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
                 if (!verifier) {
                     if (passInput.length < 8) {
-                        showToast("Hasło Master musi mieć co najmniej 8 znaków!", "error");
+                        showToast("Hasło do aplikacji musi mieć co najmniej 8 znaków!", "error");
                         authSubmitting = false; if (authButton) authButton.disabled = false;
                         return;
                     }
                     if (isWeakMasterPassword(passInput)) {
-                        showToast("Hasło Master jest zbyt proste. Unikaj powtórzeń i prostych sekwencji, np. abc123, 111222, 123456.", "error");
+                        showToast("Hasło do aplikacji jest zbyt proste. Unikaj powtórzeń i prostych sekwencji, np. abc123, 111222, 123456.", "error");
                         authSubmitting = false; if (authButton) authButton.disabled = false;
                         return;
                     }
@@ -2980,18 +2981,18 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                             pendingSetupBackupData = null;
                             await saveEncryptedState();
                             applyImportedBackupUI();
-                            showToast("Utworzono Hasło Master i wczytano backup!", "success");
+                            showToast("Utworzono Hasło do aplikacji i wczytano backup!", "success");
                         } catch (backupErr) {
                             void 0;
                             const reason = backupErr && backupErr.message ? backupErr.message : 'wystąpił nieznany błąd podczas przywracania danych.';
                             pendingSetupBackupData = null;
                             await saveEncryptedState();
-                            setBackupStatus('Backup NIE został zastosowany po utworzeniu Hasła Master - ' + reason, 'error');
-                            showToast("Utworzono Hasło Master, ale backup nie został zastosowany - " + reason, "error");
+                            setBackupStatus('Backup NIE został zastosowany po utworzeniu hasła do aplikacji - ' + reason, 'error');
+                            showToast("Utworzono Hasło do aplikacji, ale backup nie został zastosowany - " + reason, "error");
                         }
                     } else {
                         await saveEncryptedState();
-                        showToast("Pomyślnie utworzono Hasło Master!", "success");
+                        showToast("Pomyślnie utworzono Hasło do aplikacji!", "success");
                     }
                     failedAuthAttempts = 0;
                     authLockoutUntil = 0;
@@ -3030,7 +3031,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         const delay = Math.min(30000, 3000 * Math.pow(2, Math.min(failedAuthAttempts - 1, 4)));
                         startAuthLockout(Math.ceil(delay / 1000));
                         authSubmitting = false; if (authButton) authButton.disabled = true;
-                        showToast(`Hasło Master jest niepoprawne. Odczekaj ${Math.ceil(delay / 1000)}s przed kolejną próbą.`, "error");
+                        showToast(`Hasło do aplikacji jest niepoprawne. Odczekaj ${Math.ceil(delay / 1000)}s przed kolejną próbą.`, "error");
                         playSound('delete');
                     }
                 }
@@ -3078,7 +3079,9 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         await resetProfileNameToUser('Nie udało się zweryfikować hasła w Cloudflare. Nazwa profilu została ustawiona na USER.');
                         return;
                     }
+                    privilegedNameVerifiedFor = accountName;
                     showToast('Potwierdzono nazwę konta z odznaką.', 'success');
+                    await updateBadgesDisplay();
                 } finally {
                     privilegedNameGateRunning = false;
                 }
@@ -3319,11 +3322,11 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const confirmPass = document.getElementById('change-confirm-pass').value;
 
                 if (oldPass !== masterPassword) {
-                    updateChangeOldPasswordStatus('Obecne Hasło Master jest nieprawidłowe.', true);
-                    showToast("Obecne Hasło Master jest nieprawidłowe!", "error");
+                    updateChangeOldPasswordStatus('Obecne Hasło do aplikacji jest nieprawidłowe.', true);
+                    showToast("Obecne Hasło do aplikacji jest nieprawidłowe!", "error");
                     return;
                 }
-                updateChangeOldPasswordStatus('Obecne Hasło Master jest poprawne.', false);
+                updateChangeOldPasswordStatus('Obecne Hasło do aplikacji jest poprawne.', false);
                 if (newPass.length < 8) {
                     showToast("Nowe hasło musi mieć co najmniej 8 znaków!", "error");
                     return;
@@ -3361,7 +3364,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 localStorage.removeItem(STORAGE_KEYS.TRASH);
 
                 closeModal('modal-change-master');
-                showToast("Pomyślnie zmieniono Hasło Master!", "success");
+                showToast("Pomyślnie zmieniono Hasło do aplikacji!", "success");
                 playSound('save');
             }
 
@@ -4017,6 +4020,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
                 const badges = new Map((Array.isArray(profile.badges) ? profile.badges : [])
                     .map(item => [String(item.badge_key || ''), Number(item.badge_level) || 1]));
+                const hasPrivilegedBadge = ['owner', 'admin', 'moderator'].some(key => badges.has(key));
+                // Fail closed: nie pokazuj żadnych odznak ani znacznika weryfikacji,
+                // dopóki użytkownik nie potwierdzi hasłem nazwy konta uprzywilejowanego.
+                if (hasPrivilegedBadge && privilegedNameVerifiedFor !== u) {
+                    void enforcePrivilegedNamePassword();
+                    return;
+                }
                 const isOwner = badges.has('owner');
                 const isAdmin = badges.has('admin');
                 const isZasluzony = badges.has('zasluzony');
@@ -5689,8 +5699,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const status = document.getElementById('auth-backup-status');
                 if (!status) return;
                 status.textContent = message;
-                status.classList.remove('text-zinc-500', 'text-gray-500', 'text-green-500', 'text-red-500', 'text-yellow-500');
-                if (type === 'success') status.classList.add('text-green-500');
+                status.classList.remove('text-zinc-500', 'text-gray-500', 'text-green-500', 'text-red-500', 'text-yellow-500', 'font-bold', 'text-sm', 'rounded-xl', 'border', 'border-green-500/40', 'bg-green-500/10', 'p-3');
+                if (type === 'success') status.classList.add('text-green-500', 'font-bold', 'text-sm', 'rounded-xl', 'border', 'border-green-500/40', 'bg-green-500/10', 'p-3');
                 else if (type === 'error') status.classList.add('text-red-500');
                 else if (type === 'warning') status.classList.add('text-yellow-500');
                 else status.classList.add('text-zinc-500');
@@ -5743,9 +5753,9 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
                         if (!masterCryptoKey || masterPassword === null) {
                             if (!isInitialSetup) {
-                                const reason = 'aplikacja jest już skonfigurowana; najpierw odblokuj ją obecnym Hasłem Master.';
+                                const reason = 'aplikacja jest już skonfigurowana; najpierw odblokuj ją obecnym hasłem do aplikacji.';
                                 setBackupStatus('Backup NIE został wczytany - ' + reason, 'error');
-                                showToast('Backup NIE został wczytany - najpierw odblokuj aplikację obecnym Hasłem Master.', 'error');
+                                showToast('Backup NIE został wczytany - najpierw odblokuj aplikację obecnym hasłem do aplikacji.', 'error');
                                 playSound('delete');
                                 return;
                             }
@@ -5754,25 +5764,25 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         if (Date.now() < backupLockoutUntil) {
                             const left = Math.ceil((backupLockoutUntil - Date.now()) / 1000);
                             startBackupLockout(left);
-                            showToast(`Hasło Master backupu było niepoprawne. Odczekaj jeszcze ${left}s.`, 'error');
+                            showToast(`Hasło do aplikacji backupu było niepoprawne. Odczekaj jeszcze ${left}s.`, 'error');
                             return;
                         }
 
                         const backupPassword = await appPrompt(
-                            "Podaj Hasło Master użyte w momencie tworzenia tego backupu:",
+                            "Podaj Hasło do aplikacji użyte w momencie tworzenia tego backupu:",
                             '',
-                            { title: 'HASŁO MASTER BACKUPU', inputType: 'password', icon: 'fa-lock', confirmText: 'ODSZYFRUJ' }
+                            { title: 'HASŁO DO APLIKACJI BACKUPU', inputType: 'password', icon: 'fa-lock', confirmText: 'ODSZYFRUJ' }
                         );
 
                         if (backupPassword === null) {
-                            setBackupStatus('Backup NIE został wczytany - anulowano podawanie Hasła Master backupu.', 'warning');
-                            showToast("Wczytywanie backupu anulowane - nie podano Hasła Master backupu.", "info");
+                            setBackupStatus('Backup NIE został wczytany - anulowano podawanie hasła do aplikacji backupu.', 'warning');
+                            showToast("Wczytywanie backupu anulowane - nie podano hasła do aplikacji backupu.", "info");
                             return;
                         }
 
                         if (!backupPassword) {
-                            setBackupStatus('Backup NIE został wczytany - Hasło Master backupu było puste.', 'error');
-                            showToast("Backup NIE został wczytany - Hasło Master backupu nie może być puste!", "error");
+                            setBackupStatus('Backup NIE został wczytany - Hasło do aplikacji backupu było puste.', 'error');
+                            showToast("Backup NIE został wczytany - Hasło do aplikacji backupu nie może być puste!", "error");
                             playSound('delete');
                             return;
                         }
@@ -5801,8 +5811,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                             failedBackupAttempts++;
                             const delay = Math.min(30000, 3000 * Math.pow(2, Math.min(failedBackupAttempts - 1, 4)));
                             startBackupLockout(Math.ceil(delay / 1000));
-                            setBackupStatus(`Backup NIE został wczytany. Podane Hasło Master jest NIEPOPRAWNE. Odczekaj jeszcze ${Math.ceil(delay / 1000)} s przed kolejną próbą.`, 'error');
-                            showToast(`Hasło Master backupu jest niepoprawne. Odczekaj ${Math.ceil(delay / 1000)}s.`, "error");
+                            setBackupStatus(`Backup NIE został wczytany. Podane Hasło do aplikacji jest NIEPOPRAWNE. Odczekaj jeszcze ${Math.ceil(delay / 1000)} s przed kolejną próbą.`, 'error');
+                            showToast(`Hasło do aplikacji backupu jest niepoprawne. Odczekaj ${Math.ceil(delay / 1000)}s.`, "error");
                             playSound('delete');
                             return;
                         }
@@ -5829,13 +5839,15 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                         }
 
                         if (isInitialSetup) {
-                            if (await appConfirm(`Wczytać backup z dnia ${importedData.timestamp ? importedData.timestamp.slice(0,10) : 'nieznanego'} i użyć go podczas tworzenia nowego Hasła Master?`, { title: 'IMPORT BACKUPU', icon: 'fa-database', confirmText: 'WCZYTAJ' })) {
+                            if (await appConfirm(`Wczytać backup z dnia ${importedData.timestamp ? importedData.timestamp.slice(0,10) : 'nieznanego'} i użyć go podczas tworzenia nowego hasła do aplikacji?`, { title: 'IMPORT BACKUPU', icon: 'fa-database', confirmText: 'WCZYTAJ' })) {
                                 pendingSetupBackupData = importedData;
+                                const backupPicker = document.getElementById('auth-backup-file-input');
+                                if (backupPicker) { const uploadButton = backupPicker.previousElementSibling; if (uploadButton) uploadButton.classList.add('hidden'); }
                                 failedBackupAttempts = 0;
                                 backupLockoutUntil = 0;
                                 if (backupLockoutTimer) { clearInterval(backupLockoutTimer); backupLockoutTimer = null; }
-                                setBackupStatus('Backup został poprawnie odszyfrowany i wczytany. Teraz ustaw nowe Hasło Master - dane zostaną zapisane pod nowym hasłem.', 'success');
-                                showToast("Backup poprawnie wczytany. Ustaw teraz nowe Hasło Master.", "success");
+                                setBackupStatus('Backup został poprawnie odszyfrowany i wczytany. Teraz ustaw nowe Hasło do aplikacji - dane zostaną zapisane pod nowym hasłem.', 'success');
+                                showToast("Backup poprawnie wczytany. Ustaw teraz nowe Hasło do aplikacji.", "success");
                                 playSound('save');
                             } else {
                                 setBackupStatus('Backup NIE został wczytany - anulowano potwierdzenie importu.', 'warning');
@@ -5896,8 +5908,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const settingsPanel = document.getElementById('general-admin-open-panel-wrap');
                 if (settingsPanel) settingsPanel.classList.toggle('hidden', !canShowPanel);
                 if (panelButton) {
-                    panelButton.classList.add('hidden');
-                    panelButton.classList.remove('flex');
+                    panelButton.classList.toggle('hidden', !canShowPanel);
+                    panelButton.classList.toggle('flex', canShowPanel);
                 }
             }
             async function adminButtonClick() {
@@ -5913,9 +5925,17 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             async function adminApi(path, payload, method = 'POST') {
                 const headers = { 'Content-Type': 'application/json' };
                 if (scythedAdminSession) headers.Authorization = `Bearer ${scythedAdminSession}`;
+                let requestPayload = payload || {};
+                if (method !== 'GET' && path.startsWith('/api/admin/')) {
+                    const accountName = String(scythedAccountUsername || username || '').trim().replace(/^@/, '');
+                    if (!scythedAdminSession || !accountName) throw new Error('Sesja wygasła. Zaloguj się ponownie do profilu.');
+                    const reauthPassword = await appPrompt(`Potwierdź zmianę w bazie D1 hasłem do konta „${accountName}”. Bez poprawnego hasła zmiana nie zostanie wykonana.`, '', { title: 'POTWIERDŹ ZMIANĘ W D1', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'POTWIERDŹ' });
+                    if (reauthPassword === null || !String(reauthPassword)) throw new Error('Anulowano zmianę — nie potwierdzono hasłem konta.');
+                    requestPayload = { ...requestPayload, _reauthPassword: String(reauthPassword) };
+                }
                 const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 15000);
                 try {
-                    const response = await fetch(`${SCYTHED_API_BASE}${path}`, { method, mode: 'cors', credentials: 'omit', cache: 'no-store', headers, ...(method === 'GET' ? {} : { body: JSON.stringify(payload || {}) }), signal: controller.signal });
+                    const response = await fetch(`${SCYTHED_API_BASE}${path}`, { method, mode: 'cors', credentials: 'omit', cache: 'no-store', headers, ...(method === 'GET' ? {} : { body: JSON.stringify(requestPayload) }), signal: controller.signal });
                     return { response, data: await response.json().catch(() => ({})) };
                 } finally { clearTimeout(timer); }
             }
