@@ -1267,28 +1267,16 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
             </div>
 
             <div id="general-admin-open-panel-wrap" class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i>Panel Administracyjny</span><button type="button" onclick="window.scythedApp.adminButtonClick()" class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition">Otwórz panel</button></div>
-            <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-3">
-                <h4 class="text-xs font-bold text-zinc-700 dark:text-gray-300"><i class="fas fa-key text-brand-red mr-1"></i>ZMIEŃ HASŁO</h4>
-                <p class="text-[10px] text-zinc-500">Wybierz rodzaj hasła, które chcesz zmienić.</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start">
-                    <div class="p-3 rounded-xl bg-white dark:bg-black/30 border border-zinc-200 dark:border-zinc-700 space-y-2.5 min-w-0">
-                        <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200"><i class="fas fa-lock text-brand-red mr-1"></i>Hasło do aplikacji</h5>
-                        <p class="text-[10px] text-zinc-500">Zmień hasło używane do odblokowania aplikacji.</p>
-                        <button id="settings-change-app-password" type="button" onclick="window.scythedApp.openChangeMasterModal()" class="admin-master-action w-full px-3 py-2 text-xs font-bold rounded-xl border transition">Zmień hasło do aplikacji</button>
-                    </div>
-                    <div class="p-3 rounded-xl bg-white dark:bg-black/30 border border-zinc-200 dark:border-zinc-700 space-y-2.5 min-w-0">
-                        <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200"><i class="fas fa-user-shield text-brand-red mr-1"></i>Hasło do nazwy</h5>
-                        <p class="text-[10px] text-zinc-500">Zmień hasło przypisane do zweryfikowanej nazwy konta.</p>
-                        <button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled class="w-full px-3 py-2 text-xs font-bold rounded-xl border border-zinc-300 dark:border-zinc-700 opacity-50 cursor-not-allowed transition">Zmień hasło do nazwy</button>
-                        <p id="name-password-availability" class="text-[10px] text-zinc-500">Sprawdzanie statusu weryfikacji konta…</p>
-                        <div id="name-password-settings-form" class="hidden space-y-2 border-t border-zinc-200 dark:border-zinc-700 pt-3">
-                            <input id="name-password-old" type="password" autocomplete="current-password" placeholder="Obecne hasło do nazwy" class="w-full bg-zinc-50 dark:bg-black/60 border border-zinc-300 dark:border-zinc-800 rounded-lg px-3 py-2 text-xs">
-                            <input id="name-password-new" type="password" autocomplete="new-password" placeholder="Nowe hasło (min. 12 znaków)" class="w-full bg-zinc-50 dark:bg-black/60 border border-zinc-300 dark:border-zinc-800 rounded-lg px-3 py-2 text-xs">
-                            <input id="name-password-confirm" type="password" autocomplete="new-password" placeholder="Powtórz nowe hasło" class="w-full bg-zinc-50 dark:bg-black/60 border border-zinc-300 dark:border-zinc-800 rounded-lg px-3 py-2 text-xs">
-                            <button type="button" onclick="window.scythedApp.changeNamePassword()" class="w-full px-3 py-2 rounded-lg bg-brand-red text-white text-xs font-bold">ZAPISZ NOWE HASŁO</button>
-                            <p id="name-password-status" class="hidden text-[10px]"></p>
-                        </div>
-                    </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch">
+                <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
+                    <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200"><i class="fas fa-lock text-brand-red mr-1"></i>Hasło do aplikacji</h5>
+                    <p class="text-[10px] text-zinc-500">Zmień hasło używane do odblokowania aplikacji.</p>
+                    <button id="settings-change-app-password" type="button" onclick="window.scythedApp.openChangeMasterModal()" class="admin-master-action w-full px-3 py-2 text-xs font-bold rounded-xl border transition">Zmień hasło do aplikacji</button>
+                </div>
+                <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
+                    <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200"><i class="fas fa-user-shield text-brand-red mr-1"></i>Hasło do nazwy</h5>
+                    <p class="text-[10px] text-zinc-500">Zmień hasło przypisane do nazwy konta.</p>
+                    <button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled title="Sprawdzanie statusu weryfikacji konta…" class="w-full px-3 py-2 text-xs font-bold rounded-xl border border-zinc-300 dark:border-zinc-700 opacity-50 cursor-not-allowed transition">Zmień hasło do nazwy</button>
                 </div>
             </div>
 
@@ -1525,6 +1513,34 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     <button type="submit" class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAPISZ HASŁO</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div id="modal-change-name-password" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4">
+        <div class="bg-white/95 dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-md w-full p-6 space-y-6 glow-effect backdrop-blur-md shadow-2xl">
+            <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
+                <h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white flex items-center gap-2"><i class="fas fa-user-shield text-brand-red"></i> ZMIEŃ HASŁO DO NAZWY</h3>
+                <button type="button" onclick="window.scythedApp.closeModal('modal-change-name-password')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Obecne hasło do nazwy</label>
+                    <div class="relative"><input id="name-password-old" type="password" required autocomplete="current-password" placeholder="Wpisz obecne hasło do nazwy..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner"><button type="button" onclick="window.scythedApp.togglePasswordVisibility('name-password-old')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" aria-label="Pokaż lub ukryj obecne hasło do nazwy"><i class="fas fa-eye"></i></button></div>
+                </div>
+                <div>
+                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nowe hasło do nazwy</label>
+                    <div class="relative"><input id="name-password-new" type="password" required autocomplete="new-password" placeholder="Wpisz nowe hasło (min. 12 znaków)..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner"><button type="button" onclick="window.scythedApp.togglePasswordVisibility('name-password-new')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" aria-label="Pokaż lub ukryj nowe hasło do nazwy"><i class="fas fa-eye"></i></button></div>
+                </div>
+                <div>
+                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Potwierdź nowe hasło do nazwy</label>
+                    <div class="relative"><input id="name-password-confirm" type="password" required autocomplete="new-password" placeholder="Wpisz ponownie nowe hasło..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner"><button type="button" onclick="window.scythedApp.togglePasswordVisibility('name-password-confirm')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" aria-label="Pokaż lub ukryj potwierdzenie hasła do nazwy"><i class="fas fa-eye"></i></button></div>
+                </div>
+                <p id="name-password-status" class="hidden text-[10px] font-semibold"></p>
+                <div class="pt-2 flex gap-3">
+                    <button type="button" onclick="window.scythedApp.closeModal('modal-change-name-password')" class="flex-1 py-3 bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-900 text-zinc-700 dark:text-gray-300 font-bold rounded-xl border border-zinc-300 dark:border-zinc-800 text-xs transition">ANULUJ</button>
+                    <button type="button" onclick="window.scythedApp.changeNamePassword()" class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAPISZ HASŁO</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -3286,12 +3302,9 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 
             async function refreshNamePasswordSettingsAvailability() {
                 const button = document.getElementById('settings-change-name-password');
-                const message = document.getElementById('name-password-availability');
-                const form = document.getElementById('name-password-settings-form');
-                if (button) { button.disabled = true; button.classList.add('opacity-50', 'cursor-not-allowed'); }
-                if (form) form.classList.add('hidden');
+                if (button) { button.disabled = true; button.classList.add('opacity-50', 'cursor-not-allowed'); button.title = 'Sprawdzanie statusu weryfikacji konta…'; }
                 if (!username || badgeAccountKey(username) === 'user') {
-                    if (message) message.textContent = 'Zmiana hasła do nazwy jest zablokowana — konto nie ma zweryfikowanej nazwy.';
+                    if (button) button.title = 'Zmiana zablokowana — konto nie ma zweryfikowanej nazwy.';
                     return;
                 }
                 try {
@@ -3299,18 +3312,24 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     if (!response.ok) throw new Error('verification_status_unavailable');
                     const profile = await response.json();
                     const verified = profile.verified === true;
-                    if (button) { button.disabled = !verified; button.classList.toggle('opacity-50', !verified); button.classList.toggle('cursor-not-allowed', !verified); }
-                    if (message) message.textContent = verified ? 'Konto zweryfikowane — możesz zmienić hasło do nazwy.' : 'Zmiana hasła do nazwy jest zablokowana, ponieważ konto nie jest zweryfikowane.';
+                    if (button) {
+                        button.disabled = !verified;
+                        button.classList.toggle('opacity-50', !verified);
+                        button.classList.toggle('cursor-not-allowed', !verified);
+                        button.title = verified ? 'Zmień hasło przypisane do zweryfikowanej nazwy.' : 'Zmiana zablokowana — konto nie jest zweryfikowane.';
+                    }
                 } catch (_) {
-                    if (message) message.textContent = 'Nie udało się sprawdzić weryfikacji. Zmiana hasła do nazwy pozostaje zablokowana.';
+                    if (button) button.title = 'Nie udało się sprawdzić weryfikacji — zmiana hasła pozostaje zablokowana.';
                 }
             }
 
             function toggleNamePasswordSettings() {
                 const button = document.getElementById('settings-change-name-password');
-                const form = document.getElementById('name-password-settings-form');
-                if (!button || button.disabled || !form) return;
-                form.classList.toggle('hidden');
+                if (!button || button.disabled) return;
+                ['name-password-old','name-password-new','name-password-confirm'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+                const status = document.getElementById('name-password-status');
+                if (status) { status.textContent = ''; status.className = 'hidden text-[10px] font-semibold'; }
+                document.getElementById('modal-change-name-password')?.classList.remove('hidden');
             }
 
             function openSettingsModal() {
@@ -3333,7 +3352,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     const {response,data} = await scythedApi('/api/account/change-password', {username: badgeAccountKey(username), oldPassword, newPassword});
                     if (!response.ok || data.ok !== true) throw new Error(data.error === 'verification_failed' ? 'Obecne hasło jest nieprawidłowe.' : (data.message || 'Nie udało się zmienić hasła.'));
                     ['name-password-old','name-password-new','name-password-confirm'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-                    showStatus('Hasło do nazwy zostało zmienione.'); showToast('Zmieniono hasło do nazwy konta.', 'success');
+                    showStatus('Hasło do nazwy zostało zmienione.'); showToast('Zmieniono hasło do nazwy konta.', 'success'); closeModal('modal-change-name-password');
                 } catch(error) { showStatus(error.message || 'Błąd zmiany hasła.', true); }
             }
 
