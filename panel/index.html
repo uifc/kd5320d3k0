@@ -1144,6 +1144,73 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
 #modal-settings #security-settings-category .admin-access-logo { flex-shrink:0; }
 </style>
 
+
+<style id="scythed-v14-visual-fixes">
+/* Ikony zmiany hasła zawsze dziedziczą kolor tekstu — także po zmianie motywu. */
+#modal-settings .settings-password-action,
+#modal-settings .settings-password-action i,
+#modal-settings .settings-password-action span {
+  color: inherit !important;
+}
+#modal-settings .settings-password-action {
+  color: var(--settings-control-text, #27272a) !important;
+  background: rgb(228 228 231) !important;
+  border-color: rgb(212 212 216) !important;
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+}
+html.dark #modal-settings .settings-password-action {
+  color: #f4f4f5 !important; background: rgb(39 39 42) !important; border-color: rgb(63 63 70) !important;
+}
+#modal-settings .settings-password-action i {
+  color: var(--brand-red, #ff0033) !important;
+  transition: color .2s ease;
+}
+#modal-settings h4 { text-transform: uppercase !important; }
+#scythed-admin-modal #admin-create-user-form button[type="submit"],
+#scythed-admin-modal button[onclick*="adminLogout"] {
+  background: var(--brand-red, #ef4444) !important;
+  color: var(--brand-contrast-text, #fff) !important;
+  border-color: var(--brand-red, #ef4444) !important;
+}
+#scythed-admin-modal button[onclick*="adminLogout"]:hover,
+#scythed-admin-modal #admin-create-user-form button[type="submit"]:hover {
+  background: var(--brand-hoverRed, var(--brand-red, #ef4444)) !important;
+}
+#scythed-admin-modal .admin-bottom-close {
+  background: rgb(228 228 231); border: 1px solid rgb(212 212 216); font-size: .75rem; font-weight: 700;
+}
+html.dark #scythed-admin-modal .admin-bottom-close { background: rgb(39 39 42); border-color: rgb(63 63 70); }
+#scythed-admin-modal header > button { width: 2.25rem; height: 2.25rem; display:inline-flex; align-items:center; justify-content:center; border-radius:.5rem; border:1px solid rgb(212 212 216); background:rgb(244 244 245); }
+html.dark #scythed-admin-modal header > button { border-color:rgb(63 63 70); background:rgb(39 39 42); }
+#scythed-admin-modal header > button i { font-size:1rem !important; }
+</style>
+
+<style id="scythed-v15-primary-color-icons">
+/* Ikony przycisków zmiany hasła korzystają z głównego koloru aplikacji. */
+#modal-settings .settings-password-action i {
+  color: var(--brand-red, #ff0033) !important;
+  transition: color .2s ease;
+}
+</style>
+
+<style id="scythed-v17-noninteractive-logo">
+/* Logo SCYTHED na ekranie logowania/ustawiania hasła jest wyłącznie animacją, nie przyciskiem. */
+#auth-overlay .brand-logo { pointer-events: none !important; cursor: default !important; }
+#auth-overlay .brand-logo:hover { transform: none !important; }
+#auth-overlay .brand-logo, #auth-overlay .brand-logo * { user-select: none !important; }
+</style>
+<script id="scythed-v17-disable-auth-logo-click-sound">
+(function () {
+  document.addEventListener('click', function (event) {
+    const logo = event.target && event.target.closest ? event.target.closest('#auth-overlay .brand-logo') : null;
+    if (!logo) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+  }, true);
+})();
+</script>
+
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-zinc-100 dark:bg-black text-zinc-900 dark:text-white selection:bg-brand-red selection:text-white pb-24 md:pb-28 transition-colors duration-300 relative overflow-x-hidden" style="isolation:isolate">
 
@@ -1500,7 +1567,7 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
 
             <div class="space-y-2">
                 <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                    <i class="fas fa-paint-roller mr-1"></i> Wygląd & Personalizacja Tła
+                    <i class="fas fa-paint-roller mr-1"></i> PERSONALIZACJA
                 </h4>
 
                 <div class="grid grid-cols-2 gap-2">
@@ -1591,9 +1658,9 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
                     </div>
 
                     <div class="flex items-center justify-between order-2 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                        <span class="text-xs font-semibold">Rozmiar Czcionki</span>
+                        <span class="text-xs font-semibold">Wielkość</span>
                         <div class="flex items-center gap-2">
-                            <input type="range" id="ui-scale-slider" min="1" max="3" step="1" value="2" onchange="window.scythedApp.updateUIScale(this.value)" class="w-16 accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
+                            <input type="range" id="ui-scale-slider" min="1" max="3" step="1" value="2" oninput="window.scythedApp.updateUIScale(this.value)" class="w-16 accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
                             <span id="scale-label-text" class="text-[10px] font-mono font-bold text-brand-red w-12 text-center">ŚREDNI</span>
                         </div>
                     </div>
@@ -1626,17 +1693,17 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
 
             <div class="space-y-2">
                 <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                    <i class="fas fa-lock mr-1"></i> Automatyczne blokowanie
+                    <i class="fas fa-lock mr-1"></i> BLOKOWANIE
                 </h4>
                 <div class="flex items-center justify-between gap-4 p-4 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
                     <div class="flex items-center gap-2 min-w-0">
                         <i class="fas fa-bell text-xs shrink-0" style="color: var(--brand-red, #ff0033);" aria-hidden="true"></i>
-                        <div class="flex flex-col min-w-0"><span class="text-sm font-bold">Automatyczna blokada</span></div>
+                        <div class="flex flex-col min-w-0"><span class="text-sm font-bold">AUTOMATYCZNA BLOKADA</span></div>
                     </div>
                     <select id="auto-lock-mode" onchange="window.scythedApp.setAutoLockMode(this.value)" class="w-auto max-w-[60%] shrink-0 px-3 py-2 bg-white dark:bg-zinc-900 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-brand-red">
-                        <option value="hidden">Po opuszczeniu strony</option>
-                        <option value="timed">Po 10 minutach</option>
-                        <option value="off">Wyłączona</option>
+                        <option value="hidden">PO OPUSZCZENIU STRONY</option>
+                        <option value="timed">PO 10 MINUTACH</option>
+                        <option value="off">WYŁĄCZONA</option>
                     </select>
                 </div>
             </div>
@@ -1746,11 +1813,13 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
                 </div>
                 <div>
                     <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nowe hasło do nazwy</label>
-                    <div class="relative"><input id="name-password-new" type="password" required autocomplete="new-password" placeholder="Wpisz nowe hasło (min. 12 znaków)..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner"><button type="button" onclick="window.scythedApp.togglePasswordVisibility('name-password-new')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" aria-label="Pokaż lub ukryj nowe hasło do nazwy"><i class="fas fa-eye"></i></button></div>
+                    <div class="relative"><input id="name-password-new" type="password" required minlength="12" autocomplete="new-password" placeholder="Wpisz nowe hasło (min. 12 znaków)..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner"><button type="button" onclick="window.scythedApp.togglePasswordVisibility('name-password-new')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" aria-label="Pokaż lub ukryj nowe hasło do nazwy"><i class="fas fa-eye"></i></button></div>
+                    <p id="name-password-strength" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500" aria-live="polite"></p>
                 </div>
                 <div>
                     <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Potwierdź nowe hasło do nazwy</label>
                     <div class="relative"><input id="name-password-confirm" type="password" required autocomplete="new-password" placeholder="Wpisz ponownie nowe hasło..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner"><button type="button" onclick="window.scythedApp.togglePasswordVisibility('name-password-confirm')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" aria-label="Pokaż lub ukryj potwierdzenie hasła do nazwy"><i class="fas fa-eye"></i></button></div>
+                    <p id="name-password-confirm-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left" aria-live="polite"></p>
                 </div>
                 <p id="name-password-status" class="hidden text-[10px] font-semibold"></p>
                 <div class="pt-2 flex gap-3">
@@ -2633,6 +2702,14 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
                 if (changeConfirmInput) {
                     changeConfirmInput.addEventListener('input', updateChangeConfirmStatus);
                 }
+
+                const namePasswordNewInput = document.getElementById('name-password-new');
+                if (namePasswordNewInput) namePasswordNewInput.addEventListener('input', function () {
+                    updateNamePasswordStrengthUI(this.value);
+                    updateNamePasswordConfirmStatus();
+                });
+                const namePasswordConfirmInput = document.getElementById('name-password-confirm');
+                if (namePasswordConfirmInput) namePasswordConfirmInput.addEventListener('input', updateNamePasswordConfirmStatus);
             });
 
             function isAllowedImageFile(file) {
@@ -3546,6 +3623,7 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
                 ['name-password-old','name-password-new','name-password-confirm'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
                 const status = document.getElementById('name-password-status');
                 if (status) { status.textContent = ''; status.className = 'hidden text-[10px] font-semibold'; }
+                ['name-password-strength','name-password-confirm-status'].forEach(id => { const el = document.getElementById(id); if (el) { el.textContent = ''; el.className = 'hidden mt-1.5 px-1 text-[10px] font-semibold text-left'; } });
                 document.getElementById('modal-change-name-password')?.classList.remove('hidden');
             }
 
@@ -3557,6 +3635,29 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
                 playSound('click');
             }
 
+            function updateNamePasswordStrengthUI(password) {
+                const target = document.getElementById('name-password-strength');
+                if (!target) return;
+                target.classList.remove('text-green-500');
+                target.classList.add('text-red-500');
+                if (!password) { target.textContent = ''; target.classList.add('hidden'); return; }
+                if (password.length < 12) target.textContent = `Hasło jest za krótkie — minimum 12 znaków (brakuje ${12 - password.length}).`;
+                else if (typeof isWeakMasterPassword === 'function' && isWeakMasterPassword(password)) target.textContent = 'Hasło może być zbyt słabe — unikaj prostych sekwencji i powtórzeń.';
+                else { target.textContent = 'Hasło spełnia wymaganie minimum 12 znaków.'; target.classList.remove('text-red-500'); target.classList.add('text-green-500'); }
+                target.classList.remove('hidden');
+            }
+
+            function updateNamePasswordConfirmStatus() {
+                const input = document.getElementById('name-password-confirm');
+                const original = document.getElementById('name-password-new');
+                const target = document.getElementById('name-password-confirm-status');
+                if (!input || !original || !target) return;
+                if (!input.value) { target.textContent = ''; target.className = 'hidden mt-1.5 px-1 text-[10px] font-semibold text-left'; return; }
+                const matches = input.value === original.value;
+                target.textContent = matches ? 'Hasła są zgodne.' : 'Hasła nie są zgodne.';
+                target.className = `mt-1.5 px-1 text-[10px] font-semibold text-left ${matches ? 'text-green-500' : 'text-red-500'}`;
+            }
+
             async function changeNamePassword() {
                 const oldPassword = document.getElementById('name-password-old')?.value || '';
                 const newPassword = document.getElementById('name-password-new')?.value || '';
@@ -3564,7 +3665,9 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
                 const status = document.getElementById('name-password-status');
                 const showStatus = (message, error=false) => { if(status){ status.textContent=message; status.className=`text-[10px] ${error?'text-red-500':'text-green-500'}`; } };
                 if (!username || badgeAccountKey(username) === 'user') return showStatus('Najpierw ustaw nazwę zweryfikowanego konta.', true);
-                if (!oldPassword || newPassword.length < 12 || newPassword !== confirmPassword) return showStatus('Wpisz obecne hasło, nowe (min. 12 znaków) i zgodne potwierdzenie.', true);
+                if (!oldPassword) return showStatus('Wpisz obecne hasło do nazwy.', true);
+                if (newPassword.length < 12) { updateNamePasswordStrengthUI(newPassword); return showStatus(`Nowe hasło jest za krótkie — brakuje ${12 - newPassword.length} znaków.`, true); }
+                if (newPassword !== confirmPassword) { updateNamePasswordConfirmStatus(); return showStatus('Potwierdzenie hasła nie jest zgodne.', true); }
                 try {
                     const {response,data} = await scythedApi('/api/account/change-password', {username: badgeAccountKey(username), oldPassword, newPassword});
                     if (!response.ok || data.ok !== true) throw new Error(data.error === 'verification_failed' ? 'Obecne hasło jest nieprawidłowe.' : (data.message || 'Nie udało się zmienić hasła.'));
@@ -4482,6 +4585,20 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
                 if (scale == 1) { html.classList.add('size-small'); if (label) label.innerText = 'MAŁY'; }
                 else if (scale == 3) { html.classList.add('size-large'); if (label) label.innerText = 'DUŻY'; }
                 else { html.classList.add('size-medium'); if (label) label.innerText = 'NORMALNY'; }
+                // Font scaling changes layout metrics; refresh pointer-relative canvas effects
+                // so they do not remain offset until the next mouse movement.
+                requestAnimationFrame(() => {
+                    window.dispatchEvent(new Event('resize'));
+                    const card = document.querySelector('#app-card, .app-card, #main-card');
+                    if (card) {
+                        const rect = card.getBoundingClientRect();
+                        const canvas = card.querySelector('canvas');
+                        if (canvas) {
+                            canvas.width = Math.max(1, Math.round(rect.width * (window.devicePixelRatio || 1)));
+                            canvas.height = Math.max(1, Math.round(rect.height * (window.devicePixelRatio || 1)));
+                        }
+                    }
+                });
             }
 
             function badgeAccountKey(accountName) {
@@ -6401,7 +6518,7 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
                     const del = canDeleteTarget ? `<button onclick="window.scythedApp.adminDeleteUser('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">USUŃ KONTO</button>` : '';
                     const badgeOptions = orderedBadges.map(b => `<option value="${escapeHtml(b.badge)}">${escapeHtml(badgeLabel(b))}</option>`).join('');
                     const revoke = badgeOptions && !isOwnerProfile && canManageTarget ? `<div class="flex flex-wrap gap-1 mt-1"><select id="revoke-badge-${escapeHtml(name)}" class="admin-badge-select max-w-[170px] rounded border px-2 py-1 text-xs" aria-label="Wybierz odznakę do odebrania">${badgeOptions}</select><button onclick="window.scythedApp.adminRevokeBadge('${escapeHtml(name)}', document.getElementById('revoke-badge-${escapeHtml(name)}').value)" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ODBIERZ</button></div>` : (isOwnerProfile ? '<span class="text-xs text-zinc-500">Profil właściciela — dostępna tylko zmiana hasła.</span>' : (canManageTarget ? '<span class="text-zinc-500">Brak odznak</span>' : '<span class="text-xs text-zinc-500">Odznaki innych kont może edytować wyłącznie właściciel.</span>'));
-                    return `<tr class="admin-user-row ${isOwnerProfile ? 'admin-owner-row' : ''} border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(isOwnerProfile ? 'Właściciel' : name)}${isOwnerProfile ? '<div class="text-[10px] font-normal text-zinc-500">Właściciel projektu</div>' : ''}</td><td class="p-2">${status}</td><td class="p-2 min-w-[140px]"><div class="flex flex-wrap items-center gap-1.5">${badges}</div></td><td class="p-2"><div class="flex flex-col items-start gap-1.5">${isOwnerProfile ? (scythedIsOwner ? passwordButton : '<span class="text-xs text-zinc-500">Zmiana hasła właściciela dostępna wyłącznie właścicielowi.</span>') : `<div class="flex flex-wrap gap-1.5">${passwordButton}${del}</div>${revoke}`}</div></td></tr>`;
+                    return `<tr class="admin-user-row ${isOwnerProfile ? 'admin-owner-row' : ''} border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(isOwnerProfile ? 'Szymon cn!!!!!!' : name)}${isOwnerProfile ? '<div class="text-[10px] font-normal text-zinc-500">Właściciel projektu</div>' : ''}</td><td class="p-2">${status}</td><td class="p-2 min-w-[140px]"><div class="flex flex-wrap items-center gap-1.5">${badges}</div></td><td class="p-2"><div class="flex flex-col items-start gap-1.5">${isOwnerProfile ? (scythedIsOwner ? passwordButton : '<span class="text-xs text-zinc-500">Zmiana hasła właściciela dostępna wyłącznie właścicielowi.</span>') : `<div class="flex flex-wrap gap-1.5">${passwordButton}${del}</div>${revoke}`}</div></td></tr>`;
                 }).join('');
             }
             async function adminRefreshUsers() {
@@ -6615,6 +6732,7 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
           <div class="space-y-2"><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw" autocomplete="off" autocorrect="off" spellcheck="false"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
           <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="moderator">Moderator</option><option value="zasluzony">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
+          <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button type="button" onclick="window.scythedApp.closeAdminPanel()" class="admin-bottom-close px-4 py-2 rounded-lg text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"><i class="fas fa-times mr-2" aria-hidden="true"></i>ZAMKNIJ PANEL ADMINA</button></div>
         </div>
       </section>
     </div>
