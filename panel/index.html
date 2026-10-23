@@ -1177,12 +1177,18 @@ html.dark #modal-settings .settings-password-action {
   background: var(--brand-hoverRed, var(--brand-red, #ef4444)) !important;
 }
 #scythed-admin-modal .admin-bottom-close {
-  background: rgb(228 228 231); border: 1px solid rgb(212 212 216); font-size: .75rem; font-weight: 700;
+  background: var(--brand-red, #ef4444) !important; color: var(--brand-contrast-text, #fff) !important; border-color: var(--brand-red, #ef4444) !important;
 }
-html.dark #scythed-admin-modal .admin-bottom-close { background: rgb(39 39 42); border-color: rgb(63 63 70); }
-#scythed-admin-modal header > button { width: 2.25rem; height: 2.25rem; display:inline-flex; align-items:center; justify-content:center; border-radius:.5rem; border:1px solid rgb(212 212 216); background:rgb(244 244 245); }
-html.dark #scythed-admin-modal header > button { border-color:rgb(63 63 70); background:rgb(39 39 42); }
-#scythed-admin-modal header > button i { font-size:1rem !important; }
+#scythed-admin-modal button[onclick*="adminLogout"] {
+  background-color: var(--brand-red, #ef4444) !important; color: var(--brand-contrast-text, #fff) !important; border-color: var(--brand-red, #ef4444) !important;
+}
+#scythed-admin-modal button[onclick*="adminLogout"]:hover,
+#scythed-admin-modal #admin-create-user-form button[type="submit"]:hover {
+  background-color: var(--brand-hoverRed, var(--brand-red, #ef4444)) !important;
+}
+#scythed-admin-modal header > button { width: auto; height: auto; display:inline; align-items:initial; justify-content:initial; border:0; border-radius:0; background:transparent; }
+html.dark #scythed-admin-modal header > button { border:0; background:transparent; }
+#scythed-admin-modal header > button i { font-size:1.125rem !important; }
 </style>
 
 <style id="scythed-v15-primary-color-icons">
@@ -6747,7 +6753,7 @@ html body #modal-settings button#settings-change-name-password > i {
 
     <div id="scythed-admin-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm p-3 md:p-6 flex items-center justify-center">
       <section class="w-full max-w-6xl max-h-[92vh] mx-auto bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 rounded-2xl shadow-2xl overflow-y-auto">
-        <header class="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3"><div><h2 class="font-orbitron font-extrabold text-lg text-zinc-900 dark:text-white"><i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL ADMINA</h2><p class="text-xs text-zinc-500 mt-1">Zarządzanie kontami i odznakami</p></div><button onclick="window.scythedApp.closeAdminPanel()" class="w-9 h-9 inline-flex items-center justify-center rounded-lg text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Zamknij panel"><i class="fas fa-times text-lg" aria-hidden="true"></i></button></header>
+        <header class="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3"><div><h2 class="font-orbitron font-extrabold text-lg text-zinc-900 dark:text-white"><i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL ADMINA</h2><p class="text-xs text-zinc-500 mt-1">Zarządzanie kontami i odznakami</p></div><button onclick="window.scythedApp.closeAdminPanel()" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Zamknij panel"><i class="fas fa-times text-lg"></i></button></header>
         <div id="admin-login-view" class="p-4 md:p-6 max-w-lg mx-auto space-y-4"><p class="text-sm text-zinc-600 dark:text-zinc-300">Panel wymaga aktywnej sesji konta SCYTHED uwierzytelnionego hasłem zapisanym w Cloudflare D1. Otwórz panel z Ustawień ogólnych i potwierdź hasłem konta SCYTHED.</p></div>
         <div id="admin-content-view" class="hidden p-4 md:p-6 space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-3"><p class="text-xs text-brand-red">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button onclick="window.scythedApp.adminToggleLogs()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-bold">ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="px-3 py-2 rounded-lg border border-brand-red/40 text-brand-red text-xs font-bold">WYLOGUJ</button></div></div>
@@ -6763,7 +6769,7 @@ html body #modal-settings button#settings-change-name-password > i {
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
           <div class="space-y-2"><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw" autocomplete="off" autocorrect="off" spellcheck="false"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
           <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="moderator">Moderator</option><option value="zasluzony">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
-          <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button type="button" onclick="window.scythedApp.closeAdminPanel()" class="admin-bottom-close px-4 py-2 rounded-lg text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"><i class="fas fa-times mr-2" aria-hidden="true"></i>ZAMKNIJ PANEL ADMINA</button></div>
+          <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button type="button" onclick="window.scythedApp.closeAdminPanel()" class="w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAMKNIJ PANEL ADMINA</button></div>
         </div>
       </section>
     </div>
