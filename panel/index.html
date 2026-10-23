@@ -1239,7 +1239,6 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     </div>
 
     <div class="fixed bottom-4 right-4 z-40 flex flex-row-reverse items-center gap-2">
-        <button type="button" onclick="window.scythedApp.adminButtonClick()" id="scythed-admin-panel-button" class="hidden w-12 h-12 rounded-2xl border border-brand-red/50 hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md items-center justify-center text-lg text-brand-red bg-brand-red/10 transition-all glow-effect" title="Panel admina" aria-label="Panel admina"><i class="fas fa-shield-halved"></i></button>
         <button onclick="window.scythedApp.openSettingsModal()" class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" title="Ustawienia & System">
             <i class="fas fa-gear"></i>
         </button>
@@ -5699,11 +5698,20 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const status = document.getElementById('auth-backup-status');
                 if (!status) return;
                 status.textContent = message;
-                status.classList.remove('text-zinc-500', 'text-gray-500', 'text-green-500', 'text-red-500', 'text-yellow-500', 'font-bold', 'text-sm', 'rounded-xl', 'border', 'border-green-500/40', 'bg-green-500/10', 'p-3');
-                if (type === 'success') status.classList.add('text-green-500', 'font-bold', 'text-sm', 'rounded-xl', 'border', 'border-green-500/40', 'bg-green-500/10', 'p-3');
-                else if (type === 'error') status.classList.add('text-red-500');
-                else if (type === 'warning') status.classList.add('text-yellow-500');
-                else status.classList.add('text-zinc-500');
+                status.className = 'text-[11px] leading-relaxed rounded-xl border px-3 py-3 flex items-start gap-2 transition-all';
+                if (type === 'success') {
+                    status.classList.add('text-red-600', 'dark:text-red-300', 'font-semibold', 'border-red-500/50', 'bg-red-500/10', 'shadow-[0_0_22px_rgba(239,68,68,0.10)]');
+                    status.innerHTML = '<span class="mt-0.5 inline-flex shrink-0 h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white"><i class="fas fa-check text-[10px]"></i></span><span class="min-w-0"></span>';
+                    status.lastElementChild.textContent = message;
+                    status.setAttribute('role', 'status');
+                    status.setAttribute('aria-live', 'polite');
+                } else if (type === 'error') {
+                    status.classList.add('text-red-600', 'dark:text-red-300', 'border-red-500/40', 'bg-red-500/5');
+                } else if (type === 'warning') {
+                    status.classList.add('text-amber-600', 'dark:text-amber-300', 'border-amber-500/40', 'bg-amber-500/5');
+                } else {
+                    status.classList.add('text-zinc-600', 'dark:text-zinc-400', 'border-zinc-300', 'dark:border-zinc-700', 'bg-zinc-100/70', 'dark:bg-black/20');
+                }
             }
 
             function importBackup(event) {
@@ -5903,14 +5911,9 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const name = String(profile.username ?? username ?? '').trim().replace(/^@/, '').toLowerCase();
                 const eligible = !!name && (profile.hasAdminBadge === true || profile.hasOwnerBadge === true);
                 window.scythedProfileHasAdminBadge = profile.hasAdminBadge === true; window.scythedProfileHasOwnerBadge = profile.hasOwnerBadge === true;
-                const panelButton = document.getElementById('scythed-admin-panel-button');
                 const canShowPanel = eligible;
                 const settingsPanel = document.getElementById('general-admin-open-panel-wrap');
                 if (settingsPanel) settingsPanel.classList.toggle('hidden', !canShowPanel);
-                if (panelButton) {
-                    panelButton.classList.toggle('hidden', !canShowPanel);
-                    panelButton.classList.toggle('flex', canShowPanel);
-                }
             }
             async function adminButtonClick() {
                 const name = String(username || '').trim().replace(/^@/, '').toLowerCase();
@@ -5926,7 +5929,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const headers = { 'Content-Type': 'application/json' };
                 if (scythedAdminSession) headers.Authorization = `Bearer ${scythedAdminSession}`;
                 let requestPayload = payload || {};
-                if (method !== 'GET' && path.startsWith('/api/admin/')) {
+                if (method !== 'GET' && /^\/api\/admin\/(?:clear-logs|logs\/clear|create-user|set-verified|delete-user|restore-user|set-password|assign-badge|revoke-badge)(?:\?|$)/.test(path)) {
                     const accountName = String(scythedAccountUsername || username || '').trim().replace(/^@/, '');
                     if (!scythedAdminSession || !accountName) throw new Error('Sesja wygasła. Zaloguj się ponownie do profilu.');
                     const reauthPassword = await appPrompt(`Potwierdź zmianę w bazie D1 hasłem do konta „${accountName}”. Bez poprawnego hasła zmiana nie zostanie wykonana.`, '', { title: 'POTWIERDŹ ZMIANĘ W D1', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'POTWIERDŹ' });
@@ -5991,8 +5994,6 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 if (scythedAdminExpiryTimer) clearTimeout(scythedAdminExpiryTimer); scythedAdminExpiryTimer = null;
                 if (scythedAdminCountdownInterval) clearInterval(scythedAdminCountdownInterval); scythedAdminCountdownInterval = null; scythedAdminExpiresAt = 0;
                 const countdown = document.getElementById('admin-session-countdown'); if (countdown) countdown.textContent = '10:00';
-                const panelButton = document.getElementById('scythed-admin-panel-button');
-                if (panelButton) { panelButton.classList.add('hidden'); panelButton.classList.remove('flex'); }
                 updateAccountActionButtons({ username: username, verified: false, hasAdminBadge: window.scythedProfileHasAdminBadge === true, hasOwnerBadge: window.scythedProfileHasOwnerBadge === true });
                 if (typeof updateBadgesDisplay === 'function') updateBadgesDisplay();
                 const content = document.getElementById('admin-content-view'); if (content) content.classList.add('hidden');
