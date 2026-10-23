@@ -1025,6 +1025,75 @@ html.dark #modal-settings .settings-password-action:hover:not(:disabled),html.da
 #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl h5{font-size:.72rem;}
 @media(max-width:520px){#modal-settings .settings-password-action,#general-admin-open-panel-wrap .admin-access-action{width:100%;min-width:0;white-space:nowrap;font-size:.64rem!important;}}
 </style>
+
+<style id="scythed-final-neutral-theme-fix-v11">
+/* Ostateczne nadpisanie: akcent marki służy tylko do focus/małych ikon, nigdy jako tło wszystkich guzików. */
+:root{--sc-control-light:#f4f4f5;--sc-control-light-hover:#e4e4e7;--sc-control-light-border:#d4d4d8;--sc-control-dark:#18181b;--sc-control-dark-hover:#27272a;--sc-control-dark-border:#3f3f46;--sc-panel-light:#fafafa;--sc-panel-dark:#09090b;}
+/* Kafelki i wiersz panelu administracyjnego mają neutralne, zgodne z trybem tła. */
+#modal-settings #general-admin-open-panel-wrap,
+#modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{
+ background:var(--sc-panel-light)!important;border:1px solid #e4e4e7!important;color:#27272a!important;
+}
+html.dark #modal-settings #general-admin-open-panel-wrap,
+html.dark #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{
+ background:var(--sc-panel-dark)!important;border-color:#27272a!important;color:#f4f4f5!important;
+}
+/* Wyśrodkowane tytuły obu haseł. */
+#modal-settings .grid.grid-cols-2>div.p-3.rounded-xl h5{
+ width:100%!important;text-align:center!important;color:#27272a!important;margin-inline:auto!important;
+}
+html.dark #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl h5{color:#f4f4f5!important;}
+/* Spójne kontrolki: kolor tła nie zależy od koloru głównego. */
+#modal-settings .settings-password-action,
+#modal-settings .admin-master-action,
+#general-admin-open-panel-wrap .admin-access-action,
+#scythed-admin-modal button{
+ background:var(--sc-control-light)!important;color:#27272a!important;border:1px solid var(--sc-control-light-border)!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.6)!important;text-shadow:none!important;
+}
+html.dark #modal-settings .settings-password-action,
+html.dark #modal-settings .admin-master-action,
+html.dark #general-admin-open-panel-wrap .admin-access-action,
+html.dark #scythed-admin-modal button{
+ background:var(--sc-control-dark)!important;color:#f4f4f5!important;border-color:var(--sc-control-dark-border)!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+#modal-settings .settings-password-action:hover:not(:disabled),
+#modal-settings .admin-master-action:hover:not(:disabled),
+#general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled),
+#scythed-admin-modal button:hover:not(:disabled){
+ background:var(--sc-control-light-hover)!important;color:#18181b!important;border-color:#a1a1aa!important;filter:none!important;transform:none!important;box-shadow:none!important;
+}
+html.dark #modal-settings .settings-password-action:hover:not(:disabled),
+html.dark #modal-settings .admin-master-action:hover:not(:disabled),
+html.dark #general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled),
+html.dark #scythed-admin-modal button:hover:not(:disabled){
+ background:var(--sc-control-dark-hover)!important;color:#fff!important;border-color:#52525b!important;filter:none!important;transform:none!important;box-shadow:none!important;
+}
+/* Przyciski główne wewnątrz panelu admina również nie przejmują koloru brand. */
+#scythed-admin-modal .admin-theme-button,
+#scythed-admin-modal button[class*="bg-brand-red"],
+#scythed-admin-modal button[class*="bg-red-"]{
+ background:var(--sc-control-light)!important;color:#27272a!important;border-color:var(--sc-control-light-border)!important;
+}
+html.dark #scythed-admin-modal .admin-theme-button,
+html.dark #scythed-admin-modal button[class*="bg-brand-red"],
+html.dark #scythed-admin-modal button[class*="bg-red-"]{
+ background:var(--sc-control-dark)!important;color:#f4f4f5!important;border-color:var(--sc-control-dark-border)!important;
+}
+#scythed-admin-modal .admin-theme-button:hover,
+#scythed-admin-modal button[class*="bg-brand-red"]:hover,
+#scythed-admin-modal button[class*="bg-red-"]:hover{background:var(--sc-control-light-hover)!important;color:#18181b!important;border-color:#a1a1aa!important;}
+html.dark #scythed-admin-modal .admin-theme-button:hover,
+html.dark #scythed-admin-modal button[class*="bg-brand-red"]:hover,
+html.dark #scythed-admin-modal button[class*="bg-red-"]:hover{background:var(--sc-control-dark-hover)!important;color:#fff!important;border-color:#52525b!important;}
+/* Ikony na przyciskach zmiany haseł dziedziczą kolor tekstu. */
+#modal-settings .settings-password-action i{color:inherit!important;}
+#general-admin-open-panel-wrap .admin-access-logo{color:var(--brand-readable-accent,var(--brand-red,#ff0033))!important;}
+#modal-settings button:focus-visible,#scythed-admin-modal button:focus-visible{outline:2px solid var(--brand-readable-accent,var(--brand-red,#ff0033))!important;outline-offset:2px!important;}
+#modal-settings .settings-password-action:disabled{opacity:.48!important;cursor:not-allowed!important;}
+</style>
+
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-zinc-100 dark:bg-black text-zinc-900 dark:text-white selection:bg-brand-red selection:text-white pb-24 md:pb-28 transition-colors duration-300 relative overflow-x-hidden" style="isolation:isolate">
 
