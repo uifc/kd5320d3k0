@@ -1017,6 +1017,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                                 </button>
                             </div>
                         </div>
+                        <label id="app-dialog-remember-wrap" class="hidden mt-3 flex items-center gap-2 text-xs text-zinc-700 dark:text-gray-300 cursor-pointer"><input id="app-dialog-remember" type="checkbox" class="accent-red-600"><span>Zapamiętaj mnie na tym urządzeniu</span></label>
                         <div class="mt-5 flex flex-col-reverse sm:flex-row sm:justify-end gap-2">
                             <button id="app-dialog-cancel" type="button" class="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-gray-300 text-xs font-bold hover:bg-zinc-200 dark:hover:bg-zinc-900 transition">ANULUJ</button>
                             <button id="app-dialog-ok" type="button" class="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-brand-hoverRed text-white text-xs font-bold font-orbitron glow-effect transition">POTWIERDŹ</button>
@@ -1270,7 +1271,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 <button type="button" onclick="window.scythedApp.openChangeMasterModal()" class="admin-master-action px-3 py-1.5 text-xs font-bold rounded-xl border transition flex items-center gap-1.5">Zmień hasło</button>
             </div>
             <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                <label class="flex items-start justify-between gap-3 cursor-pointer"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300"><i class="fas fa-shield-halved text-brand-red mr-1"></i>Wymagaj hasła do nazwy zweryfikowanego konta<p class="text-[10px] font-normal text-zinc-500 mt-1">Po włączeniu przy odblokowaniu aplikacji trzeba potwierdzić hasło do nazwy. Możesz to wyłączyć tutaj.</p></span><input id="verified-name-password-toggle" type="checkbox" class="mt-1 accent-red-600" onchange="window.scythedApp.setVerifiedNamePasswordRequired(this.checked)"></label>
+                <div class="flex items-start gap-3"><i class="fas fa-shield-halved text-brand-red mt-0.5"></i><div class="text-xs font-semibold text-zinc-700 dark:text-gray-300">Hasło do nazwy zweryfikowanego konta<p class="text-[10px] font-normal text-zinc-500 mt-1">Weryfikacja jest zawsze wymagana na nowym urządzeniu. Zaznacz „Zapamiętaj mnie” podczas potwierdzania, aby nie wpisywać hasła ponownie na tym urządzeniu.</p></div></div>
             </div>
             <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2">
                 <h4 class="text-xs font-bold text-zinc-700 dark:text-gray-300"><i class="fas fa-key text-brand-red mr-1"></i>HASŁO DO NAZWY KONTA</h4>
@@ -1619,10 +1620,14 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 setTimeout(() => {
                     const input = document.getElementById('app-dialog-input');
                     if (input) input.value = '';
+                    const rememberWrap = document.getElementById('app-dialog-remember-wrap');
+                    const rememberCheckbox = document.getElementById('app-dialog-remember');
+                    if (rememberWrap) rememberWrap.classList.add('hidden');
+                    if (rememberCheckbox) rememberCheckbox.checked = false;
                 }, 180);
             }
 
-            function openAppDialog({type = 'confirm', title = 'Potwierdzenie', message = '', inputValue = '', inputType = 'text', placeholder = '', confirmText = 'POTWIERDŹ', cancelText = 'ANULUJ', icon = 'fa-shield-halved'} = {}) {
+            function openAppDialog({type = 'confirm', title = 'Potwierdzenie', message = '', inputValue = '', inputType = 'text', placeholder = '', confirmText = 'POTWIERDŹ', cancelText = 'ANULUJ', icon = 'fa-shield-halved', rememberMe = false} = {}) {
                 if (activeAppDialog) closeAppDialog(null);
                 const overlay = document.getElementById('app-dialog-overlay');
                 const titleEl = document.getElementById('app-dialog-title');
@@ -1630,6 +1635,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 const inputWrap = document.getElementById('app-dialog-input-wrap');
                 const input = document.getElementById('app-dialog-input');
                 const toggle = document.getElementById('app-dialog-toggle-password');
+                const rememberWrap = document.getElementById('app-dialog-remember-wrap');
+                const rememberCheckbox = document.getElementById('app-dialog-remember');
                 const okBtn = document.getElementById('app-dialog-ok');
                 const cancelBtn = document.getElementById('app-dialog-cancel');
                 const closeBtn = document.getElementById('app-dialog-close');
@@ -1646,6 +1653,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 input.type = inputType;
                 input.placeholder = placeholder;
                 input.value = inputValue ?? '';
+                if (rememberWrap) rememberWrap.classList.toggle('hidden', !rememberMe || type !== 'prompt');
+                if (rememberCheckbox) rememberCheckbox.checked = false;
                 input.autocomplete = inputType === 'password' ? 'current-password' : 'off';
                 okBtn.classList.remove('hidden');
                 cancelBtn.classList.remove('hidden');
@@ -1655,10 +1664,10 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     const finish = value => closeAppDialog(value);
                     const onKeyDown = event => {
                         if (event.key === 'Escape') { event.preventDefault(); finish(null); }
-                        if (event.key === 'Enter' && type === 'prompt') { event.preventDefault(); finish(input.value); }
+                        if (event.key === 'Enter' && type === 'prompt') { event.preventDefault(); finish(rememberMe ? { password: input.value, remember: !!rememberCheckbox?.checked } : input.value); }
                     };
                     activeAppDialog = {resolve, onKeyDown};
-                    okBtn.onclick = () => finish(type === 'prompt' ? input.value : true);
+                    okBtn.onclick = () => finish(type === 'prompt' ? (rememberMe ? { password: input.value, remember: !!rememberCheckbox?.checked } : input.value) : true);
                     cancelBtn.onclick = () => finish(null);
                     closeBtn.onclick = () => finish(null);
                     toggle.onclick = () => {
@@ -1686,7 +1695,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     placeholder: options.placeholder || '',
                     confirmText: options.confirmText || 'ZATWIERDŹ',
                     cancelText: options.cancelText || 'ANULUJ',
-                    icon: options.icon || 'fa-key'
+                    icon: options.icon || 'fa-key',
+                    rememberMe: options.rememberMe === true
                 });
             }
 
@@ -3048,12 +3058,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 }
             }
 
-            function isVerifiedNamePasswordRequired() {
-                try { return localStorage.getItem('scythed_verified_name_password_required') !== 'false'; } catch (_) { return true; }
+            function isVerifiedNamePasswordRequired() { return true; }
+            function rememberedNameKey(name) { return `scythed_verified_name_remembered_${badgeAccountKey(name)}`; }
+            function isNameRemembered(name) {
+                try { return localStorage.getItem(rememberedNameKey(name)) === 'true'; } catch (_) { return false; }
             }
-            function setVerifiedNamePasswordRequired(enabled) {
-                try { localStorage.setItem('scythed_verified_name_password_required', enabled ? 'true' : 'false'); } catch (_) {}
-                showToast(enabled ? 'Włączono wymaganie hasła do nazwy zweryfikowanego konta.' : 'Wyłączono wymaganie hasła do nazwy.', 'success');
+            function rememberNameOnThisDevice(name) {
+                try { localStorage.setItem(rememberedNameKey(name), 'true'); return true; } catch (_) { return false; }
             }
             async function enforcePrivilegedNamePassword() {
                 if (privilegedNameGateRunning || !isVaultUnlocked() || !isVerifiedNamePasswordRequired()) return;
@@ -3063,10 +3074,16 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 try {
                     const statusResult = await scythedApi('/api/name-status', { username: accountName });
                     if (!statusResult.response.ok || statusResult.data.ok !== true || statusResult.data.protected !== true) return;
-                    const password = await appPrompt(`Nazwa „${accountName}” należy do zweryfikowanego konta. Podaj hasło do tej nazwy, aby ją zachować.`, '', { title: 'WERYFIKACJA NAZWY', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'WERYFIKUJ', cancelText: 'USTAW USER' });
-                    if (password === null || !String(password).length) { await resetProfileNameToUser('Nie podano hasła do nazwy. Nazwa profilu została ustawiona na USER.'); return; }
-                    const { response, data } = await scythedApi('/api/verify-name', { username: accountName, password: String(password) });
+                    if (isNameRemembered(accountName)) {
+                        privilegedNameVerifiedFor = accountName;
+                        await updateBadgesDisplay();
+                        return;
+                    }
+                    const answer = await appPrompt(`Nazwa „${accountName}” należy do zweryfikowanego konta. Podaj hasło do tej nazwy, aby ją zachować.`, '', { title: 'WERYFIKACJA NAZWY', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'WERYFIKUJ', cancelText: 'USTAW USER', rememberMe: true });
+                    if (answer === null || !String(answer.password ?? '').length) { await resetProfileNameToUser('Nie podano hasła do nazwy. Nazwa profilu została ustawiona na USER.'); return; }
+                    const { response, data } = await scythedApi('/api/verify-name', { username: accountName, password: String(answer.password) });
                     if (!response.ok || data.ok !== true || data.verified !== true) { await resetProfileNameToUser('Hasło do nazwy jest nieprawidłowe. Nazwa profilu została ustawiona na USER.'); return; }
+                    if (answer.remember) rememberNameOnThisDevice(accountName);
                     privilegedNameVerifiedFor = accountName;
                     showToast('Potwierdzono nazwę zweryfikowanego konta.', 'success');
                     await updateBadgesDisplay();
@@ -3262,8 +3279,6 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 updateBackupReminderUI();
                 updateHeaderAnimationSpeed(headerSpeedToSliderValue(headerAnimationSpeed));
                 document.getElementById('modal-settings').classList.remove('hidden');
-                const verifiedToggle = document.getElementById('verified-name-password-toggle');
-                if (verifiedToggle) verifiedToggle.checked = isVerifiedNamePasswordRequired();
                 playSound('click');
             }
 
@@ -4320,19 +4335,20 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 }
                 const passwordAccount = val;
 
-                if (newProtected && isVerifiedNamePasswordRequired()) {
-                    const password = await appPrompt(`Nazwa „${val}” jest chroniona odznaką/weryfikacją.\nPodaj hasło dla konta „${badgeAccountKey(passwordAccount)}”, aby potwierdzić zmianę:`, '', { title: 'WERYFIKACJA NAZWY', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'WERYFIKUJ' });
-                    if (password === null) {
+                if (newProtected && isVerifiedNamePasswordRequired() && !isNameRemembered(passwordAccount)) {
+                    const answer = await appPrompt(`Nazwa „${val}” jest chroniona odznaką/weryfikacją.\nPodaj hasło dla konta „${badgeAccountKey(passwordAccount)}”, aby potwierdzić zmianę:`, '', { title: 'WERYFIKACJA NAZWY', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'WERYFIKUJ', rememberMe: true });
+                    if (answer === null || !String(answer.password ?? '').length) {
                         input.value = username;
                         return;
                     }
-                    const ok = await verifyBadgeNamePassword(passwordAccount, password);
+                    const ok = await verifyBadgeNamePassword(passwordAccount, answer.password);
                     if (!ok) {
                         input.value = username;
                         showToast('Nieprawidłowe hasło do odznaki/weryfikacji lub błąd połączenia. Nazwa nie została zmieniona.', 'error');
                         playSound('delete');
                         return;
                     }
+                    if (answer.remember) rememberNameOnThisDevice(passwordAccount);
                 }
 
                 username = val;
@@ -6076,12 +6092,13 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                     }).join(' ') || '-';
                     const hasModeratorBadge = (u.badges || []).some(b => b.badge === 'moderator' || b.badge === 'mod');
                     const verifiedBox = u.verified ? '<span class="admin-verified-status" title="Konto zweryfikowane"><i class="fas fa-circle-check mr-1"></i>ZWERYFIKOWANE</span>' : '<span class="text-zinc-500">Niezweryfikowane</span>';
+                    // Konta uprzywilejowane pokazują wyłącznie rolę, bez osobnego statusu weryfikacji.
                     const status = isOwnerProfile
-                        ? `<div class="flex flex-wrap items-center gap-1"><span class="admin-owner-status" title="Właściciel zweryfikowany"><i class="fas fa-crown mr-1"></i>WŁAŚCICIEL</span>${verifiedBox}</div>`
+                        ? `<span class="admin-owner-status" title="Właściciel projektu"><i class="fas fa-crown mr-1"></i>WŁAŚCICIEL</span>`
                         : isAdminAccount
-                            ? `<div class="flex flex-wrap items-center gap-1"><span class="admin-admin-status"><i class="fas fa-shield-halved mr-1"></i>ADMIN</span>${verifiedBox}</div>`
+                            ? `<span class="admin-admin-status"><i class="fas fa-shield-halved mr-1"></i>ADMIN</span>`
                             : hasModeratorBadge
-                                ? `<div class="flex flex-wrap items-center gap-1"><span class="admin-moderator-status"><i class="fas fa-hammer mr-1"></i>MODERATOR</span>${verifiedBox}</div>`
+                                ? `<span class="admin-moderator-status"><i class="fas fa-hammer mr-1"></i>MODERATOR</span>`
                                 : verifiedBox;
                     const isSelf = name.toLowerCase() === String(scythedAccountUsername || '').toLowerCase();
                     const targetPrivileged = isOwnerProfile || isAdminAccount;
@@ -6243,7 +6260,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
                 showToast,
                 hideToast,
                 closeModal,
-                openSettingsModal, setVerifiedNamePasswordRequired, changeNamePassword,
+                openSettingsModal, changeNamePassword,
                 openChangeMasterModal,
                 handleChangeMasterSubmit,
                 toggleTheme,
