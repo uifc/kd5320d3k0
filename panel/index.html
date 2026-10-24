@@ -7691,5 +7691,43 @@ html.dark #modal-settings #app-bg-effects-panel > span { color:#fff !important; 
 }
 </style>
 
+
+<style id="scythed-settings-dropdown-dark-fix-v1">
+/* Ujednolicone listy wyboru w ustawieniach: szare w ciemnym motywie, z czytelną typografią. */
+#modal-settings #ui-scale-slider,
+#modal-settings #auto-lock-mode,
+#modal-settings #backup-reminder-days {
+  box-sizing: border-box !important;
+  min-height: 2.25rem !important;
+  padding: .45rem .8rem !important;
+  border-radius: .65rem !important;
+  font-family: inherit !important;
+  font-size: .75rem !important;
+  line-height: 1.25rem !important;
+  font-weight: 800 !important;
+  color-scheme: light;
+}
+html.dark #modal-settings #ui-scale-slider,
+html.dark #modal-settings #auto-lock-mode,
+html.dark #modal-settings #backup-reminder-days {
+  background-color: #27272a !important;
+  color: #f4f4f5 !important;
+  border-color: #52525b !important;
+  color-scheme: dark;
+}
+html.dark #modal-settings #ui-scale-slider option,
+html.dark #modal-settings #auto-lock-mode option,
+html.dark #modal-settings #backup-reminder-days option {
+  background-color: #27272a !important;
+  color: #f4f4f5 !important;
+}
+html.dark #modal-settings #ui-scale-slider:hover,
+html.dark #modal-settings #auto-lock-mode:hover,
+html.dark #modal-settings #backup-reminder-days:hover {
+  background-color: #3f3f46 !important;
+  border-color: #71717a !important;
+}
+</style>
+
 </body>
 </html>
