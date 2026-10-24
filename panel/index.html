@@ -8120,3 +8120,28 @@ html.dark #scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
   -webkit-text-fill-color: var(--brand-contrast-text, #111111) !important;
 }
 </style>
+
+
+<style id="scythed-admin-top-toolbar-text-contrast-fix">
+/* Górny pasek panelu admina: LOGI, ODŚWIEŻ, WYLOGUJ.
+   Tekst korzysta z tej samej dynamicznej zmiennej kontrastu co przyciski Ustawień. */
+#scythed-admin-modal #admin-content-view > div.flex.flex-wrap.items-center.justify-between > div > button.admin-primary-action,
+#scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"],
+#scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"],
+#scythed-admin-modal #admin-content-view button[onclick*="adminLogout"] {
+  color: var(--brand-contrast-text, #111111) !important;
+  -webkit-text-fill-color: var(--brand-contrast-text, #111111) !important;
+}
+#scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"] > *,
+#scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"] > *,
+#scythed-admin-modal #admin-content-view button[onclick*="adminLogout"] > * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+#scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"]:hover,
+#scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"]:hover,
+#scythed-admin-modal #admin-content-view button[onclick*="adminLogout"]:hover {
+  color: var(--brand-contrast-text, #111111) !important;
+  -webkit-text-fill-color: var(--brand-contrast-text, #111111) !important;
+}
+</style>
