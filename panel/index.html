@@ -7878,6 +7878,36 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 .admin-name-admin-tag { display:inline-flex; align-items:center; padding:.16rem .48rem; border-radius:.42rem; border:1px solid rgba(248,113,113,.8); color:#f87171; background:linear-gradient(120deg,rgba(69,10,10,.32),rgba(185,28,28,.56),rgba(127,29,29,.28),rgba(220,38,38,.62)); background-size:220% 220%; animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite; line-height:1.35; }
 .admin-name-owner-tag { display:inline-flex; align-items:center; padding:.16rem .48rem; border-radius:.42rem; border:1px solid rgba(250,204,21,.9); color:#facc15; background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)); background-size:220% 220%; animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite; line-height:1.35; }
 </style>
+
+<script id="scythed-admin-button-click-sounds">
+(function () {
+  // Dźwięk kliknięcia dla przycisków panelu admina, zgodny z ustawieniem wyciszenia aplikacji.
+  let ctx;
+  function muted() {
+    try {
+      if (typeof window.isSoundMuted === 'boolean') return window.isSoundMuted;
+      const raw = localStorage.getItem('scythed_sound_muted') || localStorage.getItem('soundMuted') || localStorage.getItem('isSoundMuted');
+      return raw === 'true' || raw === '1';
+    } catch (_) { return false; }
+  }
+  document.addEventListener('click', function (event) {
+    const target = event.target && event.target.closest ? event.target.closest('#scythed-admin-modal button, #scythed-admin-modal input[type="button"], #scythed-admin-modal input[type="submit"]') : null;
+    if (!target || target.disabled || target.dataset.scythedSoundPlayed === '1' || muted()) return;
+    // Nie dubluj dźwięku, jeśli przycisk ma już własny handler dźwięku.
+    if (target.hasAttribute('data-no-click-sound')) return;
+    try {
+      if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === 'suspended') ctx.resume();
+      const osc = ctx.createOscillator(), gain = ctx.createGain(), now = ctx.currentTime;
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.setValueAtTime(400, now); osc.frequency.exponentialRampToValueAtTime(200, now + 0.05);
+      gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+      osc.start(now); osc.stop(now + 0.05);
+    } catch (_) {}
+  }, true);
+})();
+</script>
+
 </body>
 </html>
 
