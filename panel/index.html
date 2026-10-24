@@ -7498,5 +7498,102 @@ html.dark #modal-settings .bg-zinc-100 {
 }
 </style>
 
+<!-- SCYTHED v66: targeted restoration based on supplied reference -->
+<style id="scythed-final-visual-fixes-v66">
+/* Stałe kolory statusów kont w panelu administracyjnym. */
+#scythed-admin-modal .admin-owner-status {
+  color:#facc15 !important; -webkit-text-fill-color:#facc15 !important;
+  border-color:rgba(250,204,21,.75) !important;
+  background:linear-gradient(110deg,rgba(120,74,0,.16),rgba(234,179,8,.30),rgba(120,74,0,.16)) !important;
+  background-size:200% 100% !important;
+  animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important;
+  box-shadow:0 0 10px rgba(250,204,21,.22) !important;
+}
+#scythed-admin-modal .admin-owner-status > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+#scythed-admin-modal .admin-admin-status {
+  color:#f87171 !important; -webkit-text-fill-color:#f87171 !important;
+  border-color:rgba(248,113,113,.92) !important;
+  background:linear-gradient(110deg,rgba(69,10,10,.16),rgba(185,28,28,.28),rgba(69,10,10,.16)) !important;
+  background-size:200% 100% !important;
+  animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important;
+}
+#scythed-admin-modal .admin-admin-status > i { color:#f87171 !important; -webkit-text-fill-color:#f87171 !important; }
+#scythed-admin-modal .admin-moderator-status {
+  color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important;
+  border-color:rgba(96,135,190,.75) !important;
+  background:linear-gradient(110deg,rgba(23,37,84,.18),rgba(30,64,125,.32),rgba(23,37,84,.18)) !important;
+  background-size:200% 100% !important;
+  animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important;
+}
+#scythed-admin-modal .admin-moderator-status > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
+#scythed-admin-modal .admin-verified-status,
+#scythed-admin-modal .admin-verified-status:hover {
+  color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important;
+  border-color:#3b82f6 !important; background:rgba(59,130,246,.12) !important;
+}
+#scythed-admin-modal .admin-verified-status > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
+
+/* Przywróć wcześniejsze, animowane palety odznak w liście użytkowników. */
+#scythed-admin-modal .admin-list-badge.admin-list-owner {
+  background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)) !important;
+  background-size:220% 220% !important; border-color:rgba(250,204,21,.9) !important;
+  color:#facc15 !important; animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important;
+  box-shadow:0 0 10px rgba(250,204,21,.22) !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-owner > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-admin {
+  background:linear-gradient(120deg,rgba(69,10,10,.32),rgba(185,28,28,.56),rgba(127,29,29,.28),rgba(220,38,38,.62)) !important;
+  background-size:220% 220% !important; border-color:rgba(248,113,113,.92) !important; color:#f87171 !important;
+  animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-admin > i { color:#f87171 !important; -webkit-text-fill-color:#f87171 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-moderator {
+  background:linear-gradient(120deg,rgba(23,37,84,.34),rgba(30,64,125,.42),rgba(29,58,115,.32),rgba(59,95,150,.44)) !important;
+  background-size:220% 220% !important; border-color:rgba(96,135,190,.68) !important; color:#a0bce3 !important;
+  animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-moderator > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-zasluzony {
+  background:linear-gradient(120deg,rgba(20,83,45,.42),rgba(34,197,94,.62),rgba(21,128,61,.42),rgba(74,222,128,.68)) !important;
+  background-size:220% 220% !important; border-color:rgba(74,222,128,.92) !important; color:#86efac !important;
+  animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-zasluzony > i { color:#4ade80 !important; -webkit-text-fill-color:#4ade80 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-bug { background:rgba(34,197,94,.14) !important; border-color:rgba(34,197,94,.65) !important; color:#4ade80 !important; animation:badgePulseGlow 2.2s ease-in-out infinite !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-bug > i { color:#4ade80 !important; -webkit-text-fill-color:#4ade80 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-beta { background:rgba(250,204,21,.10) !important; border-color:rgba(250,204,21,.55) !important; color:#facc15 !important; animation:badgePulseGlow 2.2s ease-in-out infinite !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-beta > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+
+/* Nie nadpisuj oryginalnych powierzchni ciemnego motywu; w jasnym utrzymaj neutralne kafelki. */
+html.dark #modal-settings .bg-white:not(.dark\\:bg-brand-card) { background-color:revert !important; }
+html.dark #modal-settings .bg-zinc-50, html.dark #modal-settings .bg-zinc-100 { background-color:revert !important; }
+html:not(.dark) #modal-settings .bg-white:not(.dark\\:bg-brand-card),
+html:not(.dark) #modal-settings .bg-zinc-50, html:not(.dark) #modal-settings .bg-zinc-100 { background-color:#f3f4f6 !important; }
+
+/* Próbnik nakładki ma taki sam rozmiar i oprawę jak próbnik koloru głównego. */
+#modal-settings #brand-color-picker, #modal-settings #bg-overlay-color {
+  width:1.25rem !important; height:1.25rem !important; padding:0 !important;
+  border:0 !important; border-radius:0 !important; background:transparent !important;
+  box-shadow:none !important; appearance:auto !important; -webkit-appearance:auto !important; cursor:pointer !important;
+}
+#modal-settings #bg-overlay-color::-webkit-color-swatch-wrapper, #modal-settings #brand-color-picker::-webkit-color-swatch-wrapper { padding:0 !important; }
+#modal-settings #bg-overlay-color::-webkit-color-swatch, #modal-settings #brand-color-picker::-webkit-color-swatch,
+#modal-settings #bg-overlay-color::-moz-color-swatch, #modal-settings #brand-color-picker::-moz-color-swatch { border:0 !important; border-radius:3px !important; }
+
+/* Opcje list rozwijanych czytelne w obu motywach. */
+html.dark select, html.dark select option { background-color:#18181b !important; color:#f4f4f5 !important; }
+html:not(.dark) select, html:not(.dark) select option { background-color:#f4f4f5 !important; color:#18181b !important; }
+#modal-settings #app-bg-effects-panel > span { color:#111827 !important; }
+html.dark #modal-settings #app-bg-effects-panel > span { color:#fff !important; }
+#modal-settings #app-bg-effects-panel > span > i { color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important; -webkit-text-fill-color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important; }
+.theme-accent-action { color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important; }
+html.dark #modal-settings #bg-overlay-hex, html.dark #modal-settings #brand-hex-input { color:#f4f4f5 !important; }
+html:not(.dark) #modal-settings #bg-overlay-hex, html:not(.dark) #modal-settings #brand-hex-input { color:#18181b !important; }
+@media(prefers-reduced-motion:reduce) {
+  #scythed-admin-modal .admin-list-badge, #scythed-admin-modal .admin-owner-status,
+  #scythed-admin-modal .admin-admin-status, #scythed-admin-modal .admin-moderator-status { animation:none !important; }
+}
+</style>
+
 </body>
 </html>
