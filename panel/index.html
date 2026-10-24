@@ -6651,7 +6651,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     const del = canDeleteTarget ? `<button onclick="window.scythedApp.adminDeleteUser('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">USUŃ KONTO</button>` : '';
                     const badgeOptions = orderedBadges.map(b => `<option value="${escapeHtml(b.badge)}">${escapeHtml(badgeLabel(b))}</option>`).join('');
                     const revoke = badgeOptions && !isOwnerProfile && canManageTarget ? `<div class="flex flex-wrap gap-1 mt-1"><select id="revoke-badge-${escapeHtml(name)}" class="admin-badge-select max-w-[170px] rounded border px-2 py-1 text-xs" aria-label="Wybierz odznakę do odebrania">${badgeOptions}</select><button onclick="window.scythedApp.adminRevokeBadge('${escapeHtml(name)}', document.getElementById('revoke-badge-${escapeHtml(name)}').value)" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ODBIERZ</button></div>` : (isOwnerProfile ? '<span class="text-xs text-zinc-500">Profil właściciela — dostępna tylko zmiana hasła.</span>' : (canManageTarget ? '<span class="text-zinc-500">Brak odznak</span>' : '<span class="text-xs text-zinc-500">Odznaki innych kont może edytować wyłącznie właściciel.</span>'));
-                    return `<tr class="admin-user-row ${isOwnerProfile ? 'admin-owner-row' : ''} border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${isOwnerProfile ? '<span class="admin-name-owner-tag">Szymon</span>' : isAdminAccount ? `<span class="admin-name-admin-tag">${escapeHtml(name)}</span>` : escapeHtml(name)}${isOwnerProfile ? '<div class="text-[10px] font-normal text-zinc-500">Właściciel projektu</div>' : ''}</td><td class="p-2">${status}</td><td class="p-2 min-w-[140px]"><div class="flex flex-wrap items-center gap-1.5">${badges}</div></td><td class="p-2"><div class="flex flex-col items-start gap-1.5">${isOwnerProfile ? (scythedIsOwner ? passwordButton : '<span class="text-xs text-zinc-500">Zmiana hasła właściciela dostępna wyłącznie właścicielowi.</span>') : `<div class="flex flex-wrap gap-1.5">${passwordButton}${del}</div>${revoke}`}</div></td></tr>`;
+                    return `<tr class="admin-user-row ${isOwnerProfile ? 'admin-owner-row' : ''} border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(name)}${isOwnerProfile ? '<div class="text-[10px] font-normal text-zinc-500">Właściciel projektu</div>' : ''}</td><td class="p-2">${status}</td><td class="p-2 min-w-[140px]"><div class="flex flex-wrap items-center gap-1.5">${badges}</div></td><td class="p-2"><div class="flex flex-col items-start gap-1.5">${isOwnerProfile ? (scythedIsOwner ? passwordButton : '<span class="text-xs text-zinc-500">Zmiana hasła właściciela dostępna wyłącznie właścicielowi.</span>') : `<div class="flex flex-wrap gap-1.5">${passwordButton}${del}</div>${revoke}`}</div></td></tr>`;
                 }).join('');
             }
             async function adminRefreshUsers() {
@@ -8301,4 +8301,39 @@ html:not(.dark) #scythed-admin-modal header > button i {
   stroke: #71717a !important;
   -webkit-text-fill-color: #71717a !important;
 }
+</style>
+
+<style id="scythed-admin-final-user-request-corrections">
+/* Names stay plain; the red styling belongs to the Administrator badge, not the username. */
+#scythed-admin-modal .admin-name-admin-tag,
+#scythed-admin-modal .admin-name-owner-tag { display: contents !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; animation: none !important; box-shadow: none !important; color: inherit !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover { background: linear-gradient(120deg,rgba(69,10,10,.32),rgba(185,28,28,.56),rgba(127,29,29,.28),rgba(220,38,38,.62)) !important; border-color: rgba(248,113,113,.92) !important; }
+/* The close X is always neutral gray regardless of theme/accent; it brightens on hover like Settings. */
+#scythed-admin-modal header > button,
+#scythed-admin-modal header > button svg,
+#scythed-admin-modal header > button svg *,
+#scythed-admin-modal header > button i {
+  color: #a1a1aa !important;
+  stroke: #a1a1aa !important;
+  -webkit-text-fill-color: #a1a1aa !important;
+  transition: color .16s ease, stroke .16s ease, filter .16s ease !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+#scythed-admin-modal header > button:hover,
+#scythed-admin-modal header > button:hover svg,
+#scythed-admin-modal header > button:hover svg *,
+#scythed-admin-modal header > button:hover i {
+  color: #d4d4d8 !important;
+  stroke: #d4d4d8 !important;
+  -webkit-text-fill-color: #d4d4d8 !important;
+  filter: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+#scythed-admin-modal header > button:focus,
+#scythed-admin-modal header > button:active { background: transparent !important; background-color: transparent !important; }
 </style>
