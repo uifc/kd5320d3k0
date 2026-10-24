@@ -8053,234 +8053,24 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
 </script>
 
 
-<style id="scythed-admin-buttons-match-settings-final">
-/* Przyciski panelu administratora korzystają z tych samych neutralnych kontrolek co Ustawienia. */
-#scythed-admin-modal button:not(header > button),
-#scythed-admin-modal input[type="button"],
-#scythed-admin-modal input[type="submit"] {
-  background: var(--sc-control-light, #f4f4f5) !important;
-  color: #27272a !important;
-  border: 1px solid var(--sc-control-light-border, #d4d4d8) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.6) !important;
-  text-shadow: none !important;
-  transition: background-color .16s ease, color .16s ease, border-color .16s ease, box-shadow .16s ease !important;
-}
-html.dark #scythed-admin-modal button:not(header > button),
-html.dark #scythed-admin-modal input[type="button"],
-html.dark #scythed-admin-modal input[type="submit"] {
-  background: var(--sc-control-dark, #18181b) !important;
-  color: #f4f4f5 !important;
-  border-color: var(--sc-control-dark-border, #3f3f46) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.035) !important;
-}
-#scythed-admin-modal button:not(header > button):hover:not(:disabled),
-#scythed-admin-modal input[type="button"]:hover:not(:disabled),
-#scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
-  background: var(--sc-control-light-hover, #e4e4e7) !important;
-  color: #18181b !important;
-  border-color: #a1a1aa !important;
-  box-shadow: none !important;
-  filter: none !important;
-  transform: none !important;
-}
-html.dark #scythed-admin-modal button:not(header > button):hover:not(:disabled),
-html.dark #scythed-admin-modal input[type="button"]:hover:not(:disabled),
-html.dark #scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
-  background: var(--sc-control-dark-hover, #27272a) !important;
-  color: #fff !important;
-  border-color: #52525b !important;
-  box-shadow: none !important;
-  filter: none !important;
-  transform: none !important;
-}
-#scythed-admin-modal button:disabled { opacity: .48 !important; cursor: not-allowed !important; }
-#scythed-admin-modal header > button,
-#scythed-admin-modal header > button:hover { background: transparent !important; border-color: transparent !important; box-shadow: none !important; }
-</style>
-
-<style id="scythed-admin-button-text-color-sync-final">
-/* Wszystkie przyciski panelu admina używają tego samego dynamicznego koloru tekstu,
-   co przyciski ustawień. Kolor aktualizuje się razem z wybranym kolorem akcentu. */
-#scythed-admin-modal button:not(header > button),
-#scythed-admin-modal input[type="button"],
-#scythed-admin-modal input[type="submit"] {
-  color: var(--brand-contrast-text, #111111) !important;
-  -webkit-text-fill-color: var(--brand-contrast-text, #111111) !important;
-}
-#scythed-admin-modal button:not(header > button) > *,
-#scythed-admin-modal input[type="button"] > *,
-#scythed-admin-modal input[type="submit"] > * {
-  color: inherit !important;
-  -webkit-text-fill-color: inherit !important;
-}
-#scythed-admin-modal button:not(header > button):hover:not(:disabled),
-#scythed-admin-modal input[type="button"]:hover:not(:disabled),
-#scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
-  color: var(--brand-contrast-text, #111111) !important;
-  -webkit-text-fill-color: var(--brand-contrast-text, #111111) !important;
-}
-</style>
-
-
-<style id="scythed-admin-top-toolbar-text-contrast-fix">
-/* Górny pasek panelu admina: LOGI, ODŚWIEŻ, WYLOGUJ.
-   Tekst korzysta z tej samej dynamicznej zmiennej kontrastu co przyciski Ustawień. */
-#scythed-admin-modal #admin-content-view > div.flex.flex-wrap.items-center.justify-between > div > button.admin-primary-action,
-#scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"],
-#scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"],
-#scythed-admin-modal #admin-content-view button[onclick*="adminLogout"] {
-  color: var(--brand-contrast-text, #111111) !important;
-  -webkit-text-fill-color: var(--brand-contrast-text, #111111) !important;
-}
-#scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"] > *,
-#scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"] > *,
-#scythed-admin-modal #admin-content-view button[onclick*="adminLogout"] > * {
-  color: inherit !important;
-  -webkit-text-fill-color: inherit !important;
-}
-#scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"]:hover,
-#scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"]:hover,
-#scythed-admin-modal #admin-content-view button[onclick*="adminLogout"]:hover {
-  color: var(--brand-contrast-text, #111111) !important;
-  -webkit-text-fill-color: var(--brand-contrast-text, #111111) !important;
-}
-</style>
-
-
-<style id="scythed-admin-buttons-neutral-theme-fix">
-/* Przyciski panelu admina nie korzystają z koloru akcentu:
-   ciemny motyw = jednolity ciemny szary + biały tekst;
-   jasny motyw = jednolity jasny szary + czarny tekst. */
-#scythed-admin-modal #admin-content-view button.admin-primary-action,
-#scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"],
-#scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"],
-#scythed-admin-modal #admin-content-view button[onclick*="adminLogout"],
-#scythed-admin-modal #admin-create-user-form button[type="submit"],
-#scythed-admin-modal #global-toggle-emails,
-#scythed-admin-modal #global-toggle-passwords,
-#scythed-admin-modal #admin-refresh-logs,
-#scythed-admin-modal #admin-logs-refresh,
-#scythed-admin-modal #admin-logout,
-#scythed-admin-modal #admin-logs-clear,
-#scythed-admin-modal .admin-primary-action,
-#scythed-admin-modal button.theme-accent-action,
-#scythed-admin-modal .admin-theme-button {
-  background: #e4e4e7 !important;
+<style id="scythed-admin-fixed-neutral-buttons-corrected">
+/* Tylko przyciski panelu: neutralne kolory zależne od motywu.
+   Nie dotykamy powierzchni panelu, pól formularzy ani kolorowych odznak. */
+#scythed-admin-modal button:not(header > button):not(.admin-list-badge) {
   background-color: #e4e4e7 !important;
-  color: #18181b !important;
-  -webkit-text-fill-color: #18181b !important;
-  border-color: #d4d4d8 !important;
-  box-shadow: none !important;
-}
-html.dark #scythed-admin-modal #admin-content-view button.admin-primary-action,
-html.dark #scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"],
-html.dark #scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"],
-html.dark #scythed-admin-modal #admin-content-view button[onclick*="adminLogout"],
-html.dark #scythed-admin-modal #admin-create-user-form button[type="submit"],
-html.dark #scythed-admin-modal #global-toggle-emails,
-html.dark #scythed-admin-modal #global-toggle-passwords,
-html.dark #scythed-admin-modal #admin-refresh-logs,
-html.dark #scythed-admin-modal #admin-logs-refresh,
-html.dark #scythed-admin-modal #admin-logout,
-html.dark #scythed-admin-modal #admin-logs-clear,
-html.dark #scythed-admin-modal .admin-primary-action,
-html.dark #scythed-admin-modal button.theme-accent-action,
-html.dark #scythed-admin-modal .admin-theme-button {
-  background: #27272a !important;
-  background-color: #27272a !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #3f3f46 !important;
-  box-shadow: none !important;
-}
-#scythed-admin-modal #admin-content-view button.admin-primary-action *,
-#scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"] *,
-#scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"] *,
-#scythed-admin-modal #admin-content-view button[onclick*="adminLogout"] *,
-#scythed-admin-modal #admin-create-user-form button[type="submit"] *,
-#scythed-admin-modal #global-toggle-emails *,
-#scythed-admin-modal #global-toggle-passwords *,
-#scythed-admin-modal #admin-refresh-logs *,
-#scythed-admin-modal #admin-logs-refresh *,
-#scythed-admin-modal #admin-logout *,
-#scythed-admin-modal #admin-logs-clear *,
-#scythed-admin-modal .admin-primary-action *,
-#scythed-admin-modal button.theme-accent-action *,
-#scythed-admin-modal .admin-theme-button * {
-  color: inherit !important;
-  -webkit-text-fill-color: inherit !important;
-}
-#scythed-admin-modal #admin-content-view button.admin-primary-action:hover:not(:disabled),
-#scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"]:hover:not(:disabled),
-#scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"]:hover:not(:disabled),
-#scythed-admin-modal #admin-content-view button[onclick*="adminLogout"]:hover:not(:disabled),
-#scythed-admin-modal #admin-create-user-form button[type="submit"]:hover:not(:disabled),
-#scythed-admin-modal #global-toggle-emails:hover:not(:disabled),
-#scythed-admin-modal #global-toggle-passwords:hover:not(:disabled),
-#scythed-admin-modal #admin-refresh-logs:hover:not(:disabled),
-#scythed-admin-modal #admin-logs-refresh:hover:not(:disabled),
-#scythed-admin-modal #admin-logout:hover:not(:disabled),
-#scythed-admin-modal #admin-logs-clear:hover:not(:disabled),
-#scythed-admin-modal .admin-primary-action:hover:not(:disabled),
-#scythed-admin-modal button.theme-accent-action:hover:not(:disabled),
-#scythed-admin-modal .admin-theme-button:hover:not(:disabled) {
-  background: #d4d4d8 !important;
-  background-color: #d4d4d8 !important;
-  color: #18181b !important;
-  -webkit-text-fill-color: #18181b !important;
-  border-color: #a1a1aa !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-html.dark #scythed-admin-modal #admin-content-view button.admin-primary-action:hover:not(:disabled),
-html.dark #scythed-admin-modal #admin-content-view button[onclick*="adminToggleLogs"]:hover:not(:disabled),
-html.dark #scythed-admin-modal #admin-content-view button[onclick*="adminRefreshUsers"]:hover:not(:disabled),
-html.dark #scythed-admin-modal #admin-content-view button[onclick*="adminLogout"]:hover:not(:disabled),
-html.dark #scythed-admin-modal #admin-create-user-form button[type="submit"]:hover:not(:disabled),
-html.dark #scythed-admin-modal #global-toggle-emails:hover:not(:disabled),
-html.dark #scythed-admin-modal #global-toggle-passwords:hover:not(:disabled),
-html.dark #scythed-admin-modal #admin-refresh-logs:hover:not(:disabled),
-html.dark #scythed-admin-modal #admin-logs-refresh:hover:not(:disabled),
-html.dark #scythed-admin-modal #admin-logout:hover:not(:disabled),
-html.dark #scythed-admin-modal #admin-logs-clear:hover:not(:disabled),
-html.dark #scythed-admin-modal .admin-primary-action:hover:not(:disabled),
-html.dark #scythed-admin-modal button.theme-accent-action:hover:not(:disabled),
-html.dark #scythed-admin-modal .admin-theme-button:hover:not(:disabled) {
-  background: #3f3f46 !important;
-  background-color: #3f3f46 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #52525b !important;
-}
-</style>
-
-
-
-<style id="scythed-admin-final-fixed-theme-colors">
-/* Finalne, niezależne od koloru akcentu kolory panelu administratora. */
-/* Przyciski (w tym górny pasek, tworzenie konta, operacje i zamknięcie panelu). */
-#scythed-admin-modal button:not(header > button),
-#scythed-admin-modal input[type="button"],
-#scythed-admin-modal input[type="submit"] {
-  background: #e4e4e7 !important;
-  background-color: #e4e4e7 !important;
+  background-image: none !important;
   color: #18181b !important;
   -webkit-text-fill-color: #18181b !important;
   border-color: #d4d4d8 !important;
   box-shadow: none !important;
   text-shadow: none !important;
-  filter: none !important;
 }
-#scythed-admin-modal button:not(header > button) *,
-#scythed-admin-modal input[type="button"] *,
-#scythed-admin-modal input[type="submit"] * {
+#scythed-admin-modal button:not(header > button):not(.admin-list-badge) > *,
+#scythed-admin-modal button:not(header > button):not(.admin-list-badge) i {
   color: inherit !important;
   -webkit-text-fill-color: inherit !important;
 }
-#scythed-admin-modal button:not(header > button):hover:not(:disabled),
-#scythed-admin-modal input[type="button"]:hover:not(:disabled),
-#scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
-  background: #d4d4d8 !important;
+#scythed-admin-modal button:not(header > button):not(.admin-list-badge):hover:not(:disabled) {
   background-color: #d4d4d8 !important;
   color: #18181b !important;
   -webkit-text-fill-color: #18181b !important;
@@ -8289,31 +8079,26 @@ html.dark #scythed-admin-modal .admin-theme-button:hover:not(:disabled) {
   filter: none !important;
   transform: none !important;
 }
-html.dark #scythed-admin-modal button:not(header > button),
-html.dark #scythed-admin-modal input[type="button"],
-html.dark #scythed-admin-modal input[type="submit"] {
-  background: #27272a !important;
+html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge) {
   background-color: #27272a !important;
+  background-image: none !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   border-color: #3f3f46 !important;
+  box-shadow: none !important;
 }
-html.dark #scythed-admin-modal button:not(header > button) *,
-html.dark #scythed-admin-modal input[type="button"] *,
-html.dark #scythed-admin-modal input[type="submit"] * {
+html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge) > *,
+html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge) i {
   color: inherit !important;
   -webkit-text-fill-color: inherit !important;
 }
-html.dark #scythed-admin-modal button:not(header > button):hover:not(:disabled),
-html.dark #scythed-admin-modal input[type="button"]:hover:not(:disabled),
-html.dark #scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
-  background: #3f3f46 !important;
+html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge):hover:not(:disabled) {
   background-color: #3f3f46 !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   border-color: #52525b !important;
 }
-/* X w nagłówku pozostaje bez tła. */
+/* Krzyżyk zamknięcia nagłówka nie dostaje tła. */
 #scythed-admin-modal header > button,
 #scythed-admin-modal header > button:hover {
   background: transparent !important;
@@ -8323,9 +8108,8 @@ html.dark #scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
   border-color: transparent !important;
   box-shadow: none !important;
 }
-/* Informacja o sesji i licznik zawsze czerwone, niezależnie od motywu i akcentu. */
+/* Tekst sesji administratora i licznik zawsze czerwone. */
 #scythed-admin-modal #admin-content-view p.text-brand-red,
-#scythed-admin-modal #admin-content-view .text-brand-red,
 #scythed-admin-modal #admin-session-countdown {
   color: #ef4444 !important;
   -webkit-text-fill-color: #ef4444 !important;
