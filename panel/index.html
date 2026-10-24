@@ -1657,7 +1657,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 
             <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-2">
                 <h3 class="font-orbitron font-bold text-sm md:text-base text-zinc-900 dark:text-white flex items-center gap-2">
-                    <i class="fas fa-gear text-brand-red"></i> USTAWIENIA & SYSTEM
+                    <i class="fas fa-gear text-brand-red"></i> USTAWIENIA
                 </h3>
                 <button onclick="window.scythedApp.closeModal('modal-settings')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times text-lg"></i></button>
             </div>
@@ -7879,31 +7879,48 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 .admin-name-owner-tag { display:inline-flex; align-items:center; padding:.16rem .48rem; border-radius:.42rem; border:1px solid rgba(250,204,21,.9); color:#facc15; background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)); background-size:220% 220%; animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite; line-height:1.35; }
 </style>
 
-<script id="scythed-admin-button-click-sounds">
+<script id="scythed-global-button-click-sounds-v2">
 (function () {
-  // Dźwięk kliknięcia dla przycisków panelu admina, zgodny z ustawieniem wyciszenia aplikacji.
   let ctx;
   function muted() {
     try {
       if (typeof window.isSoundMuted === 'boolean') return window.isSoundMuted;
+      const txt = (document.getElementById('sound-text')?.textContent || '').trim().toUpperCase();
+      if (txt === 'WYCISZONY' || txt === 'WYCISZONE') return true;
       const raw = localStorage.getItem('scythed_sound_muted') || localStorage.getItem('soundMuted') || localStorage.getItem('isSoundMuted');
       return raw === 'true' || raw === '1';
     } catch (_) { return false; }
   }
-  document.addEventListener('click', function (event) {
-    const target = event.target && event.target.closest ? event.target.closest('#scythed-admin-modal button, #scythed-admin-modal input[type="button"], #scythed-admin-modal input[type="submit"]') : null;
-    if (!target || target.disabled || target.dataset.scythedSoundPlayed === '1' || muted()) return;
-    // Nie dubluj dźwięku, jeśli przycisk ma już własny handler dźwięku.
-    if (target.hasAttribute('data-no-click-sound')) return;
+  function play() {
+    if (muted()) return;
     try {
       if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
       if (ctx.state === 'suspended') ctx.resume();
       const osc = ctx.createOscillator(), gain = ctx.createGain(), now = ctx.currentTime;
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.frequency.setValueAtTime(400, now); osc.frequency.exponentialRampToValueAtTime(200, now + 0.05);
-      gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
-      osc.start(now); osc.stop(now + 0.05);
+      osc.type = 'sine'; osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.setValueAtTime(420, now); osc.frequency.exponentialRampToValueAtTime(240, now + .055);
+      gain.gain.setValueAtTime(.09, now); gain.gain.exponentialRampToValueAtTime(.001, now + .06);
+      osc.start(now); osc.stop(now + .06);
     } catch (_) {}
+  }
+  document.addEventListener('click', function (event) {
+    const target = event.target && event.target.closest ? event.target.closest('button, input[type="button"], input[type="submit"]') : null;
+    if (!target || target.disabled || muted()) return;
+    if (target.id === 'sound-toggle-btn' || target.closest('#auth-overlay .brand-logo')) return;
+    if (target.dataset.scythedSoundPlayed === '1' || target.hasAttribute('data-no-click-sound')) return;
+    // Let existing app sounds handle their own controls to avoid duplicate tones.
+    if (target.closest('#scythed-admin-modal')) play();
+    else if (!target.hasAttribute('onclick') && !target.matches('[data-sound-handled]')) play();
+  }, true);
+  // Keep the global mute flag synchronized with the existing settings control.
+  document.addEventListener('click', function (event) {
+    const toggle = event.target && event.target.closest && event.target.closest('#sound-toggle-btn');
+    if (!toggle) return;
+    setTimeout(function () {
+      const text = (document.getElementById('sound-text')?.textContent || '').trim().toUpperCase();
+      window.isSoundMuted = (text === 'WYCISZONY' || text === 'WYCISZONE');
+      try { localStorage.setItem('scythed_sound_muted', window.isSoundMuted ? 'true' : 'false'); } catch (_) {}
+    }, 0);
   }, true);
 })();
 </script>
@@ -8387,4 +8404,10 @@ html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij p
 #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover i { color: #27272a !important; -webkit-text-fill-color: #27272a !important; background: transparent !important; background-color: transparent !important; }
 html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover,
 html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover i { color: #e4e4e7 !important; -webkit-text-fill-color: #e4e4e7 !important; }
+</style>
+
+<style id="scythed-admin-logo-theme-follow">
+/* Reuse the existing SCYTHED logo asset in the admin panel without changing its current dimensions. */
+#scythed-admin-modal img[alt*="logo" i], #scythed-admin-modal .brand-logo img, #scythed-admin-modal img.admin-logo { content:url('/assets/logos/logo.png?v=2'); object-fit:contain; }
+#scythed-admin-modal img[alt*="logo" i], #scythed-admin-modal .brand-logo img, #scythed-admin-modal img.admin-logo { filter: var(--scythed-logo-filter, none); }
 </style>
