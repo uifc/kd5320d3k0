@@ -6722,7 +6722,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const target = scythedAdminUsersCache.find(item => String(item.username).toLowerCase() === String(username || '').toLowerCase());
                 const targetPrivileged = String(username || '').toLowerCase() === 'szymon' || (target?.badges || []).some(b => b.badge === 'admin' || b.badge === 'owner');
                 if (!scythedIsOwner && targetPrivileged && String(username || '').toLowerCase() !== String(scythedAccountUsername || '').toLowerCase()) return adminMessage('Administrator nie może zmieniać hasła innemu administratorowi ani właścicielowi.', true);
-                const password = prompt(`Nowe hasło dla ${username} (minimum 12 znaków):`); if (password === null) return;
+                const password = await appPrompt(`Nowe hasło dla ${username} (minimum 12 znaków):`, '', { title: 'ZMIANA HASŁA', icon: 'fa-key', inputType: 'password', confirmText: 'ZAPISZ HASŁO' }); if (password === null) return;
                 const { response, data } = await adminApi('/api/admin/set-password', { username, password });
                 if (!response.ok) return adminMessage(`Zmiana hasła nieudana: ${data.error || 'błąd API'}`, true);
                 adminMessage(`Zmieniono hasło konta ${username}.`);
@@ -6751,7 +6751,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 if (!scythedIsOwner && targetPrivileged && String(username || '').toLowerCase() !== String(scythedAccountUsername || '').toLowerCase()) return adminMessage('Administrator nie może edytować odznak innego administratora ani właściciela.', true);
                 if (!badge) return adminMessage('Wybierz odznakę do odebrania.', true);
                 const label = ({owner:'Właściciel',admin:'Administrator',moderator:'Moderator',bug_hunter:'Łowca błędów',zasluzony:'Zasłużony',beta_tester:'Beta tester'})[badge] || badge;
-                if (!confirm(`Odebrać odznakę „${label}” kontu ${username}?`)) return;
+                if (!await appConfirm(`Odebrać odznakę „${label}” kontu ${username}?`, { title: 'ODEBRANIE ODZNAKI', icon: 'fa-award', confirmText: 'ODBIERZ ODZNAKĘ' })) return;
                 const account = scythedAdminUsersCache.find(item => String(item.username).toLowerCase() === username.toLowerCase());
                 const previous = (account?.badges || []).find(item => item.badge === badge);
                 const { response, data } = await adminApi('/api/admin/revoke-badge', { username, badge });
@@ -8012,3 +8012,42 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
  opacity:1 !important;
 }
 </style>
+
+
+<style id="scythed-panel-icons-readable-accent-fix">
+/* Ikony akcji w panelach korzystają z tej samej wersji akcentu o czytelnym kontraście. */
+#scythed-admin-modal button i,
+#scythed-admin-modal a i,
+#modal-browser button i,
+#modal-browser-accounts button i,
+#modal-browser-panel button i,
+.browser-panel button i,
+.browser-panel a i {
+  color: var(--brand-readable-accent, var(--brand-red, #ff0033));
+}
+</style>
+<script id="scythed-panel-icons-readable-accent-sync">
+(function(){
+  const root=document.documentElement;
+  function syncPanelIcons(){
+    const dark=root.classList.contains('dark');
+    const accent=getComputedStyle(root).getPropertyValue('--brand-red').trim() || '#ff0033';
+    let readable=dark ? '#ff5268' : '#c51630';
+    if(typeof window.getReadableBrandAccent==='function'){
+      try { readable=window.getReadableBrandAccent(accent,dark) || readable; } catch(e) {}
+    }
+    root.style.setProperty('--brand-readable-accent',readable);
+    document.querySelectorAll('#scythed-admin-modal button i, #scythed-admin-modal a i, #modal-browser button i, #modal-browser-accounts button i, #modal-browser-panel button i, .browser-panel button i, .browser-panel a i').forEach(icon=>{
+      if(icon.dataset.keepBrandColor==='true') return;
+      icon.style.setProperty('color','var(--brand-readable-accent, var(--brand-red, #ff0033))','important');
+      icon.style.setProperty('-webkit-text-fill-color','var(--brand-readable-accent, var(--brand-red, #ff0033))','important');
+    });
+  }
+  syncPanelIcons();
+  new MutationObserver(syncPanelIcons).observe(root,{attributes:true,attributeFilter:['class','style']});
+  document.addEventListener('input',()=>requestAnimationFrame(syncPanelIcons),true);
+  document.addEventListener('change',()=>requestAnimationFrame(syncPanelIcons),true);
+  document.addEventListener('click',()=>requestAnimationFrame(syncPanelIcons),true);
+  document.addEventListener('DOMContentLoaded',syncPanelIcons);
+})();
+</script>
