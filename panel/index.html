@@ -7946,3 +7946,16 @@ html.dark #modal-settings #backup-reminder-days option {
 #scythed-admin-modal .admin-list-badge.admin-list-bug > i { color: #4ade80 !important; -webkit-text-fill-color: #4ade80 !important; }
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2 > i { color: #3b82f6 !important; -webkit-text-fill-color: #3b82f6 !important; }
 </style>
+
+
+<style id="scythed-password-button-icon-accent-sync">
+/* Ikony obu przycisków „Zmień hasło” korzystają z tego samego dynamicznego akcentu co pozostałe loga, w obu motywach. */
+html body #modal-settings button.settings-password-action > i,
+html body #modal-settings button.settings-password-action:hover:not(:disabled) > i,
+html.dark body #modal-settings button.settings-password-action > i,
+html:not(.dark) body #modal-settings button.settings-password-action > i {
+  color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  opacity: 1 !important;
+}
+</style>
