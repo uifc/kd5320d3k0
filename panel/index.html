@@ -8957,3 +8957,63 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   if (modal && window.MutationObserver) new MutationObserver(clean).observe(modal, {subtree:true, childList:true, attributes:true, attributeFilter:['title','data-tooltip','aria-label','tabindex']});
 })();
 </script>
+
+
+<!-- SCYTHED: final icon-outline cleanup and consistent badge shimmer -->
+<style id="scythed-final-shine-outline-fix">
+/* Use the exact same shimmer motion and timing as Moderator/Zasłużony. */
+#profile-badges-container #badge-admin::after,
+#profile-badges-container #badge-owner::after,
+#scythed-admin-modal .admin-list-badge.admin-list-admin::after,
+#scythed-admin-modal .admin-list-badge.admin-list-owner::after {
+  animation: scythedSolidBadgeShine 3.1s ease-in-out infinite !important;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.52), transparent) !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+#profile-badges-container #badge-admin::after,
+#scythed-admin-modal .admin-list-badge.admin-list-admin::after {
+  background: linear-gradient(90deg, transparent, rgba(254,202,202,.72), transparent) !important;
+}
+#profile-badges-container #badge-owner::after,
+#scythed-admin-modal .admin-list-badge.admin-list-owner::after {
+  background: linear-gradient(90deg, transparent, rgba(254,240,138,.72), transparent) !important;
+}
+/* Remove the Level 2 Bug Hunter shine only; keep its solid blue tile. */
+#profile-badges-container .profile-badge-tooltip.bug-hunter-level-2::after,
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+/* The icon itself must not have a stroke/outline/shadow in the admin panel. */
+#scythed-admin-modal .admin-list-badge,
+#scythed-admin-modal .admin-list-badge:hover,
+#scythed-admin-modal .admin-list-badge:focus,
+#scythed-admin-modal .admin-list-badge:focus-visible,
+#scythed-admin-modal .admin-list-badge:active {
+  outline: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 transparent !important;
+}
+#scythed-admin-modal .admin-list-badge > i,
+#scythed-admin-modal .admin-list-badge > i::before,
+#scythed-admin-modal .admin-list-badge > svg,
+#scythed-admin-modal .admin-list-badge > span,
+#scythed-admin-modal .admin-list-badge > span::before {
+  outline: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 transparent !important;
+  background: transparent !important;
+}
+</style>
