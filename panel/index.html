@@ -7437,5 +7437,66 @@ html.dark #modal-settings .bg-zinc-100 { background-color:rgba(0,0,0,.55); }
   document.addEventListener('DOMContentLoaded',refresh);
 })();
 </script>
+
+
+<!-- SCYTHED v65: restore theme-specific surfaces and original badge/icon styling -->
+<style id="scythed-v65-theme-and-badge-restoration">
+/* W ciemnym motywie okna i kafelki ustawień zachowują wcześniejsze, ciemne powierzchnie. */
+html.dark #modal-settings .bg-white:not(.dark\:bg-brand-card),
+html.dark #modal-settings .bg-zinc-50,
+html.dark #modal-settings .bg-zinc-100 {
+  background-color: revert !important;
+}
+/* Próbnik koloru nakładki ma ten sam rozmiar, obramowanie i tło co próbnik koloru głównego. */
+#modal-settings #bg-overlay-color {
+  width:1.25rem !important; height:1.25rem !important;
+  padding:0 !important; border:0 !important; border-radius:0 !important;
+  background:transparent !important; box-shadow:none !important;
+  appearance:auto !important; cursor:pointer !important;
+}
+#modal-settings #bg-overlay-color::-webkit-color-swatch-wrapper,
+#modal-settings #brand-color-picker::-webkit-color-swatch-wrapper { padding:0 !important; }
+#modal-settings #bg-overlay-color::-webkit-color-swatch,
+#modal-settings #brand-color-picker::-webkit-color-swatch { border:0 !important; border-radius:3px !important; }
+#modal-settings #bg-overlay-color::-moz-color-swatch,
+#modal-settings #brand-color-picker::-moz-color-swatch { border:0 !important; border-radius:3px !important; }
+/* Zmiana hasła: ikony kłódki/użytkownika mają czytelny odcień akcentu, także w jasnym motywie. */
+#modal-settings .settings-password-action i,
+#modal-settings [class*="password"] > i,
+#modal-settings [id*="password"] + i,
+#modal-settings h4 i.fa-lock,
+#modal-settings h4 i.fa-user,
+#modal-settings label i.fa-lock,
+#modal-settings label i.fa-user {
+  color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important;
+  -webkit-text-fill-color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important;
+}
+/* „Zweryfikowane” ma zawsze niebieską paletę, niezależnie od akcentu. */
+#scythed-admin-modal .admin-verified-status,
+#scythed-admin-modal .admin-verified-status:hover {
+  color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important;
+  border-color:#3b82f6 !important; background:rgba(59,130,246,.12) !important;
+}
+#scythed-admin-modal .admin-verified-status > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
+/* Przywrócenie animowanej, złotej odznaki właściciela również w panelu administracyjnym. */
+#scythed-admin-modal .admin-list-badge.admin-list-owner,
+#scythed-admin-modal .admin-owner-status {
+  background-size:200% 100% !important;
+  animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important;
+  box-shadow:0 0 10px rgba(250,204,21,.22) !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-owner,
+#scythed-admin-modal .admin-list-badge.admin-list-owner:hover {
+  background-image:linear-gradient(120deg,rgba(120,74,0,.32),rgba(234,179,8,.62),rgba(133,77,14,.32),rgba(250,204,21,.68)) !important;
+  border-color:rgba(250,204,21,.95) !important; color:#facc15 !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-owner > i,
+#scythed-admin-modal .admin-owner-status > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+@media(prefers-reduced-motion:reduce) {
+  #scythed-admin-modal .admin-list-badge.admin-list-owner,
+  #scythed-admin-modal .admin-owner-status { animation:none !important; }
+}
+</style>
+
 </body>
 </html>
