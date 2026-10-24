@@ -1741,7 +1741,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                                 <label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Kolor Nakładki</label>
                                 <div class="flex items-center gap-2">
                                     <input type="color" id="bg-overlay-color" value="#000000" onchange="window.scythedApp.updateBgOverlayColor(this.value)" class="w-8 h-8 rounded border-0 bg-transparent cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
-                                    <span class="text-xs font-mono" id="bg-overlay-hex">#000000</span>
+                                    <input type="text" id="bg-overlay-hex" value="#000000" aria-label="Kod HEX koloru nakładki" onblur="window.scythedApp.updateBgOverlayColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" class="w-16 bg-transparent text-[11px] font-mono focus:outline-none uppercase text-center" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="7">
                                 </div>
                             </div>
 
@@ -2899,7 +2899,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 if (blurSlider) blurSlider.value = '0';
                 if (blurLabel) blurLabel.innerText = '0%';
                 if (colorPicker) colorPicker.value = appBgOverlayColor;
-                if (colorLabel) colorLabel.innerText = appBgOverlayColor.toUpperCase();
+                if (colorLabel) colorLabel.value = appBgOverlayColor.toUpperCase();
                 if (opacitySlider) opacitySlider.value = '40';
                 if (opacityLabel) opacityLabel.innerText = '40%';
 
@@ -2918,9 +2918,24 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 
             function updateBgOverlayColor(hex) {
                 appBgOverlayColor = hex;
-                document.getElementById('bg-overlay-hex').innerText = hex.toUpperCase();
+                document.getElementById('bg-overlay-hex').value = hex.toUpperCase();
                 applyAppBackgroundUI();
                 saveEncryptedState();
+            }
+
+            function updateBgOverlayColorFromText(value) {
+                const input = document.getElementById('bg-overlay-hex');
+                const picker = document.getElementById('bg-overlay-color');
+                const hex = String(value || '').trim().replace(/^#?/, '#');
+                if (!/^#[0-9a-fA-F]{6}$/.test(hex)) {
+                    if (input) input.value = String(appBgOverlayColor || '#000000').toUpperCase();
+                    showToast('Wpisz poprawny kod HEX, np. #000000.', 'error');
+                    return;
+                }
+                const normalized = hex.toLowerCase();
+                if (input) input.value = normalized.toUpperCase();
+                if (picker) picker.value = normalized;
+                updateBgOverlayColor(normalized);
             }
 
             function updateBgOverlayOpacity(val) {
@@ -4260,7 +4275,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 document.getElementById('bg-blur-slider').value = appBgBlur;
                 document.getElementById('bg-blur-val').innerText = `${appBgBlur}%`;
                 document.getElementById('bg-overlay-color').value = appBgOverlayColor;
-                document.getElementById('bg-overlay-hex').innerText = appBgOverlayColor.toUpperCase();
+                document.getElementById('bg-overlay-hex').value = appBgOverlayColor.toUpperCase();
                 document.getElementById('bg-opacity-slider').value = appBgOverlayOpacity;
                 document.getElementById('bg-opacity-val').innerText = `${appBgOverlayOpacity}%`;
 
@@ -6071,7 +6086,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const overlay = document.getElementById('bg-overlay-color');
                 if (overlay) overlay.value = appBgOverlayColor;
                 const overlayHex = document.getElementById('bg-overlay-hex');
-                if (overlayHex) overlayHex.innerText = appBgOverlayColor.toUpperCase();
+                if (overlayHex) overlayHex.value = appBgOverlayColor.toUpperCase();
                 const opacity = document.getElementById('bg-opacity-slider');
                 if (opacity) opacity.value = appBgOverlayOpacity;
                 const opacityVal = document.getElementById('bg-opacity-val');
@@ -6811,6 +6826,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 removeAppCustomBackground,
                 updateBgBlur,
                 updateBgOverlayColor,
+                updateBgOverlayColorFromText,
                 updateBgOverlayOpacity,
                 toggleStreamerMode,
                 generateAndSetPassword,
@@ -7729,5 +7745,88 @@ html.dark #modal-settings #backup-reminder-days:hover {
 }
 </style>
 
+
+
+<style id="scythed-final-hex-and-dropdown-typography-fix">
+/* Pola HEX i próbniki kolorów nie mogą pozostawać białe w ciemnym motywie. */
+#modal-settings #brand-hex-input,
+#modal-settings #bg-overlay-hex {
+  background-color: #e4e4e7 !important;
+  border: 1px solid #d4d4d8 !important;
+  color: #27272a !important;
+  border-radius: .45rem !important;
+  box-sizing: border-box !important;
+}
+html.dark #modal-settings #brand-hex-input,
+html.dark #modal-settings #bg-overlay-hex {
+  background-color: #27272a !important;
+  border-color: #52525b !important;
+  color: #f4f4f5 !important;
+  color-scheme: dark;
+}
+/* Wybierane listy mają tę samą rodzinę i zbliżoną wielkość pisma co animowany nagłówek SCYTHED. */
+#modal-settings #ui-scale-slider,
+#modal-settings #auto-lock-mode,
+#modal-settings #backup-reminder-days {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: .68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: .025em !important;
+  line-height: 1.25rem !important;
+  text-transform: uppercase;
+}
+#modal-settings #ui-scale-slider option,
+#modal-settings #auto-lock-mode option,
+#modal-settings #backup-reminder-days option {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: .68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: .015em !important;
+}
+html.dark #modal-settings #ui-scale-slider,
+html.dark #modal-settings #auto-lock-mode,
+html.dark #modal-settings #backup-reminder-days {
+  background-color: #27272a !important;
+  color: #f4f4f5 !important;
+  border-color: #52525b !important;
+  color-scheme: dark !important;
+}
+html.dark #modal-settings #ui-scale-slider option,
+html.dark #modal-settings #auto-lock-mode option,
+html.dark #modal-settings #backup-reminder-days option {
+  background-color: #27272a !important;
+  color: #f4f4f5 !important;
+}
+</style>
+
 </body>
 </html>
+
+
+<style id="scythed-dropdown-font-match-image-button-and-overlay-hex-input">
+/* Listy mają typografię przycisku „WYBIERZ OBRAZ”: zwykły sans-serif, 12 px, bold. */
+#modal-settings #auto-lock-mode,
+#modal-settings #backup-reminder-days {
+  font-family: inherit !important;
+  font-size: .75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.25rem !important;
+}
+#modal-settings #auto-lock-mode option,
+#modal-settings #backup-reminder-days option {
+  font-family: inherit !important;
+  font-size: .75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+#modal-settings #bg-overlay-hex {
+  width: 4rem !important; min-width: 4rem !important;
+  padding: .2rem .25rem !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 11px !important; font-weight: 600 !important;
+  text-align: center !important; text-transform: uppercase !important;
+}
+</style>
