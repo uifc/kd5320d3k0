@@ -6634,7 +6634,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                         return `<span title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}" data-tooltip="${escapeHtml(label)}" class="${m.cls}${levelClass}" role="img"><i class="fas ${m.icon}"></i></span>`;
                     }).join(' ') || '-';
                     const hasModeratorBadge = (u.badges || []).some(b => b.badge === 'moderator' || b.badge === 'mod');
-                    const verifiedBox = u.verified ? '<span class="admin-verified-status" title="Konto zweryfikowane"><i class="fas fa-circle-check mr-1"></i>ZWERYFIKOWANE</span>' : '<span class="text-zinc-500">Niezweryfikowane</span>';
+                    const verifiedBox = u.verified ? '<span class="admin-verified-status" title="Konto zweryfikowane"><i class="fas fa-circle-check mr-1"></i>ZWERYFIKOWANY</span>' : '<span class="text-zinc-500">Niezweryfikowane</span>';
                     // Konta uprzywilejowane pokazują wyłącznie rolę, bez osobnego statusu weryfikacji.
                     const status = isOwnerProfile
                         ? `<span class="admin-owner-status" title="Właściciel projektu"><i class="fas fa-crown mr-1"></i>WŁAŚCICIEL</span>`
@@ -6850,7 +6850,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 
     <div id="scythed-admin-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm p-3 md:p-6 flex items-center justify-center">
       <section class="w-full max-w-6xl max-h-[92vh] mx-auto bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 rounded-2xl shadow-2xl overflow-y-auto">
-        <header class="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3"><div><h2 class="font-orbitron font-extrabold text-lg text-zinc-900 dark:text-white"><i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL ADMINA</h2><p class="text-xs text-zinc-500 mt-1">Zarządzanie kontami i odznakami</p></div><button onclick="window.scythedApp.closeAdminPanel()" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Zamknij panel"><i class="fas fa-times text-lg"></i></button></header>
+        <header class="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3"><div><h2 class="font-orbitron font-extrabold text-lg text-zinc-900 dark:text-white"><i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL ADMINA</h2><p class="text-xs text-zinc-500 mt-1">Zarządzanie nazwami / kontami Scythed</p></div><button onclick="window.scythedApp.closeAdminPanel()" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Zamknij panel"><i class="fas fa-times text-lg"></i></button></header>
         <div id="admin-login-view" class="p-4 md:p-6 max-w-lg mx-auto space-y-4"><p class="text-sm text-zinc-600 dark:text-zinc-300">Panel wymaga aktywnej sesji konta SCYTHED uwierzytelnionego hasłem zapisanym w Cloudflare D1. Otwórz panel z Ustawień ogólnych i potwierdź hasłem konta SCYTHED.</p></div>
         <div id="admin-content-view" class="hidden p-4 md:p-6 space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-3"><p class="text-xs text-brand-red">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button onclick="window.scythedApp.adminToggleLogs()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-clock mr-1.5" aria-hidden="true"></i>LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-rotate mr-1.5" aria-hidden="true"></i>ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-right-from-bracket mr-1.5" aria-hidden="true"></i>WYLOGUJ</button></div></div>
@@ -7762,6 +7762,56 @@ html.dark #modal-settings #backup-reminder-days option {
 }
 </style>
 
+
+<style id="scythed-requested-admin-polish">
+/* Panel Admina: przycisk zamknięcia ma stały kolor akcentu, tak jak główne przyciski. */
+#scythed-admin-modal header > button[aria-label="Zamknij panel"] {
+  color: var(--brand-contrast-text, #fff) !important;
+  background: var(--brand-red, #ff0033) !important;
+  border: 1px solid var(--brand-red, #ff0033) !important;
+  border-radius: .55rem !important;
+  width: 2.25rem !important; height: 2.25rem !important;
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  transition: none !important;
+}
+#scythed-admin-modal header > button[aria-label="Zamknij panel"]:hover,
+#scythed-admin-modal header > button[aria-label="Zamknij panel"]:focus {
+  color: var(--brand-contrast-text, #fff) !important;
+  background: var(--brand-red, #ff0033) !important;
+  border-color: var(--brand-red, #ff0033) !important;
+  filter: none !important; opacity: 1 !important;
+}
+/* W panelu admina odznaki są statyczne w reakcji na kursor; tooltipy pozostają na profilu. */
+#scythed-admin-modal .admin-list-badge,
+#scythed-admin-modal .admin-owner-status { cursor: default !important; }
+#scythed-admin-modal .admin-list-badge:hover,
+#scythed-admin-modal .admin-owner-status:hover { filter: none !important; }
+#scythed-admin-modal .admin-list-badge:hover::after { opacity: 1; }
+/* Jasny motyw: przyciemnij kolory odznak i statusów dla lepszego kontrastu. */
+html:not(.dark) #scythed-admin-modal .admin-list-owner,
+html:not(.dark) #scythed-admin-modal .admin-owner-status { color:#8a6500 !important; border-color:#a87900 !important; }
+html:not(.dark) #scythed-admin-modal .admin-list-owner > i { color:#8a6500 !important; }
+html:not(.dark) #scythed-admin-modal .admin-list-admin,
+html:not(.dark) #scythed-admin-modal .admin-admin-status { color:#b91c1c !important; border-color:#b91c1c !important; }
+html:not(.dark) #scythed-admin-modal .admin-list-zasluzony { color:#166534 !important; border-color:#15803d !important; }
+html:not(.dark) #scythed-admin-modal .admin-list-zasluzony > i { color:#166534 !important; }
+html:not(.dark) #scythed-admin-modal .admin-list-moderator,
+html:not(.dark) #scythed-admin-modal .admin-moderator-status,
+html:not(.dark) #scythed-admin-modal .admin-verified-status { color:#1d4ed8 !important; border-color:#2563eb !important; }
+html:not(.dark) #scythed-admin-modal .admin-list-bug { color:#166534 !important; border-color:#15803d !important; }
+html:not(.dark) #scythed-admin-modal .admin-list-beta { color:#854d0e !important; border-color:#a16207 !important; }
+/* Odznaka właściciela: żółty gradient i animacja są niezależne od koloru marki. */
+#scythed-admin-modal .admin-list-owner,
+#scythed-admin-modal .admin-owner-status {
+  background-size: 220% 220% !important;
+  animation: badgeGradientShift 3.2s ease-in-out infinite, badgePulseGlow 2.2s ease-in-out infinite !important;
+}
+@media(prefers-reduced-motion:reduce) {
+  #scythed-admin-modal .admin-list-owner,
+  #scythed-admin-modal .admin-owner-status { animation:none !important; }
+}
+</style>
+
 </body>
 </html>
 
@@ -7835,15 +7885,7 @@ html.dark #modal-settings #backup-reminder-days option {
 
 
 <style id="scythed-admin-badge-hover-and-bughunter2-fix">
-/* Odznaki w panelu admina zachowują stałe kolory jak na profilu. */
-#scythed-admin-modal .admin-list-badge,
-#scythed-admin-modal .admin-list-badge:hover,
-#scythed-admin-modal .admin-list-badge:focus,
-#scythed-admin-modal .admin-list-badge:active {
-  filter: none !important;
-  transform: none !important;
-  transition: none !important;
-}
+/* Odznaki w panelu admina zachowują kolory, a efekty najechania pozostają aktywne. */
 
 /* Łowca błędów poziom 1 — zielony */
 #scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2),
