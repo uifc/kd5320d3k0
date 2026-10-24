@@ -1626,7 +1626,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                         <i class="fas fa-network-wired text-[10px]"></i>
                     </div>
                     <div id="badge-beta-tester" class="profile-badge-tooltip hidden beta-tester-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm" data-tooltip="Beta Tester" aria-label="Beta Tester">
-                        <i class="fas fa-certificate text-blue-300 text-[10px]"></i>
+                        <i class="fas fa-flask text-[10px]"></i>
                     </div>
 
                 </div>
@@ -6616,7 +6616,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     moderator: { label: 'Moderator', icon: 'fa-hammer', cls: 'admin-list-badge admin-list-moderator moderator-badge' },
                     zasluzony: { label: 'Zasłużony', icon: 'fa-award', cls: 'admin-list-badge admin-list-zasluzony' },
                     bug_hunter: { label: 'Łowca błędów', icon: 'fa-network-wired', cls: 'admin-list-badge admin-list-bug bug-hunter-badge' },
-                    beta_tester: { label: 'Beta Tester', icon: 'fa-certificate', cls: 'admin-list-badge admin-list-beta beta-tester-badge' }
+                    beta_tester: { label: 'Beta Tester', icon: 'fa-flask', cls: 'admin-list-badge admin-list-beta beta-tester-badge' }
                 };
                 const badgeLabel = b => `${(badgeMeta[b.badge] || {label:b.badge}).label}${b.badge === 'bug_hunter' ? ` Poziom ${Math.max(1, Math.min(3, Number(b.level) || 1))}` : ''}`;
                 const sorted = [...users].sort((a,b) => {
@@ -9130,5 +9130,52 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   content: none !important;
   display: none !important;
   animation: none !important;
+}
+</style>
+
+
+<!-- SCYTHED: Beta Tester badge refreshed to a calm, matte blue-violet testing theme; no effects. -->
+<style id="scythed-beta-tester-matte-refresh">
+#profile-badges-container .beta-tester-badge,
+#profile-badges-container .beta-tester-badge:hover,
+#profile-badges-container .beta-tester-badge:focus,
+#scythed-admin-modal .admin-list-badge.admin-list-beta,
+#scythed-admin-modal .admin-list-badge.admin-list-beta:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-beta:focus,
+#scythed-admin-modal .admin-list-badge.admin-list-beta:active {
+  background: #172554 !important;
+  background-image: none !important;
+  border: 1px solid #60a5fa !important;
+  border-color: #60a5fa !important;
+  color: #dbeafe !important;
+  -webkit-text-fill-color: #dbeafe !important;
+  animation: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  outline: none !important;
+}
+#profile-badges-container .beta-tester-badge > i,
+#profile-badges-container .beta-tester-badge > svg,
+#scythed-admin-modal .admin-list-badge.admin-list-beta > i,
+#scythed-admin-modal .admin-list-badge.admin-list-beta > svg {
+  color: #93c5fd !important;
+  -webkit-text-fill-color: #93c5fd !important;
+  background: transparent !important;
+  animation: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+#profile-badges-container .beta-tester-badge::before,
+#profile-badges-container .beta-tester-badge::after,
+#scythed-admin-modal .admin-list-badge.admin-list-beta::before,
+#scythed-admin-modal .admin-list-badge.admin-list-beta::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  transition: none !important;
+  box-shadow: none !important;
 }
 </style>
