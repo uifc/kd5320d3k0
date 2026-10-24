@@ -8098,66 +8098,25 @@ html.dark #scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
 #scythed-admin-modal header > button:hover { background: transparent !important; border-color: transparent !important; box-shadow: none !important; }
 </style>
 
-
-<style id="scythed-admin-neutral-buttons-accent-actions-v2">
-/* Admin: neutralne przyciski jak jasne/szare kontrolki w Ustawieniach. */
-#scythed-admin-modal button:not(header > button):not(.admin-bottom-close):not(#admin-create-user-form button[type="submit"]),
+<style id="scythed-admin-button-text-color-sync-final">
+/* Wszystkie przyciski panelu admina używają tego samego dynamicznego koloru tekstu,
+   co przyciski ustawień. Kolor aktualizuje się razem z wybranym kolorem akcentu. */
+#scythed-admin-modal button:not(header > button),
 #scythed-admin-modal input[type="button"],
 #scythed-admin-modal input[type="submit"] {
-  background: #f4f4f5 !important;
-  color: #27272a !important;
-  border: 1px solid #d4d4d8 !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.65) !important;
-  transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease !important;
+  color: var(--brand-contrast-text, #111111) !important;
+  -webkit-text-fill-color: var(--brand-contrast-text, #111111) !important;
 }
-html.dark #scythed-admin-modal button:not(header > button):not(.admin-bottom-close):not(#admin-create-user-form button[type="submit"]),
-html.dark #scythed-admin-modal input[type="button"],
-html.dark #scythed-admin-modal input[type="submit"] {
-  background: #27272a !important;
-  color: #f4f4f5 !important;
-  border-color: #52525b !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.04) !important;
+#scythed-admin-modal button:not(header > button) > *,
+#scythed-admin-modal input[type="button"] > *,
+#scythed-admin-modal input[type="submit"] > * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
 }
-#scythed-admin-modal button:not(header > button):not(.admin-bottom-close):not(#admin-create-user-form button[type="submit"]):hover:not(:disabled),
+#scythed-admin-modal button:not(header > button):hover:not(:disabled),
 #scythed-admin-modal input[type="button"]:hover:not(:disabled),
 #scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
-  background: #e4e4e7 !important; border-color: #a1a1aa !important;
-}
-html.dark #scythed-admin-modal button:not(header > button):not(.admin-bottom-close):not(#admin-create-user-form button[type="submit"]):hover:not(:disabled),
-html.dark #scythed-admin-modal input[type="button"]:hover:not(:disabled),
-html.dark #scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
-  background: #3f3f46 !important; border-color: #71717a !important;
-}
-/* Dodaj konto oraz zamknięcie ustawień/panelu używają wybranego koloru głównego. */
-#add-entry-btn,
-#modal-settings button[onclick*="closeModal('modal-settings')"],
-#scythed-admin-modal .admin-bottom-close,
-#scythed-admin-modal #admin-create-user-form button[type="submit"] {
-  background: var(--brand-red, #ff0033) !important;
-  border-color: var(--brand-red, #ff0033) !important;
-  color: var(--brand-contrast-text, #fff) !important;
-  box-shadow: 0 0 15px var(--brand-red-glow, rgba(255,0,51,.25)) !important;
-}
-#add-entry-btn:hover,
-#modal-settings button[onclick*="closeModal('modal-settings')"]:hover,
-#scythed-admin-modal .admin-bottom-close:hover,
-#scythed-admin-modal #admin-create-user-form button[type="submit"]:hover {
-  background: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
-  border-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
-}
-/* Ikony neutralnych przycisków zachowują czytelny wariant koloru głównego. */
-#scythed-admin-modal button:not(.admin-bottom-close):not(#admin-create-user-form button[type="submit"]) > i,
-#add-entry-btn > i,
-#modal-settings button[onclick*="closeModal('modal-settings')"] > i,
-#scythed-admin-modal #admin-create-user-form button[type="submit"] > i {
-  color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
-  -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
-}
-#add-entry-btn > i,
-#modal-settings button[onclick*="closeModal('modal-settings')"] > i,
-#scythed-admin-modal .admin-bottom-close > i,
-#scythed-admin-modal #admin-create-user-form button[type="submit"] > i {
-  color: var(--brand-contrast-text, #fff) !important;
-  -webkit-text-fill-color: var(--brand-contrast-text, #fff) !important;
+  color: var(--brand-contrast-text, #111111) !important;
+  -webkit-text-fill-color: var(--brand-contrast-text, #111111) !important;
 }
 </style>
