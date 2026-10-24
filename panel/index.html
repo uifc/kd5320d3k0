@@ -8254,3 +8254,80 @@ html.dark #scythed-admin-modal .admin-theme-button:hover:not(:disabled) {
 }
 </style>
 
+
+
+<style id="scythed-admin-final-fixed-theme-colors">
+/* Finalne, niezależne od koloru akcentu kolory panelu administratora. */
+/* Przyciski (w tym górny pasek, tworzenie konta, operacje i zamknięcie panelu). */
+#scythed-admin-modal button:not(header > button),
+#scythed-admin-modal input[type="button"],
+#scythed-admin-modal input[type="submit"] {
+  background: #e4e4e7 !important;
+  background-color: #e4e4e7 !important;
+  color: #18181b !important;
+  -webkit-text-fill-color: #18181b !important;
+  border-color: #d4d4d8 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+#scythed-admin-modal button:not(header > button) *,
+#scythed-admin-modal input[type="button"] *,
+#scythed-admin-modal input[type="submit"] * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+#scythed-admin-modal button:not(header > button):hover:not(:disabled),
+#scythed-admin-modal input[type="button"]:hover:not(:disabled),
+#scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
+  background: #d4d4d8 !important;
+  background-color: #d4d4d8 !important;
+  color: #18181b !important;
+  -webkit-text-fill-color: #18181b !important;
+  border-color: #a1a1aa !important;
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+}
+html.dark #scythed-admin-modal button:not(header > button),
+html.dark #scythed-admin-modal input[type="button"],
+html.dark #scythed-admin-modal input[type="submit"] {
+  background: #27272a !important;
+  background-color: #27272a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #3f3f46 !important;
+}
+html.dark #scythed-admin-modal button:not(header > button) *,
+html.dark #scythed-admin-modal input[type="button"] *,
+html.dark #scythed-admin-modal input[type="submit"] * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+html.dark #scythed-admin-modal button:not(header > button):hover:not(:disabled),
+html.dark #scythed-admin-modal input[type="button"]:hover:not(:disabled),
+html.dark #scythed-admin-modal input[type="submit"]:hover:not(:disabled) {
+  background: #3f3f46 !important;
+  background-color: #3f3f46 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #52525b !important;
+}
+/* X w nagłówku pozostaje bez tła. */
+#scythed-admin-modal header > button,
+#scythed-admin-modal header > button:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+/* Informacja o sesji i licznik zawsze czerwone, niezależnie od motywu i akcentu. */
+#scythed-admin-modal #admin-content-view p.text-brand-red,
+#scythed-admin-modal #admin-content-view .text-brand-red,
+#scythed-admin-modal #admin-session-countdown {
+  color: #ef4444 !important;
+  -webkit-text-fill-color: #ef4444 !important;
+}
+</style>
