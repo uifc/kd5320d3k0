@@ -8700,3 +8700,113 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3::after { animation:none !important; }
 }
 </style>
+
+
+<style id="scythed-admin-profile-badge-parity-final">
+/* Ostateczne wyrównanie: status/odznaki w panelu nie zmieniają się przy najechaniu. */
+@keyframes scythedBadgeGradientUnified {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes scythedBadgeGlowUnified {
+  0%,100% { box-shadow: 0 0 4px rgba(255,255,255,.12); }
+  50% { box-shadow: 0 0 8px rgba(255,255,255,.22); }
+}
+@keyframes scythedBadgeShineUnified {
+  0%,100% { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
+  18% { opacity: .72; }
+  48% { opacity: .5; }
+  72% { opacity: 0; }
+}
+/* Administrator i Właściciel: jednakowe tempo animacji jak Łowca poziom 3, kolory odznak zachowane. */
+#profile-badges-container #badge-admin,
+#profile-badges-container #badge-owner,
+#profile-badges-container #badge-admin:hover,
+#profile-badges-container #badge-owner:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-owner,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-owner:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:focus,
+#scythed-admin-modal .admin-list-badge.admin-list-owner:focus {
+  opacity: 1 !important;
+  background-size: 300% 300% !important;
+  animation: scythedBadgeGradientUnified 3.2s ease-in-out infinite, scythedBadgeGlowUnified 3.2s ease-in-out infinite !important;
+  transition: none !important;
+  filter: none !important;
+}
+#profile-badges-container #badge-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:focus {
+  background-color: #991b1b !important;
+  background-image: linear-gradient(120deg,#7f1d1d 0%,#b91c1c 28%,#991b1b 55%,#dc2626 78%,#7f1d1d 100%) !important;
+  border-color: #f87171 !important; color: #fecaca !important;
+}
+#profile-badges-container #badge-owner,
+#scythed-admin-modal .admin-list-badge.admin-list-owner,
+#scythed-admin-modal .admin-list-badge.admin-list-owner:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-owner:focus {
+  background-color: #713f12 !important;
+  background-image: linear-gradient(120deg,#713f12 0%,#a16207 28%,#854d0e 55%,#ca8a04 78%,#713f12 100%) !important;
+  border-color: #eab308 !important; color: #facc15 !important;
+}
+#profile-badges-container #badge-admin::after,
+#profile-badges-container #badge-owner::after,
+#scythed-admin-modal .admin-list-badge.admin-list-admin::after,
+#scythed-admin-modal .admin-list-badge.admin-list-owner::after {
+  content: "" !important; position: absolute !important; inset: -35% auto -35% 0 !important;
+  width: 34% !important; pointer-events: none !important; border: 0 !important;
+  background: linear-gradient(90deg,transparent,rgba(255,255,255,.52),transparent) !important;
+  transform: translateX(-150%) skewX(-18deg);
+  animation: scythedBadgeShineUnified 3.2s ease-in-out infinite !important;
+}
+#profile-badges-container #badge-admin > i,
+#scythed-admin-modal .admin-list-badge.admin-list-admin > i { color:#fecaca !important; -webkit-text-fill-color:#fecaca !important; }
+#profile-badges-container #badge-owner > i,
+#scythed-admin-modal .admin-list-badge.admin-list-owner > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+/* Panelowe odznaki są dekoracyjne: brak hoverowych filtrów, zmian kolorów i tooltipów. */
+#scythed-admin-modal .admin-list-badge,
+#scythed-admin-modal .admin-list-badge:hover,
+#scythed-admin-modal .admin-list-badge:focus,
+#scythed-admin-modal .admin-list-badge:focus-visible {
+  transition: none !important; filter: none !important; transform: none !important;
+  text-shadow: none !important; cursor: default !important; outline: none !important;
+}
+#scythed-admin-modal .admin-list-badge::before { content: none !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-moderator,
+#scythed-admin-modal .admin-list-badge.admin-list-moderator:hover { background-color:#1e3a5f !important; background-image:none !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-zasluzony,
+#scythed-admin-modal .admin-list-badge.admin-list-zasluzony:hover { background-color:#14532d !important; background-image:none !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2,
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2:hover { background-color:#1e3a8a !important; background-image:none !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3,
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3:hover { background-color:#4c1d95 !important; background-image:linear-gradient(120deg,#2e1065 0%,#4c1d95 24%,#6d28d9 48%,#5b21b6 72%,#3b0764 100%) !important; background-size:300% 300% !important; animation:scythedBadgeGradientUnified 3.2s ease-in-out infinite,scythedBadgeGlowUnified 3.2s ease-in-out infinite !important; }
+@media (prefers-reduced-motion: reduce) {
+  #profile-badges-container #badge-admin,
+  #profile-badges-container #badge-admin::after,
+  #profile-badges-container #badge-owner,
+  #profile-badges-container #badge-owner::after,
+  #scythed-admin-modal .admin-list-badge.admin-list-admin,
+  #scythed-admin-modal .admin-list-badge.admin-list-owner,
+  #scythed-admin-modal .admin-list-badge.admin-list-admin::after,
+  #scythed-admin-modal .admin-list-badge.admin-list-owner::after { animation:none !important; }
+}
+</style>
+<script id="scythed-admin-badge-no-hover-tooltips">
+(() => {
+  const cleanAdminBadges = () => {
+    document.querySelectorAll('#scythed-admin-modal .admin-list-badge').forEach((badge) => {
+      badge.removeAttribute('title');
+      badge.removeAttribute('data-tooltip');
+      badge.removeAttribute('aria-label');
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cleanAdminBadges, { once: true });
+  else cleanAdminBadges();
+  const modal = document.getElementById('scythed-admin-modal');
+  if (modal && 'MutationObserver' in window) {
+    new MutationObserver(cleanAdminBadges).observe(modal, { childList: true, subtree: true, attributes: true, attributeFilter: ['title','data-tooltip','aria-label'] });
+  }
+})();
+</script>
