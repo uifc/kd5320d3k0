@@ -9017,3 +9017,46 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   background: transparent !important;
 }
 </style>
+
+
+<!-- SCYTHED: administrator badge border matching its red logo -->
+<style id="scythed-admin-logo-colored-border">
+#profile-badges-container #badge-admin,
+#profile-badges-container #badge-admin:hover,
+#profile-badges-container #badge-admin.fixed-owner-badge,
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover {
+  border: 1px solid #ef4444 !important;
+  outline: 1px solid #ef4444 !important;
+  outline-offset: -2px !important;
+}
+</style>
+
+
+<!-- SCYTHED: warmer gold OWNER badge; keep ADMIN badge styling from v3 -->
+<style id="scythed-owner-badge-gold-final">
+#profile-badges-container #badge-owner,
+#profile-badges-container #badge-owner:hover,
+#profile-badges-container #badge-owner.fixed-owner-badge,
+#scythed-admin-modal .admin-list-badge.admin-list-owner,
+#scythed-admin-modal .admin-list-badge.admin-list-owner:hover {
+  background-color: #a16207 !important;
+  background-image: linear-gradient(120deg, #a16207 0%, #d97706 32%, #facc15 58%, #ca8a04 78%, #a16207 100%) !important;
+  background-size: 220% 220% !important;
+  border-color: #facc15 !important;
+  outline-color: #facc15 !important;
+  color: #fff7cc !important;
+  animation: badgeGradientShift 3.2s ease-in-out infinite !important;
+}
+#profile-badges-container #badge-owner > i,
+#profile-badges-container #badge-owner > svg,
+#scythed-admin-modal .admin-list-badge.admin-list-owner > i,
+#scythed-admin-modal .admin-list-badge.admin-list-owner > svg {
+  color: #fff2a8 !important;
+  -webkit-text-fill-color: #fff2a8 !important;
+}
+#profile-badges-container #badge-owner::after,
+#scythed-admin-modal .admin-list-badge.admin-list-owner::after {
+  background: linear-gradient(90deg, transparent, rgba(255,248,180,.9), transparent) !important;
+}
+</style>
