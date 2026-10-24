@@ -6986,43 +6986,6 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 /* Keep 1.0x at the physical center of the speed slider. */
 #modal-settings #header-animation-speed { min-width: 0; touch-action: pan-y; }
 </style>
-<script id="scythed-final-v25-live-accent-sync">
-(function(){
-  function syncAccentButtons(){
-    const root = document.documentElement;
-    const color = getComputedStyle(root).getPropertyValue('--brand-red').trim() || '#ff0033';
-    const hover = getComputedStyle(root).getPropertyValue('--brand-hover-red').trim() || color;
-    const glow = getComputedStyle(root).getPropertyValue('--brand-red-glow').trim() || 'rgba(255,0,51,.35)';
-    document.querySelectorAll('#scythed-admin-modal .admin-bottom-close, #scythed-admin-modal .admin-primary-action, #scythed-admin-modal button[onclick*="adminToggleLogs"], #scythed-admin-modal button[onclick*="adminRefreshUsers"], #scythed-admin-modal button[onclick*="adminLogout"]').forEach(function(btn){
-      btn.style.setProperty('background-color', color, 'important');
-      btn.style.setProperty('background', color, 'important');
-      btn.style.setProperty('border-color', color, 'important');
-      btn.style.setProperty('color', '#fff', 'important');
-      btn.style.setProperty('box-shadow', '0 0 15px ' + glow, 'important');
-      if (!btn.dataset.scythedAccentHoverBound) {
-        btn.addEventListener('mouseenter', function(){
-          const h = getComputedStyle(document.documentElement).getPropertyValue('--brand-hover-red').trim() || getComputedStyle(document.documentElement).getPropertyValue('--brand-red').trim() || '#ff0033';
-          this.style.setProperty('background-color', h, 'important'); this.style.setProperty('background', h, 'important'); this.style.setProperty('border-color', h, 'important');
-        });
-        btn.addEventListener('mouseleave', function(){
-          const c = getComputedStyle(document.documentElement).getPropertyValue('--brand-red').trim() || '#ff0033';
-          this.style.setProperty('background-color', c, 'important'); this.style.setProperty('background', c, 'important'); this.style.setProperty('border-color', c, 'important');
-        });
-        btn.dataset.scythedAccentHoverBound = '1';
-      }
-    });
-  }
-  syncAccentButtons();
-  const observer = new MutationObserver(syncAccentButtons);
-  observer.observe(document.documentElement, {attributes:true, attributeFilter:['style','class']});
-  const admin = document.getElementById('scythed-admin-modal');
-  if (admin) observer.observe(admin, {subtree:true, childList:true, attributes:true, attributeFilter:['class','style']});
-  document.addEventListener('click', function(){ setTimeout(syncAccentButtons, 0); }, true);
-  document.addEventListener('DOMContentLoaded', syncAccentButtons);
-})();
-</script>
-
-
 <style id="scythed-v63-contrast-and-accent-consistency">
 /* Kolor akcentu jest spójny, ale nie ingeruje w indywidualne kolory odznak. */
 #modal-settings #general-admin-open-panel-wrap > span {
@@ -8116,14 +8079,13 @@ html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge
 }
 </style>
 
-<style id="scythed-admin-fixed-neutral-button-colors-css-only">
-/* CSS-only fix: no observers or runtime loops. Button colors never use the user accent. */
-#scythed-admin-modal #admin-content-view button:not(.admin-list-badge):not(.admin-badge-select),
-#scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select),
+<style id="scythed-admin-neutral-button-colors-final">
+/* Stable admin buttons. This overrides the previous live-accent rules; no JS re-colors buttons. */
+#scythed-admin-modal button.admin-primary-action,
 #scythed-admin-modal button.admin-bottom-close,
-#scythed-admin-modal button#admin-logs-refresh,
-#scythed-admin-modal button#admin-refresh-logs,
-#scythed-admin-modal button#admin-logs-clear {
+#scythed-admin-modal #admin-create-user-form button[type="submit"],
+#scythed-admin-modal #admin-content-view button:not(.admin-list-badge):not(.admin-badge-select),
+#scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select) {
   background: #e4e4e7 !important;
   background-color: #e4e4e7 !important;
   background-image: none !important;
@@ -8132,16 +8094,21 @@ html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge
   border-color: #d4d4d8 !important;
   box-shadow: none !important;
   text-shadow: none !important;
+  filter: none !important;
 }
+#scythed-admin-modal button.admin-primary-action *,
+#scythed-admin-modal button.admin-bottom-close *,
+#scythed-admin-modal #admin-create-user-form button[type="submit"] *,
 #scythed-admin-modal #admin-content-view button:not(.admin-list-badge):not(.admin-badge-select) *,
-#scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select) *,
-#scythed-admin-modal button.admin-bottom-close * {
+#scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select) * {
   color: #18181b !important;
   -webkit-text-fill-color: #18181b !important;
 }
+#scythed-admin-modal button.admin-primary-action:hover:not(:disabled),
+#scythed-admin-modal button.admin-bottom-close:hover:not(:disabled),
+#scythed-admin-modal #admin-create-user-form button[type="submit"]:hover:not(:disabled),
 #scythed-admin-modal #admin-content-view button:not(.admin-list-badge):not(.admin-badge-select):hover:not(:disabled),
-#scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select):hover:not(:disabled),
-#scythed-admin-modal button.admin-bottom-close:hover:not(:disabled) {
+#scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select):hover:not(:disabled) {
   background: #d4d4d8 !important;
   background-color: #d4d4d8 !important;
   color: #18181b !important;
@@ -8150,12 +8117,11 @@ html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge
   box-shadow: none !important;
   transform: none !important;
 }
-html.dark #scythed-admin-modal #admin-content-view button:not(.admin-list-badge):not(.admin-badge-select),
-html.dark #scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select),
+html.dark #scythed-admin-modal button.admin-primary-action,
 html.dark #scythed-admin-modal button.admin-bottom-close,
-html.dark #scythed-admin-modal button#admin-logs-refresh,
-html.dark #scythed-admin-modal button#admin-refresh-logs,
-html.dark #scythed-admin-modal button#admin-logs-clear {
+html.dark #scythed-admin-modal #admin-create-user-form button[type="submit"],
+html.dark #scythed-admin-modal #admin-content-view button:not(.admin-list-badge):not(.admin-badge-select),
+html.dark #scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select) {
   background: #27272a !important;
   background-color: #27272a !important;
   background-image: none !important;
@@ -8164,22 +8130,26 @@ html.dark #scythed-admin-modal button#admin-logs-clear {
   border-color: #3f3f46 !important;
   box-shadow: none !important;
 }
+html.dark #scythed-admin-modal button.admin-primary-action *,
+html.dark #scythed-admin-modal button.admin-bottom-close *,
+html.dark #scythed-admin-modal #admin-create-user-form button[type="submit"] *,
 html.dark #scythed-admin-modal #admin-content-view button:not(.admin-list-badge):not(.admin-badge-select) *,
-html.dark #scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select) *,
-html.dark #scythed-admin-modal button.admin-bottom-close * {
+html.dark #scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select) * {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
+html.dark #scythed-admin-modal button.admin-primary-action:hover:not(:disabled),
+html.dark #scythed-admin-modal button.admin-bottom-close:hover:not(:disabled),
+html.dark #scythed-admin-modal #admin-create-user-form button[type="submit"]:hover:not(:disabled),
 html.dark #scythed-admin-modal #admin-content-view button:not(.admin-list-badge):not(.admin-badge-select):hover:not(:disabled),
-html.dark #scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select):hover:not(:disabled),
-html.dark #scythed-admin-modal button.admin-bottom-close:hover:not(:disabled) {
+html.dark #scythed-admin-modal #admin-login-view button:not(.admin-list-badge):not(.admin-badge-select):hover:not(:disabled) {
   background: #3f3f46 !important;
   background-color: #3f3f46 !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   border-color: #52525b !important;
 }
-/* Header close X remains transparent; session line and countdown stay red. */
+/* Keep the header X transparent and session text red. */
 #scythed-admin-modal header > button,
 #scythed-admin-modal header > button:hover {
   background: transparent !important;
