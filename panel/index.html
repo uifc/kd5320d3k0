@@ -7006,8 +7006,90 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 })();
 </script>
 
-</body>
-</html>
+
+<style id="scythed-v63-contrast-and-accent-consistency">
+/* Kolor akcentu jest spójny, ale nie ingeruje w indywidualne kolory odznak. */
+#modal-settings #general-admin-open-panel-wrap > span {
+  color: var(--brand-red, #ff0033) !important;
+}
+#modal-settings #general-admin-open-panel-wrap .admin-access-logo {
+  color: var(--brand-red, #ff0033) !important;
+}
+/* Tekst i ikony akcji admina dziedziczą kontrast wyliczony z koloru głównego. */
+#scythed-admin-modal .admin-bottom-close,
+#scythed-admin-modal .admin-primary-action,
+#scythed-admin-modal button[onclick*="adminToggleLogs"],
+#scythed-admin-modal button[onclick*="adminRefreshUsers"],
+#scythed-admin-modal button[onclick*="adminLogout"],
+#scythed-admin-modal #admin-create-user-form button[type="submit"] {
+  color: var(--scythed-accent-contrast, #fff) !important;
+}
+#scythed-admin-modal .admin-bottom-close > i,
+#scythed-admin-modal .admin-primary-action > i,
+#scythed-admin-modal button[onclick*="adminToggleLogs"] > i,
+#scythed-admin-modal button[onclick*="adminRefreshUsers"] > i,
+#scythed-admin-modal button[onclick*="adminLogout"] > i,
+#scythed-admin-modal #admin-create-user-form button[type="submit"] > i {
+  color: inherit !important;
+}
+/* Zachowaj oryginalne, tematyczne kolory odznak i statusów — nie nadpisuj ich akcentem. */
+#scythed-admin-modal .admin-list-badge,
+#scythed-admin-modal .admin-list-badge > i,
+#scythed-admin-modal .admin-owner-status,
+#scythed-admin-modal .admin-verified-status,
+#scythed-admin-modal .admin-list-bug,
+#scythed-admin-modal .admin-list-zasluzony {
+  forced-color-adjust: auto;
+}
+</style>
+<script id="scythed-v63-dynamic-contrast">
+(function () {
+  function parseColor(value) {
+    if (!value) return null;
+    value = String(value).trim();
+    let m = value.match(/^#([\da-f]{3}|[\da-f]{6})$/i);
+    if (m) {
+      let h = m[1];
+      if (h.length === 3) h = h.split('').map(c => c + c).join('');
+      return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+    }
+    m = value.match(/^rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/i);
+    if (m) return [Number(m[1]), Number(m[2]), Number(m[3])];
+    return null;
+  }
+  function luminance(rgb) {
+    const channels = rgb.map(v => {
+      v = Math.max(0, Math.min(255, v)) / 255;
+      return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+  }
+  function sync() {
+    const root = document.documentElement;
+    const css = getComputedStyle(root);
+    const accent = css.getPropertyValue('--brand-red').trim() || '#ff0033';
+    const rgb = parseColor(accent);
+    // Bright accents (e.g. yellow) need dark text; darker accents need white text.
+    const contrast = rgb && luminance(rgb) > 0.43 ? '#18181b' : '#ffffff';
+    root.style.setProperty('--scythed-accent-contrast', contrast);
+    const admin = document.getElementById('scythed-admin-modal');
+    if (!admin) return;
+    admin.querySelectorAll('.admin-bottom-close, .admin-primary-action, button[onclick*="adminToggleLogs"], button[onclick*="adminRefreshUsers"], button[onclick*="adminLogout"], #admin-create-user-form button[type="submit"]').forEach(btn => {
+      // Set only foreground contrast; preserve each badge's independent palette.
+      btn.style.setProperty('color', contrast, 'important');
+      btn.querySelectorAll(':scope > i').forEach(icon => icon.style.setProperty('color', 'inherit', 'important'));
+    });
+  }
+  sync();
+  const mo = new MutationObserver(sync);
+  mo.observe(document.documentElement, {attributes:true, attributeFilter:['style','class']});
+  document.addEventListener('DOMContentLoaded', sync);
+  document.addEventListener('click', () => requestAnimationFrame(sync), true);
+  document.addEventListener('input', () => requestAnimationFrame(sync), true);
+})();
+</script>
+
+
 
 
 <style id="scythed-final-v22-admin-and-auth-fixes">
@@ -7096,3 +7178,82 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
   border-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
 }
 </style>
+
+
+<!-- SCYTHED badge palette lock v64 -->
+<style id="scythed-v64-admin-badge-palette-lock">
+/* Odznaki w panelu admina mają własną, stałą paletę — niezależną od koloru głównego i jasnego/ciemnego motywu. */
+#scythed-admin-modal .admin-list-badge.admin-list-owner,
+#scythed-admin-modal .admin-list-badge.admin-list-owner:hover { background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)) !important; border-color:rgba(250,204,21,.9) !important; color:#facc15 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-owner > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover { background:linear-gradient(120deg,rgba(69,10,10,.32),rgba(185,28,28,.56),rgba(127,29,29,.28),rgba(220,38,38,.62)) !important; border-color:rgba(248,113,113,.92) !important; color:#f87171 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-admin > i { color:#f87171 !important; -webkit-text-fill-color:#f87171 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-moderator,
+#scythed-admin-modal .admin-list-badge.admin-list-moderator:hover { background:linear-gradient(120deg,rgba(23,37,84,.34),rgba(30,64,125,.42),rgba(29,58,115,.32),rgba(59,95,150,.44)) !important; border-color:rgba(96,135,190,.68) !important; color:#a0bce3 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-moderator > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-zasluzony,
+#scythed-admin-modal .admin-list-badge.admin-list-zasluzony:hover { background:linear-gradient(120deg,rgba(20,83,45,.42),rgba(34,197,94,.62),rgba(21,128,61,.42),rgba(74,222,128,.68)) !important; border-color:rgba(74,222,128,.92) !important; color:#86efac !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-zasluzony > i { color:#4ade80 !important; -webkit-text-fill-color:#4ade80 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-bug,
+#scythed-admin-modal .admin-list-badge.admin-list-bug:hover { background:rgba(34,197,94,.14) !important; border-color:rgba(34,197,94,.65) !important; color:#4ade80 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-bug > i { color:#4ade80 !important; -webkit-text-fill-color:#4ade80 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-beta,
+#scythed-admin-modal .admin-list-badge.admin-list-beta:hover { background:rgba(250,204,21,.10) !important; border-color:rgba(250,204,21,.55) !important; color:#facc15 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-beta > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+#scythed-admin-modal .admin-owner-status { color:#facc15 !important; border-color:rgba(250,204,21,.7) !important; background:linear-gradient(110deg,rgba(120,74,0,.16),rgba(234,179,8,.3),rgba(120,74,0,.16)) !important; }
+#scythed-admin-modal .admin-admin-status { color:#ef4444 !important; border-color:#ef4444 !important; background:rgba(239,68,68,.12) !important; }
+#scythed-admin-modal .admin-moderator-status { color:#60a5fa !important; border-color:#3b82f6 !important; background:rgba(59,130,246,.12) !important; }
+#scythed-admin-modal .admin-verified-status { color:#60a5fa !important; border-color:#3b82f6 !important; background:rgba(59,130,246,.12) !important; }
+</style>
+
+<style id="scythed-admin-badges-accent-fix">
+/* Admin badges follow the current primary accent rather than hard-coded colors. */
+#scythed-admin-modal .admin-list-badge,
+#scythed-admin-modal .admin-list-badge:hover,
+#scythed-admin-modal .admin-owner-status,
+#scythed-admin-modal .admin-admin-status,
+#scythed-admin-modal .admin-moderator-status,
+#scythed-admin-modal .admin-verified-status {
+  background: color-mix(in srgb, var(--brand-red, var(--primary-color, #e11d48)) 18%, transparent) !important;
+  border-color: color-mix(in srgb, var(--brand-red, var(--primary-color, #e11d48)) 72%, transparent) !important;
+  color: var(--scythed-accent-contrast, #fff) !important;
+  -webkit-text-fill-color: var(--scythed-accent-contrast, #fff) !important;
+}
+#scythed-admin-modal .admin-list-badge > i,
+#scythed-admin-modal .admin-owner-status > i,
+#scythed-admin-modal .admin-admin-status > i,
+#scythed-admin-modal .admin-moderator-status > i,
+#scythed-admin-modal .admin-verified-status > i {
+  color: var(--brand-red, var(--primary-color, #e11d48)) !important;
+  -webkit-text-fill-color: var(--brand-red, var(--primary-color, #e11d48)) !important;
+}
+</style>
+<script id="scythed-admin-badges-accent-fix-script">
+(() => {
+  const root = document.documentElement;
+  function syncAdminBadgeAccent() {
+    const css = getComputedStyle(root);
+    let accent = (css.getPropertyValue('--brand-red') || css.getPropertyValue('--primary-color') || '').trim();
+    if (!accent) accent = '#e11d48';
+    let rgb = null;
+    if (/^#[0-9a-f]{3}$/i.test(accent)) accent = '#' + accent.slice(1).split('').map(c => c+c).join('');
+    const hex = accent.match(/^#([0-9a-f]{6})$/i);
+    const rgbMatch = accent.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+    if (hex) rgb = [parseInt(hex[1].slice(0,2),16),parseInt(hex[1].slice(2,4),16),parseInt(hex[1].slice(4,6),16)];
+    else if (rgbMatch) rgb = rgbMatch.slice(1,4).map(Number);
+    if (rgb) {
+      const lum = (rgb.map(v => { v /= 255; return v <= .04045 ? v/12.92 : Math.pow((v+.055)/1.055,2.4); })[0]*.2126) + (rgb.map(v => { v /= 255; return v <= .04045 ? v/12.92 : Math.pow((v+.055)/1.055,2.4); })[1]*.7152) + (rgb.map(v => { v /= 255; return v <= .04045 ? v/12.92 : Math.pow((v+.055)/1.055,2.4); })[2]*.0722);
+      root.style.setProperty('--scythed-accent-contrast', lum > .43 ? '#18181b' : '#ffffff');
+    }
+  }
+  syncAdminBadgeAccent();
+  new MutationObserver(syncAdminBadgeAccent).observe(root, {attributes:true, attributeFilter:['style','class']});
+  document.addEventListener('DOMContentLoaded', syncAdminBadgeAccent);
+  document.addEventListener('input', () => requestAnimationFrame(syncAdminBadgeAccent), true);
+  document.addEventListener('click', () => requestAnimationFrame(syncAdminBadgeAccent), true);
+})();
+</script>
+
+</body>
+</html>
