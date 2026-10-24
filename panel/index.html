@@ -6597,7 +6597,16 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             function adminFilterUsers() {
                 const q = String(document.getElementById("admin-protected-name-search")?.value || "").trim().toLowerCase();
                 const rank = { owner: 0, admin: 1, moderator: 2, zasluzony: 3, bug_hunter: 4, beta_tester: 5 };
-                const filtered = scythedAdminUsersCache.filter(u => { const badges = (u.badges || []).map(b => b.badge === "mod" ? "moderator" : b.badge).join(" "); return `${u.username} ${u.displayName || ""} ${u.verified ? "zweryfikowane zabezpieczona" : "niezweryfikowane"} ${badges}`.toLowerCase().includes(q); });
+                const badgeSearchNames = { owner: "Właściciel", admin: "Administrator", moderator: "Moderator", mod: "Moderator", zasluzony: "Zasłużony", bug_hunter: "Łowca błędów", beta_tester: "Beta Tester" };
+                const filtered = scythedAdminUsersCache.filter(u => {
+                    const badges = (u.badges || []).map(b => {
+                        const key = b.badge === "mod" ? "moderator" : b.badge;
+                        const label = badgeSearchNames[key] || key || "";
+                        return `${label} ${key} ${key === "bug_hunter" ? `Poziom ${Number(b.level) === 2 ? 2 : 1}` : ""}`;
+                    }).join(" ");
+                    const status = u.verified ? "Zweryfikowany zweryfikowana zabezpieczona" : "Niezweryfikowany niezabezpieczona";
+                    return `${u.username || ""} ${u.displayName || ""} ${status} ${badges}`.toLocaleLowerCase("pl").includes(q);
+                });
                 filtered.sort((a,b) => {
                     const getRank = u => { const keys=(u.badges||[]).map(x=>x.badge); return Math.min(...keys.map(k=>rank[k] ?? 99), 99); };
                     const ar=getRank(a), br=getRank(b); return ar-br || String(a.username).localeCompare(String(b.username), 'pl');
@@ -6864,7 +6873,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             </form>
           </section>
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
-          <div class="space-y-2"><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj zabezpieczonych nazw / kont / odznak…" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" aria-label="Szukaj zabezpieczonych nazw" autocomplete="off" autocorrect="off" spellcheck="false"><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
+          <div class="space-y-2"><div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none" aria-hidden="true"></i><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj..." class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent py-2 pl-9 pr-3 text-sm" aria-label="Szukaj zabezpieczonych nazw"></div><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
           <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="moderator">Moderator</option><option value="zasluzony">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
           <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button type="button" onclick="window.scythedApp.closeAdminPanel()" class="admin-bottom-close w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAMKNIJ PANEL ADMINA</button></div>
         </div>
@@ -8336,4 +8345,16 @@ html:not(.dark) #scythed-admin-modal header > button i {
 }
 #scythed-admin-modal header > button:focus,
 #scythed-admin-modal header > button:active { background: transparent !important; background-color: transparent !important; }
+</style>
+
+<style id="scythed-admin-close-x-match-settings-and-search-final">
+/* Match the Settings close icon: neutral theme-aware gray, brighter on hover, transparent background. */
+#scythed-admin-modal > section > header > button[aria-label="Zamknij panel"],
+#scythed-admin-modal > section > header > button[aria-label="Zamknij panel"] i { color: #71717a !important; -webkit-text-fill-color: #71717a !important; transition: color .16s ease !important; background: transparent !important; background-color: transparent !important; border: 0 !important; box-shadow: none !important; }
+html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"],
+html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"] i { color: #a1a1aa !important; -webkit-text-fill-color: #a1a1aa !important; }
+#scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover,
+#scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover i { color: #27272a !important; -webkit-text-fill-color: #27272a !important; background: transparent !important; background-color: transparent !important; }
+html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover,
+html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover i { color: #e4e4e7 !important; -webkit-text-fill-color: #e4e4e7 !important; }
 </style>
