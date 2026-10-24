@@ -7349,5 +7349,93 @@ button.bg-brand-red > *, button[class~="bg-brand-red"] > *,
 form button[type="submit"].bg-brand-red > * { color:inherit !important; }
 </style>
 
+<style id="scythed-light-theme-readability-v64">
+/* W jasnym motywie ikony/akcenty mają kontrastową wersję wybranego koloru. */
+html:not(.dark) #modal-settings .text-brand-red,
+html:not(.dark) #modal-settings h4,
+html:not(.dark) #modal-settings [style*="color: var(--brand-red"],
+html:not(.dark) #modal-settings i.text-brand-red,
+html:not(.dark) #modal-settings .fas.text-brand-red,
+html:not(.dark) #modal-settings .far.text-brand-red,
+html:not(.dark) #modal-settings .admin-access-logo {
+  color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important;
+}
+/* Panel administracyjny: sam napis neutralny, ikona zostaje akcentowa. */
+#modal-settings #general-admin-open-panel-wrap > span { color:#fff !important; }
+html:not(.dark) #modal-settings #general-admin-open-panel-wrap > span { color:#111827 !important; }
+#modal-settings #general-admin-open-panel-wrap .admin-access-logo { color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important; }
+/* Szare, neutralne powierzchnie kontrolek — także próbnik i pole HEX. */
+#modal-settings #brand-color-picker,
+#modal-settings #brand-hex-input,
+#modal-settings #bg-overlay-color,
+#modal-settings #bg-overlay-hex {
+  background-color:#e5e7eb !important;
+  border-color:#cbd5e1 !important;
+  color:#1f2937 !important;
+  border-radius:.45rem;
+}
+html:not(.dark) #modal-settings select,
+html:not(.dark) #modal-settings input:not([type="range"]):not([type="color"]):not([type="checkbox"]):not([type="file"]),
+html:not(.dark) #modal-settings button:not(.theme-accent-action) {
+  color:#1f2937;
+}
+html:not(.dark) #modal-settings select,
+html:not(.dark) #modal-settings #brand-color-picker,
+html:not(.dark) #modal-settings #brand-hex-input,
+html:not(.dark) #modal-settings #bg-overlay-hex {
+  background-color:#e5e7eb !important;
+  border-color:#cbd5e1 !important;
+}
+/* Ikony w kontrolkach odzwierciedlają czytelny odcień wybranego akcentu. */
+#modal-settings button i:not(.fa-times),
+#modal-settings h4 i,
+#modal-settings label i,
+#modal-settings span i,
+#modal-settings .settings-password-action i {
+  color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important;
+}
+/* W jasnym motywie teksty pomocnicze nie mogą znikać na jasnym tle. */
+html:not(.dark) #modal-settings .text-zinc-400,
+html:not(.dark) #modal-settings .text-zinc-500,
+html:not(.dark) #modal-settings .text-gray-400,
+html:not(.dark) #modal-settings .text-gray-500,
+html:not(.dark) #modal-settings [class*="text-zinc-500"],
+html:not(.dark) #modal-settings [class*="text-gray-400"],
+html:not(.dark) #modal-settings [class*="text-gray-500"] { color:#4b5563 !important; }
+#modal-settings #backup-reminder-days,
+#modal-settings #auto-lock-mode,
+#modal-settings #ui-scale-slider { font-weight:800 !important; }
+#modal-settings #backup-reminder-status { font-weight:700 !important; }
+/* Jasne tła w ustawieniach spójne z neutralnym szarym tłem kontrolki dźwięku. */
+#modal-settings .bg-white:not(.dark\:bg-brand-card),
+#modal-settings .bg-zinc-50,
+#modal-settings .bg-zinc-100 { background-color:#f3f4f6; }
+html.dark #modal-settings .bg-zinc-50,
+html.dark #modal-settings .bg-zinc-100 { background-color:rgba(0,0,0,.55); }
+</style>
+<script id="scythed-light-theme-readability-sync-v64">
+(function(){
+  const root=document.documentElement;
+  function refresh(){
+    const dark=root.classList.contains('dark');
+    const accent=getComputedStyle(root).getPropertyValue('--brand-red').trim() || '#ff0033';
+    if(typeof window.getReadableBrandAccent==='function'){
+      root.style.setProperty('--brand-readable-accent',window.getReadableBrandAccent(accent,dark));
+    }
+    const adminLabel=document.querySelector('#modal-settings #general-admin-open-panel-wrap > span');
+    if(adminLabel) adminLabel.style.color=dark?'#ffffff':'#111827';
+    document.querySelectorAll('#modal-settings button i, #modal-settings h4 i, #modal-settings label i, #modal-settings span i').forEach(icon=>{
+      if(icon.classList.contains('fa-times')) return;
+      icon.style.color='var(--brand-readable-accent, var(--brand-red, #ff0033))';
+    });
+  }
+  refresh();
+  new MutationObserver(refresh).observe(root,{attributes:true,attributeFilter:['class','style']});
+  document.addEventListener('input',()=>requestAnimationFrame(refresh),true);
+  document.addEventListener('change',()=>requestAnimationFrame(refresh),true);
+  document.addEventListener('click',()=>requestAnimationFrame(refresh),true);
+  document.addEventListener('DOMContentLoaded',refresh);
+})();
+</script>
 </body>
 </html>
