@@ -7595,5 +7595,101 @@ html:not(.dark) #modal-settings #bg-overlay-hex, html:not(.dark) #modal-settings
 }
 </style>
 
+
+<!-- SCYTHED v67: final theme and visual consistency fixes -->
+<style id="scythed-final-visual-fixes-v67">
+/* Przyciski akcji: ten sam akcent co UTWÓRZ KONTO, niezależnie od motywu. */
+#scythed-admin-modal #admin-create-user-form button[type="submit"],
+#scythed-admin-modal #global-toggle-emails,
+#scythed-admin-modal #global-toggle-passwords,
+#scythed-admin-modal #admin-refresh-logs,
+#scythed-admin-modal #admin-logs-refresh,
+#scythed-admin-modal #admin-logout,
+#scythed-admin-modal #admin-logs-clear,
+#scythed-admin-modal .admin-primary-action,
+#scythed-admin-modal button.theme-accent-action {
+  background:var(--brand-red,#ff0033) !important;
+  color:#fff !important; -webkit-text-fill-color:#fff !important;
+  border-color:var(--brand-red,#ff0033) !important;
+}
+#scythed-admin-modal #admin-create-user-form button[type="submit"]:hover,
+#scythed-admin-modal #global-toggle-emails:hover,
+#scythed-admin-modal #global-toggle-passwords:hover,
+#scythed-admin-modal #admin-refresh-logs:hover,
+#scythed-admin-modal #admin-logs-refresh:hover,
+#scythed-admin-modal #admin-logout:hover,
+#scythed-admin-modal #admin-logs-clear:hover,
+#scythed-admin-modal .admin-primary-action:hover,
+#scythed-admin-modal button.theme-accent-action:hover {
+  background:var(--brand-hover-red,var(--brand-red,#cc0029)) !important;
+  border-color:var(--brand-hover-red,var(--brand-red,#cc0029)) !important;
+}
+#scythed-admin-modal #admin-create-user-form button[type="submit"] i,
+#scythed-admin-modal #global-toggle-emails i,
+#scythed-admin-modal #global-toggle-passwords i,
+#scythed-admin-modal #admin-refresh-logs i,
+#scythed-admin-modal #admin-logs-refresh i,
+#scythed-admin-modal #admin-logout i,
+#scythed-admin-modal #admin-logs-clear i { color:#fff !important; -webkit-text-fill-color:#fff !important; }
+/* Elementy ustawień zmieniają kolory wraz z klasą html.dark, a nie pozostają w jasnej palecie. */
+html.dark #modal-settings select,
+html.dark #modal-settings select option,
+html.dark #scythed-admin-modal select,
+html.dark #scythed-admin-modal select option {
+  color:#f4f4f5 !important; background-color:#18181b !important;
+}
+html:not(.dark) #modal-settings select,
+html:not(.dark) #modal-settings select option,
+html:not(.dark) #scythed-admin-modal select,
+html:not(.dark) #scythed-admin-modal select option {
+  color:#18181b !important; background-color:#f4f4f5 !important;
+}
+html.dark #modal-settings select:focus, html.dark #scythed-admin-modal select:focus { outline-color:var(--brand-red,#ff0033) !important; }
+/* Próbnik koloru nakładki ma identyczny rozmiar i oprawę jak próbnik koloru głównego. */
+#modal-settings #brand-color-picker,
+#modal-settings #bg-overlay-color {
+  box-sizing:border-box !important; display:block !important;
+  width:20px !important; min-width:20px !important; max-width:20px !important;
+  height:20px !important; min-height:20px !important; max-height:20px !important;
+  padding:0 !important; margin:0 !important; border:0 !important;
+  border-radius:3px !important; background:transparent !important;
+  appearance:none !important; -webkit-appearance:none !important; overflow:hidden !important;
+  cursor:pointer !important;
+}
+#modal-settings #brand-color-picker::-webkit-color-swatch-wrapper,
+#modal-settings #bg-overlay-color::-webkit-color-swatch-wrapper { padding:0 !important; }
+#modal-settings #brand-color-picker::-webkit-color-swatch,
+#modal-settings #bg-overlay-color::-webkit-color-swatch { border:1px solid rgba(127,127,127,.55) !important; border-radius:3px !important; }
+#modal-settings #brand-color-picker::-moz-color-swatch,
+#modal-settings #bg-overlay-color::-moz-color-swatch { border:1px solid rgba(127,127,127,.55) !important; border-radius:3px !important; }
+/* Tytuł efektów nakładki ma być neutralny, a ikona nadal akcentowa. */
+#modal-settings #app-bg-effects-panel > span { color:#111827 !important; }
+html.dark #modal-settings #app-bg-effects-panel > span { color:#fff !important; }
+#modal-settings #app-bg-effects-panel > span > i { color:var(--brand-red,#ff0033) !important; -webkit-text-fill-color:var(--brand-red,#ff0033) !important; }
+/* Kolor ikony, tekstu i tła odznaki musi być zgodny; przywrócenie animacji właściciela. */
+#badge-owner {
+  color:#facc15 !important; -webkit-text-fill-color:#facc15 !important;
+  background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)) !important;
+  background-size:220% 220% !important; border-color:rgba(250,204,21,.9) !important;
+  animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important;
+}
+#badge-owner > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+#badge-admin { color:#f87171 !important; -webkit-text-fill-color:#f87171 !important; animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important; }
+#badge-admin > i { color:#f87171 !important; -webkit-text-fill-color:#f87171 !important; }
+#badge-moderator { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important; }
+#badge-moderator > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
+#scythed-admin-modal .admin-owner-status, #scythed-admin-modal .admin-owner-status > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+#scythed-admin-modal .admin-admin-status, #scythed-admin-modal .admin-admin-status > i { color:#f87171 !important; -webkit-text-fill-color:#f87171 !important; }
+#scythed-admin-modal .admin-moderator-status, #scythed-admin-modal .admin-moderator-status > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-owner > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-admin > i { color:#f87171 !important; -webkit-text-fill-color:#f87171 !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-moderator > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
+@media(prefers-reduced-motion:reduce) {
+  #badge-owner,#badge-admin,#badge-moderator,#scythed-admin-modal .admin-list-badge,
+  #scythed-admin-modal .admin-owner-status,#scythed-admin-modal .admin-admin-status,
+  #scythed-admin-modal .admin-moderator-status { animation:none !important; }
+}
+</style>
+
 </body>
 </html>
