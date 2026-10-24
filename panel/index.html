@@ -8388,3 +8388,51 @@ html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij p
 html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover,
 html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover i { color: #e4e4e7 !important; -webkit-text-fill-color: #e4e4e7 !important; }
 </style>
+
+
+<style id="scythed-admin-status-animation-and-logs-close">
+/* Administrator: animowana odznaka w stylu statusu Właściciela. */
+#scythed-admin-modal .admin-admin-status {
+  background: linear-gradient(110deg, rgba(69,10,10,.30), rgba(220,38,38,.55), rgba(127,29,29,.30), rgba(248,113,113,.55)) !important;
+  background-size: 220% 220% !important;
+  border-color: rgba(248,113,113,.95) !important;
+  color: #fecaca !important;
+  box-shadow: 0 0 9px rgba(239,68,68,.20);
+  animation: scythedAdminStatusShift 3.2s ease-in-out infinite, badgePulseGlow 2.2s ease-in-out infinite !important;
+}
+#scythed-admin-modal .admin-admin-status i { color: #fca5a5 !important; }
+@keyframes scythedAdminStatusShift {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+/* Przycisk zamykania sekcji logów: spójny, wyraźny i z delikatnym hoverem. */
+#scythed-admin-modal #admin-logs-section button[onclick*="admin-logs-section"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .35rem !important;
+  padding: .35rem .7rem !important;
+  border: 1px solid rgba(239,68,68,.35) !important;
+  border-radius: .55rem !important;
+  background: rgba(239,68,68,.08) !important;
+  color: #f87171 !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: .04em !important;
+  transition: background .16s ease, border-color .16s ease, color .16s ease, transform .16s ease !important;
+}
+#scythed-admin-modal #admin-logs-section button[onclick*="admin-logs-section"]:hover {
+  background: rgba(239,68,68,.16) !important;
+  border-color: rgba(248,113,113,.75) !important;
+  color: #fca5a5 !important;
+  transform: translateY(-1px);
+}
+html:not(.dark) #scythed-admin-modal .admin-admin-status {
+  color: #b91c1c !important;
+  background: linear-gradient(110deg, rgba(254,226,226,.8), rgba(252,165,165,.55), rgba(254,226,226,.8)) !important;
+  border-color: rgba(220,38,38,.6) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #scythed-admin-modal .admin-admin-status { animation: none !important; }
+}
+</style>
