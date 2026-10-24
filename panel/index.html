@@ -8602,3 +8602,101 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2::after { animation: none !important; }
 }
 </style>
+
+
+<!-- SCYTHED FINAL BADGE CONSISTENCY FIX -->
+<style id="scythed-final-badge-consistency-fix">
+/* Wspólny rytm animacji dla wszystkich odznak: bez szybszego pulsu Administratora ani Łowcy poziomu 3. */
+@keyframes scythedUnifiedBadgeGlow {
+  0%, 100% { box-shadow: 0 0 3px rgba(255,255,255,.10); }
+  50% { box-shadow: 0 0 7px rgba(255,255,255,.20); }
+}
+#profile-badges-container #badge-admin,
+#profile-badges-container #badge-admin.fixed-owner-badge {
+  background-color: #991b1b !important;
+  background-image: linear-gradient(120deg,#7f1d1d 0%,#b91c1c 28%,#991b1b 55%,#dc2626 78%,#7f1d1d 100%) !important;
+  background-size: 300% 300% !important;
+  border-color: #f87171 !important;
+  color: #fecaca !important;
+  opacity: 1 !important;
+  animation: badgeGradientShift 3.2s ease-in-out infinite, scythedUnifiedBadgeGlow 3.2s ease-in-out infinite !important;
+  box-shadow: 0 0 4px rgba(239,68,68,.22) !important;
+}
+#profile-badges-container #badge-admin::after {
+  content: "" !important;
+  background: linear-gradient(110deg,transparent 42%,rgba(254,202,202,.10) 47%,rgba(255,255,255,.48) 50%,rgba(248,113,113,.12) 53%,transparent 58%) !important;
+  animation: badgeShine 3.1s ease-in-out infinite !important;
+}
+/* Poziom 3: kryjący, mocno fioletowy gradient i ten sam czas animacji co pozostałe odznaki. */
+#profile-badges-container .profile-badge-tooltip.bug-hunter-level-3,
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3,
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3:hover {
+  background-color: #4c1d95 !important;
+  background-image: linear-gradient(120deg,#2e1065 0%,#4c1d95 24%,#6d28d9 48%,#5b21b6 72%,#3b0764 100%) !important;
+  background-size: 300% 300% !important;
+  border-color: #c4b5fd !important;
+  color: #ede9fe !important;
+  opacity: 1 !important;
+  animation: scythedVioletGradient 3.2s ease-in-out infinite, scythedUnifiedBadgeGlow 3.2s ease-in-out infinite !important;
+  box-shadow: 0 0 5px rgba(109,40,217,.30) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+#profile-badges-container .profile-badge-tooltip.bug-hunter-level-3::after,
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: -35% auto -35% 0 !important;
+  width: 34% !important;
+  background: linear-gradient(90deg,transparent,rgba(255,255,255,.52),transparent) !important;
+  transform: translateX(-150%) skewX(-18deg);
+  animation: scythedSolidBadgeShine 3.1s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+#profile-badges-container .profile-badge-tooltip.bug-hunter-level-3 > i,
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3 > i {
+  color: #ede9fe !important;
+  -webkit-text-fill-color: #ede9fe !important;
+}
+/* Odznaki w panelu używają takich samych pełnych kolorów i efektów jak profil. */
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover {
+  background-color: #991b1b !important;
+  background-image: linear-gradient(120deg,#7f1d1d 0%,#b91c1c 28%,#991b1b 55%,#dc2626 78%,#7f1d1d 100%) !important;
+  background-size: 300% 300% !important;
+  border-color: #f87171 !important;
+  color: #fecaca !important;
+  opacity: 1 !important;
+  animation: badgeGradientShift 3.2s ease-in-out infinite, scythedUnifiedBadgeGlow 3.2s ease-in-out infinite !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-admin > i { color:#fecaca !important; -webkit-text-fill-color:#fecaca !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-moderator,
+#scythed-admin-modal .admin-list-badge.admin-list-moderator:hover { background:#1e3a5f !important; background-image:none !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-zasluzony,
+#scythed-admin-modal .admin-list-badge.admin-list-zasluzony:hover { background:#14532d !important; background-image:none !important; }
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2,
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2:hover { background:#1e3a8a !important; background-image:none !important; }
+/* Status konta Administrator: czerwony, jednolity i statyczny — jak status Moderator pod względem formy. */
+#scythed-admin-modal .admin-admin-status,
+#scythed-admin-modal .admin-admin-status:hover {
+  background: rgba(220,38,38,.12) !important;
+  background-image: none !important;
+  border: 1px solid #ef4444 !important;
+  color: #f87171 !important;
+  box-shadow: none !important;
+  animation: none !important;
+  text-shadow: none !important;
+}
+#scythed-admin-modal .admin-admin-status > i { color:#f87171 !important; -webkit-text-fill-color:#f87171 !important; }
+#scythed-admin-modal .admin-admin-status::before,
+#scythed-admin-modal .admin-admin-status::after { content:none !important; display:none !important; animation:none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #profile-badges-container #badge-admin,
+  #profile-badges-container #badge-admin::after,
+  #profile-badges-container .bug-hunter-level-3,
+  #profile-badges-container .bug-hunter-level-3::after,
+  #scythed-admin-modal .admin-list-badge.admin-list-admin,
+  #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3,
+  #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3::after { animation:none !important; }
+}
+</style>
