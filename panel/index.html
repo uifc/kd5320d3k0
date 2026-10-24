@@ -8115,3 +8115,121 @@ html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge
   -webkit-text-fill-color: #ef4444 !important;
 }
 </style>
+
+<style id="scythed-admin-fixed-button-colors-v2">
+/* Stałe neutralne kolory tylko dla przycisków panelu admina; nie zmieniamy tła panelu, pól ani odznak. */
+#scythed-admin-modal button:not(header > button):not(.admin-list-badge):not(.admin-badge-select) {
+  background-color: #e4e4e7 !important;
+  background-image: none !important;
+  color: #18181b !important;
+  -webkit-text-fill-color: #18181b !important;
+  border-color: #d4d4d8 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+#scythed-admin-modal button:not(header > button):not(.admin-list-badge):not(.admin-badge-select) > *,
+#scythed-admin-modal button:not(header > button):not(.admin-list-badge):not(.admin-badge-select) i {
+  color: #18181b !important;
+  -webkit-text-fill-color: #18181b !important;
+}
+#scythed-admin-modal button:not(header > button):not(.admin-list-badge):not(.admin-badge-select):hover:not(:disabled) {
+  background-color: #d4d4d8 !important;
+  color: #18181b !important;
+  -webkit-text-fill-color: #18181b !important;
+  border-color: #a1a1aa !important;
+}
+html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge):not(.admin-badge-select) {
+  background-color: #27272a !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #3f3f46 !important;
+  box-shadow: none !important;
+}
+html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge):not(.admin-badge-select) > *,
+html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge):not(.admin-badge-select) i {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge):not(.admin-badge-select):hover:not(:disabled) {
+  background-color: #3f3f46 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #52525b !important;
+}
+#scythed-admin-modal header > button,
+#scythed-admin-modal header > button:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+#scythed-admin-modal #admin-content-view p.text-brand-red,
+#scythed-admin-modal #admin-session-countdown {
+  color: #ef4444 !important;
+  -webkit-text-fill-color: #ef4444 !important;
+}
+</style>
+<script id="scythed-admin-fixed-button-colors-runtime-v2">
+(function () {
+  const modal = document.getElementById('scythed-admin-modal');
+  if (!modal || modal.dataset.fixedNeutralButtonsV2 === '1') return;
+  modal.dataset.fixedNeutralButtonsV2 = '1';
+
+  function applyFixedButtonColors() {
+    const dark = document.documentElement.classList.contains('dark');
+    const bg = dark ? '#27272a' : '#e4e4e7';
+    const fg = dark ? '#ffffff' : '#18181b';
+    const border = dark ? '#3f3f46' : '#d4d4d8';
+    const hoverBg = dark ? '#3f3f46' : '#d4d4d8';
+    const hoverBorder = dark ? '#52525b' : '#a1a1aa';
+
+    modal.querySelectorAll('button:not(header > button):not(.admin-list-badge):not(.admin-badge-select)').forEach(function (button) {
+      button.style.setProperty('background-color', bg, 'important');
+      button.style.setProperty('background-image', 'none', 'important');
+      button.style.setProperty('color', fg, 'important');
+      button.style.setProperty('-webkit-text-fill-color', fg, 'important');
+      button.style.setProperty('border-color', border, 'important');
+      button.style.setProperty('box-shadow', 'none', 'important');
+      button.querySelectorAll('*').forEach(function (child) {
+        child.style.setProperty('color', fg, 'important');
+        child.style.setProperty('-webkit-text-fill-color', fg, 'important');
+      });
+    });
+    const session = modal.querySelector('#admin-session-countdown');
+    if (session) {
+      session.style.setProperty('color', '#ef4444', 'important');
+      session.style.setProperty('-webkit-text-fill-color', '#ef4444', 'important');
+    }
+    const sessionText = modal.querySelector('#admin-content-view p.text-brand-red');
+    if (sessionText) {
+      sessionText.style.setProperty('color', '#ef4444', 'important');
+      sessionText.style.setProperty('-webkit-text-fill-color', '#ef4444', 'important');
+    }
+  }
+
+  modal.addEventListener('mouseover', function (event) {
+    const button = event.target.closest && event.target.closest('button:not(header > button):not(.admin-list-badge):not(.admin-badge-select)');
+    if (!button || !modal.contains(button) || button.disabled) return;
+    const dark = document.documentElement.classList.contains('dark');
+    button.style.setProperty('background-color', dark ? '#3f3f46' : '#d4d4d8', 'important');
+    button.style.setProperty('border-color', dark ? '#52525b' : '#a1a1aa', 'important');
+  });
+  modal.addEventListener('mouseout', function (event) {
+    const button = event.target.closest && event.target.closest('button:not(header > button):not(.admin-list-badge):not(.admin-badge-select)');
+    if (!button || !modal.contains(button) || (event.relatedTarget && button.contains(event.relatedTarget))) return;
+    applyFixedButtonColors();
+  });
+
+  applyFixedButtonColors();
+  new MutationObserver(function () { applyFixedButtonColors(); }).observe(modal, {
+    subtree: true, childList: true, attributes: true, attributeFilter: ['class', 'style']
+  });
+  new MutationObserver(applyFixedButtonColors).observe(document.documentElement, {
+    attributes: true, attributeFilter: ['class']
+  });
+  document.addEventListener('DOMContentLoaded', applyFixedButtonColors);
+})();
+</script>
