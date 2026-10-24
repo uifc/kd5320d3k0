@@ -7843,3 +7843,29 @@ html.dark #modal-settings #backup-reminder-days option {
   line-height: 1.25rem !important;
 }
 </style>
+
+
+<style id="scythed-admin-badge-hover-match-profile">
+/* Odznaki w panelu admina reagują na hover tak samo subtelnie jak odznaki na profilu. */
+#scythed-admin-modal .admin-list-badge,
+#scythed-admin-modal .admin-list-badge:hover,
+#scythed-admin-modal .admin-list-badge:focus,
+#scythed-admin-modal .admin-list-badge:focus-visible {
+  transform: none !important;
+  scale: none !important;
+  filter: none;
+  transition: filter 120ms ease !important;
+  cursor: help;
+}
+#scythed-admin-modal .admin-list-badge:hover {
+  filter: brightness(1.12) !important;
+}
+#scythed-admin-modal .admin-list-badge::before,
+#scythed-admin-modal .admin-list-badge::after {
+  pointer-events: none !important;
+}
+#scythed-admin-modal .admin-list-badge > i {
+  transform: none !important;
+  transition: none !important;
+}
+</style>
