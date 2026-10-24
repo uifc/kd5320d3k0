@@ -7914,6 +7914,22 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 }
 </style>
 
+
+
+<!-- SCYTHED: lighter red border for the Administrator badge, in profile and admin panel -->
+<style id="scythed-admin-lighter-border-v9">
+#profile-badges-container #badge-admin,
+#profile-badges-container #badge-admin:hover,
+#profile-badges-container #badge-admin.fixed-owner-badge,
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:focus,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:active {
+  border-color: #fca5a5 !important;
+  outline-color: #fca5a5 !important;
+}
+</style>
+
 </body>
 </html>
 
@@ -9177,5 +9193,49 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   animation: none !important;
   transition: none !important;
   box-shadow: none !important;
+}
+</style>
+
+
+<!-- SCYTHED: consistent subtle hover feedback for every badge, matching the Zasluzony badge -->
+<style id="scythed-unified-badge-hover-feedback">
+/* Profile badges: a small lift and gentle brightness on hover, without shine/animation. */
+#profile-badges-container .profile-badge-tooltip,
+#profile-badges-container .profile-badge-tooltip > i,
+#scythed-admin-modal .admin-list-badge,
+#scythed-admin-modal .admin-list-badge > i,
+#scythed-admin-modal .admin-list-badge > svg {
+  transition: transform 160ms ease, filter 160ms ease, border-color 160ms ease !important;
+}
+#profile-badges-container .profile-badge-tooltip:hover,
+#scythed-admin-modal .admin-list-badge:hover {
+  transform: translateY(-1px) !important;
+  filter: brightness(1.12) !important;
+}
+#profile-badges-container .profile-badge-tooltip:hover > i,
+#scythed-admin-modal .admin-list-badge:hover > i,
+#scythed-admin-modal .admin-list-badge:hover > svg {
+  transform: scale(1.04) !important;
+}
+/* Beta Tester stays matte: no glow, shine, or animated effects. */
+#profile-badges-container .beta-tester-badge:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-beta:hover {
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+#profile-badges-container .beta-tester-badge::before,
+#profile-badges-container .beta-tester-badge::after,
+#scythed-admin-modal .admin-list-badge.admin-list-beta::before,
+#scythed-admin-modal .admin-list-badge.admin-list-beta::after {
+  animation: none !important;
+  box-shadow: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #profile-badges-container .profile-badge-tooltip,
+  #profile-badges-container .profile-badge-tooltip > i,
+  #scythed-admin-modal .admin-list-badge,
+  #scythed-admin-modal .admin-list-badge > i,
+  #scythed-admin-modal .admin-list-badge > svg { transition: none !important; }
 }
 </style>
