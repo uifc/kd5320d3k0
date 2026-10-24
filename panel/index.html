@@ -8810,3 +8810,150 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   }
 })();
 </script>
+
+
+<!-- SCYTHED: final admin/owner badge parity and inert admin-panel badges -->
+<style id="scythed-final-admin-owner-parity">
+@keyframes scythedBadgeShineFinal {
+  0%, 100% { transform: translateX(-155%) skewX(-18deg); opacity: 0; }
+  18% { opacity: .68; }
+  48% { opacity: .5; }
+  72% { opacity: 0; }
+}
+/* Moderator-like badge treatment: opaque solid base + one shared shimmer, no faster gradient/pulse. */
+#profile-badges-container #badge-admin,
+#profile-badges-container #badge-admin.fixed-owner-badge,
+#profile-badges-container #badge-owner,
+#profile-badges-container #badge-admin:hover,
+#profile-badges-container #badge-owner:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-owner,
+#scythed-admin-modal .admin-list-badge.admin-list-owner:hover {
+  position: relative !important;
+  overflow: hidden !important;
+  opacity: 1 !important;
+  background-size: auto !important;
+  animation: none !important;
+  transition: none !important;
+  filter: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* Administrator: opaque red like Moderator's badge form, retaining its own icon/tooltip. */
+#profile-badges-container #badge-admin,
+#profile-badges-container #badge-admin.fixed-owner-badge,
+#profile-badges-container #badge-admin:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover {
+  background: #7f1d1d !important;
+  background-image: none !important;
+  border: 1px solid #f87171 !important;
+  color: #fecaca !important;
+  animation: none !important;
+}
+/* Owner: opaque gold, same structure and animation timing. */
+#profile-badges-container #badge-owner,
+#profile-badges-container #badge-owner:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-owner,
+#scythed-admin-modal .admin-list-badge.admin-list-owner:hover {
+  background: #713f12 !important;
+  background-image: none !important;
+  border: 1px solid #eab308 !important;
+  color: #facc15 !important;
+  animation: none !important;
+}
+/* Identical shine speed on profile and admin-panel copies. */
+#profile-badges-container #badge-admin::after,
+#profile-badges-container #badge-owner::after,
+#scythed-admin-modal .admin-list-badge.admin-list-admin::after,
+#scythed-admin-modal .admin-list-badge.admin-list-owner::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: -35% !important;
+  bottom: -35% !important;
+  left: 0 !important;
+  width: 34% !important;
+  inset-inline-end: auto !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  transform: translateX(-155%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.52), transparent) !important;
+  animation: scythedBadgeShineFinal 3.2s ease-in-out infinite !important;
+}
+#profile-badges-container #badge-admin::after,
+#scythed-admin-modal .admin-list-badge.admin-list-admin::after {
+  background: linear-gradient(90deg, transparent, rgba(254,202,202,.62), transparent) !important;
+}
+#profile-badges-container #badge-owner::after,
+#scythed-admin-modal .admin-list-badge.admin-list-owner::after {
+  background: linear-gradient(90deg, transparent, rgba(254,240,138,.62), transparent) !important;
+}
+/* Icons must not get their own border/outline; only the badge tile has a border. */
+#profile-badges-container #badge-admin > i,
+#profile-badges-container #badge-owner > i,
+#scythed-admin-modal .admin-list-badge > i {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+#profile-badges-container #badge-admin > i,
+#scythed-admin-modal .admin-list-badge.admin-list-admin > i { color: #fecaca !important; -webkit-text-fill-color: #fecaca !important; }
+#profile-badges-container #badge-owner > i,
+#scythed-admin-modal .admin-list-badge.admin-list-owner > i { color: #facc15 !important; -webkit-text-fill-color: #facc15 !important; }
+/* Match profile tile dimensions; admin-panel badges are decorative and do not react to the mouse. */
+#scythed-admin-modal .admin-list-badge {
+  flex: 0 0 28px !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+  cursor: default !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+#scythed-admin-modal .admin-list-badge:hover,
+#scythed-admin-modal .admin-list-badge:focus,
+#scythed-admin-modal .admin-list-badge:focus-visible,
+#scythed-admin-modal .admin-list-badge:active {
+  background-color: inherit !important;
+  filter: none !important;
+  transform: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+#scythed-admin-modal .admin-list-badge::before { content: none !important; display: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #profile-badges-container #badge-admin::after,
+  #profile-badges-container #badge-owner::after,
+  #scythed-admin-modal .admin-list-badge.admin-list-admin::after,
+  #scythed-admin-modal .admin-list-badge.admin-list-owner::after { animation: none !important; }
+}
+</style>
+<script id="scythed-admin-badges-no-tooltip-final">
+(() => {
+  const clean = () => document.querySelectorAll('#scythed-admin-modal .admin-list-badge').forEach(el => {
+    el.removeAttribute('title');
+    el.removeAttribute('data-tooltip');
+    el.removeAttribute('aria-label');
+    el.removeAttribute('tabindex');
+  });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', clean, { once: true });
+  else clean();
+  const modal = document.getElementById('scythed-admin-modal');
+  if (modal && window.MutationObserver) new MutationObserver(clean).observe(modal, {subtree:true, childList:true, attributes:true, attributeFilter:['title','data-tooltip','aria-label','tabindex']});
+})();
+</script>
