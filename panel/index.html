@@ -4552,17 +4552,8 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const isZasluzony = badges.has('zasluzony');
                 const bugLevel = badges.get('bug_hunter');
                 const isModerator = badges.has('moderator');
-                let showBeta = badges.has('beta_tester');
-
-                if (!showBeta && !isOwner && accountCreatedDate) {
-                    const parts = accountCreatedDate.split('.');
-                    if (parts.length === 3) {
-                        const day = parseInt(parts[0], 10), month = parseInt(parts[1], 10), year = parseInt(parts[2], 10);
-                        const d = new Date(year, month - 1, day);
-                        const betaCutoff = new Date(2026, 9, 1, 0, 0, 0, 0);
-                        showBeta = !Number.isNaN(d.getTime()) && d < betaCutoff;
-                    }
-                }
+                // Beta Tester jest nadawany wyłącznie jako jawna odznaka z API; data konta nie przydziela go automatycznie.
+                const showBeta = badges.has('beta_tester');
 
                 if (ownerBadge) ownerBadge.classList.toggle('hidden', !isOwner);
                 if (adminBadge) adminBadge.classList.toggle('hidden', !isAdmin || isOwner);
@@ -9058,5 +9049,86 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #profile-badges-container #badge-owner::after,
 #scythed-admin-modal .admin-list-badge.admin-list-owner::after {
   background: linear-gradient(90deg, transparent, rgba(255,248,180,.9), transparent) !important;
+}
+</style>
+
+
+<!-- SCYTHED: align administrator border with its logo; give Beta Tester a distinct light-yellow palette -->
+<style id="scythed-admin-border-beta-light-yellow-final">
+#profile-badges-container #badge-admin,
+#profile-badges-container #badge-admin:hover,
+#profile-badges-container #badge-admin.fixed-owner-badge,
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover {
+  border-color: #f87171 !important;
+  outline-color: #f87171 !important;
+}
+#profile-badges-container .beta-tester-badge,
+#profile-badges-container .beta-tester-badge:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-beta,
+#scythed-admin-modal .admin-list-badge.admin-list-beta:hover {
+  background: #fef9c3 !important;
+  background-image: none !important;
+  border-color: #fde047 !important;
+  color: #a16207 !important;
+  -webkit-text-fill-color: #a16207 !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+#profile-badges-container .beta-tester-badge > i,
+#profile-badges-container .beta-tester-badge > svg,
+#scythed-admin-modal .admin-list-badge.admin-list-beta > i,
+#scythed-admin-modal .admin-list-badge.admin-list-beta > svg {
+  color: #a16207 !important;
+  -webkit-text-fill-color: #a16207 !important;
+}
+#profile-badges-container .beta-tester-badge::after,
+#scythed-admin-modal .admin-list-badge.admin-list-beta::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+</style>
+
+
+<!-- SCYTHED: enforce matching badge colors in the admin panel as well as the profile -->
+<style id="scythed-admin-panel-badge-colors-v7">
+/* Administrator: border matches the badge logo's red tone. */
+#scythed-admin-modal .admin-list-badge.admin-list-admin,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:focus,
+#scythed-admin-modal .admin-list-badge.admin-list-admin:active {
+  border: 1px solid #f87171 !important;
+  border-color: #f87171 !important;
+  outline-color: #f87171 !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-admin > i,
+#scythed-admin-modal .admin-list-badge.admin-list-admin > svg {
+  color: #f87171 !important;
+  -webkit-text-fill-color: #f87171 !important;
+}
+/* Beta Tester: brighter, light-yellow look, consistent with the profile badge. */
+#scythed-admin-modal .admin-list-badge.admin-list-beta,
+#scythed-admin-modal .admin-list-badge.admin-list-beta:hover,
+#scythed-admin-modal .admin-list-badge.admin-list-beta:focus,
+#scythed-admin-modal .admin-list-badge.admin-list-beta:active {
+  background: #fef08a !important;
+  background-image: none !important;
+  border: 1px solid #facc15 !important;
+  border-color: #facc15 !important;
+  color: #a16207 !important;
+  -webkit-text-fill-color: #a16207 !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-beta > i,
+#scythed-admin-modal .admin-list-badge.admin-list-beta > svg {
+  color: #a16207 !important;
+  -webkit-text-fill-color: #a16207 !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-beta::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
 }
 </style>
