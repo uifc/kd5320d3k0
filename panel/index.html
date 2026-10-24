@@ -7869,3 +7869,42 @@ html.dark #modal-settings #backup-reminder-days option {
   transition: none !important;
 }
 </style>
+
+
+<style id="scythed-admin-badge-hover-and-bughunter2-fix">
+/* Odznaki w panelu admina zachowują stałe kolory jak na profilu. */
+#scythed-admin-modal .admin-list-badge,
+#scythed-admin-modal .admin-list-badge:hover,
+#scythed-admin-modal .admin-list-badge:focus,
+#scythed-admin-modal .admin-list-badge:active {
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Łowca błędów poziom 1 — zielony */
+#scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2),
+#scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2):hover {
+  background: rgba(34,197,94,.14) !important;
+  border-color: rgba(34,197,94,.65) !important;
+  color: #4ade80 !important;
+  -webkit-text-fill-color: #4ade80 !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2) > i {
+  color: #4ade80 !important;
+  -webkit-text-fill-color: #4ade80 !important;
+}
+
+/* Łowca błędów poziom 2 — niebieski również po najechaniu */
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2,
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2:hover {
+  background: rgba(59,130,246,.14) !important;
+  border-color: rgba(96,165,250,.78) !important;
+  color: #60a5fa !important;
+  -webkit-text-fill-color: #60a5fa !important;
+}
+#scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2 > i {
+  color: #3b82f6 !important;
+  -webkit-text-fill-color: #3b82f6 !important;
+}
+</style>
