@@ -7255,5 +7255,99 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 })();
 </script>
 
+
+<style id="scythed-final-role-button-logo-fix">
+/* Status konta zachowuje własną, rozpoznawalną paletę — niezależnie od akcentu motywu. */
+#scythed-admin-modal .admin-owner-status,
+#scythed-admin-modal .admin-list-owner,
+#scythed-admin-modal .admin-owner-status > i,
+#scythed-admin-modal .admin-list-owner > i {
+  color:#facc15 !important;
+}
+#scythed-admin-modal .admin-owner-status,
+#scythed-admin-modal .admin-list-owner {
+  border-color:rgba(250,204,21,.75) !important;
+  background:linear-gradient(110deg,rgba(120,74,0,.16),rgba(234,179,8,.30),rgba(120,74,0,.16)) !important;
+}
+#scythed-admin-modal .admin-admin-status,
+#scythed-admin-modal .admin-list-admin,
+#scythed-admin-modal .admin-admin-status > i,
+#scythed-admin-modal .admin-list-admin > i {
+  color:#ef4444 !important;
+}
+#scythed-admin-modal .admin-admin-status,
+#scythed-admin-modal .admin-list-admin {
+  border-color:rgba(239,68,68,.8) !important;
+  background:rgba(239,68,68,.12) !important;
+}
+#scythed-admin-modal .admin-moderator-status,
+#scythed-admin-modal .admin-list-moderator,
+#scythed-admin-modal .admin-moderator-status > i,
+#scythed-admin-modal .admin-list-moderator > i { color:#60a5fa !important; }
+#scythed-admin-modal .admin-moderator-status,
+#scythed-admin-modal .admin-list-moderator { border-color:rgba(59,130,246,.75) !important; background:rgba(59,130,246,.12) !important; }
+
+/* Nagłówek wejścia do panelu: czerwone pozostaje wyłącznie logo/ikona. */
+#modal-settings #general-admin-open-panel-wrap > span {
+  color:#18181b !important;
+}
+html.dark #modal-settings #general-admin-open-panel-wrap > span { color:#fff !important; }
+#modal-settings #general-admin-open-panel-wrap .admin-access-logo {
+  color:var(--brand-red,#ff0033) !important;
+}
+
+/* Przyciski akcji mają wyraźny tekst i spójne hover/focus/disabled jak „UTWÓRZ KONTO”. */
+#scythed-admin-modal .admin-primary-action,
+#scythed-admin-modal button[onclick*="adminToggleLogs"],
+#scythed-admin-modal button[onclick*="adminRefreshUsers"],
+#scythed-admin-modal button[onclick*="adminLogout"],
+#scythed-admin-modal .admin-bottom-close,
+#scythed-admin-modal #admin-create-user-form button[type="submit"] {
+  color:var(--scythed-accent-contrast,#fff) !important;
+  background-color:var(--brand-red,#ff0033) !important;
+  border-color:var(--brand-red,#ff0033) !important;
+  transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease,color .18s ease !important;
+}
+#scythed-admin-modal .admin-primary-action > *,
+#scythed-admin-modal button[onclick*="adminToggleLogs"] > *,
+#scythed-admin-modal button[onclick*="adminRefreshUsers"] > *,
+#scythed-admin-modal button[onclick*="adminLogout"] > *,
+#scythed-admin-modal .admin-bottom-close > *,
+#scythed-admin-modal #admin-create-user-form button[type="submit"] > * { color:inherit !important; }
+#scythed-admin-modal .admin-primary-action:hover:not(:disabled),
+#scythed-admin-modal button[onclick*="adminToggleLogs"]:hover:not(:disabled),
+#scythed-admin-modal button[onclick*="adminRefreshUsers"]:hover:not(:disabled),
+#scythed-admin-modal button[onclick*="adminLogout"]:hover:not(:disabled),
+#scythed-admin-modal .admin-bottom-close:hover:not(:disabled),
+#scythed-admin-modal #admin-create-user-form button[type="submit"]:hover:not(:disabled) {
+  background-color:var(--brand-hoverRed,var(--brand-red,#ff0033)) !important;
+  border-color:var(--brand-hoverRed,var(--brand-red,#ff0033)) !important;
+  transform:translateY(-1px);
+}
+#scythed-admin-modal .admin-primary-action:focus-visible,
+#scythed-admin-modal button[onclick*="adminToggleLogs"]:focus-visible,
+#scythed-admin-modal button[onclick*="adminRefreshUsers"]:focus-visible,
+#scythed-admin-modal button[onclick*="adminLogout"]:focus-visible,
+#scythed-admin-modal .admin-bottom-close:focus-visible,
+#scythed-admin-modal #admin-create-user-form button[type="submit"]:focus-visible {
+  outline:2px solid var(--brand-red,#ff0033) !important; outline-offset:2px !important;
+}
+#scythed-admin-modal .admin-primary-action:disabled,
+#scythed-admin-modal button[onclick*="adminToggleLogs"]:disabled,
+#scythed-admin-modal button[onclick*="adminRefreshUsers"]:disabled,
+#scythed-admin-modal button[onclick*="adminLogout"]:disabled,
+#scythed-admin-modal .admin-bottom-close:disabled,
+#scythed-admin-modal #admin-create-user-form button[type="submit"]:disabled { opacity:.5 !important; cursor:not-allowed !important; transform:none !important; }
+
+/* Napisy na przyciskach formularzy logowania/rejestracji: czytelny kontrast również po zmianie motywu. */
+button.bg-brand-red, button[class~="bg-brand-red"],
+form button[type="submit"].bg-brand-red,
+#scythed-admin-modal button.bg-brand-red {
+  color:var(--scythed-accent-contrast,#fff) !important;
+}
+button.bg-brand-red > *, button[class~="bg-brand-red"] > *,
+form button[type="submit"].bg-brand-red > * { color:inherit !important; }
+</style>
+
 </body>
 </html>
