@@ -6544,7 +6544,19 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 if (!usernameToLogin || usernameToLogin.toLowerCase() === 'user') {
                     showToast('Najpierw ustaw nazwę konta w lewym dolnym rogu.', 'info'); return;
                 }
-                const password = await appPrompt(`Potwierdź dostęp do panelu administracyjnego hasłem konta SCYTHED.`, '', { title: 'DOSTĘP ADMINISTRACYJNY', inputType: 'password', icon: 'fa-shield-halved', confirmText: 'ZALOGUJ' });
+                const logsOnlyLogin = window.scythedProfileHasModeratorBadge === true && window.scythedProfileHasAdminBadge !== true && window.scythedProfileHasOwnerBadge !== true;
+                const password = await appPrompt(
+                    logsOnlyLogin
+                        ? 'Potwierdź dostęp do dziennika zmian hasłem konta SCYTHED.'
+                        : 'Potwierdź dostęp do panelu administracyjnego hasłem konta SCYTHED.',
+                    '',
+                    {
+                        title: logsOnlyLogin ? 'DOSTĘP DO LOGÓW' : 'DOSTĘP ADMINISTRACYJNY',
+                        inputType: 'password',
+                        icon: logsOnlyLogin ? 'fa-clock' : 'fa-shield-halved',
+                        confirmText: logsOnlyLogin ? 'SPRAWDŹ LOGI' : 'ZALOGUJ'
+                    }
+                );
                 if (password === null || !password) return;
                 try {
                     const { response, data } = await fetch(`${SCYTHED_API_BASE}/api/account/login`, { method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: usernameToLogin, password }) }).then(async response => ({ response, data: await response.json().catch(() => ({})) }));
@@ -8059,6 +8071,20 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 })();
 </script>
 
+
+<style id="scythed-verified-icon-match-moderator-hammer">
+/* Ikona statusu zweryfikowanego ma ten sam stały niebieski kolor co młotek moderatora. */
+#scythed-admin-modal .admin-verified-status > i,
+#scythed-admin-modal .admin-verified-status > i:hover,
+#scythed-admin-modal .admin-moderator-status > i,
+#scythed-admin-modal .admin-moderator-status > i:hover {
+  color: #60a5fa !important;
+  -webkit-text-fill-color: #60a5fa !important;
+  text-shadow: none !important;
+  filter: none !important;
+  animation: none !important;
+}
+</style>
 </body>
 </html>
 
@@ -9535,4 +9561,66 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 }
 /* W dzienniku zmian zostaje tylko górny przycisk zamknięcia, po prawej stronie nagłówka. */
 #scythed-admin-modal .scythed-logs-close-bottom { display: none !important; }
+</style>
+
+
+<style id="scythed-v20-password-eye-and-verified-status">
+/* Pole hasła: oczko jest stabilnie wycentrowane po prawej stronie i nie przesuwa się po najechaniu. */
+#scythed-admin-modal #admin-create-password { padding-right: 2.75rem !important; }
+#scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button {
+  position: absolute !important;
+  right: .375rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  min-width: 2rem !important;
+  width: 2rem !important;
+  min-height: 2rem !important;
+  height: 2rem !important;
+  padding: .25rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 2 !important;
+  transition: color .15s ease, background-color .15s ease, border-color .15s ease !important;
+  animation: none !important;
+}
+#scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button:hover,
+#scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button:focus,
+#scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button:active {
+  transform: translateY(-50%) !important;
+  animation: none !important;
+}
+#scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button i {
+  display: block !important;
+  pointer-events: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+/* Status „ZWERYFIKOWANY” i jego checkmark mają zawsze stały niebieski kolor, niezależny od motywu. */
+#scythed-admin-modal .admin-verified-status,
+#scythed-admin-modal .admin-verified-status:hover,
+#scythed-admin-modal .admin-verified-status:focus {
+  color: #60a5fa !important;
+  -webkit-text-fill-color: #60a5fa !important;
+  border-color: #3b82f6 !important;
+  background: rgba(59,130,246,.12) !important;
+  text-shadow: none !important;
+  filter: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+#scythed-admin-modal .admin-verified-status > i,
+#scythed-admin-modal .admin-verified-status > i:hover {
+  color: #60a5fa !important;
+  -webkit-text-fill-color: #60a5fa !important;
+  text-shadow: none !important;
+  filter: none !important;
+  animation: none !important;
+}
+#scythed-admin-modal .admin-verified-status::before,
+#scythed-admin-modal .admin-verified-status::after {
+  animation: none !important;
+  box-shadow: none !important;
+}
 </style>
