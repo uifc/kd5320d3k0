@@ -9763,3 +9763,59 @@ html.dark #modal-settings #app-bg-effects-panel {
   background-color: #18181b !important;
 }
 </style>
+
+
+<style id="scythed-v28-overlay-effects-correct-theme-match">
+/* The effects heading text follows the theme's normal foreground color. */
+html:not(.dark) #modal-settings #app-bg-effects-panel > span {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html.dark #modal-settings #app-bg-effects-panel > span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+/* The wand icon remains dynamic and follows the same accent color as other themed icons. */
+#modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles {
+  color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+}
+/* Match the full effects panel to the "Wielkość" tile: zinc-100 in light mode, black/60 in dark mode. */
+html:not(.dark) #modal-settings #app-bg-effects-panel {
+  background-color: #f4f4f5 !important;
+  border-color: #e4e4e7 !important;
+}
+html.dark #modal-settings #app-bg-effects-panel {
+  background-color: rgb(0 0 0 / 0.6) !important;
+  border-color: #27272a !important;
+}
+</style>
+
+
+<style id="scythed-v29-wand-icon-dynamic-accent">
+/* Różdżka zawsze korzysta z tego samego dynamicznego akcentu co pozostałe ikony — również w ciemnym motywie. */
+#modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles,
+#modal-settings .font-bold.flex.items-center.gap-1\.5 > i.fa-wand-magic-sparkles {
+  color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  filter: none !important;
+}
+</style>
+<script id="scythed-v29-wand-icon-live-sync">
+(function(){
+  const root = document.documentElement;
+  function syncOverlayWand(){
+    const icon = document.querySelector('#modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles');
+    if (!icon) return;
+    // Use the same computed accent variable as the other themed icons; do not hardcode a light/dark color.
+    icon.style.setProperty('color', 'var(--brand-readable-accent, var(--brand-red, #ff0033))', 'important');
+    icon.style.setProperty('-webkit-text-fill-color', 'var(--brand-readable-accent, var(--brand-red, #ff0033))', 'important');
+  }
+  syncOverlayWand();
+  new MutationObserver(syncOverlayWand).observe(root, {attributes:true, attributeFilter:['class','style']});
+  document.addEventListener('input', syncOverlayWand, true);
+  document.addEventListener('change', syncOverlayWand, true);
+  document.addEventListener('click', syncOverlayWand, true);
+  document.addEventListener('transitionend', syncOverlayWand, true);
+})();
+</script>
