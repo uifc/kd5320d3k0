@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta property="og:title" content="SCYTHED">
-    <meta property="og:description" content="MENADŻER HASEŁ - v.7.2.">
+    <meta property="og:description" content="MENADŻER HASEŁ - v.6.3.">
     <meta property="og:image" content="https://i.imgur.com/jIS4wrD.png">
     <meta property="og:url" content="https://scythed.xyz">
     <meta property="og:type" content="website">
@@ -1639,7 +1639,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
         <button onclick="window.scythedApp.openSettingsModal()" class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" title="USTAWIENIA">
             <i class="fas fa-gear"></i>
         </button>
-        <span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">v.7.2</span>
+        <span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">v.6.3</span>
     </div>
 
     <footer class="w-full max-w-xl mx-auto text-center px-4 mt-8 space-y-1 relative z-10">
@@ -8087,6 +8087,74 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
   animation: none !important;
 }
 </style>
+
+<style id="scythed-overlay-frame-and-neutral-action-fix">
+/* Ramka wokół wyboru koloru nakładki dopasowana do powierzchni motywu. */
+#modal-settings .flex.items-center.gap-2:has(>#bg-overlay-color) {
+  box-sizing: border-box;
+  gap: .55rem !important;
+  padding: .35rem .5rem !important;
+  min-height: 2.9rem;
+  border: 1px solid #e4e4e7 !important;
+  border-radius: .9rem !important;
+  background: #f4f4f5 !important;
+  transition: background-color .18s ease, border-color .18s ease;
+}
+html.dark #modal-settings .flex.items-center.gap-2:has(>#bg-overlay-color) {
+  background: #0c0c0e !important;
+  border-color: #27272a !important;
+}
+#modal-settings #bg-overlay-color {
+  flex: 0 0 2rem;
+  width: 2rem !important;
+  height: 2rem !important;
+  border-radius: .45rem !important;
+}
+#modal-settings #bg-overlay-hex {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto !important;
+}
+
+/* Przyciski haseł i wejścia do paneli mają tę samą neutralną powierzchnię co przełącznik motywu. */
+#modal-settings .settings-password-action,
+#modal-settings .admin-master-action,
+#general-admin-open-panel-wrap .admin-access-action,
+#scythed-admin-modal .scythed-admin-utility-button,
+#scythed-admin-modal .scythed-logs-close-button {
+  background: #f4f4f5 !important;
+  border-color: #d4d4d8 !important;
+  color: #27272a !important;
+}
+html.dark #modal-settings .settings-password-action,
+html.dark #modal-settings .admin-master-action,
+html.dark #general-admin-open-panel-wrap .admin-access-action,
+html.dark #scythed-admin-modal .scythed-admin-utility-button,
+html.dark #scythed-admin-modal .scythed-logs-close-button {
+  background: #0c0c0e !important;
+  border-color: #3f3f46 !important;
+  color: #f4f4f5 !important;
+}
+#modal-settings .settings-password-action:hover:not(:disabled),
+#modal-settings .admin-master-action:hover:not(:disabled),
+#general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled),
+#scythed-admin-modal .scythed-admin-utility-button:hover:not(:disabled),
+#scythed-admin-modal .scythed-logs-close-button:hover:not(:disabled) {
+  background: #e4e4e7 !important;
+  border-color: #a1a1aa !important;
+  color: #18181b !important;
+}
+html.dark #modal-settings .settings-password-action:hover:not(:disabled),
+html.dark #modal-settings .admin-master-action:hover:not(:disabled),
+html.dark #general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled),
+html.dark #scythed-admin-modal .scythed-admin-utility-button:hover:not(:disabled),
+html.dark #scythed-admin-modal .scythed-logs-close-button:hover:not(:disabled) {
+  background: #18181b !important;
+  border-color: #52525b !important;
+  color: #fff !important;
+}
+</style>
+
 </body>
 </html>
 
@@ -9879,102 +9947,4 @@ body.dark #modal-settings #app-bg-effects-panel,
   background-color: #0c0c0e !important;
   border-color: #27272a !important;
 }
-</style>
-
-<style id="scythed-v32-match-admin-logs-password-surfaces-to-settings">
-/* Dopasuj powierzchnie panelu SCYTHED i dziennika zmian do neutralnych panelików ustawień. */
-#scythed-admin-modal > section,
-#scythed-admin-modal #admin-logs-section,
-#modal-change-master > div,
-#modal-change-name-password > div {
-  background-color: #f4f4f5 !important;
-  border-color: #e4e4e7 !important;
-}
-html.dark #scythed-admin-modal > section,
-html.dark #scythed-admin-modal #admin-logs-section,
-html.dark #modal-change-master > div,
-html.dark #modal-change-name-password > div {
-  background-color: #0c0c0e !important;
-  border-color: #27272a !important;
-}
-/* Przyciski zmiany haseł i wejścia do panelu korzystają z tej samej powierzchni co kafelki ustawień. */
-#modal-settings .settings-password-action,
-#modal-settings .admin-master-action,
-#general-admin-open-panel-wrap .admin-access-action {
-  background-color: #f4f4f5 !important;
-  border-color: #d4d4d8 !important;
-}
-html.dark #modal-settings .settings-password-action,
-html.dark #modal-settings .admin-master-action,
-html.dark #general-admin-open-panel-wrap .admin-access-action {
-  background-color: #0c0c0e !important;
-  border-color: #27272a !important;
-}
-#modal-settings .settings-password-action:hover:not(:disabled),
-#modal-settings .admin-master-action:hover:not(:disabled),
-#general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled) {
-  background-color: #e4e4e7 !important;
-  border-color: #a1a1aa !important;
-}
-html.dark #modal-settings .settings-password-action:hover:not(:disabled),
-html.dark #modal-settings .admin-master-action:hover:not(:disabled),
-html.dark #general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled) {
-  background-color: #18181b !important;
-  border-color: #3f3f46 !important;
-}
-</style>
-
-<!-- SCYTHED v7.2: settings tile surfaces and overlay color accent frame -->
-<style id="scythed-v72-settings-surfaces-overlay-frame">
-/* Wszystkie standardowe paneliki ustawień mają jednolitą powierzchnię w obu motywach. */
-#modal-settings .grid.grid-cols-2 > div.p-2\.5.rounded-xl,
-#modal-settings .grid.grid-cols-2 > div.p-3.rounded-xl,
-#modal-settings #general-admin-open-panel-wrap,
-#modal-settings #app-bg-effects-panel {
-  background-color:#f4f4f5 !important;
-  border-color:#e4e4e7 !important;
-}
-html.dark #modal-settings .grid.grid-cols-2 > div.p-2\.5.rounded-xl,
-html.dark #modal-settings .grid.grid-cols-2 > div.p-3.rounded-xl,
-html.dark #modal-settings #general-admin-open-panel-wrap,
-html.dark #modal-settings #app-bg-effects-panel {
-  background-color:#0c0c0e !important;
-  border-color:#27272a !important;
-}
-/* Ramka próbki koloru nakładki korzysta z aktualnego koloru głównego, a więc aktualizuje się wraz z motywem. */
-#modal-settings #bg-overlay-color-frame {
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  width:26px !important; height:26px !important;
-  padding:2px !important;
-  box-sizing:border-box !important;
-  border:2px solid var(--brand-red,#ff0033) !important;
-  border-radius:6px !important;
-  background:transparent !important;
-  flex:0 0 auto !important;
-}
-#modal-settings #bg-overlay-color-frame #bg-overlay-color {
-  display:block !important;
-  width:18px !important; min-width:18px !important; max-width:18px !important;
-  height:18px !important; min-height:18px !important; max-height:18px !important;
-  padding:0 !important; margin:0 !important; border:0 !important;
-  border-radius:2px !important; box-shadow:none !important;
-}
-#modal-settings #bg-overlay-color-frame #bg-overlay-color::-webkit-color-swatch-wrapper { padding:0 !important; }
-#modal-settings #bg-overlay-color-frame #bg-overlay-color::-webkit-color-swatch { border:0 !important; border-radius:2px !important; }
-#modal-settings #bg-overlay-color-frame #bg-overlay-color::-moz-color-swatch { border:0 !important; border-radius:2px !important; }
-
-/* v7.2: bez ramek wokół próbek kolorów; pozostaje sam próbnik i kod HEX. */
-#modal-settings #bg-overlay-color { border:0 !important; outline:0 !important; box-shadow:none !important; border-radius:0 !important; }
-#modal-settings #bg-overlay-color::-webkit-color-swatch-wrapper { padding:0 !important; }
-#modal-settings #bg-overlay-color::-webkit-color-swatch { border:0 !important; border-radius:0 !important; }
-#modal-settings #bg-overlay-color::-moz-color-swatch { border:0 !important; border-radius:0 !important; }
-#modal-settings #brand-color-picker { border:0 !important; outline:0 !important; box-shadow:none !important; border-radius:0 !important; padding:0 !important; background:transparent !important; appearance:none !important; -webkit-appearance:none !important; }
-#modal-settings #brand-color-picker::-webkit-color-swatch-wrapper { padding:0 !important; }
-#modal-settings #brand-color-picker::-webkit-color-swatch { border:0 !important; border-radius:0 !important; }
-#modal-settings #brand-color-picker::-moz-color-swatch { border:0 !important; border-radius:0 !important; }
-#modal-settings #brand-hex-input { background:transparent !important; border:0 !important; box-shadow:none !important; }
-#modal-settings .flex.items-center.gap-1.bg-white.dark\:bg-black\/80.border.border-zinc-300.dark\:border-zinc-800.px-2.py-1.rounded-lg:has(#brand-color-picker) { border:0 !important; background:transparent !important; padding:0 !important; border-radius:0 !important; gap:6px !important; }
-#modal-settings .flex.items-center.justify-between.order-1.p-2\.5.rounded-xl:has(#brand-color-picker) { background:transparent !important; border:0 !important; padding:0 !important; border-radius:0 !important; }
 </style>
