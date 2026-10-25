@@ -10148,3 +10148,30 @@ body.dark #general-admin-open-panel-wrap button.admin-access-action:hover,
   window.addEventListener('load', syncOverlayVisibility, { once: true });
 })();
 </script>
+
+
+<style id="scythed-v37-admin-button-gray-fix">
+/* Ujednolicenie przycisku OTWÓRZ PANEL / SPRAWDŹ LOGI z pozostałymi przyciskami ustawień w ciemnym motywie. */
+html.dark body #modal-settings #security-settings-category #general-admin-open-panel-wrap button.admin-access-action,
+html.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
+html.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
+body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
+.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action {
+  background: #18181b !important;
+  background-color: #18181b !important;
+  background-image: none !important;
+  border: 1px solid #3f3f46 !important;
+  color: #f4f4f5 !important;
+  box-shadow: none !important;
+}
+html.dark body #modal-settings #security-settings-category #general-admin-open-panel-wrap button.admin-access-action:hover:not(:disabled),
+html.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action:hover:not(:disabled),
+html.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-action:hover:not(:disabled),
+body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-action:hover:not(:disabled),
+.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action:hover:not(:disabled) {
+  background: #27272a !important;
+  background-color: #27272a !important;
+  border-color: #52525b !important;
+  color: #ffffff !important;
+}
+</style>
