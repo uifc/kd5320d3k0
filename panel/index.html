@@ -1739,10 +1739,9 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 
                             <div class="space-y-1">
                                 <label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Kolor Nakładki</label>
-                                <div class="flex items-center gap-2">
-                                    <input type="color" id="bg-overlay-color" value="#000000" onchange="window.scythedApp.updateBgOverlayColor(this.value)" data-no-click-sound class="w-8 h-8 rounded border-0 bg-transparent cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
-                                    <input type="text" id="bg-overlay-hex" value="#000000" aria-label="Kod HEX koloru nakładki" onblur="window.scythedApp.updateBgOverlayColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" class="w-16 bg-transparent text-[11px] font-mono text-zinc-800 dark:text-gray-200 focus:outline-none uppercase text-center font-normal" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="7" data-no-click-sound>
-                                </div>
+                                <div class="flex items-center gap-1 bg-white dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 px-2 py-1 rounded-lg">
+                                    <input type="color" id="bg-overlay-color" value="#000000" onchange="window.scythedApp.updateBgOverlayColor(this.value)" data-no-click-sound class="w-5 h-5 bg-transparent border-0 cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
+                                    <input type="text" id="bg-overlay-hex" value="#000000" aria-label="Kod HEX koloru nakładki" onblur="window.scythedApp.updateBgOverlayColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" class="w-16 bg-transparent text-[11px] font-mono text-zinc-800 dark:text-gray-200 focus:outline-none uppercase text-center font-normal" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="7" data-no-click-sound></div>
                             </div>
 
                             <div class="space-y-1">
@@ -8152,6 +8151,63 @@ html.dark #scythed-admin-modal .scythed-logs-close-button:hover:not(:disabled) {
   background: #18181b !important;
   border-color: #52525b !important;
   color: #fff !important;
+}
+</style>
+
+
+<style id="scythed-requested-control-colors-fix">
+/* Kolor nakładki: dokładnie taki sam, kompaktowy próbnik jak przy Kolorze Głównym. */
+#modal-settings #bg-overlay-color {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  min-width: 1.25rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: .2rem !important;
+  background: transparent !important;
+}
+#modal-settings #bg-overlay-hex { width: 4rem !important; }
+/* Przyciski: hasło aplikacji, hasło nazwy oraz wejścia do paneli moderatora/administratora. */
+#modal-settings button.settings-password-action,
+#modal-settings button.admin-master-action,
+#general-admin-open-panel-wrap button.admin-access-action,
+button.settings-password-action,
+button.admin-master-action,
+button.admin-access-action {
+  background-color: #f4f4f5 !important;
+  border-color: #d4d4d8 !important;
+  color: #27272a !important;
+}
+html.dark #modal-settings button.settings-password-action,
+html.dark #modal-settings button.admin-master-action,
+html.dark #general-admin-open-panel-wrap button.admin-access-action,
+body.dark #modal-settings button.settings-password-action,
+body.dark #modal-settings button.admin-master-action,
+body.dark #general-admin-open-panel-wrap button.admin-access-action,
+.dark #modal-settings button.settings-password-action,
+.dark #modal-settings button.admin-master-action,
+.dark #general-admin-open-panel-wrap button.admin-access-action,
+html.dark button.settings-password-action,
+html.dark button.admin-master-action,
+html.dark button.admin-access-action,
+body.dark button.settings-password-action,
+body.dark button.admin-master-action,
+body.dark button.admin-access-action {
+  background-color: #0c0c0e !important;
+  background-image: none !important;
+  border-color: #3f3f46 !important;
+  color: #f4f4f5 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+#modal-settings button.settings-password-action:hover:not(:disabled),
+#modal-settings button.admin-master-action:hover:not(:disabled),
+#general-admin-open-panel-wrap button.admin-access-action:hover:not(:disabled),
+html.dark #modal-settings button.settings-password-action:hover:not(:disabled),
+html.dark #modal-settings button.admin-master-action:hover:not(:disabled),
+html.dark #general-admin-open-panel-wrap button.admin-access-action:hover:not(:disabled) {
+  background-color: var(--brand-red, #ff0033) !important;
+  border-color: var(--brand-red, #ff0033) !important;
+  color: var(--brand-contrast-text, #fff) !important;
 }
 </style>
 
