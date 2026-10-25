@@ -6957,7 +6957,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             <div><h3 class="font-bold text-sm"><i class="fas fa-user-plus text-brand-red mr-2"></i>DODAJ NOWĄ NAZWĘ / KONTO</h3></div>
             <form id="admin-create-user-form" autocomplete="off" onsubmit="window.scythedApp.adminCreateUser(event)" class="grid grid-cols-1 md:grid-cols-2 gap-2">
               <input id="admin-create-username" name="scythed-new-username" type="text" required minlength="1" maxlength="16" pattern="[A-Za-z0-9_. ]+" placeholder="Nowa nazwa / login" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="off" autocapitalize="off" spellcheck="false">
-              <div class="flex flex-col gap-1.5"><div class="relative"><input id="admin-create-password" name="scythed-new-password" type="password" required minlength="12" maxlength="1024" placeholder="Hasło (min. 12 znaków)" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 pr-10 text-sm" autocomplete="new-password"><button type="button" class="scythed-admin-utility-button absolute right-1.5 top-1/2 -translate-y-1/2" aria-label="Pokaż hasło do nowej zweryfikowanej nazwy" title="Pokaż hasło" onclick="window.scythedApp.togglePasswordVisibility('admin-create-password')" data-no-click-sound><i class="fas fa-eye" aria-hidden="true"></i></button></div><div class="flex items-center justify-between gap-2"><span class="text-[10px] text-zinc-500">Hasło do nowej zweryfikowanej nazwy</span><button type="button" onclick="window.scythedApp.generateNamePassword12()" class="scythed-logs-close-button scythed-admin-utility-button whitespace-nowrap" title="Wygeneruj losowe hasło o długości 12 znaków" data-no-click-sound><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span>GENERUJ 12 ZNAKÓW</span></button></div></div>
+              <div class="flex flex-col gap-1.5"><div class="relative"><input id="admin-create-password" name="scythed-new-password" type="password" required minlength="12" maxlength="1024" placeholder="Hasło (min. 12 znaków)" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 pr-10 text-sm" autocomplete="new-password"><button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż hasło do nowej zweryfikowanej nazwy" title="Pokaż hasło" onclick="window.scythedApp.togglePasswordVisibility('admin-create-password')" data-no-click-sound><i class="fas fa-eye" aria-hidden="true"></i></button></div><div class="flex items-center justify-between gap-2"><span class="text-[10px] text-zinc-500">Hasło do nowej zweryfikowanej nazwy</span><button type="button" onclick="window.scythedApp.generateNamePassword12()" class="scythed-logs-close-button scythed-admin-utility-button whitespace-nowrap" title="Wygeneruj losowe hasło o długości 12 znaków" data-no-click-sound><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span>GENERUJ 12 ZNAKÓW</span></button></div></div>
               <button type="submit" class="md:col-span-2 rounded-lg bg-brand-red hover:bg-brand-hoverRed text-white p-2.5 text-xs font-bold transition"><i class="fas fa-plus mr-2"></i>UTWÓRZ KONTO</button>
             </form>
           </section>
@@ -8057,6 +8057,8 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
     }
     root.style.setProperty('--brand-readable-accent',readable);
     document.querySelectorAll('#modal-settings .fa-check, #modal-settings .fa-check-circle, #modal-settings .fa-circle-check, #modal-change-name-password .fa-check, #modal-change-name-password .fa-check-circle, #modal-change-name-password .fa-circle-check, #scythed-admin-modal .fa-check, #scythed-admin-modal .fa-check-circle, #scythed-admin-modal .fa-circle-check').forEach(icon=>{
+      // Stałe ikony statusów/odznak nie są kontrolkami użytkownika — nie nadpisujemy ich własnych kolorów.
+      if (icon.closest('.admin-verified-status, .admin-moderator-status, .admin-list-badge, .profile-badge-tooltip, .profile-badge, .badge-icon')) return;
       icon.style.setProperty('color','var(--brand-readable-accent,var(--brand-red,#ff0033))','important');
       icon.style.setProperty('-webkit-text-fill-color','var(--brand-readable-accent,var(--brand-red,#ff0033))','important');
     });
@@ -9684,4 +9686,26 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
   filter: none !important;
   animation: none !important;
 }
+</style>
+
+
+<style id="scythed-v23-eye-like-password-fields-and-checkmark-scope">
+/* Oczko generatora ma taki sam prosty wygląd jak oczka przy zmianie hasła — bez kafelka/przycisku. */
+#scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"] ,
+#scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"]:hover,
+#scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"]:focus,
+#scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"]:active {
+  background: transparent !important; border: 0 !important; box-shadow: none !important; outline-offset: 2px;
+  color: #71717a !important; padding: 0 !important; width: auto !important; min-width: 0 !important; max-width: none !important;
+  height: auto !important; min-height: 0 !important; max-height: none !important; border-radius: 0 !important;
+  transform: translateY(-50%) !important; transition: color .15s ease !important; animation: none !important;
+}
+html.dark #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"] { color: #9ca3af !important; }
+#scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"] > i {
+  color: inherit !important; -webkit-text-fill-color: currentColor !important; transform: none !important; animation: none !important;
+}
+/* Tylko status „ZWERYFIKOWANY” ma stały niebieski check; kontrolki z checkmarkiem nadal używają akcentu motywu. */
+#scythed-admin-modal .admin-verified-status > i,
+#scythed-admin-modal .admin-verified-status:hover > i,
+#scythed-admin-modal .admin-verified-status:focus > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
 </style>
