@@ -8211,6 +8211,54 @@ html.dark #general-admin-open-panel-wrap button.admin-access-action:hover:not(:d
 }
 </style>
 
+
+<style id="scythed-final-panel-and-overlay-fix">
+/* Ciemne powierzchnie paneli: nie używaj czerni #000, tylko neutralne #0c0c0e. */
+html.dark #modal-settings #general-admin-open-panel-wrap,
+html.dark #modal-settings #security-settings-category .grid.grid-cols-2 > div.p-3.rounded-xl,
+html.dark #scythed-admin-modal #admin-logs-section,
+html.dark #scythed-admin-modal #admin-content-view > section,
+html.dark #scythed-admin-modal #admin-content-view > .p-4.rounded-xl,
+html.dark #scythed-admin-modal #admin-content-view > .space-y-2 > .relative,
+html.dark #scythed-admin-modal #admin-content-view .admin-user-row,
+html.dark #scythed-admin-modal section {
+  background-color: #0c0c0e !important;
+}
+/* Ustawienia bezpieczeństwa: wyrównaj też powierzchnie kart z panelem Tryb Wyglądu. */
+html.dark #modal-settings #general-admin-open-panel-wrap,
+html.dark #modal-settings #security-settings-category .grid.grid-cols-2 > div.p-3.rounded-xl,
+html.dark #scythed-admin-modal #admin-logs-section,
+html.dark #scythed-admin-modal #admin-content-view > section,
+html.dark #scythed-admin-modal #admin-content-view > .p-4.rounded-xl {
+  border-color: #27272a !important;
+}
+/* Nakładka na stronę ma być całkowicie niewidoczna, dopóki użytkownik nie wybierze własnego tła. */
+#app-bg-overlay {
+  background-color: transparent !important;
+}
+body.has-custom-bg #app-bg-overlay {
+  background-color: var(--app-bg-overlay-color, rgba(0,0,0,.4)) !important;
+}
+/* Bez własnego tła nie pokazuj panelu efektów ani nie stosuj rozmycia/koloru nakładki. */
+body:not(.has-custom-bg) #app-custom-bg {
+  background-image: none !important;
+  filter: none !important;
+}
+body:not(.has-custom-bg) #app-bg-overlay {
+  display: block;
+  background: transparent !important;
+}
+/* Kompaktowy kontener wyboru koloru nakładki — taki sam charakter jak Kolor Główny. */
+html.dark #modal-settings #app-bg-effects-panel .flex.items-center.gap-1:has(#bg-overlay-color) {
+  background: #0c0c0e !important;
+  border-color: #27272a !important;
+}
+html:not(.dark) #modal-settings #app-bg-effects-panel .flex.items-center.gap-1:has(#bg-overlay-color) {
+  background: #fff !important;
+  border-color: #d4d4d8 !important;
+}
+</style>
+
 </body>
 </html>
 
