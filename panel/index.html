@@ -4576,7 +4576,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     betaBadge.setAttribute('aria-label', 'Beta Tester');
                 }
                 if (verifiedIcon) verifiedIcon.classList.toggle('hidden', profile.verified !== true);
-                updateAccountActionButtons({ verified: profile.verified === true, hasAdminBadge: isAdmin, hasOwnerBadge: isOwner, username: u });
+                updateAccountActionButtons({ verified: profile.verified === true, hasAdminBadge: isAdmin, hasOwnerBadge: isOwner, hasModeratorBadge: isModerator, username: u });
                 if (isOwner) [adminBadge, zasluzonyBadge, bugHunterBadge, moderatorBadge, betaBadge].forEach(el => { if (el) el.classList.add('hidden'); });
             }
 
