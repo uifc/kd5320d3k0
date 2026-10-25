@@ -562,7 +562,7 @@
             z-index: -1;
             pointer-events: none;
             transition: background-color 0.3s ease;
-            background-color: var(--app-bg-overlay-color, rgba(0, 0, 0, 0.4));
+            background-color: transparent;
         }
 
         .default-banner {
@@ -10052,3 +10052,80 @@ body.dark #modal-settings #app-bg-effects-panel,
   border-color: #27272a !important;
 }
 </style>
+
+
+<style id="scythed-v35-exact-panel-surface-and-overlay-visibility">
+/* Bez własnego obrazu warstwa nakładki ma być całkowicie niewidoczna. */
+#app-bg-overlay,
+body:not(.has-custom-bg) #app-bg-overlay {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+/* Nakładka jest aktywna wyłącznie po załadowaniu własnego tła aplikacji. */
+body.has-custom-bg #app-bg-overlay {
+  background-color: var(--app-bg-overlay-color, rgba(0,0,0,.4)) !important;
+}
+/* Wiersz „Panel Administracyjny” albo „Logi SCYTHED” w ustawieniach.
+   Używa jawnego koloru, aby starsze klasy Tailwind i reguły motywu go nie nadpisywały. */
+html.dark body #modal-settings #general-admin-open-panel-wrap,
+html.dark body #modal-settings #security-settings-category #general-admin-open-panel-wrap,
+body.dark #modal-settings #general-admin-open-panel-wrap,
+.dark body #modal-settings #general-admin-open-panel-wrap {
+  background: #0c0c0e !important;
+  background-color: #0c0c0e !important;
+  border-color: #27272a !important;
+  color: #f4f4f5 !important;
+}
+html:not(.dark) body #modal-settings #general-admin-open-panel-wrap,
+body:not(.dark) #modal-settings #general-admin-open-panel-wrap {
+  background: #f4f4f5 !important;
+  background-color: #f4f4f5 !important;
+  border-color: #d4d4d8 !important;
+  color: #27272a !important;
+}
+/* Przycisk w tym wierszu ma dokładnie powierzchnię #0c0c0e w ciemnym motywie. */
+html.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
+html.dark body #general-admin-open-panel-wrap button.admin-access-action,
+body.dark #general-admin-open-panel-wrap button.admin-access-action,
+.dark body #general-admin-open-panel-wrap button.admin-access-action {
+  background: #0c0c0e !important;
+  background-color: #0c0c0e !important;
+  background-image: none !important;
+  border: 1px solid #3f3f46 !important;
+  color: #f4f4f5 !important;
+  box-shadow: none !important;
+}
+html.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action:hover,
+html.dark body #general-admin-open-panel-wrap button.admin-access-action:hover,
+body.dark #general-admin-open-panel-wrap button.admin-access-action:hover,
+.dark body #general-admin-open-panel-wrap button.admin-access-action:hover {
+  background: #18181b !important;
+  background-color: #18181b !important;
+  border-color: #52525b !important;
+  color: #fff !important;
+}
+</style>
+<script id="scythed-v35-overlay-state-sync">
+(function () {
+  function syncOverlayVisibility() {
+    const overlay = document.getElementById('app-bg-overlay');
+    if (!overlay) return;
+    const hasCustomBackground = document.body.classList.contains('has-custom-bg');
+    if (!hasCustomBackground) {
+      overlay.style.setProperty('background-color', 'transparent', 'important');
+      overlay.style.setProperty('background-image', 'none', 'important');
+    } else {
+      overlay.style.removeProperty('background-color');
+      overlay.style.removeProperty('background-image');
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncOverlayVisibility, { once: true });
+  } else {
+    syncOverlayVisibility();
+  }
+  const observer = new MutationObserver(syncOverlayVisibility);
+  if (document.body) observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  window.addEventListener('load', syncOverlayVisibility, { once: true });
+})();
+</script>
