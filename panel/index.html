@@ -9880,3 +9880,46 @@ body.dark #modal-settings #app-bg-effects-panel,
   border-color: #27272a !important;
 }
 </style>
+
+<style id="scythed-v32-match-admin-logs-password-surfaces-to-settings">
+/* Dopasuj powierzchnie panelu SCYTHED i dziennika zmian do neutralnych panelików ustawień. */
+#scythed-admin-modal > section,
+#scythed-admin-modal #admin-logs-section,
+#modal-change-master > div,
+#modal-change-name-password > div {
+  background-color: #f4f4f5 !important;
+  border-color: #e4e4e7 !important;
+}
+html.dark #scythed-admin-modal > section,
+html.dark #scythed-admin-modal #admin-logs-section,
+html.dark #modal-change-master > div,
+html.dark #modal-change-name-password > div {
+  background-color: #0c0c0e !important;
+  border-color: #27272a !important;
+}
+/* Przyciski zmiany haseł i wejścia do panelu korzystają z tej samej powierzchni co kafelki ustawień. */
+#modal-settings .settings-password-action,
+#modal-settings .admin-master-action,
+#general-admin-open-panel-wrap .admin-access-action {
+  background-color: #f4f4f5 !important;
+  border-color: #d4d4d8 !important;
+}
+html.dark #modal-settings .settings-password-action,
+html.dark #modal-settings .admin-master-action,
+html.dark #general-admin-open-panel-wrap .admin-access-action {
+  background-color: #0c0c0e !important;
+  border-color: #27272a !important;
+}
+#modal-settings .settings-password-action:hover:not(:disabled),
+#modal-settings .admin-master-action:hover:not(:disabled),
+#general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled) {
+  background-color: #e4e4e7 !important;
+  border-color: #a1a1aa !important;
+}
+html.dark #modal-settings .settings-password-action:hover:not(:disabled),
+html.dark #modal-settings .admin-master-action:hover:not(:disabled),
+html.dark #general-admin-open-panel-wrap .admin-access-action:hover:not(:disabled) {
+  background-color: #18181b !important;
+  border-color: #3f3f46 !important;
+}
+</style>
