@@ -3954,7 +3954,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     canvas.style.display = 'block';
                     if (notify) showToast("Zatrzymano animację tła nagłówka.", "info");
                 } else {
-                    btnIcon.className = 'fas fa-eye-slash text-zinc-400 dark:text-gray-500';
+                    btnIcon.className = 'fas fa-eye-slash text-brand-red';
                     btnText.innerText = 'UKRYJ';
                     canvas.style.display = 'none';
                     if (notify) showToast("Ukryto animowane tło nagłówka.", "info");
@@ -8276,6 +8276,33 @@ body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-act
 /* The overlay-effects controls are hidden until an image is actually selected. */
 #modal-settings #app-bg-effects-panel[hidden],
 #modal-settings #app-bg-effects-panel.hidden { display:none!important; }
+</style>
+
+
+<style id="scythed-v38-light-toggle-icon-colors">
+/* In light mode, enabled sound/notifications keep the same accent color as other active icons. */
+html:not(.dark) body #sound-toggle-btn #sound-icon.text-brand-red,
+html:not(.dark) body #notifications-toggle-btn #notifications-icon.text-brand-red {
+  color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  opacity: 1 !important;
+}
+/* Muted/disabled states alone use gray icons, in both themes. */
+html:not(.dark) body #sound-toggle-btn #sound-icon.text-zinc-400,
+html:not(.dark) body #notifications-toggle-btn #notifications-icon.text-zinc-400 {
+  color: #a1a1aa !important;
+  -webkit-text-fill-color: #a1a1aa !important;
+}
+</style>
+
+
+<style id="scythed-v39-header-hide-icon-accent">
+/* UKRYJ: keep the icon in the active accent color in light mode, like other active controls. */
+html:not(.dark) #theme-toggle-icon.fa-eye-slash {
+  color: var(--brand-red, #ff0033) !important;
+  -webkit-text-fill-color: var(--brand-red, #ff0033) !important;
+  opacity: 1 !important;
+}
 </style>
 
 </body>
