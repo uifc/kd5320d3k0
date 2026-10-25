@@ -1271,8 +1271,8 @@ html.dark #scythed-admin-modal header > button { border:0; background:transparen
 html body #modal-settings button.settings-password-action > i,
 html body #modal-settings button#settings-change-app-password > i,
 html body #modal-settings button#settings-change-name-password > i {
-  color: var(--brand-red, #ff0033) !important;
-  -webkit-text-fill-color: var(--brand-red, #ff0033) !important;
+  color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
   opacity: 1 !important;
   transition: color .2s ease, -webkit-text-fill-color .2s ease !important;
 }
@@ -4664,7 +4664,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const icon = document.getElementById('sound-icon');
                 const text = document.getElementById('sound-text');
                 if (isSoundMuted) {
-                    if (icon) icon.className = 'fas fa-volume-xmark text-zinc-400 dark:text-gray-500';
+                    if (icon) icon.className = 'fas fa-volume-xmark text-brand-red';
                     if (text) text.innerText = 'WYCISZONY';
                 } else {
                     if (icon) icon.className = 'fas fa-volume-high text-brand-red';
@@ -4686,7 +4686,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const icon = document.getElementById('notifications-icon');
                 const text = document.getElementById('notifications-text');
                 if (areNotificationsMuted) {
-                    if (icon) icon.className = 'fas fa-bell-slash text-zinc-400 dark:text-gray-500';
+                    if (icon) icon.className = 'fas fa-bell-slash text-brand-red';
                     if (text) text.innerText = 'WYCISZONE';
                 } else {
                     if (icon) icon.className = 'fas fa-bell text-brand-red';
@@ -8299,8 +8299,8 @@ html:not(.dark) body #notifications-toggle-btn #notifications-icon.text-zinc-400
 <style id="scythed-v39-header-hide-icon-accent">
 /* UKRYJ: keep the icon in the active accent color in light mode, like other active controls. */
 html:not(.dark) #theme-toggle-icon.fa-eye-slash {
-  color: var(--brand-red, #ff0033) !important;
-  -webkit-text-fill-color: var(--brand-red, #ff0033) !important;
+  color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
   opacity: 1 !important;
 }
 </style>
@@ -10200,5 +10200,17 @@ body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-act
   background-color: #27272a !important;
   border-color: #52525b !important;
   color: #ffffff !important;
+}
+</style>
+
+
+<style id="scythed-v40-unified-toggle-icon-colors">
+/* DŹWIĘK/WYCISZONY, WŁĄCZONE/WYCISZONE and UKRYJ all use the same contrast-aware accent color. */
+html:not(.dark) body #sound-toggle-btn #sound-icon,
+html:not(.dark) body #notifications-toggle-btn #notifications-icon,
+html:not(.dark) #theme-toggle-icon.fa-eye-slash {
+  color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  opacity: 1 !important;
 }
 </style>
