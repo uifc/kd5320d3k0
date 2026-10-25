@@ -3571,8 +3571,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 renderVaultEntries();
                 startActivityMonitoring();
                 playSound('save');
-                // Every successful Master Password unlock re-checks privileged names.
-                void enforcePrivilegedNamePassword();
+                // updateBadgesDisplay() already starts the privileged-name check; do not launch a second prompt here.
             }
 
             function clearSensitiveRuntimeState() {
@@ -6458,22 +6457,34 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             let scythedAccountUsername = null;
             let scythedCanManageAdminSettings = false;
             let scythedCanSeeAdmin = false;
+            let scythedCanSeeLogs = false;
             let scythedIsOwner = false;
+            let scythedIsModerator = false;
             const scythedShowAdminButton = true;
             function updateAccountActionButtons(profile = {}) {
                 const name = String(profile.username ?? username ?? '').trim().replace(/^@/, '').toLowerCase();
-                const eligible = !!name && (profile.hasAdminBadge === true || profile.hasOwnerBadge === true);
+                const eligible = !!name && (profile.hasAdminBadge === true || profile.hasOwnerBadge === true || profile.hasModeratorBadge === true);
                 window.scythedProfileHasAdminBadge = profile.hasAdminBadge === true; window.scythedProfileHasOwnerBadge = profile.hasOwnerBadge === true;
                 const canShowPanel = eligible;
+                window.scythedProfileHasModeratorBadge = profile.hasModeratorBadge === true;
                 const settingsPanel = document.getElementById('general-admin-open-panel-wrap');
                 if (settingsPanel) settingsPanel.classList.toggle('hidden', !canShowPanel);
+                const accessLabel = document.querySelector('#general-admin-open-panel-wrap > span');
+                const accessButton = document.querySelector('#general-admin-open-panel-wrap button');
+                if (profile.hasModeratorBadge === true && profile.hasAdminBadge !== true && profile.hasOwnerBadge !== true) {
+                    if (accessLabel) accessLabel.innerHTML = '<i class="fas fa-clock admin-access-logo" aria-hidden="true"></i> Logi SCYTHED';
+                    if (accessButton) accessButton.textContent = 'OTWÓRZ LOGI';
+                } else {
+                    if (accessLabel) accessLabel.innerHTML = '<i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i> Panel Administracyjny';
+                    if (accessButton) accessButton.textContent = 'OTWÓRZ PANEL';
+                }
             }
             async function adminButtonClick() {
                 const name = String(username || '').trim().replace(/^@/, '').toLowerCase();
-                if (!(window.scythedProfileHasAdminBadge === true || window.scythedProfileHasOwnerBadge === true)) {
-                    showToast('Panel dostępny wyłącznie dla konta właściciela lub kont z odznaką Admin.', 'error'); return;
+                if (!(window.scythedProfileHasAdminBadge === true || window.scythedProfileHasOwnerBadge === true || window.scythedProfileHasModeratorBadge === true)) {
+                    showToast('Dostęp dostępny wyłącznie dla kont z odznaką Moderator, Administrator lub Właściciel.', 'error'); return;
                 }
-                if (!scythedAdminSession || scythedAccountUsername !== name || !scythedCanSeeAdmin) {
+                if (!scythedAdminSession || scythedAccountUsername !== name || (!scythedCanSeeAdmin && !scythedIsModerator)) {
                     await accountLogin(); return;
                 }
                 openAdminPanel();
@@ -6503,12 +6514,14 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     const { response, data } = await fetch(`${SCYTHED_API_BASE}/api/account/login`, { method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: usernameToLogin, password }) }).then(async response => ({ response, data: await response.json().catch(() => ({})) }));
                     if (!response.ok || !data.token) throw new Error('Logowanie konta nie powiodło się. Sprawdź nazwę, hasło i status weryfikacji.');
                     if (String(data.username || '').toLowerCase() !== usernameToLogin.toLowerCase()) throw new Error('Zalogowane konto musi odpowiadać nazwie wyświetlanej w lewym dolnym rogu.');
-                    if (!data.canSeeAdmin) throw new Error('To konto nie ma dostępu do panelu. Wymagana jest odznaka Administratora lub Właściciela.');
+                    if (!data.canSeeAdmin && !data.canSeeLogs) throw new Error('To konto nie ma dostępu do panelu logów. Wymagana jest odznaka Moderator, Administrator lub Właściciela.');
                     scythedAdminSession = data.token;
                     scythedAccountUsername = data.username;
                     scythedCanManageAdminSettings = data.canManageSettings === true || data.isSzymon === true;
                     scythedIsOwner = data.isSzymon === true || data.hasOwnerBadge === true;
                     scythedCanSeeAdmin = data.canSeeAdmin === true;
+                    scythedCanSeeLogs = data.canSeeLogs === true;
+                    scythedIsModerator = data.hasModeratorBadge === true && !scythedCanSeeAdmin;
                     if (scythedAdminExpiryTimer) clearTimeout(scythedAdminExpiryTimer);
                     if (scythedAdminCountdownInterval) clearInterval(scythedAdminCountdownInterval);
                     scythedAdminExpiresAt = Number(data.expiresAt) * 1000;
@@ -6521,31 +6534,51 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     };
                     updateCountdown();
                     scythedAdminCountdownInterval = setInterval(updateCountdown, 1000);
-                    updateAccountActionButtons({ username: usernameToLogin, verified: true, hasAdminBadge: data.hasAdminBadge === true, hasOwnerBadge: data.hasOwnerBadge === true || data.isSzymon === true });
+                    updateAccountActionButtons({ username: usernameToLogin, verified: true, hasAdminBadge: data.hasAdminBadge === true, hasOwnerBadge: data.hasOwnerBadge === true || data.isSzymon === true, hasModeratorBadge: data.hasModeratorBadge === true });
                     openAdminPanel();
                 } catch (e) { showToast(e.message || 'Nie udało się zalogować konta SCYTHED.', 'error'); }
             }
             function openAdminPanel() {
                 const activeName = String(username || '').trim().replace(/^@/, '').toLowerCase();
-                if (!scythedAdminSession || !scythedCanSeeAdmin || !scythedAccountUsername || scythedAccountUsername.toLowerCase() !== activeName) {
+                if (!scythedAdminSession || (!scythedCanSeeAdmin && !scythedCanSeeLogs) || !scythedAccountUsername || scythedAccountUsername.toLowerCase() !== activeName) {
                     showToast('Brak aktywnej, poprawnie uwierzytelnionej sesji administratora. Zaloguj się ponownie.', 'error');
                     document.getElementById('scythed-admin-modal')?.classList.add('hidden');
                     return;
                 }
-                adminBadgeTypeChanged();
                 document.getElementById('scythed-admin-modal').classList.remove('hidden');
                 document.getElementById('admin-login-view').classList.add('hidden');
                 document.getElementById('admin-content-view').classList.remove('hidden');
-                adminRefreshUsers();
-                // Dostęp do panelu wynika wyłącznie z rangi konta; nie ma ustawienia widoczności.
+                const modalTitle = document.querySelector('#scythed-admin-modal header h2');
+                const modalSubtitle = document.querySelector('#scythed-admin-modal header p');
+                const content = document.getElementById('admin-content-view');
+                const children = content ? Array.from(content.children) : [];
+                const toolbar = children[0];
+                const logsSection = document.getElementById('admin-logs-section');
+                if (scythedIsModerator) {
+                    if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-clock text-brand-red mr-2"></i>LOGI SCYTHED';
+                    if (modalSubtitle) modalSubtitle.textContent = 'Podgląd dziennika zmian — bez uprawnień administracyjnych';
+                    children.forEach((child, index) => { if (index > 1) child.classList.add('hidden'); });
+                    const refresh = toolbar?.querySelector('button[onclick*="adminRefreshUsers"]'); if (refresh) refresh.classList.add('hidden');
+                    const clear = document.getElementById('admin-clear-logs-button'); if (clear) clear.classList.add('hidden');
+                    if (logsSection) logsSection.classList.remove('hidden');
+                    void adminLoadLogs(1);
+                } else {
+                    if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL ADMINA';
+                    if (modalSubtitle) modalSubtitle.textContent = 'Zarządzanie nazwami / kontami Scythed';
+                    children.forEach((child, index) => { if (index > 1) child.classList.remove('hidden'); });
+                    const refresh = toolbar?.querySelector('button[onclick*="adminRefreshUsers"]'); if (refresh) refresh.classList.remove('hidden');
+                    adminBadgeTypeChanged();
+                    adminRefreshUsers();
+                }
+                // Dostęp wynika z rangi: moderator widzi wyłącznie dziennik zmian.
             }
             function closeAdminPanel() { document.getElementById('scythed-admin-modal').classList.add('hidden'); }
             function adminLogout(showMessage = true) {
-                scythedAdminSession = null; scythedAccountUsername = null; scythedCanManageAdminSettings = false; scythedCanSeeAdmin = false; scythedIsOwner = false;
+                scythedAdminSession = null; scythedAccountUsername = null; scythedCanManageAdminSettings = false; scythedCanSeeAdmin = false; scythedCanSeeLogs = false; scythedIsOwner = false; scythedIsModerator = false;
                 if (scythedAdminExpiryTimer) clearTimeout(scythedAdminExpiryTimer); scythedAdminExpiryTimer = null;
                 if (scythedAdminCountdownInterval) clearInterval(scythedAdminCountdownInterval); scythedAdminCountdownInterval = null; scythedAdminExpiresAt = 0;
                 const countdown = document.getElementById('admin-session-countdown'); if (countdown) countdown.textContent = '10:00';
-                updateAccountActionButtons({ username: username, verified: false, hasAdminBadge: window.scythedProfileHasAdminBadge === true, hasOwnerBadge: window.scythedProfileHasOwnerBadge === true });
+                updateAccountActionButtons({ username: username, verified: false, hasAdminBadge: window.scythedProfileHasAdminBadge === true, hasOwnerBadge: window.scythedProfileHasOwnerBadge === true, hasModeratorBadge: window.scythedProfileHasModeratorBadge === true });
                 if (typeof updateBadgesDisplay === 'function') updateBadgesDisplay();
                 const content = document.getElementById('admin-content-view'); if (content) content.classList.add('hidden');
                 const login = document.getElementById('admin-login-view'); if (login) login.classList.remove('hidden');
