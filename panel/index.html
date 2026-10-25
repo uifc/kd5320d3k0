@@ -9819,3 +9819,26 @@ html.dark #modal-settings #app-bg-effects-panel {
   document.addEventListener('transitionend', syncOverlayWand, true);
 })();
 </script>
+
+
+<style id="scythed-v30-overlay-effects-final-match">
+/* The overlay-effects heading uses the same normal (non-bold) weight as other setting labels. */
+#modal-settings #app-bg-effects-panel > span {
+  font-weight: 400 !important;
+}
+#modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles {
+  font-weight: 400 !important;
+}
+/* Match the complete effects tile to the other settings tiles in both themes. */
+html:not(.dark) #modal-settings #app-bg-effects-panel,
+body:not(.dark) #modal-settings #app-bg-effects-panel {
+  background-color: #f4f4f5 !important;
+  border-color: #e4e4e7 !important;
+}
+html.dark #modal-settings #app-bg-effects-panel,
+body.dark #modal-settings #app-bg-effects-panel,
+.dark #modal-settings #app-bg-effects-panel {
+  background-color: rgb(0 0 0 / 0.6) !important;
+  border-color: #27272a !important;
+}
+</style>
