@@ -1636,7 +1636,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
     </div>
 
     <div class="fixed bottom-4 right-4 z-40 flex flex-row-reverse items-center gap-2">
-        <button onclick="window.scythedApp.openSettingsModal()" class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" title="Ustawienia & System">
+        <button onclick="window.scythedApp.openSettingsModal()" class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" title="USTAWIENIA">
             <i class="fas fa-gear"></i>
         </button>
         <span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">v.6.3</span>
@@ -1657,7 +1657,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 
             <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-2">
                 <h3 class="font-orbitron font-bold text-sm md:text-base text-zinc-900 dark:text-white flex items-center gap-2">
-                    <i class="fas fa-gear text-brand-red"></i> USTAWIENIA & SYSTEM
+                    <i class="fas fa-gear text-brand-red"></i> USTAWIENIA
                 </h3>
                 <button onclick="window.scythedApp.closeModal('modal-settings')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times text-lg"></i></button>
             </div>
@@ -1740,8 +1740,8 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                             <div class="space-y-1">
                                 <label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Kolor Nakładki</label>
                                 <div class="flex items-center gap-2">
-                                    <input type="color" id="bg-overlay-color" value="#000000" onchange="window.scythedApp.updateBgOverlayColor(this.value)" class="w-8 h-8 rounded border-0 bg-transparent cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
-                                    <input type="text" id="bg-overlay-hex" value="#000000" aria-label="Kod HEX koloru nakładki" onblur="window.scythedApp.updateBgOverlayColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" class="w-16 bg-transparent text-[11px] font-mono focus:outline-none uppercase text-center" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="7">
+                                    <input type="color" id="bg-overlay-color" value="#000000" onchange="window.scythedApp.updateBgOverlayColor(this.value)" data-no-click-sound class="w-8 h-8 rounded border-0 bg-transparent cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
+                                    <input type="text" id="bg-overlay-hex" value="#000000" aria-label="Kod HEX koloru nakładki" onblur="window.scythedApp.updateBgOverlayColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" class="w-16 bg-transparent text-[11px] font-mono text-zinc-800 dark:text-gray-200 focus:outline-none uppercase text-center font-normal" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="7" data-no-click-sound>
                                 </div>
                             </div>
 
@@ -2929,7 +2929,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const hex = String(value || '').trim().replace(/^#?/, '#');
                 if (!/^#[0-9a-fA-F]{6}$/.test(hex)) {
                     if (input) input.value = String(appBgOverlayColor || '#000000').toUpperCase();
-                    showToast('Wpisz poprawny kod HEX, np. #000000.', 'error');
+                    // Pole koloru nakładki aktualizuje się po cichu — bez toastów i dźwięków.
                     return;
                 }
                 const normalized = hex.toLowerCase();
@@ -6578,7 +6578,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const toolbar = children[0];
                 const logsSection = document.getElementById('admin-logs-section');
                 if (scythedIsModerator) {
-                    if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-clock scythed-logs-title-icon mr-2" aria-hidden="true"></i><span class="scythed-logs-title-text">LOGI SCYTHED</span>';
+                    if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-clock scythed-logs-title-icon mr-2" aria-hidden="true"></i><span class="scythed-logs-title-text">PANEL LOGÓW</span>';
                     const sessionLabel = document.getElementById('admin-session-label');
                     if (sessionLabel) { sessionLabel.classList.remove('text-brand-red'); sessionLabel.classList.add('scythed-moderator-session'); sessionLabel.firstChild.textContent = 'Sesja moderatora - wylogowanie za '; }
                     if (modalSubtitle) modalSubtitle.textContent = 'Podgląd dziennika zmian — bez uprawnień administracyjnych';
@@ -6587,7 +6587,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     const clear = document.getElementById('admin-clear-logs-button'); if (clear) clear.classList.add('hidden');
                     if (logsSection) logsSection.classList.remove('hidden');
                     const moderatorLogsCloseLabel = document.querySelector('#admin-logs-section .scythed-logs-close-button span');
-                    if (moderatorLogsCloseLabel) moderatorLogsCloseLabel.textContent = 'ZAMKNIJ LOGI';
+                    if (moderatorLogsCloseLabel) moderatorLogsCloseLabel.textContent = 'ZAMKNIJ';
                     void adminLoadLogs(1);
                 } else {
                     const adminLogsCloseLabel = document.querySelector('#admin-logs-section .scythed-logs-close-button span');
@@ -6920,12 +6920,12 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
         <div id="admin-login-view" class="p-4 md:p-6 max-w-lg mx-auto space-y-4"><p class="text-sm text-zinc-600 dark:text-zinc-300">Panel wymaga aktywnej sesji konta SCYTHED uwierzytelnionego hasłem zapisanym w Cloudflare D1. Otwórz panel z Ustawień ogólnych i potwierdź hasłem konta SCYTHED.</p></div>
         <div id="admin-content-view" class="hidden p-4 md:p-6 space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-3"><p id="admin-session-label" class="text-sm text-brand-red">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button onclick="window.scythedApp.adminToggleLogs()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-clock mr-1.5" aria-hidden="true"></i>LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-rotate mr-1.5" aria-hidden="true"></i>ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-right-from-bracket mr-1.5" aria-hidden="true"></i>WYLOGUJ</button></div></div>
-          <section id="admin-logs-section" class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold text-sm">DZIENNIK ZMIAN</h3><div class="flex gap-2"><button id="admin-clear-logs-button" onclick="window.scythedApp.adminClearLogs()" class="hidden text-xs px-2 py-1 rounded border border-brand-red/40 text-brand-red">WYCZYŚĆ LOGI</button><button onclick="document.getElementById('admin-logs-section').classList.add('hidden')" class="scythed-logs-close-button"><i class="fas fa-xmark" aria-hidden="true"></i><span>ZAMKNIJ</span></button></div></div><div id="admin-logs-list" class="space-y-2 text-xs"><p class="text-zinc-500">Ładowanie logów…</p></div><div id="admin-logs-pagination" class="flex flex-wrap items-center justify-center gap-1 pt-2"></div></section>
+          <section id="admin-logs-section" class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold text-sm">DZIENNIK ZMIAN</h3><div class="flex gap-2"><button id="admin-clear-logs-button" onclick="window.scythedApp.adminClearLogs()" class="hidden text-xs px-2 py-1 rounded border border-brand-red/40 text-brand-red"><i class="fas fa-trash-can" aria-hidden="true"></i><span>WYCZYŚĆ LOGI</span></button><button onclick="document.getElementById('admin-logs-section').classList.add('hidden')" class="scythed-logs-close-button"><i class="fas fa-xmark" aria-hidden="true"></i><span>ZAMKNIJ</span></button></div></div><div id="admin-logs-list" class="space-y-2 text-xs"><p class="text-zinc-500">Ładowanie logów…</p></div><div id="admin-logs-pagination" class="flex flex-wrap items-center justify-center gap-1 pt-2"></div></section>
           <section class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3">
             <div><h3 class="font-bold text-sm"><i class="fas fa-user-plus text-brand-red mr-2"></i>DODAJ NOWĄ NAZWĘ / KONTO</h3></div>
             <form id="admin-create-user-form" autocomplete="off" onsubmit="window.scythedApp.adminCreateUser(event)" class="grid grid-cols-1 md:grid-cols-2 gap-2">
               <input id="admin-create-username" name="scythed-new-username" type="text" required minlength="1" maxlength="16" pattern="[A-Za-z0-9_. ]+" placeholder="Nowa nazwa / login" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="off" autocapitalize="off" spellcheck="false">
-              <div class="flex flex-col gap-1.5"><input id="admin-create-password" name="scythed-new-password" type="password" required minlength="12" maxlength="1024" placeholder="Hasło (min. 12 znaków)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="new-password"><div class="flex items-center justify-between gap-2"><span class="text-[10px] text-zinc-500">Hasło do nowej zweryfikowanej nazwy</span><button type="button" onclick="window.scythedApp.generateNamePassword12()" class="text-xs text-brand-red hover:underline whitespace-nowrap" title="Wygeneruj losowe hasło o długości 12 znaków"><i class="fas fa-wand-magic-sparkles mr-1" aria-hidden="true"></i>GENERUJ 12 ZNAKÓW</button></div></div>
+              <div class="flex flex-col gap-1.5"><div class="relative"><input id="admin-create-password" name="scythed-new-password" type="password" required minlength="12" maxlength="1024" placeholder="Hasło (min. 12 znaków)" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 pr-10 text-sm" autocomplete="new-password"><button type="button" class="scythed-admin-utility-button absolute right-1.5 top-1/2 -translate-y-1/2" aria-label="Pokaż hasło" title="Pokaż hasło" onclick="const f=document.getElementById('admin-create-password'); const shown=f.type==='password'; f.type=shown?'text':'password'; this.innerHTML=shown?'<i class="fas fa-eye-slash" aria-hidden="true"></i>':'<i class="fas fa-eye" aria-hidden="true"></i>'; this.setAttribute('aria-label',shown?'Ukryj hasło':'Pokaż hasło'); this.title=shown?'Ukryj hasło':'Pokaż hasło';" data-no-click-sound><i class="fas fa-eye" aria-hidden="true"></i></button></div><div class="flex items-center justify-between gap-2"><span class="text-[10px] text-zinc-500">Hasło do nowej zweryfikowanej nazwy</span><button type="button" onclick="window.scythedApp.generateNamePassword12()" class="scythed-logs-close-button scythed-admin-utility-button whitespace-nowrap" title="Wygeneruj losowe hasło o długości 12 znaków" data-no-click-sound><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span>GENERUJ 12 ZNAKÓW</span></button></div></div>
               <button type="submit" class="md:col-span-2 rounded-lg bg-brand-red hover:bg-brand-hoverRed text-white p-2.5 text-xs font-bold transition"><i class="fas fa-plus mr-2"></i>UTWÓRZ KONTO</button>
             </form>
           </section>
@@ -9382,4 +9382,68 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 /* Dolny przycisk zamykania panelu używa tej samej czcionki i ma ikonę X. */
 #scythed-admin-modal .admin-bottom-close { font-family:inherit !important; letter-spacing:normal !important; display:inline-flex !important; align-items:center !important; justify-content:center !important; gap:.15rem !important; }
 #scythed-admin-modal .admin-bottom-close > i { display:inline-block !important; color:inherit !important; -webkit-text-fill-color:currentColor !important; }
+</style>
+
+
+<style id="scythed-v17-requested-final-fixes">
+/* Wszystkie przyciski użytkowe w panelu mają typografię jak LOGI/WYLOGUJ: zwykłą i jednakową. */
+#scythed-admin-modal .scythed-logs-close-button,
+#scythed-admin-modal .scythed-admin-utility-button,
+#scythed-admin-modal #admin-clear-logs-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .35rem !important;
+  box-sizing: border-box !important;
+  padding: .35rem .7rem !important;
+  border: 1px solid rgba(239,68,68,.35) !important;
+  border-radius: .55rem !important;
+  background: rgba(239,68,68,.08) !important;
+  color: var(--brand-readable-accent, #f87171) !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.25rem !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transition: background .16s ease, border-color .16s ease, color .16s ease !important;
+}
+#scythed-admin-modal .scythed-logs-close-button:hover,
+#scythed-admin-modal .scythed-admin-utility-button:hover,
+#scythed-admin-modal #admin-clear-logs-button:hover {
+  background: rgba(239,68,68,.14) !important;
+  border-color: rgba(248,113,113,.7) !important;
+  color: var(--brand-readable-accent, #fca5a5) !important;
+  transform: none !important;
+}
+#scythed-admin-modal .scythed-admin-utility-button i,
+#scythed-admin-modal .scythed-logs-close-button i,
+#scythed-admin-modal #admin-clear-logs-button i { font-size: 12px !important; }
+#scythed-admin-modal #admin-create-password { padding-right: 2.5rem !important; }
+#scythed-admin-modal #admin-create-password + button { min-width: 28px !important; min-height: 28px !important; padding: .25rem !important; }
+/* Przyciski panelu (w tym zamknięcie panelu) mają zwykłą, jednolitą typografię jak LOGI/WYLOGUJ. */
+#scythed-admin-modal .admin-bottom-close,
+#scythed-admin-modal button[onclick*="adminToggleLogs"],
+#scythed-admin-modal button[onclick*="adminLogout"] {
+  font-family: inherit !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+/* Nie pozwalaj stylom przycisków nadpisać klasy hidden, szczególnie moderatorowi. */
+#scythed-admin-modal .scythed-admin-utility-button.hidden,
+#scythed-admin-modal #admin-clear-logs-button.hidden { display: none !important; }
+/* HEX nakładki wygląda jak główny HEX: mono 11px, zwykła grubość, bez toastów przy wpisywaniu. */
+#modal-settings #bg-overlay-hex {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  line-height: normal !important;
+  color: #27272a !important;
+}
+html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
+#modal-settings h3 { font-size: 14px !important; }
 </style>
