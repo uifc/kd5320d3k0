@@ -9746,3 +9746,20 @@ html.dark #modal-settings #app-bg-effects-panel {
   accent-color: #71717a !important;
 }
 </style>
+
+
+<style id="scythed-v27-overlay-effects-light-theme-match">
+/* In light mode the overlay-effects icon follows the same dark text color as other labels, not the user's accent color. */
+html:not(.dark) #modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles,
+html:not(.dark) #modal-settings .font-bold.flex.items-center.gap-1\.5 > i.fa-wand-magic-sparkles {
+  color: #27272a !important;
+  -webkit-text-fill-color: #27272a !important;
+}
+/* Match the effects panel surface to the "Wielkość" select surface. */
+html:not(.dark) #modal-settings #app-bg-effects-panel {
+  background-color: #ffffff !important;
+}
+html.dark #modal-settings #app-bg-effects-panel {
+  background-color: #18181b !important;
+}
+</style>
