@@ -1023,7 +1023,7 @@ html.dark #scythed-admin-modal input::placeholder,html.dark #scythed-admin-modal
 </script>
 
 <style id="scythed-settings-controls-final-fix">
-/* Neutralne, jednakowe kontrolki — kolor akcentu nie zmienia ich bazowej powierzchni. */
+/* Neutralne, jednakowe kontrolki - kolor akcentu nie zmienia ich bazowej powierzchni. */
 :root{--control-surface-light:#f4f4f5;--control-surface-dark:#18181b;--control-border-light:#d4d4d8;--control-border-dark:#3f3f46;}
 #modal-settings #general-admin-open-panel-wrap,
 #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{background:#fafafa!important;border:1px solid #e4e4e7!important;border-radius:11px!important;}
@@ -1170,7 +1170,7 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
 
 
 <style id="scythed-v14-visual-fixes">
-/* Ikony zmiany hasła zawsze dziedziczą kolor tekstu — także po zmianie motywu. */
+/* Ikony zmiany hasła zawsze dziedziczą kolor tekstu - także po zmianie motywu. */
 #modal-settings .settings-password-action,
 #modal-settings .settings-password-action i,
 #modal-settings .settings-password-action span {
@@ -2936,7 +2936,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const hex = String(value || '').trim().replace(/^#?/, '#');
                 if (!/^#[0-9a-fA-F]{6}$/.test(hex)) {
                     if (input) input.value = String(appBgOverlayColor || '#000000').toUpperCase();
-                    // Pole koloru nakładki aktualizuje się po cichu — bez toastów i dźwięków.
+                    // Pole koloru nakładki aktualizuje się po cichu - bez toastów i dźwięków.
                     return;
                 }
                 const normalized = hex.toLowerCase();
@@ -3735,7 +3735,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const button = document.getElementById('settings-change-name-password');
                 if (button) { button.disabled = true; button.classList.add('opacity-50', 'cursor-not-allowed'); button.title = 'Sprawdzanie statusu weryfikacji konta…'; }
                 if (!username || badgeAccountKey(username) === 'user') {
-                    if (button) button.title = 'Zmiana zablokowana — konto nie ma zweryfikowanej nazwy.';
+                    if (button) button.title = 'Zmiana zablokowana - konto nie ma zweryfikowanej nazwy.';
                     return;
                 }
                 try {
@@ -3747,10 +3747,10 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                         button.disabled = !verified;
                         button.classList.toggle('opacity-50', !verified);
                         button.classList.toggle('cursor-not-allowed', !verified);
-                        button.title = verified ? 'Zmień hasło przypisane do zweryfikowanej nazwy.' : 'Zmiana zablokowana — konto nie jest zweryfikowane.';
+                        button.title = verified ? 'Zmień hasło przypisane do zweryfikowanej nazwy.' : 'Zmiana zablokowana - konto nie jest zweryfikowane.';
                     }
                 } catch (_) {
-                    if (button) button.title = 'Nie udało się sprawdzić weryfikacji — zmiana hasła pozostaje zablokowana.';
+                    if (button) button.title = 'Nie udało się sprawdzić weryfikacji - zmiana hasła pozostaje zablokowana.';
                 }
             }
 
@@ -3778,8 +3778,8 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 target.classList.remove('text-green-500');
                 target.classList.add('text-red-500');
                 if (!password) { target.textContent = ''; target.classList.add('hidden'); return; }
-                if (password.length < 12) target.textContent = `Hasło jest za krótkie — minimum 12 znaków (brakuje ${12 - password.length}).`;
-                else if (typeof isWeakMasterPassword === 'function' && isWeakMasterPassword(password)) target.textContent = 'Hasło może być zbyt słabe — unikaj prostych sekwencji i powtórzeń.';
+                if (password.length < 12) target.textContent = `Hasło jest za krótkie - minimum 12 znaków (brakuje ${12 - password.length}).`;
+                else if (typeof isWeakMasterPassword === 'function' && isWeakMasterPassword(password)) target.textContent = 'Hasło może być zbyt słabe - unikaj prostych sekwencji i powtórzeń.';
                 else { target.textContent = 'Hasło spełnia wymaganie minimum 12 znaków.'; target.classList.remove('text-red-500'); target.classList.add('text-green-500'); }
                 target.classList.remove('hidden');
             }
@@ -3803,7 +3803,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const showStatus = (message, error=false) => { if(status){ status.textContent=message; status.className=`text-[10px] ${error?'text-red-500':'text-green-500'}`; } };
                 if (!username || badgeAccountKey(username) === 'user') return showStatus('Najpierw ustaw nazwę zweryfikowanego konta.', true);
                 if (!oldPassword) return showStatus('Wpisz obecne hasło do nazwy.', true);
-                if (newPassword.length < 12) { updateNamePasswordStrengthUI(newPassword); return showStatus(`Nowe hasło jest za krótkie — brakuje ${12 - newPassword.length} znaków.`, true); }
+                if (newPassword.length < 12) { updateNamePasswordStrengthUI(newPassword); return showStatus(`Nowe hasło jest za krótkie - brakuje ${12 - newPassword.length} znaków.`, true); }
                 if (newPassword !== confirmPassword) { updateNamePasswordConfirmStatus(); return showStatus('Potwierdzenie hasła nie jest zgodne.', true); }
                 try {
                     const {response,data} = await scythedApi('/api/account/change-password', {username: badgeAccountKey(username), oldPassword, newPassword});
@@ -6550,7 +6550,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                         : 'Potwierdź sesję administratora hasłem konta SCYTHED. Otworzysz panel zarządzania kontami, odznakami i ustawieniami.',
                     '',
                     {
-                        title: logsOnlyLogin ? 'SESJA MODERATORA — LOGI' : 'SESJA ADMINISTRATORA — PANEL SCYTHED',
+                        title: logsOnlyLogin ? 'SESJA MODERATORA - LOGI' : 'SESJA ADMINISTRATORA - PANEL SCYTHED',
                         inputType: 'password',
                         icon: logsOnlyLogin ? 'fa-hammer' : 'fa-shield-halved',
                         confirmText: logsOnlyLogin ? 'SPRAWDŹ LOGI' : 'ZALOGUJ'
@@ -6607,7 +6607,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-clock scythed-logs-title-icon mr-2" aria-hidden="true"></i><span class="scythed-logs-title-text">PANEL LOGÓW</span>';
                     const sessionLabel = document.getElementById('admin-session-label');
                     if (sessionLabel) { sessionLabel.classList.remove('text-brand-red'); sessionLabel.classList.add('scythed-moderator-session'); sessionLabel.firstChild.textContent = 'Sesja moderatora - wylogowanie za '; }
-                    if (modalSubtitle) modalSubtitle.textContent = 'Podgląd dziennika zmian — bez uprawnień administracyjnych';
+                    if (modalSubtitle) modalSubtitle.textContent = 'Podgląd dziennika zmian - bez uprawnień administracyjnych';
                     children.forEach((child, index) => { if (index > 1) child.classList.add('hidden'); });
                     const refresh = toolbar?.querySelector('button[onclick*="adminRefreshUsers"]'); if (refresh) refresh.classList.add('hidden');
                     const clear = document.getElementById('admin-clear-logs-button'); if (clear) clear.classList.add('hidden');
@@ -6746,7 +6746,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     const passwordButton = canManageTarget ? `<button onclick="window.scythedApp.adminChangePassword('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ZMIANA HASŁA</button>` : '<span class="text-xs text-zinc-500">Nie posiadasz możliwości edytowania tego konta.</span>';
                     const del = canDeleteTarget ? `<button onclick="window.scythedApp.adminDeleteUser('${escapeHtml(name)}')" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">USUŃ KONTO</button>` : '';
                     const badgeOptions = orderedBadges.map(b => `<option value="${escapeHtml(b.badge)}">${escapeHtml(badgeLabel(b))}</option>`).join('');
-                    const revoke = badgeOptions && !isOwnerProfile && canManageTarget ? `<div class="flex flex-wrap gap-1 mt-1"><select id="revoke-badge-${escapeHtml(name)}" class="admin-badge-select max-w-[170px] rounded border px-2 py-1 text-xs" aria-label="Wybierz odznakę do odebrania">${badgeOptions}</select><button onclick="window.scythedApp.adminRevokeBadge('${escapeHtml(name)}', document.getElementById('revoke-badge-${escapeHtml(name)}').value)" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ODBIERZ</button></div>` : (isOwnerProfile ? '<span class="text-xs text-zinc-500">Profil właściciela — dostępna tylko zmiana hasła.</span>' : (canManageTarget ? '<span class="text-zinc-500">Brak odznak</span>' : ''));
+                    const revoke = badgeOptions && !isOwnerProfile && canManageTarget ? `<div class="flex flex-wrap gap-1 mt-1"><select id="revoke-badge-${escapeHtml(name)}" class="admin-badge-select max-w-[170px] rounded border px-2 py-1 text-xs" aria-label="Wybierz odznakę do odebrania">${badgeOptions}</select><button onclick="window.scythedApp.adminRevokeBadge('${escapeHtml(name)}', document.getElementById('revoke-badge-${escapeHtml(name)}').value)" class="admin-theme-button px-2 py-1 rounded border text-xs font-bold">ODBIERZ</button></div>` : (isOwnerProfile ? '<span class="text-xs text-zinc-500">Profil właściciela - dostępna tylko zmiana hasła.</span>' : (canManageTarget ? '<span class="text-zinc-500">Brak odznak</span>' : ''));
                     return `<tr class="admin-user-row ${isOwnerProfile ? 'admin-owner-row' : ''} border-b border-zinc-200 dark:border-zinc-800 align-top"><td class="p-2 font-bold">${escapeHtml(name)}${isOwnerProfile ? '<div class="text-[10px] font-normal text-zinc-500">Właściciel projektu</div>' : ''}</td><td class="p-2">${status}</td><td class="p-2 min-w-[140px]"><div class="flex flex-wrap items-center gap-1.5">${badges}</div></td><td class="p-2"><div class="flex flex-col items-start gap-1.5">${isOwnerProfile ? (scythedIsOwner ? passwordButton : '<span class="text-xs text-zinc-500">Nie posiadasz możliwości edytowania tego konta.</span>') : `<div class="flex flex-wrap gap-1.5">${passwordButton}${del}</div>${revoke}`}</div></td></tr>`;
                 }).join('');
             }
@@ -6792,7 +6792,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             }
             let scythedAdminUndoAction = null;
             function showAdminUndo(message, undoAction) {
-                // Panel admina pokazuje wyłącznie wynik operacji — bez przycisku cofania.
+                // Panel admina pokazuje wyłącznie wynik operacji - bez przycisku cofania.
                 scythedAdminUndoAction = null;
                 const el = document.getElementById('admin-action-message'); if (!el) return;
                 el.className = 'text-sm rounded-lg p-3 bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-100';
@@ -7108,7 +7108,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 #scythed-admin-modal #admin-create-user-form button[type="submit"] > i {
   color: inherit !important;
 }
-/* Zachowaj oryginalne, tematyczne kolory odznak i statusów — nie nadpisuj ich akcentem. */
+/* Zachowaj oryginalne, tematyczne kolory odznak i statusów - nie nadpisuj ich akcentem. */
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge > i,
 #scythed-admin-modal .admin-owner-status,
@@ -7258,7 +7258,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 
 <!-- SCYTHED badge palette lock v64 -->
 <style id="scythed-v64-admin-badge-palette-lock">
-/* Odznaki w panelu admina mają własną, stałą paletę — niezależną od koloru głównego i jasnego/ciemnego motywu. */
+/* Odznaki w panelu admina mają własną, stałą paletę - niezależną od koloru głównego i jasnego/ciemnego motywu. */
 #scythed-admin-modal .admin-list-badge.admin-list-owner,
 #scythed-admin-modal .admin-list-badge.admin-list-owner:hover { background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)) !important; border-color:rgba(250,204,21,.9) !important; color:#facc15 !important; }
 #scythed-admin-modal .admin-list-badge.admin-list-owner > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
@@ -7333,7 +7333,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 
 
 <style id="scythed-final-role-button-logo-fix">
-/* Status konta zachowuje własną, rozpoznawalną paletę — niezależnie od akcentu motywu. */
+/* Status konta zachowuje własną, rozpoznawalną paletę - niezależnie od akcentu motywu. */
 #scythed-admin-modal .admin-owner-status,
 #scythed-admin-modal .admin-list-owner,
 #scythed-admin-modal .admin-owner-status > i,
@@ -7440,7 +7440,7 @@ html:not(.dark) #modal-settings .admin-access-logo {
 #modal-settings #general-admin-open-panel-wrap > span { color:#fff !important; }
 html:not(.dark) #modal-settings #general-admin-open-panel-wrap > span { color:#111827 !important; }
 #modal-settings #general-admin-open-panel-wrap .admin-access-logo { color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important; }
-/* Szare, neutralne powierzchnie kontrolek — także próbnik i pole HEX. */
+/* Szare, neutralne powierzchnie kontrolek - także próbnik i pole HEX. */
 #modal-settings #brand-color-picker,
 #modal-settings #brand-hex-input,
 #modal-settings #bg-overlay-color,
@@ -8056,7 +8056,7 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
     }
     root.style.setProperty('--brand-readable-accent',readable);
     document.querySelectorAll('#modal-settings .fa-check, #modal-settings .fa-check-circle, #modal-settings .fa-circle-check, #modal-change-name-password .fa-check, #modal-change-name-password .fa-check-circle, #modal-change-name-password .fa-circle-check, #scythed-admin-modal .fa-check, #scythed-admin-modal .fa-check-circle, #scythed-admin-modal .fa-circle-check').forEach(icon=>{
-      // Stałe ikony statusów/odznak nie są kontrolkami użytkownika — nie nadpisujemy ich własnych kolorów.
+      // Stałe ikony statusów/odznak nie są kontrolkami użytkownika - nie nadpisujemy ich własnych kolorów.
       if (icon.closest('.admin-verified-status, .admin-moderator-status, .admin-list-badge, .profile-badge-tooltip, .profile-badge, .badge-icon')) return;
       icon.style.setProperty('color','var(--brand-readable-accent,var(--brand-red,#ff0033))','important');
       icon.style.setProperty('-webkit-text-fill-color','var(--brand-readable-accent,var(--brand-red,#ff0033))','important');
@@ -8248,7 +8248,7 @@ body:not(.has-custom-bg) #app-bg-overlay {
   display: block;
   background: transparent !important;
 }
-/* Kompaktowy kontener wyboru koloru nakładki — taki sam charakter jak Kolor Główny. */
+/* Kompaktowy kontener wyboru koloru nakładki - taki sam charakter jak Kolor Główny. */
 html.dark #modal-settings #app-bg-effects-panel .flex.items-center.gap-1:has(#bg-overlay-color) {
   background: #0c0c0e !important;
   border-color: #27272a !important;
@@ -8380,7 +8380,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
 <style id="scythed-admin-badge-hover-and-bughunter2-fix">
 /* Odznaki w panelu admina zachowują kolory, a efekty najechania pozostają aktywne. */
 
-/* Łowca błędów poziom 1 — zielony */
+/* Łowca błędów poziom 1 - zielony */
 #scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2),
 #scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2):hover {
   background: rgba(34,197,94,.14) !important;
@@ -8393,7 +8393,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   -webkit-text-fill-color: #4ade80 !important;
 }
 
-/* Łowca błędów poziom 2 — niebieski również po najechaniu */
+/* Łowca błędów poziom 2 - niebieski również po najechaniu */
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2,
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2:hover {
   background: rgba(59,130,246,.14) !important;
@@ -9058,7 +9058,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-list-badge.admin-list-zasluzony:hover { background:#14532d !important; background-image:none !important; }
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2,
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2:hover { background:#1e3a8a !important; background-image:none !important; }
-/* Status konta Administrator: czerwony, jednolity i statyczny — jak status Moderator pod względem formy. */
+/* Status konta Administrator: czerwony, jednolity i statyczny - jak status Moderator pod względem formy. */
 #scythed-admin-modal .admin-admin-status,
 #scythed-admin-modal .admin-admin-status:hover {
   background: rgba(220,38,38,.12) !important;
@@ -9908,7 +9908,7 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 
 
 <style id="scythed-v23-eye-like-password-fields-and-checkmark-scope">
-/* Oczko generatora ma taki sam prosty wygląd jak oczka przy zmianie hasła — bez kafelka/przycisku. */
+/* Oczko generatora ma taki sam prosty wygląd jak oczka przy zmianie hasła - bez kafelka/przycisku. */
 #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"] ,
 #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"]:hover,
 #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"]:focus,
@@ -10011,7 +10011,7 @@ html.dark #modal-settings #app-bg-effects-panel {
 
 
 <style id="scythed-v29-wand-icon-dynamic-accent">
-/* Różdżka zawsze korzysta z tego samego dynamicznego akcentu co pozostałe ikony — również w ciemnym motywie. */
+/* Różdżka zawsze korzysta z tego samego dynamicznego akcentu co pozostałe ikony - również w ciemnym motywie. */
 #modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles,
 #modal-settings .font-bold.flex.items-center.gap-1\.5 > i.fa-wand-magic-sparkles {
   color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
