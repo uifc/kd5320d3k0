@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="SCYTHED" property="og:title"/>
-<meta content="MENADŻER HASEŁ - v.6.3." property="og:description"/>
+<meta content="MENADŻER HASEŁ" property="og:description"/>
 <meta content="https://i.imgur.com/jIS4wrD.png" property="og:image"/>
 <meta content="https://scythed.xyz" property="og:url"/>
 <meta content="website" property="og:type"/>
@@ -1569,7 +1569,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 <button class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" onclick="window.scythedApp.openSettingsModal()" title="USTAWIENIA">
 <i class="fas fa-gear"></i>
 </button>
-<span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">v.6.3</span>
+<span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">v.7.2</span>
 </div>
 <footer class="w-full max-w-xl mx-auto text-center px-4 mt-8 space-y-1 relative z-10">
 <p class="text-[11px] md:text-xs text-zinc-600 dark:text-gray-400 font-mono leading-tight">
@@ -6431,13 +6431,13 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const password = await appPrompt(
                     logsOnlyLogin
                         ? 'Potwierdź sesję moderatora hasłem konta SCYTHED. Otworzysz wyłącznie podgląd dziennika zmian.'
-                        : 'Potwierdź sesję administratora hasłem konta SCYTHED. Otworzysz panel zarządzania kontami, odznakami i ustawieniami.',
+                        : 'Potwierdź sesję administratora hasłem konta SCYTHED. Otworzysz panel zarządzania kontami.',
                     '',
                     {
-                        title: logsOnlyLogin ? 'SESJA MODERATORA - LOGI' : 'SESJA ADMINISTRATORA - PANEL SCYTHED',
+                        title: logsOnlyLogin ? 'LOGI' : 'PANEL SCYTHED',
                         inputType: 'password',
                         icon: logsOnlyLogin ? 'fa-hammer' : 'fa-shield-halved',
-                        confirmText: logsOnlyLogin ? 'SPRAWDŹ LOGI' : 'ZALOGUJ'
+                        confirmText: logsOnlyLogin ? 'ZALOGUJ' : 'ZALOGUJ'
                     }
                 );
                 if (password === null || !password) return;
@@ -6491,7 +6491,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-clock scythed-logs-title-icon mr-2" aria-hidden="true"></i><span class="scythed-logs-title-text">PANEL LOGÓW</span>';
                     const sessionLabel = document.getElementById('admin-session-label');
                     if (sessionLabel) { sessionLabel.classList.remove('text-brand-red'); sessionLabel.classList.add('scythed-moderator-session'); sessionLabel.firstChild.textContent = 'Sesja moderatora - wylogowanie za '; }
-                    if (modalSubtitle) modalSubtitle.textContent = 'Podgląd dziennika zmian - bez uprawnień administracyjnych';
+                    if (modalSubtitle) modalSubtitle.textContent = 'Podgląd dziennika zmian';
                     children.forEach((child, index) => { if (index > 1) child.classList.add('hidden'); });
                     const refresh = toolbar?.querySelector('button[onclick*="adminRefreshUsers"]'); if (refresh) refresh.classList.add('hidden');
                     const clear = document.getElementById('admin-clear-logs-button'); if (clear) clear.classList.add('hidden');
@@ -9909,3 +9909,5 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   opacity: 1 !important;
 }
 </style>
+
+Strona została stworzona przez @yzke (discord)
