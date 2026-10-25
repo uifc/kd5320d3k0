@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html lang="pl" class="size-medium dark">
+<!DOCTYPE html>
+
+<html class="size-medium dark" lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta property="og:title" content="SCYTHED">
-    <meta property="og:description" content="MENADŻER HASEŁ - v.6.3.">
-    <meta property="og:image" content="https://i.imgur.com/jIS4wrD.png">
-    <meta property="og:url" content="https://scythed.xyz">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <title>@USER</title>
-    <link rel="icon" type="image/png" href="/assets/logos/logo.png?v=2">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="SCYTHED" property="og:title"/>
+<meta content="MENADŻER HASEŁ - v.6.3." property="og:description"/>
+<meta content="https://i.imgur.com/jIS4wrD.png" property="og:image"/>
+<meta content="https://scythed.xyz" property="og:url"/>
+<meta content="website" property="og:type"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>SCYTHED — Menedżer haseł</title>
+<link href="/assets/logos/logo.png?v=2" rel="icon" type="image/png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&amp;family=Rajdhani:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>
       let currentBrandColor = localStorage.getItem('scythed_brand_color_v6') || '#ff0033';
       if (!/^#[0-9A-F]{6}$/i.test(currentBrandColor)) currentBrandColor = '#ff0033';
       currentBrandColor = clampBrandColor(currentBrandColor);
@@ -81,8 +79,7 @@
           else if (savedThemeMode === 'dark') document.documentElement.classList.add('dark');
       } catch (e) {}
     </script>
-
-    <style>
+<style>
         :root {
             --brand-red: #ff0033;
             --brand-hover-red: #cc0029;
@@ -572,9 +569,8 @@
             opacity: 0 !important;
             visibility: hidden !important;
         }
-    </style>
+    
 
-<style>
 .profile-badge-tooltip{cursor:help;}
 .profile-badge-tooltip:hover{filter:brightness(1.12);}
 .badge-hover-tooltip{position:fixed;display:none;z-index:2147483647;pointer-events:none;background:#f4f4f5;color:#18181b;border:1px solid #d4d4d8;padding:6px 9px;border-radius:7px;font-size:10px;font-weight:700;line-height:1.2;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.22);font-family:inherit;}
@@ -629,7 +625,6 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 </script>
-
 <style>
 
 #app-dialog-overlay {
@@ -696,9 +691,8 @@ html:not(.dark) #app-dialog {
     #app-dialog-overlay { padding: .75rem; }
     #app-dialog { border-radius: 1rem; }
 }
-</style>
 
-<style id="badge-icon-visibility-enhancement">
+
 
 html:not(.dark) #profile-badges-container .profile-badge-tooltip > i {
     -webkit-text-stroke: 0.35px rgba(255, 255, 255, 0.88);
@@ -710,9 +704,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.65), 0 0 2px rgba(255, 255, 255, 0.20);
     filter: drop-shadow(0 0 0.6px rgba(0, 0, 0, 0.35));
 }
-</style>
 
-    <style id="admin-panel-polish">
+
       .admin-list-badge{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px;width:28px;height:28px;box-sizing:border-box;padding:0!important;border:1px solid;border-radius:.375rem;font-size:10px;overflow:hidden;background-size:220% 220%;animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite}
       .admin-list-badge>i{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;width:12px;height:12px;font-size:10px;line-height:1}
       .admin-list-owner{background:linear-gradient(120deg,rgba(120,74,0,.32),rgba(234,179,8,.62),rgba(133,77,14,.32),rgba(250,204,21,.68))!important;border-color:rgba(250,204,21,.95)!important;color:#facc15!important;box-shadow:0 0 10px rgba(250,204,21,.22)}
@@ -745,9 +738,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
       #admin-session-countdown{font-variant-numeric:tabular-nums;font-weight:800}
       html:not(.dark) .admin-badge-select,html:not(.dark) .admin-badge-select option{background:#18181b;color:#fff}
       @media(prefers-reduced-motion:reduce){.admin-list-badge,.admin-owner-status{animation:none!important}}
-    </style>
+    
 
-<style id="admin-theme-accessibility-fixes">
 
   #scythed-admin-modal .admin-list-badge > i {
     -webkit-text-stroke: .45px rgba(255,255,255,.9);
@@ -806,7 +798,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     box-shadow: 0 0 0 1000px transparent inset !important;
   }
 </style>
-<script id="disable-browser-autofill">
+<script>
 (function () {
   function disableAutofill(root) {
     if (!root || !root.querySelectorAll) return;
@@ -834,8 +826,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
   });
 })();
 </script>
-
-<style id="admin-theme-final-tune">
+<style>
 
   #scythed-admin-modal .admin-theme-button {
     background: var(--brand-red, #ff0033) !important;
@@ -873,9 +864,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
   #scythed-admin-modal .admin-list-bug.bug-hunter-level-2 > i {
     color: #3b82f6 !important;
   }
-</style>
 
-<style id="admin-access-theme-live-fix">
+
 
   #general-admin-open-panel-wrap {
     background-color: rgb(250 250 250 / .92);
@@ -929,9 +919,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
   #general-admin-open-panel-wrap * {
     transition-property: color, background-color, border-color, box-shadow;
   }
-</style>
 
-<style id="scythed-unified-theme-controls">
+
 
 :root { --control-surface-light:#e4e4e7; --control-surface-dark:#27272a; --control-border-light:#d4d4d8; --control-border-dark:#3f3f46; }
 #modal-settings .settings-password-action,
@@ -975,7 +964,7 @@ html.dark #scythed-admin-modal input::placeholder,html.dark #scythed-admin-modal
 @media(max-width:520px){#modal-settings .settings-password-action,#modal-settings .admin-master-action,#general-admin-open-panel-wrap .admin-access-action{min-width:0;width:auto;white-space:normal;}}
 @media(prefers-reduced-motion:reduce){#modal-settings .settings-password-action,#modal-settings .admin-master-action,#general-admin-open-panel-wrap .admin-access-action{transition:none!important}}
 </style>
-<script id="scythed-theme-contrast-sync">
+<script>
 (function(){
   function parseHex(hex){
     if(!/^#[0-9a-f]{6}$/i.test(hex||'')) return [255,0,51];
@@ -1015,8 +1004,7 @@ html.dark #scythed-admin-modal input::placeholder,html.dark #scythed-admin-modal
   window.addEventListener('scythed:brand-color-changed',sync);
 })();
 </script>
-
-<style id="scythed-settings-controls-final-fix">
+<style>
 
 :root{--control-surface-light:#f4f4f5;--control-surface-dark:#18181b;--control-border-light:#d4d4d8;--control-border-dark:#3f3f46;}
 #modal-settings #general-admin-open-panel-wrap,
@@ -1042,9 +1030,8 @@ html.dark #modal-settings .settings-password-action:hover:not(:disabled),html.da
 #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{display:flex;flex-direction:column;justify-content:space-between;gap:.7rem;}
 #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl h5{font-size:.72rem;}
 @media(max-width:520px){#modal-settings .settings-password-action,#general-admin-open-panel-wrap .admin-access-action{width:100%;min-width:0;white-space:nowrap;font-size:.64rem!important;}}
-</style>
 
-<style id="scythed-final-neutral-theme-fix-v11">
+
 
 :root{--sc-control-light:#f4f4f5;--sc-control-light-hover:#e4e4e7;--sc-control-light-border:#d4d4d8;--sc-control-dark:#18181b;--sc-control-dark-hover:#27272a;--sc-control-dark-border:#3f3f46;--sc-panel-light:#fafafa;--sc-panel-dark:#09090b;}
 
@@ -1110,9 +1097,8 @@ html.dark #scythed-admin-modal button[class*="bg-red-"]:hover{background:var(--s
 #general-admin-open-panel-wrap .admin-access-logo{color:var(--brand-readable-accent,var(--brand-red,#ff0033))!important;}
 #modal-settings button:focus-visible,#scythed-admin-modal button:focus-visible{outline:2px solid var(--brand-readable-accent,var(--brand-red,#ff0033))!important;outline-offset:2px!important;}
 #modal-settings .settings-password-action:disabled{opacity:.48!important;cursor:not-allowed!important;}
-</style>
 
-<style id="scythed-security-controls-consistency-v13">
+
 
 #modal-settings #security-settings-category #general-admin-open-panel-wrap,
 #modal-settings #security-settings-category .grid.grid-cols-2 > div.p-3.rounded-xl {
@@ -1159,9 +1145,8 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
 }
 #modal-settings #security-settings-category h5 { text-align:center !important; width:100% !important; }
 #modal-settings #security-settings-category .admin-access-logo { flex-shrink:0; }
-</style>
 
-<style id="scythed-v14-visual-fixes">
+
 
 #modal-settings .settings-password-action,
 #modal-settings .settings-password-action i,
@@ -1205,23 +1190,21 @@ html.dark #modal-settings .settings-password-action {
 #scythed-admin-modal header > button { width: auto; height: auto; display:inline; align-items:initial; justify-content:initial; border:0; border-radius:0; background:transparent; }
 html.dark #scythed-admin-modal header > button { border:0; background:transparent; }
 #scythed-admin-modal header > button i { font-size:1.125rem !important; }
-</style>
 
-<style id="scythed-v15-primary-color-icons">
+
 
 #modal-settings .settings-password-action i {
   color: var(--brand-red, #ff0033) !important;
   transition: color .2s ease;
 }
-</style>
 
-<style id="scythed-v17-noninteractive-logo">
+
 
 #auth-overlay .brand-logo { pointer-events: none !important; cursor: default !important; }
 #auth-overlay .brand-logo:hover { transform: none !important; }
 #auth-overlay .brand-logo, #auth-overlay .brand-logo * { user-select: none !important; }
 </style>
-<script id="scythed-v21-disable-auth-logo-click-sound">
+<script>
 (function () {
 
   document.addEventListener('click', function (event) {
@@ -1244,8 +1227,7 @@ html.dark #scythed-admin-modal header > button { border:0; background:transparen
   }, true);
 })();
 </script>
-
-<style id="scythed-v20-consolidated-primary-icon-fix">
+<style>
 
 #modal-settings .settings-password-action i,
 #modal-settings .settings-password-action .fa-lock,
@@ -1253,9 +1235,8 @@ html.dark #scythed-admin-modal header > button { border:0; background:transparen
   color: var(--brand-red, #ff0033) !important;
   transition: color .2s ease !important;
 }
-</style>
 
-<style id="scythed-final-corrective-theme-icons-categories">
+
 
 html body #modal-settings button.settings-password-action > i,
 html body #modal-settings button#settings-change-app-password > i,
@@ -1267,9 +1248,8 @@ html body #modal-settings button#settings-change-name-password > i {
 }
 
 #modal-settings h4 { text-transform: uppercase !important; }
-</style>
 
-<style id="scythed-final-v26-contrast-and-unified-light-theme">
+
 
 #scythed-admin-modal .text-brand-red,
 #scythed-admin-modal .text-red-500,
@@ -1313,710 +1293,637 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
   color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
 }
 </style>
-
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-zinc-100 dark:bg-black text-zinc-900 dark:text-white selection:bg-brand-red selection:text-white pb-24 md:pb-28 transition-colors duration-300 relative overflow-x-hidden" style="isolation:isolate">
-
-    <div id="app-custom-bg"></div>
-    <div id="app-bg-overlay"></div>
-
-    <div id="auth-overlay" class="fixed inset-0 bg-zinc-900/95 dark:bg-black/95 backdrop-blur-xl z-[100] flex items-center justify-center p-4">
-        <div class="bg-white/95 dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-md w-full p-6 space-y-6 glow-effect text-center backdrop-blur-md shadow-2xl">
-            <div class="flex flex-col items-center justify-center space-y-2">
-                <div class="w-16 h-16 rounded-2xl border border-brand-red/50 bg-zinc-100 dark:bg-black/50 flex items-center justify-center overflow-hidden p-2 mb-2 glow-effect">
-                    <img src="assets/logos/logo.gif" alt="SCYTHED Logo" class="brand-logo w-full h-full object-contain">
-                </div>
-                <h2 class="font-orbitron font-black text-2xl tracking-wider text-zinc-900 dark:text-white">SCYTH<span class="text-brand-red">ED</span></h2>
-                <p id="auth-subtitle" class="text-xs text-zinc-600 dark:text-gray-400">Próbujesz zalogować się hasłem do aplikacji (<span id="auth-username-placeholder" class="text-brand-red font-bold">@USER</span>)</p>
-            </div>
-
-            <form autocomplete="off" id="auth-form" onsubmit="window.scythedApp.handleAuthSubmit(event)" class="space-y-4">
-                <div class="relative">
-                    <input type="password" id="auth-master-password" required placeholder="Wpisz Hasło do aplikacji..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <p id="auth-password-strength" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500 text-left"></p>
-                    <button type="button" onclick="window.scythedApp.togglePasswordVisibility('auth-master-password')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white">
-                        <i class="fas fa-eye"></i>
+<div id="app-custom-bg"></div>
+<div id="app-bg-overlay"></div>
+<div class="fixed inset-0 bg-zinc-900/95 dark:bg-black/95 backdrop-blur-xl z-[100] flex items-center justify-center p-4" id="auth-overlay">
+<div class="bg-white/95 dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-md w-full p-6 space-y-6 glow-effect text-center backdrop-blur-md shadow-2xl">
+<div class="flex flex-col items-center justify-center space-y-2">
+<div class="w-16 h-16 rounded-2xl border border-brand-red/50 bg-zinc-100 dark:bg-black/50 flex items-center justify-center overflow-hidden p-2 mb-2 glow-effect">
+<img alt="SCYTHED Logo" class="brand-logo w-full h-full object-contain" src="assets/logos/logo.gif"/>
+</div>
+<h2 class="font-orbitron font-black text-2xl tracking-wider text-zinc-900 dark:text-white">SCYTH<span class="text-brand-red">ED</span></h2>
+<p class="text-xs text-zinc-600 dark:text-gray-400" id="auth-subtitle">Próbujesz zalogować się hasłem do aplikacji (<span class="text-brand-red font-bold" id="auth-username-placeholder">@USER</span>)</p>
+</div>
+<form autocomplete="off" class="space-y-4" id="auth-form" onsubmit="window.scythedApp.handleAuthSubmit(event)">
+<div class="relative">
+<input autocomplete="off" autocorrect="off" class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" id="auth-master-password" placeholder="Wpisz Hasło do aplikacji..." required="" spellcheck="false" type="password"/>
+<p class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500 text-left" id="auth-password-strength"></p>
+<button class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.togglePasswordVisibility('auth-master-password')" type="button">
+<i class="fas fa-eye"></i>
+</button>
+</div>
+<div class="relative hidden" id="auth-confirm-container">
+<input autocomplete="off" autocorrect="off" class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" id="auth-master-password-confirm" placeholder="Potwierdź Hasło do aplikacji..." spellcheck="false" type="password"/>
+<p class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left" id="auth-confirm-status"></p>
+</div>
+<div class="hidden border-t border-zinc-200 dark:border-zinc-800/80 pt-4 space-y-2" id="auth-backup-container">
+<button class="w-full py-2.5 bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-900 text-zinc-800 dark:text-gray-200 font-orbitron font-bold text-xs rounded-xl border border-zinc-300 dark:border-zinc-800 transition flex items-center justify-center gap-2" onclick="document.getElementById('auth-backup-file-input').click()" type="button">
+<i class="fas fa-upload text-brand-red"></i> WCZYTAJ BACKUP PRZY TWORZENIU HASŁA
                     </button>
-                </div>
-
-                <div id="auth-confirm-container" class="relative hidden">
-                    <input type="password" id="auth-master-password-confirm" placeholder="Potwierdź Hasło do aplikacji..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-10 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <p id="auth-confirm-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left"></p>
-                </div>
-
-                <div id="auth-backup-container" class="hidden border-t border-zinc-200 dark:border-zinc-800/80 pt-4 space-y-2">
-                    <button type="button" onclick="document.getElementById('auth-backup-file-input').click()" class="w-full py-2.5 bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-900 text-zinc-800 dark:text-gray-200 font-orbitron font-bold text-xs rounded-xl border border-zinc-300 dark:border-zinc-800 transition flex items-center justify-center gap-2">
-                        <i class="fas fa-upload text-brand-red"></i> WCZYTAJ BACKUP PRZY TWORZENIU HASŁA
-                    </button>
-                    <input type="file" id="auth-backup-file-input" accept=".scythed,.json" class="hidden" onchange="window.scythedApp.importBackup(event)" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <p id="auth-backup-status" class="text-[10px] text-zinc-500 dark:text-gray-500">Możesz najpierw wczytać zaszyfrowany backup, a następnie ustawić nowe Hasło do aplikacji.</p>
-                </div>
-
-                <div id="auth-attempt-status" class="hidden rounded-xl border px-3 py-2 text-[10px] font-semibold text-left leading-relaxed" aria-live="polite"></div>
-
-                <button type="submit" id="auth-submit-btn" class="w-full py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold text-sm rounded-xl glow-effect transition flex items-center justify-center gap-2">
-                    <i class="fas fa-lock-open"></i> ODBLOKUJ APLIKACJĘ
+<input accept=".scythed,.json" autocomplete="off" autocorrect="off" class="hidden" id="auth-backup-file-input" onchange="window.scythedApp.importBackup(event)" spellcheck="false" type="file"/>
+<p class="text-[10px] text-zinc-500 dark:text-gray-500" id="auth-backup-status">Możesz najpierw wczytać zaszyfrowany backup, a następnie ustawić nowe Hasło do aplikacji.</p>
+</div>
+<div aria-live="polite" class="hidden rounded-xl border px-3 py-2 text-[10px] font-semibold text-left leading-relaxed" id="auth-attempt-status"></div>
+<button class="w-full py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold text-sm rounded-xl glow-effect transition flex items-center justify-center gap-2" id="auth-submit-btn" type="submit">
+<i class="fas fa-lock-open"></i> ODBLOKUJ APLIKACJĘ
                 </button>
-            </form>
-
-            <div class="border-t border-zinc-200 dark:border-zinc-800/80 pt-4 flex flex-col gap-2">
-                <button onclick="window.scythedApp.confirmResetApp()" class="text-xs text-red-600 dark:text-red-500 hover-brand-dynamic dark:hover:text-red-400 font-semibold transition flex items-center justify-center gap-1.5">
-                    <i class="fas fa-triangle-exclamation"></i> Zapomniałeś hasła? Zresetuj aplikację
+</form>
+<div class="border-t border-zinc-200 dark:border-zinc-800/80 pt-4 flex flex-col gap-2">
+<button class="text-xs text-red-600 dark:text-red-500 hover-brand-dynamic dark:hover:text-red-400 font-semibold transition flex items-center justify-center gap-1.5" onclick="window.scythedApp.confirmResetApp()">
+<i class="fas fa-triangle-exclamation"></i> Zapomniałeś hasła? Zresetuj aplikację
                 </button>
-                <p class="text-[10px] text-zinc-500 italic">Uwaga: Reset spowoduje bezpowrotne usunięcie zaszyfrowanych danych.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="toast" class="fixed top-16 right-4 md:right-8 z-50 transform translate-x-[150%] transition-all duration-300 ease-in-out max-w-sm w-full bg-white dark:bg-brand-card border-r-4 border-brand-red p-4 rounded-xl shadow-2xl text-zinc-900 dark:text-white flex items-start justify-between hidden backdrop-blur-md border border-zinc-200 dark:border-brand-border">
-        <div class="flex items-start space-x-3 mr-2 overflow-hidden flex-grow">
-            <i id="toast-icon" class="fas font-bold text-brand-red flex-shrink-0 mt-0.5"></i>
-            <span id="toast-message" class="text-xs md:text-sm font-semibold break-words leading-relaxed">Komunikat</span>
-        </div>
-        <div class="flex items-center gap-2 flex-shrink-0 ml-1">
-            <button onclick="window.scythedApp.hideToast()" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white p-1"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-
-    <div id="app-dialog-overlay" aria-hidden="true">
-        <div id="app-dialog" role="dialog" aria-modal="true" aria-labelledby="app-dialog-title">
-            <div class="p-5 sm:p-6">
-                <div class="flex items-start gap-3">
-                    <div id="app-dialog-icon"><i class="fas fa-shield-halved"></i></div>
-                    <div class="min-w-0 flex-1">
-                        <div class="flex items-start justify-between gap-3">
-                            <div>
-                                <div id="app-dialog-kicker" class="text-[9px] font-mono uppercase tracking-[.22em] text-brand-red mb-1">SCYTHED / SYSTEM</div>
-                                <h3 id="app-dialog-title" class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white">Potwierdzenie</h3>
-                            </div>
-                            <button id="app-dialog-close" type="button" class="w-8 h-8 shrink-0 rounded-lg text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition" aria-label="Anuluj">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div id="app-dialog-message" class="mt-3 text-xs md:text-sm leading-relaxed text-zinc-600 dark:text-gray-300"></div>
-                        <div id="app-dialog-input-wrap" class="hidden mt-4">
-                            <div class="relative">
-                                <input id="app-dialog-input" type="text" autocomplete="off" class="w-full bg-zinc-50 dark:bg-black/70 border border-zinc-300 dark:border-zinc-800 rounded-xl px-4 py-3 pr-11 text-zinc-900 dark:text-white text-sm font-mono shadow-inner" autocorrect="off" spellcheck="false">
-                                <button id="app-dialog-toggle-password" type="button" class="hidden absolute right-3 top-3 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż/ukryj wartość">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <label id="app-dialog-remember-wrap" class="hidden mt-3 flex items-center gap-2 text-xs text-zinc-700 dark:text-gray-300 cursor-pointer"><input id="app-dialog-remember" type="checkbox" class="scythed-theme-control"><span>Zapamiętaj mnie na tym urządzeniu</span></label>
-                        <div class="mt-5 flex flex-col-reverse sm:flex-row sm:justify-end gap-2">
-                            <button id="app-dialog-cancel" type="button" class="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-gray-300 text-xs font-bold hover:bg-zinc-200 dark:hover:bg-zinc-900 transition">ANULUJ</button>
-                            <button id="app-dialog-ok" type="button" class="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-brand-hoverRed text-white text-xs font-bold font-orbitron glow-effect transition">POTWIERDŹ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <header class="border-b border-zinc-200 dark:border-brand-border bg-white/85 dark:bg-black/85 backdrop-blur-md sticky top-0 z-40 px-4 md:px-8 py-3 flex items-center justify-between transition-colors duration-300">
-        <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg border border-transparent bg-transparent flex items-center justify-center overflow-hidden">
-                <img src="assets/logos/logo.gif" alt="SCYTHED Logo" class="brand-logo w-full h-full object-contain p-0.5">
-            </div>
-            <span class="font-orbitron font-extrabold text-xl md:text-2xl tracking-wider text-zinc-900 dark:text-white streamer-scythed-name">SCYTH<span class="text-brand-red">ED</span></span>
-        </div>
-
-        <div class="flex items-center gap-2 md:gap-3">
-            <button type="button" onclick="window.scythedApp.lockVault(); return false;" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm" title="Zablokuj aplikację (Ctrl+L)">
-                <i class="fas fa-lock text-brand-red"></i>
-                <span class="hidden sm:inline">ZABLOKUJ</span>
-            </button>
-            <button onclick="window.scythedApp.confirmResetApp()" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm" title="Resetuj aplikację do stanu fabrycznego">
-                <i class="fas fa-rotate-left text-brand-red"></i>
-                <span class="hidden sm:inline">RESET</span>
-            </button>
-            <button onclick="window.scythedApp.exportBackup()" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm" title="Pobierz zaszyfrowany backup hasłem do aplikacji">
-                <i class="fas fa-download text-brand-red"></i>
-                <span class="hidden sm:inline">POBIERZ BACKUP</span>
-            </button>
-            <label class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 cursor-pointer transition flex items-center gap-1.5 shadow-sm" title="Wczytaj zaszyfrowany backup SCYTHED">
-                <i class="fas fa-upload text-brand-red"></i>
-                <span class="hidden sm:inline">WCZYTAJ BACKUP</span>
-                <input type="file" id="backup-file-input" accept=".scythed,.json" class="hidden" onchange="window.scythedApp.importBackup(event)" autocomplete="off" autocorrect="off" spellcheck="false">
-            </label>
-            <button type="button"
-                    onclick="window.location.href='https://scythed.xyz'"
-                    class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm"
-                    title="Strona główna SCYTHED">
-                <i class="fas fa-house text-brand-red"></i>
-                <span class="hidden sm:inline">STRONA GŁÓWNA</span>
-            </button>
-        </div>
-    </header>
-
-    <main class="flex-grow p-4 md:p-8 max-w-7xl mx-auto w-full space-y-6">
-
-        <div id="header-card" class="relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white/90 dark:bg-brand-card backdrop-blur-md p-5 md:p-6 border border-zinc-200 dark:border-brand-border rounded-2xl card-scale shadow-2xl transition-colors duration-300">
-            <canvas id="header-bg-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 rounded-2xl"></canvas>
-
-            <div class="relative z-10">
-                <h1 class="font-orbitron text-xl md:text-2xl font-black text-zinc-900 dark:text-white flex items-center gap-3">
-                    <i class="fas fa-shield-halved text-brand-red"></i> MENADŻER HASEŁ
+<p class="text-[10px] text-zinc-500 italic">Uwaga: Reset spowoduje bezpowrotne usunięcie zaszyfrowanych danych.</p>
+</div>
+</div>
+</div>
+<div class="fixed top-16 right-4 md:right-8 z-50 transform translate-x-[150%] transition-all duration-300 ease-in-out max-w-sm w-full bg-white dark:bg-brand-card border-r-4 border-brand-red p-4 rounded-xl shadow-2xl text-zinc-900 dark:text-white flex items-start justify-between hidden backdrop-blur-md border border-zinc-200 dark:border-brand-border" id="toast">
+<div class="flex items-start space-x-3 mr-2 overflow-hidden flex-grow">
+<i class="fas font-bold text-brand-red flex-shrink-0 mt-0.5" id="toast-icon"></i>
+<span class="text-xs md:text-sm font-semibold break-words leading-relaxed" id="toast-message">Komunikat</span>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0 ml-1">
+<button class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white p-1" onclick="window.scythedApp.hideToast()"><i class="fas fa-times"></i></button>
+</div>
+</div>
+<div aria-hidden="true" id="app-dialog-overlay">
+<div aria-labelledby="app-dialog-title" aria-modal="true" id="app-dialog" role="dialog">
+<div class="p-5 sm:p-6">
+<div class="flex items-start gap-3">
+<div id="app-dialog-icon"><i class="fas fa-shield-halved"></i></div>
+<div class="min-w-0 flex-1">
+<div class="flex items-start justify-between gap-3">
+<div>
+<div class="text-[9px] font-mono uppercase tracking-[.22em] text-brand-red mb-1" id="app-dialog-kicker">SCYTHED / SYSTEM</div>
+<h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white" id="app-dialog-title">Potwierdzenie</h3>
+</div>
+<button aria-label="Anuluj" class="w-8 h-8 shrink-0 rounded-lg text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition" id="app-dialog-close" type="button">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="mt-3 text-xs md:text-sm leading-relaxed text-zinc-600 dark:text-gray-300" id="app-dialog-message"></div>
+<div class="hidden mt-4" id="app-dialog-input-wrap">
+<div class="relative">
+<input autocomplete="off" autocorrect="off" class="w-full bg-zinc-50 dark:bg-black/70 border border-zinc-300 dark:border-zinc-800 rounded-xl px-4 py-3 pr-11 text-zinc-900 dark:text-white text-sm font-mono shadow-inner" id="app-dialog-input" spellcheck="false" type="text"/>
+<button aria-label="Pokaż/ukryj wartość" class="hidden absolute right-3 top-3 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" id="app-dialog-toggle-password" type="button">
+<i class="fas fa-eye"></i>
+</button>
+</div>
+</div>
+<label class="hidden mt-3 flex items-center gap-2 text-xs text-zinc-700 dark:text-gray-300 cursor-pointer" id="app-dialog-remember-wrap"><input class="scythed-theme-control" id="app-dialog-remember" type="checkbox"/><span>Zapamiętaj mnie na tym urządzeniu</span></label>
+<div class="mt-5 flex flex-col-reverse sm:flex-row sm:justify-end gap-2">
+<button class="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-gray-300 text-xs font-bold hover:bg-zinc-200 dark:hover:bg-zinc-900 transition" id="app-dialog-cancel" type="button">ANULUJ</button>
+<button class="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-brand-hoverRed text-white text-xs font-bold font-orbitron glow-effect transition" id="app-dialog-ok" type="button">POTWIERDŹ</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<header class="border-b border-zinc-200 dark:border-brand-border bg-white/85 dark:bg-black/85 backdrop-blur-md sticky top-0 z-40 px-4 md:px-8 py-3 flex items-center justify-between transition-colors duration-300">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 md:w-12 md:h-12 rounded-lg border border-transparent bg-transparent flex items-center justify-center overflow-hidden">
+<img alt="SCYTHED Logo" class="brand-logo w-full h-full object-contain p-0.5" src="assets/logos/logo.gif"/>
+</div>
+<span class="font-orbitron font-extrabold text-xl md:text-2xl tracking-wider text-zinc-900 dark:text-white streamer-scythed-name">SCYTH<span class="text-brand-red">ED</span></span>
+</div>
+<div class="flex items-center gap-2 md:gap-3">
+<button class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm" onclick="window.scythedApp.lockVault(); return false;" title="Zablokuj aplikację (Ctrl+L)" type="button">
+<i class="fas fa-lock text-brand-red"></i>
+<span class="hidden sm:inline">ZABLOKUJ</span>
+</button>
+<button class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm" onclick="window.scythedApp.confirmResetApp()" title="Resetuj aplikację do stanu fabrycznego">
+<i class="fas fa-rotate-left text-brand-red"></i>
+<span class="hidden sm:inline">RESET</span>
+</button>
+<button class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm" onclick="window.scythedApp.exportBackup()" title="Pobierz zaszyfrowany backup hasłem do aplikacji">
+<i class="fas fa-download text-brand-red"></i>
+<span class="hidden sm:inline">POBIERZ BACKUP</span>
+</button>
+<label class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 cursor-pointer transition flex items-center gap-1.5 shadow-sm" title="Wczytaj zaszyfrowany backup SCYTHED">
+<i class="fas fa-upload text-brand-red"></i>
+<span class="hidden sm:inline">WCZYTAJ BACKUP</span>
+<input accept=".scythed,.json" autocomplete="off" autocorrect="off" class="hidden" id="backup-file-input" onchange="window.scythedApp.importBackup(event)" spellcheck="false" type="file"/>
+</label>
+<button class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900/90 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-200 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5 shadow-sm" onclick="window.location.href='https://scythed.xyz'" title="Strona główna SCYTHED" type="button">
+<i class="fas fa-house text-brand-red"></i>
+<span class="hidden sm:inline">STRONA GŁÓWNA</span>
+</button>
+</div>
+</header>
+<main class="flex-grow p-4 md:p-8 max-w-7xl mx-auto w-full space-y-6">
+<div class="relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white/90 dark:bg-brand-card backdrop-blur-md p-5 md:p-6 border border-zinc-200 dark:border-brand-border rounded-2xl card-scale shadow-2xl transition-colors duration-300" id="header-card">
+<canvas class="absolute inset-0 w-full h-full pointer-events-none z-0 rounded-2xl" id="header-bg-canvas"></canvas>
+<div class="relative z-10">
+<h1 class="font-orbitron text-xl md:text-2xl font-black text-zinc-900 dark:text-white flex items-center gap-3">
+<i class="fas fa-shield-halved text-brand-red"></i> MENADŻER HASEŁ
                 </h1>
-                <p class="text-xs text-zinc-600 dark:text-gray-400 mt-1 flex flex-wrap items-center gap-1.5">
-                    <span>Liczba wpisów:</span> <span id="vault-count-badge" class="text-brand-red font-bold">0</span>
-                    <span class="text-zinc-400 dark:text-zinc-600">|</span>
-                    <span>Platforma:</span> <span id="vault-platform-count" class="text-brand-red font-bold">Wszystkie</span>
-                    <span class="text-zinc-400 dark:text-zinc-600">|</span>
-                    <span class="text-[11px] text-zinc-500 dark:text-gray-400 streamer-scythed-name">Scythed.xyz</span>
-                </p>
-            </div>
-
-            <div class="relative z-10 flex items-center gap-2 w-full sm:w-auto">
-                <button id="add-entry-btn" onclick="window.scythedApp.openAddEntryModal()" class="w-full sm:w-auto px-6 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold text-xs md:text-sm rounded-xl glow-effect transition flex items-center justify-center gap-2">
-                    <i class="fas fa-plus"></i> DODAJ KONTO
+<p class="text-xs text-zinc-600 dark:text-gray-400 mt-1 flex flex-wrap items-center gap-1.5">
+<span>Liczba wpisów:</span> <span class="text-brand-red font-bold" id="vault-count-badge">0</span>
+<span class="text-zinc-400 dark:text-zinc-600">|</span>
+<span>Platforma:</span> <span class="text-brand-red font-bold" id="vault-platform-count">Wszystkie</span>
+<span class="text-zinc-400 dark:text-zinc-600">|</span>
+<span class="text-[11px] text-zinc-500 dark:text-gray-400 streamer-scythed-name">Scythed.xyz</span>
+</p>
+</div>
+<div class="relative z-10 flex items-center gap-2 w-full sm:w-auto">
+<button class="w-full sm:w-auto px-6 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold text-xs md:text-sm rounded-xl glow-effect transition flex items-center justify-center gap-2" id="add-entry-btn" onclick="window.scythedApp.openAddEntryModal()">
+<i class="fas fa-plus"></i> DODAJ KONTO
                 </button>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-white/90 dark:bg-brand-card backdrop-blur-md p-4 border border-zinc-200 dark:border-brand-border rounded-2xl shadow-xl transition-colors duration-300">
-            <div class="flex items-center justify-between bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 px-4 py-2.5 rounded-xl">
-                <span class="text-xs font-mono uppercase text-zinc-700 dark:text-gray-300">Wszystkie loginy</span>
-                <button id="global-toggle-emails" onclick="window.scythedApp.toggleGlobalEmails()" class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-brand-red border border-zinc-300 dark:border-zinc-700 text-xs font-bold rounded-lg transition flex items-center gap-1.5">
-                    <i id="global-emails-icon" class="fas fa-eye-slash"></i>
-                    <span id="global-emails-text">UKRYJ WSZYSTKIE</span>
-                </button>
-            </div>
-            <div class="flex items-center justify-between bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 px-4 py-2.5 rounded-xl">
-                <span class="text-xs font-mono uppercase text-zinc-700 dark:text-gray-300">Wszystkie hasła</span>
-                <button id="global-toggle-passwords" onclick="window.scythedApp.toggleGlobalPasswords()" class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-brand-red border border-zinc-300 dark:border-zinc-700 text-xs font-bold rounded-lg transition flex items-center gap-1.5">
-                    <i id="global-pass-icon" class="fas fa-eye"></i>
-                    <span id="global-pass-text">POKAŻ WSZYSTKIE</span>
-                </button>
-            </div>
-        </div>
-            <div class="space-y-3">
-                <div id="vault-controls-row" class="flex flex-wrap lg:flex-nowrap items-center gap-2 w-full">
-                    <div id="vault-search-wrap" class="relative flex-1 min-w-[260px] lg:min-w-0">
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center pointer-events-none text-brand-red" aria-hidden="true">
-                            <i class="fas fa-search text-brand-red text-sm transition-colors duration-300" aria-hidden="true"></i>
-                        </span>
-                        <input type="text" id="vault-search-input" onfocus="window.scythedApp.toggleSearchFocus(true)" onblur="window.scythedApp.toggleSearchFocus(false)" oninput="window.scythedApp.renderVaultEntries()" placeholder="Szukaj..." class="w-full bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none shadow-xl transition-colors duration-300" autocomplete="off" autocorrect="off" spellcheck="false">
-                    </div>
-                    <select id="vault-filter-platform" onchange="window.scythedApp.renderVaultEntries()" class="vault-filter-control bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none min-w-[150px] shadow-xl transition-colors duration-300">
-                        <option value="ALL">Platforma: Wszystkie</option>
-                    </select>
-                    <select id="vault-filter-tag" onchange="window.scythedApp.renderVaultEntries()" class="vault-filter-control bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none min-w-[150px] shadow-xl transition-colors duration-300">
-                        <option value="ALL">Tag: Wszystkie</option>
-                    </select>
-                    <select id="vault-sort-order" onchange="window.scythedApp.renderVaultEntries()" class="vault-filter-control bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none min-w-[145px] shadow-xl">
-                        <option value="NEWEST">Najnowsze</option>
-                        <option value="OLDEST">Najstarsze</option>
-                        <option value="NAME_ASC">Nazwa (A-Z)</option>
-                        <option value="NAME_DESC">Nazwa (Z-A)</option>
-                        <option value="PLATFORM">Platforma</option>
-                        <option value="LAST_COPIED">Ostatnie kopiowanie</option>
-                        <option value="PINNED">Przypięte</option>
-                        <option value="FAVORITES">Ulubione</option>
-                    </select>
-                    <div id="security-actions-row" class="flex items-center gap-2 flex-shrink-0">
-                        <button id="open-trash-btn" onclick="window.scythedApp.openTrashModal()" class="px-3 py-2.5 bg-white/90 dark:bg-brand-card border border-zinc-200 dark:border-zinc-800 rounded-xl text-[11px] font-bold text-zinc-700 dark:text-gray-300 hover:border-brand-red transition flex items-center justify-center gap-1.5">
-                            <i class="fas fa-trash text-brand-red text-[11px]" aria-hidden="true"></i>
-                            <span>USUNIĘTE</span>
-                        </button>
-                        <button id="bulk-actions-btn" onclick="window.scythedApp.toggleBulkActions()" class="px-3 py-2.5 bg-white/90 dark:bg-brand-card border border-zinc-200 dark:border-zinc-800 rounded-xl text-[11px] font-bold text-zinc-700 dark:text-gray-300 hover:border-brand-red transition flex items-center justify-center gap-1.5">
-                            <i class="fas fa-list-check text-brand-red text-[11px]" aria-hidden="true"></i>
-                            <span>ZAZNACZANIE</span>
-                        </button>
-                    </div>
-                </div>
-
-            <div id="bulk-toolbar" class="hidden flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 p-3 bg-white/90 dark:bg-brand-card border border-brand-red/30 rounded-xl shadow-xl">
-                <div class="text-xs font-mono"><span id="bulk-selected-count" class="text-brand-red font-bold">0</span> zaznaczonych</div>
-                <div class="flex gap-2 flex-wrap">
-                    <button onclick="window.scythedApp.selectAllVisible()" class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-[11px] font-bold">ZAZNACZ WIDOCZNE</button>
-                    <button onclick="window.scythedApp.duplicateSelectedEntries()" class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-[11px] font-bold">DUPLIKUJ</button>
-                    <button onclick="window.scythedApp.addTagToSelectedEntries()" class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-[11px] font-bold">DODAJ TAG</button>
-                    <button onclick="window.scythedApp.bulkDeleteEntries()" class="theme-accent-action px-3 py-1.5 rounded-lg border text-[11px] font-bold">USUŃ</button>
-                    <button onclick="window.scythedApp.clearSelection()" class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-[11px] font-bold">ANULUJ</button>
-                    <button onclick="window.scythedApp.toggleBulkActions()" aria-label="Zamknij panel zaznaczania" title="Zamknij panel" class="w-8 h-8 inline-flex items-center justify-center rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:text-brand-red text-sm font-bold"><i class="fas fa-times"></i></button>
-                </div>
-            </div>
-        </div>
-
-        <div id="vault-locked-state" class="hidden bg-white/80 dark:bg-brand-card/80 backdrop-blur-md border border-brand-red/30 rounded-2xl shadow-xl p-8 flex-col gap-3">
-            <i class="fas fa-lock text-4xl text-brand-red"></i>
-            <div class="font-orbitron font-bold text-sm md:text-base">APLIKACJA ZABLOKOWANA</div>
-            <div class="text-xs text-zinc-500 dark:text-gray-400 max-w-md">Konta i dane logowania są ukryte. Wpisz poprawne Hasło do aplikacji, aby odszyfrować bazę.</div>
-        </div>
-
-        <div id="vault-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        </div>
-
-        <div id="vault-empty-state" class="hidden text-center py-16 bg-white/70 dark:bg-brand-card/70 backdrop-blur-md border border-dashed border-zinc-300 dark:border-zinc-800 rounded-2xl shadow-xl transition-colors duration-300">
-            <i class="fas fa-shield-halved text-5xl text-zinc-400 dark:text-zinc-700 mb-3"></i>
-            <p class="text-zinc-600 dark:text-gray-400 text-base font-semibold">Brak zapisanych haseł w menadżerze</p>
-            <p class="text-xs text-zinc-500 dark:text-gray-500 mt-1">Kliknij "DODAJ KONTO", aby utworzyć Twój pierwszy wpis.</p>
-        </div>
-
-    </main>
-
-    <div class="fixed bottom-4 left-4 z-40 flex flex-col gap-2 max-w-[300px] w-full">
-        <div class="bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md transition-all duration-300 glow-effect relative">
-
-            <div id="profile-card-banner" class="w-full h-16 bg-cover bg-center relative group default-banner transition-all duration-300">
-                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2 backdrop-blur-[2px]">
-                    <button onclick="document.getElementById('corner-banner-input').click()" class="p-1.5 bg-black/70 hover:bg-black text-white text-xs rounded-lg border border-white/20 transition flex items-center gap-1" title="Zmień Banner">
-                        <i class="fas fa-camera"></i> <span class="text-[10px]">Baner</span>
-                    </button>
-                    <button id="corner-reset-banner-btn" onclick="window.scythedApp.resetBannerToDefault()" class="p-1.5 bg-red-600/70 hover-bg-brand-dynamic text-white text-xs rounded-lg border border-white/20 transition hidden" title="Przywróć domyślny banner">
-                        <i class="fas fa-rotate-left"></i>
-                    </button>
-                    <input type="file" id="corner-banner-input" accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" class="hidden" onchange="window.scythedApp.handleBannerUpload(event)" autocomplete="off" autocorrect="off" spellcheck="false">
-                </div>
-            </div>
-
-            <div class="p-2.5 px-3.5 relative flex flex-col gap-2">
-                <div class="flex items-center gap-3">
-                    <div class="relative group -mt-7 flex-shrink-0 cursor-pointer" onclick="document.getElementById('corner-avatar-input').click();">
-                        <div id="profile-avatar-display" class="w-16 h-16 rounded-xl bg-zinc-100 dark:bg-zinc-900 border-2 border-brand-red flex items-center justify-center overflow-hidden shadow-lg">
-                            <img id="avatar-img-preview" src="assets/logos/avatar.png" alt="Avatar" class="brand-logo w-full h-full object-cover p-0" onerror="this.onerror=null; this.src='assets/logos/avatar.png';">
-                        </div>
-                        <div class="absolute inset-0 bg-black/60 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                            <i class="fas fa-camera text-white text-xs"></i>
-                        </div>
-                        <input type="file" id="corner-avatar-input" accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" class="hidden" onchange="window.scythedApp.handleAvatarUpload(event)" autocomplete="off" autocorrect="off" spellcheck="false">
-                    </div>
-
-                    <div class="overflow-hidden flex-grow">
-                        <div class="flex items-center gap-1 min-w-0 relative" id="username-row">
-                            <input type="text" id="username-input" name="scythed-profile-name" value="USER" readonly autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other"  oninput="window.scythedApp.syncUsernameInputWidth()" onkeydown="if(event.key==='Enter') { event.preventDefault(); window.scythedApp.toggleUsernameEdit(); } if(event.key==='Escape') { event.preventDefault(); window.scythedApp.cancelUsernameEdit(); }" maxlength="16" title="Kliknij ołówek, aby zmienić nazwę" class="profile-username-input font-orbitron font-extrabold text-sm animated-gradient-text bg-transparent focus:outline-none min-w-0 cursor-default" style="width:1px" autocorrect="off">
-                            <i id="profile-verified-icon" class="hidden fas fa-circle-check profile-verified-icon text-[13px]" title="Zweryfikowane konto" aria-label="Zweryfikowane konto"></i>
-                            <button type="button" id="username-edit-btn" onclick="window.scythedApp.toggleUsernameEdit()" class="inline-flex items-center justify-center self-center h-4 leading-none text-zinc-400 hover-brand-dynamic transition flex-shrink-0" title="Edytuj nazwę użytkownika" aria-label="Edytuj nazwę użytkownika"><i class="fas fa-pen text-[10px]"></i></button>
-                            <span id="username-width-measure" class="font-orbitron font-extrabold text-sm">USER</span>
-                        </div>
-                        <div id="profile-created-date" class="text-[9px] text-zinc-500 dark:text-gray-400 font-mono">Konto od: -</div>
-                    </div>
-                </div>
-
-                <div id="profile-badges-container" class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-zinc-200 dark:border-zinc-800/60">
-
-                    <div id="badge-owner" class="profile-badge-tooltip hidden fixed-owner-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Właściciel Projektu SCYTHED" aria-label="Właściciel Projektu SCYTHED">
-                        <i class="fas fa-crown text-[10px]"></i>
-                    </div>
-
-                    <div id="badge-admin" class="profile-badge-tooltip hidden fixed-owner-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Administrator SCYTHED" aria-label="Administrator SCYTHED">
-                        <i class="fas fa-shield-halved text-[10px]"></i>
-                    </div>
-
-                    <div id="badge-moderator" class="profile-badge-tooltip hidden moderator-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Moderator SCYTHED" aria-label="Moderator SCYTHED">
-                        <i class="fas fa-hammer text-[10px]"></i>
-                    </div>
-
-                    <div id="badge-zasluzony" class="profile-badge-tooltip hidden fixed-owner-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Zasłużony" aria-label="Zasłużony">
-                        <i class="fas fa-award text-[10px]"></i>
-                    </div>
-<div id="badge-bug-hunter" class="profile-badge-tooltip hidden bug-hunter-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm" data-tooltip="Łowca błędów poziom 1" aria-label="Łowca błędów poziom 1">
-                        <i class="fas fa-network-wired text-[10px]"></i>
-                    </div>
-                    <div id="badge-beta-tester" class="profile-badge-tooltip hidden beta-tester-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm" data-tooltip="Beta Tester" aria-label="Beta Tester">
-                        <i class="fas fa-flask text-[10px]"></i>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="fixed bottom-4 right-4 z-40 flex flex-row-reverse items-center gap-2">
-        <button onclick="window.scythedApp.openSettingsModal()" class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" title="USTAWIENIA">
-            <i class="fas fa-gear"></i>
-        </button>
-        <span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">v.6.3</span>
-    </div>
-
-    <footer class="w-full max-w-xl mx-auto text-center px-4 mt-8 space-y-1 relative z-10">
-        <p class="text-[11px] md:text-xs text-zinc-600 dark:text-gray-400 font-mono leading-tight">
-            &copy; 2026 <span class="font-orbitron font-bold text-zinc-900 dark:text-white streamer-scythed-name">SCYTH<span class="text-brand-red">ED</span></span> Menadżer Haseł. Projekt stworzony przez @yzke (discord).
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-white/90 dark:bg-brand-card backdrop-blur-md p-4 border border-zinc-200 dark:border-brand-border rounded-2xl shadow-xl transition-colors duration-300">
+<div class="flex items-center justify-between bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 px-4 py-2.5 rounded-xl">
+<span class="text-xs font-mono uppercase text-zinc-700 dark:text-gray-300">Wszystkie loginy</span>
+<button class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-brand-red border border-zinc-300 dark:border-zinc-700 text-xs font-bold rounded-lg transition flex items-center gap-1.5" id="global-toggle-emails" onclick="window.scythedApp.toggleGlobalEmails()">
+<i class="fas fa-eye-slash" id="global-emails-icon"></i>
+<span id="global-emails-text">UKRYJ WSZYSTKIE</span>
+</button>
+</div>
+<div class="flex items-center justify-between bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 px-4 py-2.5 rounded-xl">
+<span class="text-xs font-mono uppercase text-zinc-700 dark:text-gray-300">Wszystkie hasła</span>
+<button class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-brand-red border border-zinc-300 dark:border-zinc-700 text-xs font-bold rounded-lg transition flex items-center gap-1.5" id="global-toggle-passwords" onclick="window.scythedApp.toggleGlobalPasswords()">
+<i class="fas fa-eye" id="global-pass-icon"></i>
+<span id="global-pass-text">POKAŻ WSZYSTKIE</span>
+</button>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex flex-wrap lg:flex-nowrap items-center gap-2 w-full" id="vault-controls-row">
+<div class="relative flex-1 min-w-[260px] lg:min-w-0" id="vault-search-wrap">
+<span aria-hidden="true" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center pointer-events-none text-brand-red">
+<i aria-hidden="true" class="fas fa-search text-brand-red text-sm transition-colors duration-300"></i>
+</span>
+<input autocomplete="off" autocorrect="off" class="w-full bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none shadow-xl transition-colors duration-300" id="vault-search-input" onblur="window.scythedApp.toggleSearchFocus(false)" onfocus="window.scythedApp.toggleSearchFocus(true)" oninput="window.scythedApp.renderVaultEntries()" placeholder="Szukaj..." spellcheck="false" type="text"/>
+</div>
+<select class="vault-filter-control bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none min-w-[150px] shadow-xl transition-colors duration-300" id="vault-filter-platform" onchange="window.scythedApp.renderVaultEntries()">
+<option value="ALL">Platforma: Wszystkie</option>
+</select>
+<select class="vault-filter-control bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none min-w-[150px] shadow-xl transition-colors duration-300" id="vault-filter-tag" onchange="window.scythedApp.renderVaultEntries()">
+<option value="ALL">Tag: Wszystkie</option>
+</select>
+<select class="vault-filter-control bg-white/90 dark:bg-brand-card backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-xs md:text-sm text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none min-w-[145px] shadow-xl" id="vault-sort-order" onchange="window.scythedApp.renderVaultEntries()">
+<option value="NEWEST">Najnowsze</option>
+<option value="OLDEST">Najstarsze</option>
+<option value="NAME_ASC">Nazwa (A-Z)</option>
+<option value="NAME_DESC">Nazwa (Z-A)</option>
+<option value="PLATFORM">Platforma</option>
+<option value="LAST_COPIED">Ostatnie kopiowanie</option>
+<option value="PINNED">Przypięte</option>
+<option value="FAVORITES">Ulubione</option>
+</select>
+<div class="flex items-center gap-2 flex-shrink-0" id="security-actions-row">
+<button class="px-3 py-2.5 bg-white/90 dark:bg-brand-card border border-zinc-200 dark:border-zinc-800 rounded-xl text-[11px] font-bold text-zinc-700 dark:text-gray-300 hover:border-brand-red transition flex items-center justify-center gap-1.5" id="open-trash-btn" onclick="window.scythedApp.openTrashModal()">
+<i aria-hidden="true" class="fas fa-trash text-brand-red text-[11px]"></i>
+<span>USUNIĘTE</span>
+</button>
+<button class="px-3 py-2.5 bg-white/90 dark:bg-brand-card border border-zinc-200 dark:border-zinc-800 rounded-xl text-[11px] font-bold text-zinc-700 dark:text-gray-300 hover:border-brand-red transition flex items-center justify-center gap-1.5" id="bulk-actions-btn" onclick="window.scythedApp.toggleBulkActions()">
+<i aria-hidden="true" class="fas fa-list-check text-brand-red text-[11px]"></i>
+<span>ZAZNACZANIE</span>
+</button>
+</div>
+</div>
+<div class="hidden flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 p-3 bg-white/90 dark:bg-brand-card border border-brand-red/30 rounded-xl shadow-xl" id="bulk-toolbar">
+<div class="text-xs font-mono"><span class="text-brand-red font-bold" id="bulk-selected-count">0</span> zaznaczonych</div>
+<div class="flex gap-2 flex-wrap">
+<button class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-[11px] font-bold" onclick="window.scythedApp.selectAllVisible()">ZAZNACZ WIDOCZNE</button>
+<button class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-[11px] font-bold" onclick="window.scythedApp.duplicateSelectedEntries()">DUPLIKUJ</button>
+<button class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-[11px] font-bold" onclick="window.scythedApp.addTagToSelectedEntries()">DODAJ TAG</button>
+<button class="theme-accent-action px-3 py-1.5 rounded-lg border text-[11px] font-bold" onclick="window.scythedApp.bulkDeleteEntries()">USUŃ</button>
+<button class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-[11px] font-bold" onclick="window.scythedApp.clearSelection()">ANULUJ</button>
+<button aria-label="Zamknij panel zaznaczania" class="w-8 h-8 inline-flex items-center justify-center rounded-lg bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:text-brand-red text-sm font-bold" onclick="window.scythedApp.toggleBulkActions()" title="Zamknij panel"><i class="fas fa-times"></i></button>
+</div>
+</div>
+</div>
+<div class="hidden bg-white/80 dark:bg-brand-card/80 backdrop-blur-md border border-brand-red/30 rounded-2xl shadow-xl p-8 flex-col gap-3" id="vault-locked-state">
+<i class="fas fa-lock text-4xl text-brand-red"></i>
+<div class="font-orbitron font-bold text-sm md:text-base">APLIKACJA ZABLOKOWANA</div>
+<div class="text-xs text-zinc-500 dark:text-gray-400 max-w-md">Konta i dane logowania są ukryte. Wpisz poprawne Hasło do aplikacji, aby odszyfrować bazę.</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="vault-grid">
+</div>
+<div class="hidden text-center py-16 bg-white/70 dark:bg-brand-card/70 backdrop-blur-md border border-dashed border-zinc-300 dark:border-zinc-800 rounded-2xl shadow-xl transition-colors duration-300" id="vault-empty-state">
+<i class="fas fa-shield-halved text-5xl text-zinc-400 dark:text-zinc-700 mb-3"></i>
+<p class="text-zinc-600 dark:text-gray-400 text-base font-semibold">Brak zapisanych haseł w menadżerze</p>
+<p class="text-xs text-zinc-500 dark:text-gray-500 mt-1">Kliknij "DODAJ KONTO", aby utworzyć Twój pierwszy wpis.</p>
+</div>
+</main>
+<div class="fixed bottom-4 left-4 z-40 flex flex-col gap-2 max-w-[300px] w-full">
+<div class="bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md transition-all duration-300 glow-effect relative">
+<div class="w-full h-16 bg-cover bg-center relative group default-banner transition-all duration-300" id="profile-card-banner">
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2 backdrop-blur-[2px]">
+<button class="p-1.5 bg-black/70 hover:bg-black text-white text-xs rounded-lg border border-white/20 transition flex items-center gap-1" onclick="document.getElementById('corner-banner-input').click()" title="Zmień Banner">
+<i class="fas fa-camera"></i> <span class="text-[10px]">Baner</span>
+</button>
+<button class="p-1.5 bg-red-600/70 hover-bg-brand-dynamic text-white text-xs rounded-lg border border-white/20 transition hidden" id="corner-reset-banner-btn" onclick="window.scythedApp.resetBannerToDefault()" title="Przywróć domyślny banner">
+<i class="fas fa-rotate-left"></i>
+</button>
+<input accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" autocomplete="off" autocorrect="off" class="hidden" id="corner-banner-input" onchange="window.scythedApp.handleBannerUpload(event)" spellcheck="false" type="file"/>
+</div>
+</div>
+<div class="p-2.5 px-3.5 relative flex flex-col gap-2">
+<div class="flex items-center gap-3">
+<div class="relative group -mt-7 flex-shrink-0 cursor-pointer" onclick="document.getElementById('corner-avatar-input').click();">
+<div class="w-16 h-16 rounded-xl bg-zinc-100 dark:bg-zinc-900 border-2 border-brand-red flex items-center justify-center overflow-hidden shadow-lg" id="profile-avatar-display">
+<img alt="Avatar" class="brand-logo w-full h-full object-cover p-0" id="avatar-img-preview" onerror="this.onerror=null; this.src='assets/logos/avatar.png';" src="assets/logos/avatar.png"/>
+</div>
+<div class="absolute inset-0 bg-black/60 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+<i class="fas fa-camera text-white text-xs"></i>
+</div>
+<input accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" autocomplete="off" autocorrect="off" class="hidden" id="corner-avatar-input" onchange="window.scythedApp.handleAvatarUpload(event)" spellcheck="false" type="file"/>
+</div>
+<div class="overflow-hidden flex-grow">
+<div class="flex items-center gap-1 min-w-0 relative" id="username-row">
+<input autocapitalize="off" autocomplete="off" autocorrect="off" class="profile-username-input font-orbitron font-extrabold text-sm animated-gradient-text bg-transparent focus:outline-none min-w-0 cursor-default" data-form-type="other" data-lpignore="true" id="username-input" maxlength="16" name="scythed-profile-name" oninput="window.scythedApp.syncUsernameInputWidth()" onkeydown="if(event.key==='Enter') { event.preventDefault(); window.scythedApp.toggleUsernameEdit(); } if(event.key==='Escape') { event.preventDefault(); window.scythedApp.cancelUsernameEdit(); }" readonly="" spellcheck="false" style="width:1px" title="Kliknij ołówek, aby zmienić nazwę" type="text" value="USER"/>
+<i aria-label="Zweryfikowane konto" class="hidden fas fa-circle-check profile-verified-icon text-[13px]" id="profile-verified-icon" title="Zweryfikowane konto"></i>
+<button aria-label="Edytuj nazwę użytkownika" class="inline-flex items-center justify-center self-center h-4 leading-none text-zinc-400 hover-brand-dynamic transition flex-shrink-0" id="username-edit-btn" onclick="window.scythedApp.toggleUsernameEdit()" title="Edytuj nazwę użytkownika" type="button"><i class="fas fa-pen text-[10px]"></i></button>
+<span class="font-orbitron font-extrabold text-sm" id="username-width-measure">USER</span>
+</div>
+<div class="text-[9px] text-zinc-500 dark:text-gray-400 font-mono" id="profile-created-date">Konto od: -</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-zinc-200 dark:border-zinc-800/60" id="profile-badges-container">
+<div aria-label="Właściciel Projektu SCYTHED" class="profile-badge-tooltip hidden fixed-owner-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Właściciel Projektu SCYTHED" id="badge-owner">
+<i class="fas fa-crown text-[10px]"></i>
+</div>
+<div aria-label="Administrator SCYTHED" class="profile-badge-tooltip hidden fixed-owner-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Administrator SCYTHED" id="badge-admin">
+<i class="fas fa-shield-halved text-[10px]"></i>
+</div>
+<div aria-label="Moderator SCYTHED" class="profile-badge-tooltip hidden moderator-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Moderator SCYTHED" id="badge-moderator">
+<i class="fas fa-hammer text-[10px]"></i>
+</div>
+<div aria-label="Zasłużony" class="profile-badge-tooltip hidden fixed-owner-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm glow-effect" data-tooltip="Zasłużony" id="badge-zasluzony">
+<i class="fas fa-award text-[10px]"></i>
+</div>
+<div aria-label="Łowca błędów poziom 1" class="profile-badge-tooltip hidden bug-hunter-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm" data-tooltip="Łowca błędów poziom 1" id="badge-bug-hunter">
+<i class="fas fa-network-wired text-[10px]"></i>
+</div>
+<div aria-label="Beta Tester" class="profile-badge-tooltip hidden beta-tester-badge p-1.5 rounded-md border text-[9px] font-bold font-orbitron flex items-center justify-center shadow-sm" data-tooltip="Beta Tester" id="badge-beta-tester">
+<i class="fas fa-flask text-[10px]"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed bottom-4 right-4 z-40 flex flex-row-reverse items-center gap-2">
+<button class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" onclick="window.scythedApp.openSettingsModal()" title="USTAWIENIA">
+<i class="fas fa-gear"></i>
+</button>
+<span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">v.6.3</span>
+</div>
+<footer class="w-full max-w-xl mx-auto text-center px-4 mt-8 space-y-1 relative z-10">
+<p class="text-[11px] md:text-xs text-zinc-600 dark:text-gray-400 font-mono leading-tight">
+            © 2026 <span class="font-orbitron font-bold text-zinc-900 dark:text-white streamer-scythed-name">SCYTH<span class="text-brand-red">ED</span></span> Menadżer Haseł. Projekt stworzony przez @yzke (discord).
         </p>
-        <p class="text-[9px] md:text-[10px] text-zinc-500 dark:text-gray-500 leading-tight">
-            <i class="fas fa-user-shield text-brand-red mr-1"></i>
-            <span class="font-semibold text-zinc-600 dark:text-gray-400">Bezpieczeństwo:</span> Magazyn danych szyfrowany lokalnie (Wchodzisz i korzystasz z serwisu na własną odpowiedzialność. Czasami mogą tu wystąpić jakieś błędy w końcu ciągle nad tym pracujemy!).
+<p class="text-[9px] md:text-[10px] text-zinc-500 dark:text-gray-500 leading-tight">
+<i class="fas fa-user-shield text-brand-red mr-1"></i>
+<span class="font-semibold text-zinc-600 dark:text-gray-400">Bezpieczeństwo:</span> Magazyn danych szyfrowany lokalnie (Wchodzisz i korzystasz z serwisu na własną odpowiedzialność. Czasami mogą tu wystąpić jakieś błędy w końcu ciągle nad tym pracujemy!).
         </p>
-    </footer>
-
-    <div id="modal-settings" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-[560px] w-full p-2.5 sm:p-3 space-y-3 glow-effect max-h-[92vh] overflow-y-auto backdrop-blur-md shadow-2xl">
-
-            <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-2">
-                <h3 class="font-orbitron font-bold text-lg md:text-xl text-zinc-900 dark:text-white flex items-center gap-2">
-                    <i class="fas fa-gear text-brand-red text-xl md:text-2xl"></i> USTAWIENIA
+</footer>
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" id="modal-settings">
+<div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-[560px] w-full p-2.5 sm:p-3 space-y-3 glow-effect max-h-[92vh] overflow-y-auto backdrop-blur-md shadow-2xl">
+<div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-2">
+<h3 class="font-orbitron font-bold text-lg md:text-xl text-zinc-900 dark:text-white flex items-center gap-2">
+<i class="fas fa-gear text-brand-red text-xl md:text-2xl"></i> USTAWIENIA
                 </h3>
-                <button onclick="window.scythedApp.closeModal('modal-settings')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times text-lg"></i></button>
-            </div>
-
-            <div id="security-settings-category" class="space-y-2">
-                <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                    <i class="fas fa-shield-halved mr-1" aria-hidden="true"></i> ZABEZPIECZENIA
+<button class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.closeModal('modal-settings')"><i class="fas fa-times text-lg"></i></button>
+</div>
+<div class="space-y-2" id="security-settings-category">
+<h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
+<i aria-hidden="true" class="fas fa-shield-halved mr-1"></i> ZABEZPIECZENIA
                 </h4>
-            <div id="general-admin-open-panel-wrap" class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fas fa-shield-halved admin-access-logo" aria-hidden="true"></i>Panel Administracyjny</span><button type="button" onclick="window.scythedApp.adminButtonClick()" class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition">OTWÓRZ PANEL</button></div>
-            <div class="grid grid-cols-2 gap-3 items-stretch">
-                <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
-                    <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200">Hasło do aplikacji</h5>
-                    <div class="flex justify-center min-w-0"><button id="settings-change-app-password" type="button" onclick="window.scythedApp.openChangeMasterModal()" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition"><i class="fas fa-lock" aria-hidden="true"></i><span>Zmień hasło</span></button></div>
-                </div>
-                <div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
-                    <h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200">Hasło do nazwy</h5>
-                    <div class="flex justify-center min-w-0"><button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled title="Sprawdzanie statusu weryfikacji konta…" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition opacity-50 cursor-not-allowed" aria-disabled="true"><i class="fas fa-user-shield" aria-hidden="true"></i><span>Zmień hasło</span></button></div>
-                </div>
-            </div>
-            </div>
-
-            <div class="space-y-2">
-                <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                    <i class="fas fa-paint-roller mr-1"></i> PERSONALIZACJA
+<div class="hidden flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800" id="general-admin-open-panel-wrap"><span class="text-xs font-semibold text-zinc-700 dark:text-gray-300 flex items-center gap-1.5"><i aria-hidden="true" class="fas fa-shield-halved admin-access-logo"></i>Panel Administracyjny</span><button class="admin-access-action px-3 py-1.5 text-xs font-bold rounded-xl border-0 transition" onclick="window.scythedApp.adminButtonClick()" type="button">OTWÓRZ PANEL</button></div>
+<div class="grid grid-cols-2 gap-3 items-stretch">
+<div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
+<h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200">Hasło do aplikacji</h5>
+<div class="flex justify-center min-w-0"><button class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition" id="settings-change-app-password" onclick="window.scythedApp.openChangeMasterModal()" type="button"><i aria-hidden="true" class="fas fa-lock"></i><span>Zmień hasło</span></button></div>
+</div>
+<div class="p-3 rounded-xl bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 space-y-2.5 min-w-0">
+<h5 class="text-xs font-bold text-zinc-800 dark:text-gray-200">Hasło do nazwy</h5>
+<div class="flex justify-center min-w-0"><button aria-disabled="true" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition opacity-50 cursor-not-allowed" disabled="" id="settings-change-name-password" onclick="window.scythedApp.toggleNamePasswordSettings()" title="Sprawdzanie statusu weryfikacji konta…" type="button"><i aria-hidden="true" class="fas fa-user-shield"></i><span>Zmień hasło</span></button></div>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
+<i class="fas fa-paint-roller mr-1"></i> PERSONALIZACJA
                 </h4>
-
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                        <span class="text-xs font-semibold">Tryb Wyglądu</span>
-                        <button onclick="window.scythedApp.toggleTheme()" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5">
-                            <i id="theme-mode-icon" class="fas fa-moon text-brand-red"></i>
-                            <span id="theme-mode-text">TRYB</span>
-                        </button>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                        <span class="text-xs font-semibold">Animacja Nagłówka</span>
-                        <button id="theme-toggle-btn" onclick="window.scythedApp.cycleBackgroundThemeState()" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5">
-                            <i id="theme-toggle-icon" class="fas fa-play text-brand-red"></i>
-                            <span id="theme-toggle-text">POKAŻ</span>
-                        </button>
-                    </div>
-
-                    <div class="col-span-2 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                        <div class="flex items-center justify-between gap-3 mb-1">
-                            <label for="header-animation-speed" class="text-xs font-semibold">Szybkość Animacji Nagłówka</label>
-                            <span id="header-animation-speed-label" class="text-[10px] font-mono font-bold text-brand-red">1.0× (normalnie)</span>
-                        </div>
-                        <input type="range" id="header-animation-speed" min="0.5" max="1.5" step="0.05" value="1.0" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
-                        <div class="flex justify-between text-[9px] text-zinc-500 dark:text-gray-400"><span>Wolniej</span><span>Szybciej</span></div>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 col-span-2">
-                        <div class="flex flex-col">
-                            <span class="text-xs font-semibold">Własne Tło Aplikacji</span>
-                            <span class="text-[10px] text-zinc-500 dark:text-gray-400">Zastępuje domyślne tło pod całą stroną</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button onclick="document.getElementById('app-bg-input').click()" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5">
-                                <i class="fas fa-image text-brand-red"></i>
-                                <span>WYBIERZ OBRAZ</span>
-                            </button>
-                            <button id="remove-app-bg-btn" onclick="window.scythedApp.removeAppCustomBackground()" class="hidden theme-accent-action px-2.5 py-1.5 text-xs font-bold rounded-lg border transition">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <input type="file" id="app-bg-input" accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" class="hidden" onchange="window.scythedApp.handleAppBackgroundUpload(event)" autocomplete="off" autocorrect="off" spellcheck="false">
-                        </div>
-                    </div>
-
-                    <div id="app-bg-effects-panel" class="col-span-2 space-y-3 p-3 bg-zinc-50 dark:bg-black/40 rounded-xl border border-zinc-200 dark:border-zinc-800 hidden">
-                        <span class="text-xs font-bold text-brand-red flex items-center gap-1.5">
-                            <i class="fas fa-wand-magic-sparkles"></i> Efekty Nakładki na Tło
+<div class="grid grid-cols-2 gap-2">
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
+<span class="text-xs font-semibold">Tryb Wyglądu</span>
+<button class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5" onclick="window.scythedApp.toggleTheme()">
+<i class="fas fa-moon text-brand-red" id="theme-mode-icon"></i>
+<span id="theme-mode-text">TRYB</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
+<span class="text-xs font-semibold">Animacja Nagłówka</span>
+<button class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5" id="theme-toggle-btn" onclick="window.scythedApp.cycleBackgroundThemeState()">
+<i class="fas fa-play text-brand-red" id="theme-toggle-icon"></i>
+<span id="theme-toggle-text">POKAŻ</span>
+</button>
+</div>
+<div class="col-span-2 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
+<div class="flex items-center justify-between gap-3 mb-1">
+<label class="text-xs font-semibold" for="header-animation-speed">Szybkość Animacji Nagłówka</label>
+<span class="text-[10px] font-mono font-bold text-brand-red" id="header-animation-speed-label">1.0× (normalnie)</span>
+</div>
+<input autocomplete="off" autocorrect="off" class="w-full accent-brand-red cursor-pointer" id="header-animation-speed" max="1.5" min="0.5" oninput="window.scythedApp.updateHeaderAnimationSpeed(this.value)" spellcheck="false" step="0.05" type="range" value="1.0"/>
+<div class="flex justify-between text-[9px] text-zinc-500 dark:text-gray-400"><span>Wolniej</span><span>Szybciej</span></div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 col-span-2">
+<div class="flex flex-col">
+<span class="text-xs font-semibold">Własne Tło Aplikacji</span>
+<span class="text-[10px] text-zinc-500 dark:text-gray-400">Zastępuje domyślne tło pod całą stroną</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5" onclick="document.getElementById('app-bg-input').click()">
+<i class="fas fa-image text-brand-red"></i>
+<span>WYBIERZ OBRAZ</span>
+</button>
+<button class="hidden theme-accent-action px-2.5 py-1.5 text-xs font-bold rounded-lg border transition" id="remove-app-bg-btn" onclick="window.scythedApp.removeAppCustomBackground()">
+<i class="fas fa-trash"></i>
+</button>
+<input accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif" autocomplete="off" autocorrect="off" class="hidden" id="app-bg-input" onchange="window.scythedApp.handleAppBackgroundUpload(event)" spellcheck="false" type="file"/>
+</div>
+</div>
+<div class="col-span-2 space-y-3 p-3 bg-zinc-50 dark:bg-black/40 rounded-xl border border-zinc-200 dark:border-zinc-800 hidden" id="app-bg-effects-panel">
+<span class="text-xs font-bold text-brand-red flex items-center gap-1.5">
+<i class="fas fa-wand-magic-sparkles"></i> Efekty Nakładki na Tło
                         </span>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="space-y-1">
-                                <label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Rozmycie (Blur): <span id="bg-blur-val" class="font-bold text-brand-red">0%</span></label>
-                                <input type="range" id="bg-blur-slider" min="0" max="100" value="0" oninput="window.scythedApp.updateBgBlur(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
-                            </div>
-
-                            <div class="space-y-1">
-                                <label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Kolor Nakładki</label>
-                                <div class="flex items-center gap-1 bg-white dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 px-2 py-1 rounded-lg">
-                                    <input type="color" id="bg-overlay-color" value="#000000" onchange="window.scythedApp.updateBgOverlayColor(this.value)" data-no-click-sound class="w-5 h-5 bg-transparent border-0 cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
-                                    <input type="text" id="bg-overlay-hex" value="#000000" aria-label="Kod HEX koloru nakładki" onblur="window.scythedApp.updateBgOverlayColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" class="w-16 bg-transparent text-[11px] font-mono text-zinc-800 dark:text-gray-200 focus:outline-none uppercase text-center font-normal" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="7" data-no-click-sound></div>
-                            </div>
-
-                            <div class="space-y-1">
-                                <label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Krycie Koloru: <span id="bg-opacity-val" class="font-bold text-brand-red">40%</span></label>
-                                <input type="range" id="bg-opacity-slider" min="0" max="100" value="40" oninput="window.scythedApp.updateBgOverlayOpacity(this.value)" class="w-full accent-brand-red cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between order-1 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                        <span class="text-xs font-semibold">Kolor Główny</span>
-                        <div class="flex items-center gap-1 bg-white dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 px-2 py-1 rounded-lg">
-                            <input type="color" id="brand-color-picker" value="#ff0033" onchange="window.scythedApp.changeBrandColor(this.value)" class="w-5 h-5 bg-transparent border-0 cursor-pointer" autocomplete="off" autocorrect="off" spellcheck="false">
-                            <input type="text" id="brand-hex-input" value="#ff0033" onblur="window.scythedApp.changeBrandColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" class="w-16 bg-transparent text-[11px] font-mono text-zinc-800 dark:text-gray-200 focus:outline-none uppercase text-center" autocomplete="off" autocorrect="off" spellcheck="false">
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between order-3 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 col-span-2">
-                        <div class="flex flex-col">
-                            <span class="text-xs font-semibold">Tryb Streamera</span>
-                            <span class="text-[10px] text-zinc-500 dark:text-gray-400">Ukrywa nazwę użytkownika oraz nazwę strony na ekranie.</span>
-                        </div>
-                        <button id="streamer-mode-toggle-btn" onclick="window.scythedApp.toggleStreamerMode()" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5">
-                            <i id="streamer-mode-icon" class="fas fa-video-slash text-brand-red"></i>
-                            <span id="streamer-mode-text">WYŁĄCZONE</span>
-                        </button>
-                    </div>
-
-                    <div class="flex items-center justify-between order-2 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                        <span class="text-xs font-semibold">Wielkość</span>
-                        <div class="flex items-center gap-2">
-                            <select id="ui-scale-slider" onchange="window.scythedApp.updateUIScale(this.value)" aria-label="Wielkość interfejsu" class="w-auto max-w-[60%] shrink-0 px-3 py-2 bg-white dark:bg-zinc-900 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-brand-red">
-                                <option value="1">MAŁA</option><option value="2" selected>NORMALNA</option><option value="3">DUŻA</option>
-                            </select>
-                            <span id="scale-label-text" class="sr-only">NORMALNA</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="space-y-2">
-                <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                    <i class="fas fa-sliders mr-1"></i> PREFERENCJE
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="space-y-1">
+<label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Rozmycie (Blur): <span class="font-bold text-brand-red" id="bg-blur-val">0%</span></label>
+<input autocomplete="off" autocorrect="off" class="w-full accent-brand-red cursor-pointer" id="bg-blur-slider" max="100" min="0" oninput="window.scythedApp.updateBgBlur(this.value)" spellcheck="false" type="range" value="0"/>
+</div>
+<div class="space-y-1">
+<label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Kolor Nakładki</label>
+<div class="flex items-center gap-1 bg-white dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 px-2 py-1 rounded-lg">
+<input autocomplete="off" autocorrect="off" class="w-5 h-5 bg-transparent border-0 cursor-pointer" data-no-click-sound="" id="bg-overlay-color" onchange="window.scythedApp.updateBgOverlayColor(this.value)" spellcheck="false" type="color" value="#000000"/>
+<input aria-label="Kod HEX koloru nakładki" autocomplete="off" autocorrect="off" class="w-16 bg-transparent text-[11px] font-mono text-zinc-800 dark:text-gray-200 focus:outline-none uppercase text-center font-normal" data-no-click-sound="" id="bg-overlay-hex" maxlength="7" onblur="window.scythedApp.updateBgOverlayColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" spellcheck="false" type="text" value="#000000"/></div>
+</div>
+<div class="space-y-1">
+<label class="block text-[11px] font-mono text-zinc-600 dark:text-gray-400">Krycie Koloru: <span class="font-bold text-brand-red" id="bg-opacity-val">40%</span></label>
+<input autocomplete="off" autocorrect="off" class="w-full accent-brand-red cursor-pointer" id="bg-opacity-slider" max="100" min="0" oninput="window.scythedApp.updateBgOverlayOpacity(this.value)" spellcheck="false" type="range" value="40"/>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between order-1 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
+<span class="text-xs font-semibold">Kolor Główny</span>
+<div class="flex items-center gap-1 bg-white dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 px-2 py-1 rounded-lg">
+<input autocomplete="off" autocorrect="off" class="w-5 h-5 bg-transparent border-0 cursor-pointer" id="brand-color-picker" onchange="window.scythedApp.changeBrandColor(this.value)" spellcheck="false" type="color" value="#ff0033"/>
+<input autocomplete="off" autocorrect="off" class="w-16 bg-transparent text-[11px] font-mono text-zinc-800 dark:text-gray-200 focus:outline-none uppercase text-center" id="brand-hex-input" onblur="window.scythedApp.changeBrandColorFromText(this.value)" onkeydown="if(event.key==='Enter') this.blur()" spellcheck="false" type="text" value="#ff0033"/>
+</div>
+</div>
+<div class="flex items-center justify-between order-3 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 col-span-2">
+<div class="flex flex-col">
+<span class="text-xs font-semibold">Tryb Streamera</span>
+<span class="text-[10px] text-zinc-500 dark:text-gray-400">Ukrywa nazwę użytkownika oraz nazwę strony na ekranie.</span>
+</div>
+<button class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5" id="streamer-mode-toggle-btn" onclick="window.scythedApp.toggleStreamerMode()">
+<i class="fas fa-video-slash text-brand-red" id="streamer-mode-icon"></i>
+<span id="streamer-mode-text">WYŁĄCZONE</span>
+</button>
+</div>
+<div class="flex items-center justify-between order-2 p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
+<span class="text-xs font-semibold">Wielkość</span>
+<div class="flex items-center gap-2">
+<select aria-label="Wielkość interfejsu" class="w-auto max-w-[60%] shrink-0 px-3 py-2 bg-white dark:bg-zinc-900 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-brand-red" id="ui-scale-slider" onchange="window.scythedApp.updateUIScale(this.value)">
+<option value="1">MAŁA</option><option selected="" value="2">NORMALNA</option><option value="3">DUŻA</option>
+</select>
+<span class="sr-only" id="scale-label-text">NORMALNA</span>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
+<i class="fas fa-sliders mr-1"></i> PREFERENCJE
                 </h4>
-
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                        <span class="text-xs font-semibold">Efekty Dźwiękowe</span>
-                        <button id="sound-toggle-btn" onclick="window.scythedApp.toggleSound()" class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5">
-                            <i id="sound-icon" class="fas fa-volume-high text-brand-red"></i>
-                            <span id="sound-text">DŹWIĘK</span>
-                        </button>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                        <span class="text-xs font-semibold">Powiadomienia Toast</span>
-                        <button id="notifications-toggle-btn" onclick="window.scythedApp.toggleNotifications()" class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5">
-                            <i id="notifications-icon" class="fas fa-bell text-brand-red"></i>
-                            <span id="notifications-text">WŁĄCZONE</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="space-y-2">
-                <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                    <i class="fas fa-lock mr-1"></i> BLOKOWANIE
+<div class="grid grid-cols-2 gap-2">
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
+<span class="text-xs font-semibold">Efekty Dźwiękowe</span>
+<button class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5" id="sound-toggle-btn" onclick="window.scythedApp.toggleSound()">
+<i class="fas fa-volume-high text-brand-red" id="sound-icon"></i>
+<span id="sound-text">DŹWIĘK</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
+<span class="text-xs font-semibold">Powiadomienia Toast</span>
+<button class="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition flex items-center gap-1.5" id="notifications-toggle-btn" onclick="window.scythedApp.toggleNotifications()">
+<i class="fas fa-bell text-brand-red" id="notifications-icon"></i>
+<span id="notifications-text">WŁĄCZONE</span>
+</button>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
+<i class="fas fa-lock mr-1"></i> BLOKOWANIE
                 </h4>
-                <div class="flex items-center justify-between gap-4 p-4 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                    <div class="flex items-center gap-2 min-w-0">
-                        <i class="fas fa-bell text-xs shrink-0" style="color: var(--brand-red, #ff0033);" aria-hidden="true"></i>
-                        <div class="flex flex-col min-w-0"><span class="text-xs font-semibold">Automatyczna Blokada</span></div>
-                    </div>
-                    <select id="auto-lock-mode" onchange="window.scythedApp.setAutoLockMode(this.value)" class="w-auto max-w-[60%] shrink-0 px-3 py-2 bg-white dark:bg-zinc-900 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-brand-red">
-                        <option value="hidden">PO OPUSZCZENIU STRONY</option>
-                        <option value="timed">PO 10 MINUTACH</option>
-                        <option value="off">WYŁĄCZONA</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="space-y-2">
-                <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                    <i class="fas fa-database mr-1"></i> BEZPIECZEŃSTWO DANYCH
+<div class="flex items-center justify-between gap-4 p-4 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
+<div class="flex items-center gap-2 min-w-0">
+<i aria-hidden="true" class="fas fa-bell text-xs shrink-0" style="color: var(--brand-red, #ff0033);"></i>
+<div class="flex flex-col min-w-0"><span class="text-xs font-semibold">Automatyczna Blokada</span></div>
+</div>
+<select class="w-auto max-w-[60%] shrink-0 px-3 py-2 bg-white dark:bg-zinc-900 text-xs font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-brand-red" id="auto-lock-mode" onchange="window.scythedApp.setAutoLockMode(this.value)">
+<option value="hidden">PO OPUSZCZENIU STRONY</option>
+<option value="timed">PO 10 MINUTACH</option>
+<option value="off">WYŁĄCZONA</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
+<i class="fas fa-database mr-1"></i> BEZPIECZEŃSTWO DANYCH
                 </h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
-                        <div class="flex flex-col min-w-0">
-                            <span class="text-xs font-semibold flex items-center gap-1.5"><i class="fas fa-clock-rotate-left text-brand-red text-[11px]" aria-hidden="true"></i>Ostatni backup</span>
-                            <span id="last-backup-info" class="text-[10px] text-zinc-500 dark:text-gray-400 mt-1 font-mono truncate">Jeszcze nie wykonano</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 gap-2">
-                        <span class="text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap"><i class="fas fa-bell text-brand-red text-[11px]" aria-hidden="true"></i>Przypomnienie</span>
-                        <select id="backup-reminder-days" onchange="window.scythedApp.setBackupReminderDays(this.value)" class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-[10px] font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition focus:outline-none focus:border-brand-red">
-                            <option value="0">WYŁĄCZONE</option><option value="1">CODZIENNIE</option><option value="7">CO 7 DNI</option><option value="14">CO 14 DNI</option><option value="30">CO 30 DNI</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="backup-reminder-status" class="hidden text-[10px] rounded-xl px-3 py-2 border flex items-center gap-1.5"></div>
-            </div>
-
-            <div class="pt-1">
-                <button type="button" onclick="window.scythedApp.closeModal('modal-settings')" class="w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800">
+<div class="flex flex-col min-w-0">
+<span class="text-xs font-semibold flex items-center gap-1.5"><i aria-hidden="true" class="fas fa-clock-rotate-left text-brand-red text-[11px]"></i>Ostatni backup</span>
+<span class="text-[10px] text-zinc-500 dark:text-gray-400 mt-1 font-mono truncate" id="last-backup-info">Jeszcze nie wykonano</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-200 dark:border-zinc-800 gap-2">
+<span class="text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap"><i aria-hidden="true" class="fas fa-bell text-brand-red text-[11px]"></i>Przypomnienie</span>
+<select class="px-3 py-1.5 bg-zinc-200/80 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-[10px] font-bold rounded-lg border border-zinc-300 dark:border-zinc-700 transition focus:outline-none focus:border-brand-red" id="backup-reminder-days" onchange="window.scythedApp.setBackupReminderDays(this.value)">
+<option value="0">WYŁĄCZONE</option><option value="1">CODZIENNIE</option><option value="7">CO 7 DNI</option><option value="14">CO 14 DNI</option><option value="30">CO 30 DNI</option>
+</select>
+</div>
+</div>
+<div class="hidden text-[10px] rounded-xl px-3 py-2 border flex items-center gap-1.5" id="backup-reminder-status"></div>
+</div>
+<div class="pt-1">
+<button class="w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect" onclick="window.scythedApp.closeModal('modal-settings')" type="button">
                     ZAMKNIJ USTAWIENIA
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-trash" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[70] hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-3xl w-full p-5 space-y-4 glow-effect max-h-[88vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
-                <div>
-                    <h3 class="font-orbitron font-bold text-base text-zinc-900 dark:text-white">HISTORIA USUNIĘTYCH WPISÓW</h3>
-                    <p class="text-[10px] text-zinc-500 mt-1">Usunięte wpisy można przywrócić albo trwale wyczyścić.</p>
-                </div>
-                <button onclick="window.scythedApp.closeModal('modal-trash')" class="text-zinc-500 hover:text-white"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="flex justify-end gap-2">
-                <button onclick="window.scythedApp.restoreAllTrash()" class="px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/30 text-green-500 text-[11px] font-bold">PRZYWRÓĆ WSZYSTKO</button>
-                <button onclick="window.scythedApp.clearTrash()" class="theme-accent-action px-3 py-1.5 rounded-lg border text-[11px] font-bold">WYCZYŚĆ HISTORIĘ</button>
-            </div>
-            <div id="trash-list" class="space-y-2"></div>
-        </div>
-    </div>
-
-    <div id="modal-change-master" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4">
-        <div class="bg-white/95 dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-md w-full p-6 space-y-6 glow-effect backdrop-blur-md shadow-2xl">
-            <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
-                <h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white flex items-center gap-2"><i class="fas fa-lock text-brand-red"></i> ZMIEŃ HASŁO DO APLIKACJI</h3>
-                <button onclick="window.scythedApp.closeModal('modal-change-master')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times"></i></button>
-            </div>
-            <form autocomplete="off" onsubmit="window.scythedApp.handleChangeMasterSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Obecne hasło do aplikacji</label>
-                    <div class="relative">
-                        <input type="password" id="change-old-pass" required placeholder="Wpisz obecne hasło do aplikacji..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
-                        <button type="button" onclick="window.scythedApp.togglePasswordVisibility('change-old-pass')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż lub ukryj obecne hasło do aplikacji" title="Pokaż lub ukryj obecne hasło do aplikacji"><i class="fas fa-eye"></i></button>
-                    </div>
-                    <p id="change-old-pass-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left"></p>
-                </div>
-                <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nowe hasło do aplikacji</label>
-                    <div class="relative">
-                        <input type="password" id="change-new-pass" required placeholder="Wpisz nowe hasło do aplikacji..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
-                        <button type="button" onclick="window.scythedApp.togglePasswordVisibility('change-new-pass')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż lub ukryj nowe hasło do aplikacji" title="Pokaż lub ukryj nowe hasło do aplikacji">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                    <p id="change-password-strength" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500"></p>
-                </div>
-                <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Potwierdź nowe hasło do aplikacji</label>
-                    <div class="relative">
-                        <input type="password" id="change-confirm-pass" required placeholder="Wpisz ponownie nowe hasło do aplikacji..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" autocomplete="off" autocorrect="off" spellcheck="false">
-                        <button type="button" onclick="window.scythedApp.togglePasswordVisibility('change-confirm-pass')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż lub ukryj potwierdzone hasło do aplikacji" title="Pokaż lub ukryj potwierdzone hasło do aplikacji"><i class="fas fa-eye"></i></button>
-                    </div>
-                    <p id="change-confirm-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left"></p>
-                </div>
-                <div id="entry-history-row" class="hidden">
-                    <button type="button" onclick="window.scythedApp.openPasswordHistory()" class="w-full py-2 bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg text-[11px] font-bold text-zinc-600 dark:text-gray-300">
-                        <i class="fas fa-clock-rotate-left mr-1"></i> HISTORIA HASEŁ
+</div>
+</div>
+</div>
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[70] hidden flex items-center justify-center p-4" id="modal-trash">
+<div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-3xl w-full p-5 space-y-4 glow-effect max-h-[88vh] overflow-y-auto">
+<div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
+<div>
+<h3 class="font-orbitron font-bold text-base text-zinc-900 dark:text-white">HISTORIA USUNIĘTYCH WPISÓW</h3>
+<p class="text-[10px] text-zinc-500 mt-1">Usunięte wpisy można przywrócić albo trwale wyczyścić.</p>
+</div>
+<button class="text-zinc-500 hover:text-white" onclick="window.scythedApp.closeModal('modal-trash')"><i class="fas fa-times"></i></button>
+</div>
+<div class="flex justify-end gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/30 text-green-500 text-[11px] font-bold" onclick="window.scythedApp.restoreAllTrash()">PRZYWRÓĆ WSZYSTKO</button>
+<button class="theme-accent-action px-3 py-1.5 rounded-lg border text-[11px] font-bold" onclick="window.scythedApp.clearTrash()">WYCZYŚĆ HISTORIĘ</button>
+</div>
+<div class="space-y-2" id="trash-list"></div>
+</div>
+</div>
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4" id="modal-change-master">
+<div class="bg-white/95 dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-md w-full p-6 space-y-6 glow-effect backdrop-blur-md shadow-2xl">
+<div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
+<h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white flex items-center gap-2"><i class="fas fa-lock text-brand-red"></i> ZMIEŃ HASŁO DO APLIKACJI</h3>
+<button class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.closeModal('modal-change-master')"><i class="fas fa-times"></i></button>
+</div>
+<form autocomplete="off" class="space-y-4" onsubmit="window.scythedApp.handleChangeMasterSubmit(event)">
+<div>
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Obecne hasło do aplikacji</label>
+<div class="relative">
+<input autocomplete="off" autocorrect="off" class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" id="change-old-pass" placeholder="Wpisz obecne hasło do aplikacji..." required="" spellcheck="false" type="password"/>
+<button aria-label="Pokaż lub ukryj obecne hasło do aplikacji" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.togglePasswordVisibility('change-old-pass')" title="Pokaż lub ukryj obecne hasło do aplikacji" type="button"><i class="fas fa-eye"></i></button>
+</div>
+<p class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left" id="change-old-pass-status"></p>
+</div>
+<div>
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nowe hasło do aplikacji</label>
+<div class="relative">
+<input autocomplete="off" autocorrect="off" class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" id="change-new-pass" placeholder="Wpisz nowe hasło do aplikacji..." required="" spellcheck="false" type="password"/>
+<button aria-label="Pokaż lub ukryj nowe hasło do aplikacji" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.togglePasswordVisibility('change-new-pass')" title="Pokaż lub ukryj nowe hasło do aplikacji" type="button">
+<i class="fas fa-eye"></i>
+</button>
+</div>
+<p class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500" id="change-password-strength"></p>
+</div>
+<div>
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Potwierdź nowe hasło do aplikacji</label>
+<div class="relative">
+<input autocomplete="off" autocorrect="off" class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" id="change-confirm-pass" placeholder="Wpisz ponownie nowe hasło do aplikacji..." required="" spellcheck="false" type="password"/>
+<button aria-label="Pokaż lub ukryj potwierdzone hasło do aplikacji" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.togglePasswordVisibility('change-confirm-pass')" title="Pokaż lub ukryj potwierdzone hasło do aplikacji" type="button"><i class="fas fa-eye"></i></button>
+</div>
+<p class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left" id="change-confirm-status"></p>
+</div>
+<div class="hidden" id="entry-history-row">
+<button class="w-full py-2 bg-zinc-100 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg text-[11px] font-bold text-zinc-600 dark:text-gray-300" onclick="window.scythedApp.openPasswordHistory()" type="button">
+<i class="fas fa-clock-rotate-left mr-1"></i> HISTORIA HASEŁ
                     </button>
-                </div>
-                <div class="pt-2 flex gap-3">
-                    <button type="button" onclick="window.scythedApp.closeModal('modal-change-master')" class="flex-1 py-3 bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-900 text-zinc-700 dark:text-gray-300 font-bold rounded-xl border border-zinc-300 dark:border-zinc-800 text-xs transition">ANULUJ</button>
-                    <button type="submit" class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAPISZ HASŁO</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="modal-change-name-password" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4">
-        <div class="bg-white/95 dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-md w-full p-6 space-y-6 glow-effect backdrop-blur-md shadow-2xl">
-            <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
-                <h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white flex items-center gap-2"><i class="fas fa-user-shield text-brand-red"></i> ZMIEŃ HASŁO DO NAZWY</h3>
-                <button type="button" onclick="window.scythedApp.closeModal('modal-change-name-password')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Obecne hasło do nazwy</label>
-                    <div class="relative"><input id="name-password-old" type="password" required autocomplete="current-password" placeholder="Wpisz obecne hasło do nazwy..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner"><button type="button" onclick="window.scythedApp.togglePasswordVisibility('name-password-old')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" aria-label="Pokaż lub ukryj obecne hasło do nazwy"><i class="fas fa-eye"></i></button></div>
-                </div>
-                <div>
-                    <div class="mb-1"><label for="name-password-new" class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400">Nowe hasło do nazwy (min. 12 znaków)</label></div>
-                    <div class="relative"><input id="name-password-new" type="password" required minlength="12" autocomplete="new-password" placeholder="Wpisz nowe hasło (min. 12 znaków)..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner"><button type="button" onclick="window.scythedApp.togglePasswordVisibility('name-password-new')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" aria-label="Pokaż lub ukryj nowe hasło do nazwy"><i class="fas fa-eye"></i></button></div>
-                    <p id="name-password-strength" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500" aria-live="polite"></p>
-                </div>
-                <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Potwierdź nowe hasło do nazwy</label>
-                    <div class="relative"><input id="name-password-confirm" type="password" required autocomplete="new-password" placeholder="Wpisz ponownie nowe hasło..." class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner"><button type="button" onclick="window.scythedApp.togglePasswordVisibility('name-password-confirm')" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" aria-label="Pokaż lub ukryj potwierdzenie hasła do nazwy"><i class="fas fa-eye"></i></button></div>
-                    <p id="name-password-confirm-status" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left" aria-live="polite"></p>
-                </div>
-                <p id="name-password-status" class="hidden text-[10px] font-semibold"></p>
-                <div class="pt-2 flex gap-3">
-                    <button type="button" onclick="window.scythedApp.closeModal('modal-change-name-password')" class="flex-1 py-3 bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-900 text-zinc-700 dark:text-gray-300 font-bold rounded-xl border border-zinc-300 dark:border-zinc-800 text-xs transition">ANULUJ</button>
-                    <button type="button" onclick="window.scythedApp.changeNamePassword()" class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAPISZ HASŁO</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-entry" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-lg w-full p-6 space-y-4 glow-effect max-h-[90vh] overflow-y-auto backdrop-blur-md shadow-2xl">
-            <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
-                <h3 id="modal-entry-title" class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white">DODAJ NOWE KONTO</h3>
-                <button onclick="window.scythedApp.closeModal('modal-entry')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times"></i></button>
-            </div>
-
-            <form autocomplete="off" id="form-entry" onsubmit="window.scythedApp.handleSaveEntry(event)" class="space-y-4">
-                <input type="hidden" id="entry-id" autocomplete="off" autocorrect="off" spellcheck="false">
-
-                <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Platforma / Serwis</label>
-                    <select id="entry-platform" onchange="window.scythedApp.updateCustomPlatformFieldVisibility()" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm">
-                    </select>
-                </div>
-
-                <div id="entry-custom-platform-container" class="hidden">
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nazwa aplikacji</label>
-                    <input type="text" id="entry-custom-platform" maxlength="80" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="Wpisz własną nazwę aplikacji" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <p class="text-[10px] text-zinc-500 dark:text-gray-500 mt-1">Ta nazwa jest używana tylko dla tej pozycji. Logo: blank.png.</p>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">LOGIN</label>
-                    <input type="text" id="entry-account" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="user@example.com lub nick" autocomplete="off" autocorrect="off" spellcheck="false">
-                </div>
-
-                <div>
-                    <div class="flex justify-between items-center mb-1">
-                        <label class="text-xs font-mono uppercase text-zinc-600 dark:text-gray-400">Hasło</label>
-                        <button type="button" onclick="window.scythedApp.generateAndSetPassword()" class="text-xs text-brand-red hover:underline"><i class="fas fa-wand-magic-sparkles mr-1"></i> Generuj Hasło</button>
-                    </div>
-                    <div class="relative">
-                        <input type="password" id="entry-password" required class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono" autocomplete="off" autocorrect="off" spellcheck="false">
-                        <button type="button" onclick="window.scythedApp.togglePasswordVisibility('entry-password')" class="absolute right-3 top-2.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Krótka Notatka / Opis</label>
-                    <textarea id="entry-description" rows="2" maxlength="100" oninput="window.scythedApp.updateEntryLimitCounters()" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="np. Konto główne..."></textarea>
-                    <p id="entry-description-counter" class="text-[10px] text-zinc-500 mt-1 text-right" aria-live="polite">0/100 znaków</p>
-                </div>
-
-                <div class="grid grid-cols-1 gap-3">
-                    <div>
-                        <label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Tagi</label>
-                        <input type="text" id="entry-tags" oninput="window.scythedApp.updateEntryLimitCounters()" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" placeholder="#przykładowy tag, #tag" aria-describedby="entry-tags-help entry-tags-counter" autocomplete="off" autocorrect="off" spellcheck="false">
-                        <p id="entry-tags-help" class="text-[10px] text-zinc-500 mt-1">Maksymalnie 3 tagi na platformę, do 16 znaków każdy (łącznie ze znakiem #). Oddzielaj przecinkami; brakujący # zostanie dodany automatycznie.</p>
-                        <p id="entry-tags-counter" class="text-[10px] text-zinc-500 mt-1 text-right" aria-live="polite">0/3 tagi · długość tagów: -</p>
-                        <p id="entry-tags-error" class="hidden text-[10px] text-red-500 mt-1" role="alert"></p>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-5 pt-1">
-                    <label class="inline-flex items-center gap-2 text-xs font-semibold cursor-pointer">
-                        <input type="checkbox" id="entry-favorite" class="accent-brand-red" autocomplete="off" autocorrect="off" spellcheck="false"> <span>Ulubione</span>
-                    </label>
-                    <label class="inline-flex items-center gap-2 text-xs font-semibold cursor-pointer">
-                        <input type="checkbox" id="entry-pinned" class="accent-brand-red" autocomplete="off" autocorrect="off" spellcheck="false"> <span>Przypnij na górze</span>
-                    </label>
-                </div>
-
-                <div class="pt-2 flex gap-3">
-                    <button type="button" onclick="window.scythedApp.closeModal('modal-entry')" class="flex-1 py-3 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-300 font-bold rounded-lg text-xs transition">ANULUJ</button>
-                    <button type="submit" class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-lg text-xs transition glow-effect">ZAPISZ</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="modal-password-history" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[80] hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-lg w-full p-5 space-y-4 glow-effect max-h-[88vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
-                <h3 class="font-orbitron font-bold text-base text-zinc-900 dark:text-white">HISTORIA HASEŁ</h3>
-                <button onclick="window.scythedApp.closeModal('modal-password-history')" class="text-zinc-500"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="password-history-list" class="space-y-2"></div>
-        </div>
-    </div>
-
-    <script>
+</div>
+<div class="pt-2 flex gap-3">
+<button class="flex-1 py-3 bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-900 text-zinc-700 dark:text-gray-300 font-bold rounded-xl border border-zinc-300 dark:border-zinc-800 text-xs transition" onclick="window.scythedApp.closeModal('modal-change-master')" type="button">ANULUJ</button>
+<button class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect" type="submit">ZAPISZ HASŁO</button>
+</div>
+</form>
+</div>
+</div>
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4" id="modal-change-name-password">
+<div class="bg-white/95 dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-md w-full p-6 space-y-6 glow-effect backdrop-blur-md shadow-2xl">
+<div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
+<h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white flex items-center gap-2"><i class="fas fa-user-shield text-brand-red"></i> ZMIEŃ HASŁO DO NAZWY</h3>
+<button class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.closeModal('modal-change-name-password')" type="button"><i class="fas fa-times"></i></button>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Obecne hasło do nazwy</label>
+<div class="relative"><input autocomplete="current-password" class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" id="name-password-old" placeholder="Wpisz obecne hasło do nazwy..." required="" type="password"/><button aria-label="Pokaż lub ukryj obecne hasło do nazwy" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" onclick="window.scythedApp.togglePasswordVisibility('name-password-old')" type="button"><i class="fas fa-eye"></i></button></div>
+</div>
+<div>
+<div class="mb-1"><label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400" for="name-password-new">Nowe hasło do nazwy (min. 12 znaków)</label></div>
+<div class="relative"><input autocomplete="new-password" class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" id="name-password-new" minlength="12" placeholder="Wpisz nowe hasło (min. 12 znaków)..." required="" type="password"/><button aria-label="Pokaż lub ukryj nowe hasło do nazwy" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" onclick="window.scythedApp.togglePasswordVisibility('name-password-new')" type="button"><i class="fas fa-eye"></i></button></div>
+<p aria-live="polite" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-red-500" id="name-password-strength"></p>
+</div>
+<div>
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Potwierdź nowe hasło do nazwy</label>
+<div class="relative"><input autocomplete="new-password" class="w-full bg-zinc-50 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-xl pl-4 pr-11 py-3 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-sm font-mono shadow-inner" id="name-password-confirm" placeholder="Wpisz ponownie nowe hasło..." required="" type="password"/><button aria-label="Pokaż lub ukryj potwierdzenie hasła do nazwy" class="absolute right-3 top-3.5 text-zinc-500 dark:text-gray-400" onclick="window.scythedApp.togglePasswordVisibility('name-password-confirm')" type="button"><i class="fas fa-eye"></i></button></div>
+<p aria-live="polite" class="hidden mt-1.5 px-1 text-[10px] font-semibold text-left" id="name-password-confirm-status"></p>
+</div>
+<p class="hidden text-[10px] font-semibold" id="name-password-status"></p>
+<div class="pt-2 flex gap-3">
+<button class="flex-1 py-3 bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-900 text-zinc-700 dark:text-gray-300 font-bold rounded-xl border border-zinc-300 dark:border-zinc-800 text-xs transition" onclick="window.scythedApp.closeModal('modal-change-name-password')" type="button">ANULUJ</button>
+<button class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect" onclick="window.scythedApp.changeNamePassword()" type="button">ZAPISZ HASŁO</button>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" id="modal-entry">
+<div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-lg w-full p-6 space-y-4 glow-effect max-h-[90vh] overflow-y-auto backdrop-blur-md shadow-2xl">
+<div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
+<h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white" id="modal-entry-title">DODAJ NOWE KONTO</h3>
+<button class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.closeModal('modal-entry')"><i class="fas fa-times"></i></button>
+</div>
+<form autocomplete="off" class="space-y-4" id="form-entry" onsubmit="window.scythedApp.handleSaveEntry(event)">
+<input autocomplete="off" autocorrect="off" id="entry-id" spellcheck="false" type="hidden"/>
+<div>
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Platforma / Serwis</label>
+<select class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" id="entry-platform" onchange="window.scythedApp.updateCustomPlatformFieldVisibility()">
+</select>
+</div>
+<div class="hidden" id="entry-custom-platform-container">
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Nazwa aplikacji</label>
+<input autocomplete="off" autocorrect="off" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" id="entry-custom-platform" maxlength="80" placeholder="Wpisz własną nazwę aplikacji" spellcheck="false" type="text"/>
+<p class="text-[10px] text-zinc-500 dark:text-gray-500 mt-1">Ta nazwa jest używana tylko dla tej pozycji. Logo: blank.png.</p>
+</div>
+<div>
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">LOGIN</label>
+<input autocomplete="off" autocorrect="off" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" id="entry-account" placeholder="user@example.com lub nick" required="" spellcheck="false" type="text"/>
+</div>
+<div>
+<div class="flex justify-between items-center mb-1">
+<label class="text-xs font-mono uppercase text-zinc-600 dark:text-gray-400">Hasło</label>
+<button class="text-xs text-brand-red hover:underline" onclick="window.scythedApp.generateAndSetPassword()" type="button"><i class="fas fa-wand-magic-sparkles mr-1"></i> Generuj Hasło</button>
+</div>
+<div class="relative">
+<input autocomplete="off" autocorrect="off" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm font-mono" id="entry-password" required="" spellcheck="false" type="password"/>
+<button class="absolute right-3 top-2.5 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.togglePasswordVisibility('entry-password')" type="button">
+<i class="fas fa-eye"></i>
+</button>
+</div>
+</div>
+<div>
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Krótka Notatka / Opis</label>
+<textarea class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" id="entry-description" maxlength="100" oninput="window.scythedApp.updateEntryLimitCounters()" placeholder="np. Konto główne..." rows="2"></textarea>
+<p aria-live="polite" class="text-[10px] text-zinc-500 mt-1 text-right" id="entry-description-counter">0/100 znaków</p>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<div>
+<label class="block text-xs font-mono uppercase text-zinc-600 dark:text-gray-400 mb-1">Tagi</label>
+<input aria-describedby="entry-tags-help entry-tags-counter" autocomplete="off" autocorrect="off" class="w-full bg-zinc-100 dark:bg-black/80 border border-zinc-300 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-900 dark:text-white focus:border-brand-red focus:outline-none text-xs md:text-sm" id="entry-tags" oninput="window.scythedApp.updateEntryLimitCounters()" placeholder="#przykładowy tag, #tag" spellcheck="false" type="text"/>
+<p class="text-[10px] text-zinc-500 mt-1" id="entry-tags-help">Maksymalnie 3 tagi na platformę, do 16 znaków każdy (łącznie ze znakiem #). Oddzielaj przecinkami; brakujący # zostanie dodany automatycznie.</p>
+<p aria-live="polite" class="text-[10px] text-zinc-500 mt-1 text-right" id="entry-tags-counter">0/3 tagi · długość tagów: -</p>
+<p class="hidden text-[10px] text-red-500 mt-1" id="entry-tags-error" role="alert"></p>
+</div>
+</div>
+<div class="flex items-center gap-5 pt-1">
+<label class="inline-flex items-center gap-2 text-xs font-semibold cursor-pointer">
+<input autocomplete="off" autocorrect="off" class="accent-brand-red" id="entry-favorite" spellcheck="false" type="checkbox"/> <span>Ulubione</span>
+</label>
+<label class="inline-flex items-center gap-2 text-xs font-semibold cursor-pointer">
+<input autocomplete="off" autocorrect="off" class="accent-brand-red" id="entry-pinned" spellcheck="false" type="checkbox"/> <span>Przypnij na górze</span>
+</label>
+</div>
+<div class="pt-2 flex gap-3">
+<button class="flex-1 py-3 bg-zinc-200 dark:bg-zinc-900 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-gray-300 font-bold rounded-lg text-xs transition" onclick="window.scythedApp.closeModal('modal-entry')" type="button">ANULUJ</button>
+<button class="flex-1 py-3 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-lg text-xs transition glow-effect" type="submit">ZAPISZ</button>
+</div>
+</form>
+</div>
+</div>
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[80] hidden flex items-center justify-center p-4" id="modal-password-history">
+<div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-lg w-full p-5 space-y-4 glow-effect max-h-[88vh] overflow-y-auto">
+<div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3">
+<h3 class="font-orbitron font-bold text-base text-zinc-900 dark:text-white">HISTORIA HASEŁ</h3>
+<button class="text-zinc-500" onclick="window.scythedApp.closeModal('modal-password-history')"><i class="fas fa-times"></i></button>
+</div>
+<div class="space-y-2" id="password-history-list"></div>
+</div>
+</div>
+<script>
         (function() {
             'use strict';
 
@@ -6922,37 +6829,35 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 
         })();
     </script>
-
-    <div id="scythed-admin-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm p-3 md:p-6 flex items-center justify-center">
-      <section class="w-full max-w-6xl max-h-[92vh] mx-auto bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 rounded-2xl shadow-2xl overflow-y-auto">
-        <header class="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3"><div><h2 class="font-orbitron font-extrabold text-lg text-zinc-900 dark:text-white"><i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL SCYTHED</h2><p class="text-xs text-zinc-500 mt-1">Zarządzanie nazwami / kontami Scythed</p></div><button onclick="window.scythedApp.closeAdminPanel()" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Zamknij panel"><i class="fas fa-times text-lg"></i></button></header>
-        <div id="admin-login-view" class="p-4 md:p-6 max-w-lg mx-auto space-y-4"><p class="text-sm text-zinc-600 dark:text-zinc-300">Panel wymaga aktywnej sesji konta SCYTHED uwierzytelnionego hasłem zapisanym w Cloudflare D1. Otwórz panel z Ustawień ogólnych i potwierdź hasłem konta SCYTHED.</p></div>
-        <div id="admin-content-view" class="hidden p-4 md:p-6 space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-3"><p id="admin-session-label" class="text-sm text-brand-red">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button onclick="window.scythedApp.adminToggleLogs()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-clock mr-1.5" aria-hidden="true"></i>LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-rotate mr-1.5" aria-hidden="true"></i>ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-right-from-bracket mr-1.5" aria-hidden="true"></i>WYLOGUJ</button></div></div>
-          <section id="admin-logs-section" class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold text-sm">DZIENNIK ZMIAN</h3><div class="flex gap-2"><button id="admin-clear-logs-button" onclick="window.scythedApp.adminClearLogs()" class="hidden text-xs px-2 py-1 rounded border border-brand-red/40 text-brand-red"><i class="fas fa-trash-can" aria-hidden="true"></i><span>WYCZYŚĆ LOGI</span></button><button onclick="document.getElementById('admin-logs-section').classList.add('hidden')" class="scythed-logs-close-button"><i class="fas fa-xmark" aria-hidden="true"></i><span>ZAMKNIJ</span></button></div></div><div id="admin-logs-list" class="space-y-2 text-xs"><p class="text-zinc-500">Ładowanie logów…</p></div><div id="admin-logs-pagination" class="flex flex-wrap items-center justify-center gap-1 pt-2"></div></section>
-          <section class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3">
-            <div><h3 class="font-bold text-sm"><i class="fas fa-user-plus text-brand-red mr-2"></i>DODAJ NOWĄ NAZWĘ / KONTO</h3></div>
-            <form id="admin-create-user-form" autocomplete="off" onsubmit="window.scythedApp.adminCreateUser(event)" class="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <input id="admin-create-username" name="scythed-new-username" type="text" required minlength="1" maxlength="16" pattern="[A-Za-z0-9_. ]+" placeholder="Nowa nazwa / login" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="off" autocapitalize="off" spellcheck="false">
-              <div class="flex flex-col gap-1.5"><div class="relative"><input id="admin-create-password" name="scythed-new-password" type="text" required minlength="12" maxlength="1024" placeholder="Hasło (min. 12 znaków)" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="new-password" autocapitalize="off" spellcheck="false"></div><div class="flex items-center justify-between gap-2"><span class="text-[10px] text-zinc-500">Hasło do nowej zweryfikowanej nazwy</span><button type="button" onclick="window.scythedApp.generateNamePassword12()" class="scythed-logs-close-button scythed-admin-utility-button whitespace-nowrap" title="Wygeneruj losowe hasło o długości 12 znaków" data-no-click-sound><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span>GENERUJ 12 ZNAKÓW</span></button></div></div>
-              <button type="submit" class="md:col-span-2 rounded-lg bg-brand-red hover:bg-brand-hoverRed text-white p-2.5 text-xs font-bold transition"><i class="fas fa-plus mr-2"></i>UTWÓRZ KONTO</button>
-            </form>
-          </section>
-          <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
-          <div class="space-y-2"><div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none" aria-hidden="true"></i><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj..." class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent py-2 pl-9 pr-3 text-sm" aria-label="Szukaj zabezpieczonych nazw"></div><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
-          <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="moderator">Moderator</option><option value="zasluzony">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option><option value="3">Poziom 3</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
-          <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button type="button" onclick="window.scythedApp.closeAdminPanel()" class="admin-bottom-close w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect">ZAMKNIJ PANEL SCYTHED</button></div>
-        </div>
-      </section>
-    </div>
-
-<style id="scythed-v20-size-buttons-and-range-fix">
+<div class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm p-3 md:p-6 flex items-center justify-center" id="scythed-admin-modal">
+<section class="w-full max-w-6xl max-h-[92vh] mx-auto bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 rounded-2xl shadow-2xl overflow-y-auto">
+<header class="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3"><div><h2 class="font-orbitron font-extrabold text-lg text-zinc-900 dark:text-white"><i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL SCYTHED</h2><p class="text-xs text-zinc-500 mt-1">Zarządzanie nazwami / kontami Scythed</p></div><button aria-label="Zamknij panel" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" onclick="window.scythedApp.closeAdminPanel()"><i class="fas fa-times text-lg"></i></button></header>
+<div class="p-4 md:p-6 max-w-lg mx-auto space-y-4" id="admin-login-view"><p class="text-sm text-zinc-600 dark:text-zinc-300">Panel wymaga aktywnej sesji konta SCYTHED uwierzytelnionego hasłem zapisanym w Cloudflare D1. Otwórz panel z Ustawień ogólnych i potwierdź hasłem konta SCYTHED.</p></div>
+<div class="hidden p-4 md:p-6 space-y-6" id="admin-content-view">
+<div class="flex flex-wrap items-center justify-between gap-3"><p class="text-sm text-brand-red" id="admin-session-label">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold" onclick="window.scythedApp.adminToggleLogs()"><i aria-hidden="true" class="fas fa-clock mr-1.5"></i>LOGI</button><button class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold" onclick="window.scythedApp.adminRefreshUsers()"><i aria-hidden="true" class="fas fa-rotate mr-1.5"></i>ODŚWIEŻ</button><button class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold" onclick="window.scythedApp.adminLogout()"><i aria-hidden="true" class="fas fa-right-from-bracket mr-1.5"></i>WYLOGUJ</button></div></div>
+<section class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-2" id="admin-logs-section"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold text-sm">DZIENNIK ZMIAN</h3><div class="flex gap-2"><button class="hidden text-xs px-2 py-1 rounded border border-brand-red/40 text-brand-red" id="admin-clear-logs-button" onclick="window.scythedApp.adminClearLogs()"><i aria-hidden="true" class="fas fa-trash-can"></i><span>WYCZYŚĆ LOGI</span></button><button class="scythed-logs-close-button" onclick="document.getElementById('admin-logs-section').classList.add('hidden')"><i aria-hidden="true" class="fas fa-xmark"></i><span>ZAMKNIJ</span></button></div></div><div class="space-y-2 text-xs" id="admin-logs-list"><p class="text-zinc-500">Ładowanie logów…</p></div><div class="flex flex-wrap items-center justify-center gap-1 pt-2" id="admin-logs-pagination"></div></section>
+<section class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3">
+<div><h3 class="font-bold text-sm"><i class="fas fa-user-plus text-brand-red mr-2"></i>DODAJ NOWĄ NAZWĘ / KONTO</h3></div>
+<form autocomplete="off" class="grid grid-cols-1 md:grid-cols-2 gap-2" id="admin-create-user-form" onsubmit="window.scythedApp.adminCreateUser(event)">
+<input autocapitalize="off" autocomplete="off" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" id="admin-create-username" maxlength="16" minlength="1" name="scythed-new-username" pattern="[A-Za-z0-9_. ]+" placeholder="Nowa nazwa / login" required="" spellcheck="false" type="text"/>
+<div class="flex flex-col gap-1.5"><div class="relative"><input autocapitalize="off" autocomplete="new-password" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" id="admin-create-password" maxlength="1024" minlength="12" name="scythed-new-password" placeholder="Hasło (min. 12 znaków)" required="" spellcheck="false" type="text"/></div><div class="flex items-center justify-between gap-2"><span class="text-[10px] text-zinc-500">Hasło do nowej zweryfikowanej nazwy</span><button class="scythed-logs-close-button scythed-admin-utility-button whitespace-nowrap" data-no-click-sound="" onclick="window.scythedApp.generateNamePassword12()" title="Wygeneruj losowe hasło o długości 12 znaków" type="button"><i aria-hidden="true" class="fas fa-wand-magic-sparkles"></i><span>GENERUJ 12 ZNAKÓW</span></button></div></div>
+<button class="md:col-span-2 rounded-lg bg-brand-red hover:bg-brand-hoverRed text-white p-2.5 text-xs font-bold transition" type="submit"><i class="fas fa-plus mr-2"></i>UTWÓRZ KONTO</button>
+</form>
+</section>
+<div class="hidden text-sm rounded-lg p-3" id="admin-action-message"></div>
+<div class="space-y-2"><div class="relative"><i aria-hidden="true" class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none"></i><input aria-label="Szukaj zabezpieczonych nazw" autocomplete="off" autocorrect="off" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent py-2 pl-9 pr-3 text-sm" id="admin-protected-name-search" name="scythed-admin-filter" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj..." spellcheck="false" type="search"/></div><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td class="p-4 text-center text-zinc-500" colspan="4">Ładowanie…</td></tr></tbody></table></div></div>
+<div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" class="grid grid-cols-1 md:grid-cols-4 gap-2" onsubmit="window.scythedApp.adminAssignBadge(event)"><input autocomplete="off" autocorrect="off" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" id="admin-badge-username" name="scythed-badge-target" placeholder="Nazwa konta" required="" spellcheck="false"/><select class="admin-badge-select rounded-lg border p-2 text-sm" id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="moderator">Moderator</option><option value="zasluzony">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select aria-label="Poziom odznaki" class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" disabled="" id="admin-badge-level"><option value="1">Poziom 1</option><option value="2">Poziom 2</option><option value="3">Poziom 3</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
+<div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button class="admin-bottom-close w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect" onclick="window.scythedApp.closeAdminPanel()" type="button">ZAMKNIJ PANEL SCYTHED</button></div>
+</div>
+</section>
+</div>
+<style>
 input[type="range"]{touch-action:none;pointer-events:auto;user-select:none;-webkit-user-select:none;cursor:pointer}
 input[type="range"]::-webkit-slider-thumb{cursor:grab}
 input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 
 </style>
-<script id="scythed-v20-range-interaction-fix">
+<script>
 (function(){
 
   document.addEventListener('pointerdown', function(e){
@@ -6972,8 +6877,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
   });
 })();
 </script>
-
-<style id="scythed-final-v24-admin-accent-dark">
+<style>
 
 #scythed-admin-modal .admin-primary-action,
 #scythed-admin-modal button[onclick*="adminToggleLogs"],
@@ -6991,7 +6895,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
   border-color: var(--brand-hoverRed, var(--brand-hover-red, var(--brand-red, #ff0033))) !important;
 }
 </style>
-<script id="scythed-final-v24-auth-button-sounds-only">
+<script>
 (function () {
 
   function classifyAuthInteraction(event) {
@@ -7016,8 +6920,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
   });
 })();
 </script>
-
-<style id="scythed-final-v25-accent-and-slider-fix">
+<style>
 
 #scythed-admin-modal .admin-bottom-close {
   appearance: none !important; -webkit-appearance: none !important;
@@ -7055,8 +6958,8 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 }
 
 #modal-settings #header-animation-speed { min-width: 0; touch-action: pan-y; }
-</style>
-<style id="scythed-v63-contrast-and-accent-consistency">
+
+
 
 #modal-settings #general-admin-open-panel-wrap > span {
   color: var(--brand-red, #ff0033) !important;
@@ -7091,7 +6994,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
   forced-color-adjust: auto;
 }
 </style>
-<script id="scythed-v63-dynamic-contrast">
+<script>
 (function () {
   function parseColor(value) {
     if (!value) return null;
@@ -7137,8 +7040,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
   document.addEventListener('input', () => requestAnimationFrame(sync), true);
 })();
 </script>
-
-<style id="scythed-final-v22-admin-and-auth-fixes">
+<style>
 
 #scythed-admin-modal .admin-primary-action,
 #scythed-admin-modal #admin-create-user-form button[type="submit"],
@@ -7184,7 +7086,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 #modal-settings #ui-scale-slider option { max-width: 100%; }
 #modal-settings #ui-scale-slider { color: inherit; }
 </style>
-<script id="scythed-final-v22-auth-logo-silencer">
+<script>
 (function () {
 
   function isAuthLogoFrame(event) {
@@ -7208,8 +7110,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
   });
 })();
 </script>
-
-<style id="scythed-final-v23-requested-tweaks">
+<style>
 
 #scythed-admin-modal .admin-bottom-close {
   background-color: var(--brand-red, #ff0033) !important;
@@ -7222,9 +7123,8 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
   background-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
   border-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
 }
-</style>
 
-<style id="scythed-v64-admin-badge-palette-lock">
+
 
 #scythed-admin-modal .admin-list-badge.admin-list-owner,
 #scythed-admin-modal .admin-list-badge.admin-list-owner:hover { background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)) !important; border-color:rgba(250,204,21,.9) !important; color:#facc15 !important; }
@@ -7248,9 +7148,8 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 #scythed-admin-modal .admin-admin-status { color:#ef4444 !important; border-color:#ef4444 !important; background:rgba(239,68,68,.12) !important; }
 #scythed-admin-modal .admin-moderator-status { color:#60a5fa !important; border-color:#3b82f6 !important; background:rgba(59,130,246,.12) !important; }
 #scythed-admin-modal .admin-verified-status { color:#60a5fa !important; border-color:#3b82f6 !important; background:rgba(59,130,246,.12) !important; }
-</style>
 
-<style id="scythed-admin-badges-accent-fix">
+
 
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge:hover,
@@ -7272,7 +7171,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
   -webkit-text-fill-color: var(--brand-red, var(--primary-color, #e11d48)) !important;
 }
 </style>
-<script id="scythed-admin-badges-accent-fix-script">
+<script>
 (() => {
   const root = document.documentElement;
   function syncAdminBadgeAccent() {
@@ -7297,8 +7196,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
   document.addEventListener('click', () => requestAnimationFrame(syncAdminBadgeAccent), true);
 })();
 </script>
-
-<style id="scythed-final-role-button-logo-fix">
+<style>
 
 #scythed-admin-modal .admin-owner-status,
 #scythed-admin-modal .admin-list-owner,
@@ -7386,9 +7284,8 @@ form button[type="submit"].bg-brand-red,
 }
 button.bg-brand-red > *, button[class~="bg-brand-red"] > *,
 form button[type="submit"].bg-brand-red > * { color:inherit !important; }
-</style>
 
-<style id="scythed-light-theme-readability-v64">
+
 
 html:not(.dark) #modal-settings .text-brand-red,
 html:not(.dark) #modal-settings h4,
@@ -7452,7 +7349,7 @@ html:not(.dark) #modal-settings [class*="text-gray-500"] { color:#4b5563 !import
 html.dark #modal-settings .bg-zinc-50,
 html.dark #modal-settings .bg-zinc-100 { background-color:rgba(0,0,0,.55); }
 </style>
-<script id="scythed-light-theme-readability-sync-v64">
+<script>
 (function(){
   const root=document.documentElement;
   function refresh(){
@@ -7476,8 +7373,7 @@ html.dark #modal-settings .bg-zinc-100 { background-color:rgba(0,0,0,.55); }
   document.addEventListener('DOMContentLoaded',refresh);
 })();
 </script>
-
-<style id="scythed-v65-theme-and-badge-restoration">
+<style>
 
 html.dark #modal-settings .bg-white:not(.dark\:bg-brand-card),
 html.dark #modal-settings .bg-zinc-50,
@@ -7533,9 +7429,8 @@ html.dark #modal-settings .bg-zinc-100 {
   #scythed-admin-modal .admin-list-badge.admin-list-owner,
   #scythed-admin-modal .admin-owner-status { animation:none !important; }
 }
-</style>
 
-<style id="scythed-final-visual-fixes-v66">
+
 
 #scythed-admin-modal .admin-owner-status {
   color:#facc15 !important; -webkit-text-fill-color:#facc15 !important;
@@ -7625,9 +7520,8 @@ html:not(.dark) #modal-settings #bg-overlay-hex, html:not(.dark) #modal-settings
   #scythed-admin-modal .admin-list-badge, #scythed-admin-modal .admin-owner-status,
   #scythed-admin-modal .admin-admin-status, #scythed-admin-modal .admin-moderator-status { animation:none !important; }
 }
-</style>
 
-<style id="scythed-final-visual-fixes-v67">
+
 
 #scythed-admin-modal #admin-create-user-form button[type="submit"],
 #scythed-admin-modal #global-toggle-emails,
@@ -7719,9 +7613,8 @@ html.dark #modal-settings #app-bg-effects-panel > span { color:#fff !important; 
   #scythed-admin-modal .admin-owner-status,#scythed-admin-modal .admin-admin-status,
   #scythed-admin-modal .admin-moderator-status { animation:none !important; }
 }
-</style>
 
-<style id="scythed-settings-dropdown-dark-fix-v1">
+
 
 #modal-settings #ui-scale-slider,
 #modal-settings #auto-lock-mode,
@@ -7756,9 +7649,8 @@ html.dark #modal-settings #backup-reminder-days:hover {
   background-color: #3f3f46 !important;
   border-color: #71717a !important;
 }
-</style>
 
-<style id="scythed-final-hex-and-dropdown-typography-fix">
+
 
 #modal-settings #brand-hex-input,
 #modal-settings #bg-overlay-hex {
@@ -7808,9 +7700,8 @@ html.dark #modal-settings #backup-reminder-days option {
   background-color: #27272a !important;
   color: #f4f4f5 !important;
 }
-</style>
 
-<style id="scythed-requested-admin-polish">
+
 
 #scythed-admin-modal header > button[aria-label="Zamknij panel"] {
   color: var(--brand-contrast-text, #fff) !important;
@@ -7844,9 +7735,8 @@ html.dark #modal-settings #backup-reminder-days option {
   #scythed-admin-modal .admin-list-owner,
   #scythed-admin-modal .admin-owner-status { animation:none !important; }
 }
-</style>
 
-<style id="scythed-final-close-x-and-badge-light-fix">
+
 #scythed-admin-modal header > button[aria-label="Zamknij panel"],
 #scythed-admin-modal header > button[aria-label="Zamknij panel"]:hover,
 #scythed-admin-modal header > button[aria-label="Zamknij panel"]:focus {
@@ -7865,9 +7755,8 @@ html:not(.dark) #scythed-admin-modal .admin-owner-status,
 html:not(.dark) #scythed-admin-modal .admin-admin-status,
 html:not(.dark) #scythed-admin-modal .admin-moderator-status,
 html:not(.dark) #scythed-admin-modal .admin-verified-status { outline: none !important; }
-</style>
 
-<style id="scythed-admin-x-exact-fix">
+
 
 #scythed-admin-modal header > button[aria-label="Zamknij panel"],
 #scythed-admin-modal header > button[aria-label="Zamknij panel"]:hover,
@@ -7899,9 +7788,8 @@ html:not(.dark) #scythed-admin-modal header > button[aria-label="Zamknij panel"]
 html:not(.dark) #scythed-admin-modal header > button[aria-label="Zamknij panel"]:hover i {
   color: #71717a !important; -webkit-text-fill-color: #71717a !important;
 }
-</style>
 
-<style id="scythed-admin-x-hover-and-admin-name-tag">
+
 
 #scythed-admin-modal header > button { color:#a1a1aa !important; -webkit-text-fill-color:#a1a1aa !important; cursor:pointer; transition:color .16s ease, opacity .16s ease !important; }
 #scythed-admin-modal header > button svg, #scythed-admin-modal header > button svg *, #scythed-admin-modal header > button i { color:#a1a1aa !important; stroke:#a1a1aa !important; transition:color .16s ease, stroke .16s ease !important; }
@@ -7914,8 +7802,7 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 .admin-name-admin-tag { display:inline-flex; align-items:center; padding:.16rem .48rem; border-radius:.42rem; border:1px solid rgba(248,113,113,.8); color:#f87171; background:linear-gradient(120deg,rgba(69,10,10,.32),rgba(185,28,28,.56),rgba(127,29,29,.28),rgba(220,38,38,.62)); background-size:220% 220%; animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite; line-height:1.35; }
 .admin-name-owner-tag { display:inline-flex; align-items:center; padding:.16rem .48rem; border-radius:.42rem; border:1px solid rgba(250,204,21,.9); color:#facc15; background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)); background-size:220% 220%; animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite; line-height:1.35; }
 </style>
-
-<script id="scythed-admin-button-click-sounds">
+<script>
 (function () {
 
   let ctx;
@@ -7943,8 +7830,7 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
   }, true);
 })();
 </script>
-
-<style id="scythed-admin-solid-red-status">
+<style>
 
 #scythed-admin-modal .admin-admin-status {
   background: #dc2626 !important;
@@ -7955,9 +7841,8 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 #scythed-admin-modal .admin-admin-status::after {
   background-image: none !important;
 }
-</style>
 
-<style id="scythed-admin-lighter-border-v9">
+
 #profile-badges-container #badge-admin,
 #profile-badges-container #badge-admin:hover,
 #profile-badges-container #badge-admin.fixed-owner-badge,
@@ -7968,9 +7853,8 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
   border-color: #fca5a5 !important;
   outline-color: #fca5a5 !important;
 }
-</style>
 
-<style id="scythed-v15-requested-fixes">
+
 
 #modal-settings .fa-check,
 #modal-settings .fa-check-circle,
@@ -7986,7 +7870,7 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 }
 #modal-change-name-password button[onclick*="generateNamePassword12"] { font-family:inherit !important; }
 </style>
-<script id="scythed-v15-live-accent-sync">
+<script>
 (function(){
   const root=document.documentElement;
   let queued=false;
@@ -8014,8 +7898,7 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
   document.addEventListener('DOMContentLoaded',sync);
 })();
 </script>
-
-<style id="scythed-verified-icon-match-moderator-hammer">
+<style>
 
 #scythed-admin-modal .admin-verified-status > i,
 #scythed-admin-modal .admin-verified-status > i:hover,
@@ -8027,9 +7910,8 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
   filter: none !important;
   animation: none !important;
 }
-</style>
 
-<style id="scythed-overlay-frame-and-neutral-action-fix">
+
 
 #modal-settings .flex.items-center.gap-2:has(>#bg-overlay-color) {
   box-sizing: border-box;
@@ -8093,9 +7975,8 @@ html.dark #scythed-admin-modal .scythed-logs-close-button:hover:not(:disabled) {
   border-color: #52525b !important;
   color: #fff !important;
 }
-</style>
 
-<style id="scythed-requested-control-colors-fix">
+
 
 #modal-settings #bg-overlay-color {
   width: 1.25rem !important;
@@ -8149,9 +8030,8 @@ html.dark #general-admin-open-panel-wrap button.admin-access-action:hover:not(:d
   border-color: var(--brand-red, #ff0033) !important;
   color: var(--brand-contrast-text, #fff) !important;
 }
-</style>
 
-<style id="scythed-final-panel-and-overlay-fix">
+
 
 html.dark #modal-settings #general-admin-open-panel-wrap,
 html.dark #modal-settings #security-settings-category .grid.grid-cols-2 > div.p-3.rounded-xl,
@@ -8196,9 +8076,8 @@ html:not(.dark) #modal-settings #app-bg-effects-panel .flex.items-center.gap-1:h
   background: #fff !important;
   border-color: #d4d4d8 !important;
 }
-</style>
 
-<style id="scythed-v36-clarified-settings-fixes">
+
 
 html.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
 body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
@@ -8214,9 +8093,8 @@ body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-act
 
 #modal-settings #app-bg-effects-panel[hidden],
 #modal-settings #app-bg-effects-panel.hidden { display:none!important; }
-</style>
 
-<style id="scythed-v38-light-toggle-icon-colors">
+
 
 html:not(.dark) body #sound-toggle-btn #sound-icon.text-brand-red,
 html:not(.dark) body #notifications-toggle-btn #notifications-icon.text-brand-red {
@@ -8230,9 +8108,8 @@ html:not(.dark) body #notifications-toggle-btn #notifications-icon.text-zinc-400
   color: #a1a1aa !important;
   -webkit-text-fill-color: #a1a1aa !important;
 }
-</style>
 
-<style id="scythed-v39-header-hide-icon-accent">
+
 
 html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
@@ -8240,11 +8117,9 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   opacity: 1 !important;
 }
 </style>
-
 </body>
 </html>
-
-<style id="scythed-dropdown-font-match-image-button-and-overlay-hex-input">
+<style>
 
 #modal-settings #auto-lock-mode,
 #modal-settings #backup-reminder-days {
@@ -8271,8 +8146,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   text-align: center !important; text-transform: uppercase !important;
 }
 </style>
-
-<style id="scythed-fix-size-dropdown-font-match-reminder">
+<style>
 
 #modal-settings #ui-scale-slider,
 #modal-settings #ui-scale-slider option {
@@ -8284,8 +8158,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   line-height: 1.25rem !important;
 }
 </style>
-
-<style id="scythed-admin-badge-hover-match-profile">
+<style>
 
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge:hover,
@@ -8309,8 +8182,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   transition: none !important;
 }
 </style>
-
-<style id="scythed-admin-badge-hover-and-bughunter2-fix">
+<style>
 
 #scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2),
 #scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2):hover {
@@ -8336,8 +8208,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   -webkit-text-fill-color: #3b82f6 !important;
 }
 </style>
-
-<style id="scythed-admin-badges-profile-animation-final">
+<style>
 
 #scythed-admin-modal .admin-list-badge {
   position: relative !important;
@@ -8373,8 +8244,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
 #scythed-admin-modal .admin-list-badge.admin-list-bug > i { color: #4ade80 !important; -webkit-text-fill-color: #4ade80 !important; }
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2 > i { color: #3b82f6 !important; -webkit-text-fill-color: #3b82f6 !important; }
 </style>
-
-<style id="scythed-password-button-icon-accent-sync">
+<style>
 
 html body #modal-settings button.settings-password-action > i,
 html body #modal-settings button.settings-password-action:hover:not(:disabled) > i,
@@ -8385,8 +8255,7 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
   opacity: 1 !important;
 }
 </style>
-
-<script id="scythed-password-icons-readable-accent-v2">
+<script>
 (function(){
   const root=document.documentElement;
   function parseHex(v){
@@ -8428,7 +8297,7 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
   document.addEventListener('DOMContentLoaded',refresh);
 })();
 </script>
-<style id="scythed-password-icons-readable-accent-v2-css">
+<style>
 #modal-settings button.settings-password-action > i,
 #modal-settings button.settings-password-action:hover > i,
 #modal-settings button.settings-password-action:focus-visible > i {
@@ -8437,8 +8306,7 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
  opacity:1 !important;
 }
 </style>
-
-<style id="scythed-panel-icons-readable-accent-fix">
+<style>
 
 #scythed-admin-modal button i,
 #scythed-admin-modal a i,
@@ -8450,7 +8318,7 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
   color: var(--brand-readable-accent, var(--brand-red, #ff0033));
 }
 </style>
-<script id="scythed-panel-icons-readable-accent-sync">
+<script>
 (function(){
   const root=document.documentElement;
   function syncPanelIcons(){
@@ -8475,8 +8343,7 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
   document.addEventListener('DOMContentLoaded',syncPanelIcons);
 })();
 </script>
-
-<style id="scythed-admin-fixed-neutral-buttons-corrected">
+<style>
 
 #scythed-admin-modal button:not(header > button):not(.admin-list-badge) {
   background-color: #e4e4e7 !important;
@@ -8537,8 +8404,7 @@ html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge
   -webkit-text-fill-color: #ef4444 !important;
 }
 </style>
-
-<style id="scythed-admin-neutral-button-colors-final">
+<style>
 
 #scythed-admin-modal button.admin-primary-action,
 #scythed-admin-modal button.admin-bottom-close,
@@ -8624,8 +8490,7 @@ html.dark #scythed-admin-modal #admin-login-view button:not(.admin-list-badge):n
   -webkit-text-fill-color: #ef4444 !important;
 }
 </style>
-
-<style id="scythed-admin-close-x-fixed-gray-final">
+<style>
 
 #scythed-admin-modal header > button,
 #scythed-admin-modal header > button:hover,
@@ -8662,8 +8527,7 @@ html:not(.dark) #scythed-admin-modal header > button i {
   -webkit-text-fill-color: #71717a !important;
 }
 </style>
-
-<style id="scythed-admin-final-user-request-corrections">
+<style>
 
 #scythed-admin-modal .admin-name-admin-tag,
 #scythed-admin-modal .admin-name-owner-tag { display: contents !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; animation: none !important; box-shadow: none !important; color: inherit !important; }
@@ -8697,8 +8561,7 @@ html:not(.dark) #scythed-admin-modal header > button i {
 #scythed-admin-modal header > button:focus,
 #scythed-admin-modal header > button:active { background: transparent !important; background-color: transparent !important; }
 </style>
-
-<style id="scythed-admin-close-x-match-settings-and-search-final">
+<style>
 
 #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"],
 #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"] i { color: #71717a !important; -webkit-text-fill-color: #71717a !important; transition: color .16s ease !important; background: transparent !important; background-color: transparent !important; border: 0 !important; box-shadow: none !important; }
@@ -8709,8 +8572,7 @@ html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij p
 html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover,
 html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover i { color: #e4e4e7 !important; -webkit-text-fill-color: #e4e4e7 !important; }
 </style>
-
-<style id="scythed-admin-status-animation-and-logs-close">
+<style>
 
 #scythed-admin-modal .admin-admin-status {
   background: linear-gradient(110deg, rgba(69,10,10,.30), rgba(220,38,38,.55), rgba(127,29,29,.30), rgba(248,113,113,.55)) !important;
@@ -8756,8 +8618,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   #scythed-admin-modal .admin-admin-status { animation: none !important; }
 }
 </style>
-
-<style id="badge-unified-theme-and-level3-fixes">
+<style>
 
 #profile-badges-container .profile-badge-tooltip:not(#badge-admin) { background-image:none !important; animation:none !important; box-shadow:none !important; }
 #profile-badges-container .moderator-badge { background:#1e3a5f !important; border-color:#6087be !important; color:#a0bce3 !important; }
@@ -8778,8 +8639,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-list-beta { animation:none !important; background:#713f12 !important; border-color:#eab308 !important; color:#facc15 !important; box-shadow:none !important; }
 #scythed-admin-modal .admin-list-beta::after { content:none !important; animation:none !important; }
 </style>
-
-<style id="scythed-admin-badges-final-fixes">
+<style>
 
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge:hover,
@@ -8845,8 +8705,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   #profile-badges-container .bug-hunter-level-3 { animation:none !important; }
 }
 </style>
-
-<style id="scythed-solid-badge-shine-request">
+<style>
 
 @keyframes scythedSolidBadgeShine {
   0% { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
@@ -8903,8 +8762,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2::after { animation: none !important; }
 }
 </style>
-
-<style id="scythed-final-badge-consistency-fix">
+<style>
 
 @keyframes scythedUnifiedBadgeGlow {
   0%, 100% { box-shadow: 0 0 3px rgba(255,255,255,.10); }
@@ -8999,8 +8857,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3::after { animation:none !important; }
 }
 </style>
-
-<style id="scythed-admin-profile-badge-parity-final">
+<style>
 
 @keyframes scythedBadgeGradientUnified {
   0%,100% { background-position: 0% 50%; }
@@ -9091,25 +8948,8 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   #scythed-admin-modal .admin-list-badge.admin-list-owner::after { animation:none !important; }
 }
 </style>
-<script id="scythed-admin-badge-no-hover-tooltips">
-(() => {
-  const cleanAdminBadges = () => {
-    document.querySelectorAll('#scythed-admin-modal .admin-list-badge').forEach((badge) => {
-      badge.removeAttribute('title');
-      badge.removeAttribute('data-tooltip');
-      badge.removeAttribute('aria-label');
-    });
-  };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cleanAdminBadges, { once: true });
-  else cleanAdminBadges();
-  const modal = document.getElementById('scythed-admin-modal');
-  if (modal && 'MutationObserver' in window) {
-    new MutationObserver(cleanAdminBadges).observe(modal, { childList: true, subtree: true, attributes: true, attributeFilter: ['title','data-tooltip','aria-label'] });
-  }
-})();
-</script>
 
-<style id="scythed-final-admin-owner-parity">
+<style>
 @keyframes scythedBadgeShineFinal {
   0%, 100% { transform: translateX(-155%) skewX(-18deg); opacity: 0; }
   18% { opacity: .68; }
@@ -9239,7 +9079,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   #scythed-admin-modal .admin-list-badge.admin-list-owner::after { animation: none !important; }
 }
 </style>
-<script id="scythed-admin-badges-no-tooltip-final">
+<script>
 (() => {
   const clean = () => document.querySelectorAll('#scythed-admin-modal .admin-list-badge').forEach(el => {
     el.removeAttribute('title');
@@ -9253,8 +9093,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   if (modal && window.MutationObserver) new MutationObserver(clean).observe(modal, {subtree:true, childList:true, attributes:true, attributeFilter:['title','data-tooltip','aria-label','tabindex']});
 })();
 </script>
-
-<style id="scythed-final-shine-outline-fix">
+<style>
 
 #profile-badges-container #badge-admin::after,
 #profile-badges-container #badge-owner::after,
@@ -9311,8 +9150,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   background: transparent !important;
 }
 </style>
-
-<style id="scythed-admin-logo-colored-border">
+<style>
 #profile-badges-container #badge-admin,
 #profile-badges-container #badge-admin:hover,
 #profile-badges-container #badge-admin.fixed-owner-badge,
@@ -9323,8 +9161,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   outline-offset: -2px !important;
 }
 </style>
-
-<style id="scythed-owner-badge-gold-final">
+<style>
 #profile-badges-container #badge-owner,
 #profile-badges-container #badge-owner:hover,
 #profile-badges-container #badge-owner.fixed-owner-badge,
@@ -9350,8 +9187,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   background: linear-gradient(90deg, transparent, rgba(255,248,180,.9), transparent) !important;
 }
 </style>
-
-<style id="scythed-admin-border-beta-light-yellow-final">
+<style>
 #profile-badges-container #badge-admin,
 #profile-badges-container #badge-admin:hover,
 #profile-badges-container #badge-admin.fixed-owner-badge,
@@ -9386,8 +9222,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   animation: none !important;
 }
 </style>
-
-<style id="scythed-admin-panel-badge-colors-v7">
+<style>
 
 #scythed-admin-modal .admin-list-badge.admin-list-admin,
 #scythed-admin-modal .admin-list-badge.admin-list-admin:hover,
@@ -9427,8 +9262,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   animation: none !important;
 }
 </style>
-
-<style id="scythed-beta-tester-matte-refresh">
+<style>
 #profile-badges-container .beta-tester-badge,
 #profile-badges-container .beta-tester-badge:hover,
 #profile-badges-container .beta-tester-badge:focus,
@@ -9472,8 +9306,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   box-shadow: none !important;
 }
 </style>
-
-<style id="scythed-unified-badge-hover-feedback">
+<style>
 
 #profile-badges-container .profile-badge-tooltip,
 #profile-badges-container .profile-badge-tooltip > i,
@@ -9514,8 +9347,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   #scythed-admin-modal .admin-list-badge > svg { transition: none !important; }
 }
 </style>
-
-<style id="scythed-moderator-session-blue-final">
+<style>
 
 #scythed-admin-modal #admin-session-label.scythed-moderator-session,
 #scythed-admin-modal #admin-session-label.scythed-moderator-session #admin-session-countdown,
@@ -9527,8 +9359,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   filter: none !important;
 }
 </style>
-
-<style id="scythed-close-buttons-unified-v14">
+<style>
 
 #scythed-admin-modal header h2 .scythed-logs-title-text { color: inherit !important; -webkit-text-fill-color: currentColor !important; }
 #scythed-admin-modal header h2 .scythed-logs-title-icon { color: var(--brand-readable-accent, var(--brand-red, #60a5fa)) !important; -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #60a5fa)) !important; transition: color .18s ease, -webkit-text-fill-color .18s ease !important; }
@@ -9547,8 +9378,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-bottom-close { font-family:inherit !important; letter-spacing:normal !important; display:inline-flex !important; align-items:center !important; justify-content:center !important; gap:.15rem !important; }
 #scythed-admin-modal .admin-bottom-close > i { display:inline-block !important; color:inherit !important; -webkit-text-fill-color:currentColor !important; }
 </style>
-
-<style id="scythed-v17-requested-final-fixes">
+<style>
 
 #scythed-admin-modal .scythed-logs-close-button,
 #scythed-admin-modal .scythed-admin-utility-button,
@@ -9610,8 +9440,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 #modal-settings h3 { font-size: 14px !important; }
 </style>
-
-<style id="scythed-v18-final-ui-fixes">
+<style>
 
 #scythed-admin-modal .admin-primary-action,
 #scythed-admin-modal .scythed-logs-close-button,
@@ -9658,8 +9487,7 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 #scythed-admin-modal .scythed-admin-utility-button.hidden,
 #scythed-admin-modal #admin-clear-logs-button.hidden { display: none !important; }
 </style>
-
-<style id="scythed-v19-targeted-fixes">
+<style>
 
 #profile-verified-icon,
 #profile-verified-icon:hover,
@@ -9677,8 +9505,7 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 
 #scythed-admin-modal .scythed-logs-close-bottom { display: none !important; }
 </style>
-
-<style id="scythed-v20-password-eye-and-verified-status">
+<style>
 
 #scythed-admin-modal #admin-create-password { padding-right: 2.75rem !important; }
 #scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button {
@@ -9738,8 +9565,7 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
   box-shadow: none !important;
 }
 </style>
-
-<style id="scythed-v22-moderator-and-stable-eye-fixes">
+<style>
 
 #scythed-admin-modal #admin-create-username,
 #scythed-admin-modal #admin-create-password {
@@ -9797,8 +9623,7 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
   animation: none !important;
 }
 </style>
-
-<style id="scythed-v23-eye-like-password-fields-and-checkmark-scope">
+<style>
 
 #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"] ,
 #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"]:hover,
@@ -9818,8 +9643,7 @@ html.dark #scythed-admin-modal #admin-create-password + button[onclick*="toggleP
 #scythed-admin-modal .admin-verified-status:hover > i,
 #scythed-admin-modal .admin-verified-status:focus > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
 </style>
-
-<style id="scythed-v24-requested-polish-fixes">
+<style>
 
 #scythed-admin-modal #admin-create-password { padding-right: .625rem !important; }
 
@@ -9853,8 +9677,7 @@ html.dark #modal-settings #app-bg-effects-panel {
   accent-color: #71717a !important;
 }
 </style>
-
-<style id="scythed-v27-overlay-effects-light-theme-match">
+<style>
 
 html:not(.dark) #modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles,
 html:not(.dark) #modal-settings .font-bold.flex.items-center.gap-1\.5 > i.fa-wand-magic-sparkles {
@@ -9869,8 +9692,7 @@ html.dark #modal-settings #app-bg-effects-panel {
   background-color: #18181b !important;
 }
 </style>
-
-<style id="scythed-v28-overlay-effects-correct-theme-match">
+<style>
 
 html:not(.dark) #modal-settings #app-bg-effects-panel > span {
   color: #111827 !important;
@@ -9895,8 +9717,7 @@ html.dark #modal-settings #app-bg-effects-panel {
   border-color: #27272a !important;
 }
 </style>
-
-<style id="scythed-v29-wand-icon-dynamic-accent">
+<style>
 
 #modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles,
 #modal-settings .font-bold.flex.items-center.gap-1\.5 > i.fa-wand-magic-sparkles {
@@ -9905,7 +9726,7 @@ html.dark #modal-settings #app-bg-effects-panel {
   filter: none !important;
 }
 </style>
-<script id="scythed-v29-wand-icon-live-sync">
+<script>
 (function(){
   const root = document.documentElement;
   function syncOverlayWand(){
@@ -9923,8 +9744,7 @@ html.dark #modal-settings #app-bg-effects-panel {
   document.addEventListener('transitionend', syncOverlayWand, true);
 })();
 </script>
-
-<style id="scythed-v30-overlay-effects-final-match">
+<style>
 
 #modal-settings #app-bg-effects-panel > span {
   font-weight: 400 !important;
@@ -9945,8 +9765,7 @@ body.dark #modal-settings #app-bg-effects-panel,
   border-color: #27272a !important;
 }
 </style>
-
-<style id="scythed-v31-overlay-effects-precise-fix">
+<style>
 
 #modal-settings #app-bg-effects-panel > span {
   font-size: 0.75rem !important;
@@ -9982,8 +9801,7 @@ body.dark #modal-settings #app-bg-effects-panel,
   border-color: #27272a !important;
 }
 </style>
-
-<style id="scythed-v35-exact-panel-surface-and-overlay-visibility">
+<style>
 
 #app-bg-overlay,
 body:not(.has-custom-bg) #app-bg-overlay {
@@ -10033,7 +9851,7 @@ body.dark #general-admin-open-panel-wrap button.admin-access-action:hover,
   color: #fff !important;
 }
 </style>
-<script id="scythed-v35-overlay-state-sync">
+<script>
 (function () {
   function syncOverlayVisibility() {
     const overlay = document.getElementById('app-bg-overlay');
@@ -10057,8 +9875,7 @@ body.dark #general-admin-open-panel-wrap button.admin-access-action:hover,
   window.addEventListener('load', syncOverlayVisibility, { once: true });
 })();
 </script>
-
-<style id="scythed-v37-admin-button-gray-fix">
+<style>
 
 html.dark body #modal-settings #security-settings-category #general-admin-open-panel-wrap button.admin-access-action,
 html.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
@@ -10083,8 +9900,7 @@ body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-act
   color: #ffffff !important;
 }
 </style>
-
-<style id="scythed-v40-unified-toggle-icon-colors">
+<style>
 
 html:not(.dark) body #sound-toggle-btn #sound-icon,
 html:not(.dark) body #notifications-toggle-btn #notifications-icon,
