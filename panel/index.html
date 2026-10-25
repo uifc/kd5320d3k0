@@ -2055,7 +2055,13 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             }
 
             function openAppDialog({type = 'confirm', title = 'Potwierdzenie', message = '', inputValue = '', inputType = 'text', placeholder = '', confirmText = 'POTWIERDŹ', cancelText = 'ANULUJ', icon = 'fa-shield-halved', rememberMe = false} = {}) {
-                if (activeAppDialog) closeAppDialog(null);
+                // Jeśli dwa równoległe wywołania proszą o dokładnie to samo, współdziel jeden dialog.
+                // Zapobiega to podwójnemu oknu weryfikacji nazwy podczas równoległego odświeżania odznak.
+                const dialogSignature = `${type}\u0000${title}\u0000${message}`;
+                if (activeAppDialog) {
+                    if (activeAppDialog.signature === dialogSignature && activeAppDialog.promise) return activeAppDialog.promise;
+                    closeAppDialog(null);
+                }
                 const overlay = document.getElementById('app-dialog-overlay');
                 const titleEl = document.getElementById('app-dialog-title');
                 const messageEl = document.getElementById('app-dialog-message');
@@ -2087,13 +2093,13 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 cancelBtn.classList.remove('hidden');
                 document.body.classList.add('overflow-hidden');
 
-                return new Promise(resolve => {
+                const dialogPromise = new Promise(resolve => {
                     const finish = value => closeAppDialog(value);
                     const onKeyDown = event => {
                         if (event.key === 'Escape') { event.preventDefault(); finish(null); }
                         if (event.key === 'Enter' && type === 'prompt') { event.preventDefault(); finish(rememberMe ? { password: input.value, remember: !!rememberCheckbox?.checked } : input.value); }
                     };
-                    activeAppDialog = {resolve, onKeyDown};
+                    activeAppDialog = {resolve, onKeyDown, signature: dialogSignature, promise: null};
                     okBtn.onclick = () => finish(type === 'prompt' ? (rememberMe ? { password: input.value, remember: !!rememberCheckbox?.checked } : input.value) : true);
                     cancelBtn.onclick = () => finish(null);
                     closeBtn.onclick = () => finish(null);
@@ -2110,6 +2116,8 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     setTimeout(() => inputWrap.classList.contains('hidden') ? okBtn.focus() : input.focus(), 20);
                     playSound?.('click');
                 });
+                if (activeAppDialog && activeAppDialog.signature === dialogSignature) activeAppDialog.promise = dialogPromise;
+                return dialogPromise;
             }
 
             function appPrompt(message, defaultValue = '', options = {}) {
@@ -6544,7 +6552,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     scythedIsOwner = data.isSzymon === true || data.hasOwnerBadge === true;
                     scythedCanSeeAdmin = data.canSeeAdmin === true;
                     scythedCanSeeLogs = data.canSeeLogs === true;
-                    scythedIsModerator = data.hasModeratorBadge === true && !scythedCanSeeAdmin;
+                    scythedIsModerator = !scythedCanSeeAdmin && (scythedCanSeeLogs || data.hasModeratorBadge === true);
                     if (scythedAdminExpiryTimer) clearTimeout(scythedAdminExpiryTimer);
                     if (scythedAdminCountdownInterval) clearInterval(scythedAdminCountdownInterval);
                     scythedAdminExpiresAt = Number(data.expiresAt) * 1000;
@@ -6577,7 +6585,9 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const children = content ? Array.from(content.children) : [];
                 const toolbar = children[0];
                 const logsSection = document.getElementById('admin-logs-section');
-                if (scythedIsModerator) {
+                const moderatorLogsOnly = !scythedCanSeeAdmin && scythedCanSeeLogs;
+                scythedIsModerator = moderatorLogsOnly || (scythedIsModerator && !scythedCanSeeAdmin);
+                if (moderatorLogsOnly || scythedIsModerator) {
                     if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-clock scythed-logs-title-icon mr-2" aria-hidden="true"></i><span class="scythed-logs-title-text">PANEL LOGÓW</span>';
                     const sessionLabel = document.getElementById('admin-session-label');
                     if (sessionLabel) { sessionLabel.classList.remove('text-brand-red'); sessionLabel.classList.add('scythed-moderator-session'); sessionLabel.firstChild.textContent = 'Sesja moderatora - wylogowanie za '; }
@@ -6590,6 +6600,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     if (moderatorLogsCloseLabel) moderatorLogsCloseLabel.textContent = 'ZAMKNIJ';
                     void adminLoadLogs(1);
                 } else {
+                    if (logsSection) logsSection.classList.add('hidden');
                     const adminLogsCloseLabel = document.querySelector('#admin-logs-section .scythed-logs-close-button span');
                     if (adminLogsCloseLabel) adminLogsCloseLabel.textContent = 'ZAMKNIJ';
                     if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-shield-halved text-brand-red mr-2"></i>PANEL ADMINA';
@@ -6920,7 +6931,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
         <div id="admin-login-view" class="p-4 md:p-6 max-w-lg mx-auto space-y-4"><p class="text-sm text-zinc-600 dark:text-zinc-300">Panel wymaga aktywnej sesji konta SCYTHED uwierzytelnionego hasłem zapisanym w Cloudflare D1. Otwórz panel z Ustawień ogólnych i potwierdź hasłem konta SCYTHED.</p></div>
         <div id="admin-content-view" class="hidden p-4 md:p-6 space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-3"><p id="admin-session-label" class="text-sm text-brand-red">Sesja administratora - wylogowanie za <span id="admin-session-countdown">10:00</span>.</p><div class="flex gap-2"><button onclick="window.scythedApp.adminToggleLogs()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-clock mr-1.5" aria-hidden="true"></i>LOGI</button><button onclick="window.scythedApp.adminRefreshUsers()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-rotate mr-1.5" aria-hidden="true"></i>ODŚWIEŻ</button><button onclick="window.scythedApp.adminLogout()" class="admin-primary-action px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-right-from-bracket mr-1.5" aria-hidden="true"></i>WYLOGUJ</button></div></div>
-          <section id="admin-logs-section" class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold text-sm">DZIENNIK ZMIAN</h3><div class="flex gap-2"><button id="admin-clear-logs-button" onclick="window.scythedApp.adminClearLogs()" class="hidden text-xs px-2 py-1 rounded border border-brand-red/40 text-brand-red"><i class="fas fa-trash-can" aria-hidden="true"></i><span>WYCZYŚĆ LOGI</span></button><button onclick="document.getElementById('admin-logs-section').classList.add('hidden')" class="scythed-logs-close-button"><i class="fas fa-xmark" aria-hidden="true"></i><span>ZAMKNIJ</span></button></div></div><div id="admin-logs-list" class="space-y-2 text-xs"><p class="text-zinc-500">Ładowanie logów…</p></div><div id="admin-logs-pagination" class="flex flex-wrap items-center justify-center gap-1 pt-2"></div></section>
+          <section id="admin-logs-section" class="hidden p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold text-sm">DZIENNIK ZMIAN</h3><div class="flex gap-2"><button id="admin-clear-logs-button" onclick="window.scythedApp.adminClearLogs()" class="hidden text-xs px-2 py-1 rounded border border-brand-red/40 text-brand-red"><i class="fas fa-trash-can" aria-hidden="true"></i><span>WYCZYŚĆ LOGI</span></button><button onclick="document.getElementById('admin-logs-section').classList.add('hidden')" class="scythed-logs-close-button"><i class="fas fa-xmark" aria-hidden="true"></i><span>ZAMKNIJ</span></button></div></div><div id="admin-logs-list" class="space-y-2 text-xs"><p class="text-zinc-500">Ładowanie logów…</p></div><div id="admin-logs-pagination" class="flex flex-wrap items-center justify-center gap-1 pt-2"></div><div class="flex justify-center pt-3"><button type="button" onclick="document.getElementById('admin-logs-section').classList.add('hidden')" class="scythed-logs-close-button scythed-logs-close-bottom"><i class="fas fa-xmark" aria-hidden="true"></i><span>ZAMKNIJ</span></button></div></section>
           <section class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3">
             <div><h3 class="font-bold text-sm"><i class="fas fa-user-plus text-brand-red mr-2"></i>DODAJ NOWĄ NAZWĘ / KONTO</h3></div>
             <form id="admin-create-user-form" autocomplete="off" onsubmit="window.scythedApp.adminCreateUser(event)" class="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -9446,4 +9457,53 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 #modal-settings h3 { font-size: 14px !important; }
+</style>
+
+
+<style id="scythed-v18-final-ui-fixes">
+/* Spójna typografia: ZAMKNIJ, WYCZYŚĆ LOGI, generator i przyciski paska jak LOGI/WYLOGUJ. */
+#scythed-admin-modal .admin-primary-action,
+#scythed-admin-modal .scythed-logs-close-button,
+#scythed-admin-modal .scythed-admin-utility-button,
+#scythed-admin-modal #admin-clear-logs-button,
+#scythed-admin-modal .admin-bottom-close {
+  font-family: inherit !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.25rem !important;
+  text-transform: uppercase !important;
+  font-style: normal !important;
+}
+#scythed-admin-modal .scythed-logs-close-button,
+#scythed-admin-modal .scythed-admin-utility-button,
+#scythed-admin-modal #admin-clear-logs-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .35rem !important;
+  box-sizing: border-box !important;
+  padding: .35rem .7rem !important;
+  border: 1px solid rgba(239,68,68,.35) !important;
+  border-radius: .55rem !important;
+  background: rgba(239,68,68,.08) !important;
+  color: var(--brand-readable-accent, #f87171) !important;
+  box-shadow: none !important;
+}
+#scythed-admin-modal .scythed-logs-close-button:hover,
+#scythed-admin-modal .scythed-admin-utility-button:hover,
+#scythed-admin-modal #admin-clear-logs-button:hover {
+  background: rgba(239,68,68,.14) !important;
+  border-color: rgba(248,113,113,.7) !important;
+  color: var(--brand-readable-accent, #fca5a5) !important;
+  transform: none !important;
+}
+#scythed-admin-modal .scythed-logs-close-button i,
+#scythed-admin-modal .scythed-admin-utility-button i,
+#scythed-admin-modal #admin-clear-logs-button i { font-size: 12px !important; }
+#scythed-admin-modal #admin-create-password { padding-right: 2.5rem !important; }
+#scythed-admin-modal .scythed-logs-close-bottom { min-width: 104px !important; }
+#scythed-admin-modal .scythed-logs-close-button span { font-weight: 400 !important; }
+#scythed-admin-modal .scythed-admin-utility-button.hidden,
+#scythed-admin-modal #admin-clear-logs-button.hidden { display: none !important; }
 </style>
