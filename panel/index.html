@@ -1656,8 +1656,8 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
         <div class="bg-white dark:bg-brand-card border border-zinc-200 dark:border-brand-border rounded-2xl max-w-[560px] w-full p-2.5 sm:p-3 space-y-3 glow-effect max-h-[92vh] overflow-y-auto backdrop-blur-md shadow-2xl">
 
             <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-2">
-                <h3 class="font-orbitron font-bold text-sm md:text-base text-zinc-900 dark:text-white flex items-center gap-2">
-                    <i class="fas fa-gear text-brand-red"></i> USTAWIENIA
+                <h3 class="font-orbitron font-bold text-base md:text-lg text-zinc-900 dark:text-white flex items-center gap-2">
+                    <i class="fas fa-gear text-brand-red text-lg md:text-xl"></i> USTAWIENIA
                 </h3>
                 <button onclick="window.scythedApp.closeModal('modal-settings')" class="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white"><i class="fas fa-times text-lg"></i></button>
             </div>
@@ -6548,10 +6548,10 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const password = await appPrompt(
                     logsOnlyLogin
                         ? 'Potwierdź sesję moderatora hasłem konta SCYTHED. Otworzysz wyłącznie podgląd dziennika zmian.'
-                        : 'Potwierdź dostęp do panelu administracyjnego hasłem konta SCYTHED.',
+                        : 'Potwierdź sesję administratora hasłem konta SCYTHED. Otworzysz panel zarządzania kontami, odznakami i ustawieniami.',
                     '',
                     {
-                        title: logsOnlyLogin ? 'SESJA MODERATORA — LOGI' : 'DOSTĘP ADMINISTRACYJNY',
+                        title: logsOnlyLogin ? 'SESJA MODERATORA — LOGI' : 'SESJA ADMINISTRATORA — PANEL ADMINA',
                         inputType: 'password',
                         icon: logsOnlyLogin ? 'fa-hammer' : 'fa-shield-halved',
                         confirmText: logsOnlyLogin ? 'SPRAWDŹ LOGI' : 'ZALOGUJ'
@@ -6957,14 +6957,14 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             <div><h3 class="font-bold text-sm"><i class="fas fa-user-plus text-brand-red mr-2"></i>DODAJ NOWĄ NAZWĘ / KONTO</h3></div>
             <form id="admin-create-user-form" autocomplete="off" onsubmit="window.scythedApp.adminCreateUser(event)" class="grid grid-cols-1 md:grid-cols-2 gap-2">
               <input id="admin-create-username" name="scythed-new-username" type="text" required minlength="1" maxlength="16" pattern="[A-Za-z0-9_. ]+" placeholder="Nowa nazwa / login" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="off" autocapitalize="off" spellcheck="false">
-              <div class="flex flex-col gap-1.5"><div class="relative"><input id="admin-create-password" name="scythed-new-password" type="password" required minlength="12" maxlength="1024" placeholder="Hasło (min. 12 znaków)" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 pr-10 text-sm" autocomplete="new-password"><button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white" aria-label="Pokaż hasło do nowej zweryfikowanej nazwy" title="Pokaż hasło" onclick="window.scythedApp.togglePasswordVisibility('admin-create-password')" data-no-click-sound><i class="fas fa-eye" aria-hidden="true"></i></button></div><div class="flex items-center justify-between gap-2"><span class="text-[10px] text-zinc-500">Hasło do nowej zweryfikowanej nazwy</span><button type="button" onclick="window.scythedApp.generateNamePassword12()" class="scythed-logs-close-button scythed-admin-utility-button whitespace-nowrap" title="Wygeneruj losowe hasło o długości 12 znaków" data-no-click-sound><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span>GENERUJ 12 ZNAKÓW</span></button></div></div>
+              <div class="flex flex-col gap-1.5"><div class="relative"><input id="admin-create-password" name="scythed-new-password" type="text" required minlength="12" maxlength="1024" placeholder="Hasło (min. 12 znaków)" class="w-full h-[42px] rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2.5 text-sm" autocomplete="new-password" autocapitalize="off" spellcheck="false"></div><div class="flex items-center justify-between gap-2"><span class="text-[10px] text-zinc-500">Hasło do nowej zweryfikowanej nazwy</span><button type="button" onclick="window.scythedApp.generateNamePassword12()" class="scythed-logs-close-button scythed-admin-utility-button whitespace-nowrap" title="Wygeneruj losowe hasło o długości 12 znaków" data-no-click-sound><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span>GENERUJ 12 ZNAKÓW</span></button></div></div>
               <button type="submit" class="md:col-span-2 rounded-lg bg-brand-red hover:bg-brand-hoverRed text-white p-2.5 text-xs font-bold transition"><i class="fas fa-plus mr-2"></i>UTWÓRZ KONTO</button>
             </form>
           </section>
           <div id="admin-action-message" class="hidden text-sm rounded-lg p-3"></div>
           <div class="space-y-2"><div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none" aria-hidden="true"></i><input id="admin-protected-name-search" name="scythed-admin-filter" type="search" autocomplete="off" autocorrect="off" spellcheck="false" oninput="window.scythedApp.adminFilterUsers()" placeholder="Szukaj..." class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent py-2 pl-9 pr-3 text-sm" aria-label="Szukaj zabezpieczonych nazw"></div><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead><tr class="border-b border-zinc-300 dark:border-zinc-700 text-zinc-500"><th class="p-2">KONTO</th><th class="p-2">STATUS</th><th class="p-2">ODZNAKI</th><th class="p-2">OPERACJE</th></tr></thead><tbody id="admin-users-list"><tr><td colspan="4" class="p-4 text-center text-zinc-500">Ładowanie…</td></tr></tbody></table></div></div>
           <div class="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 space-y-3"><h3 class="font-bold text-sm">NADAJ ODZNAKĘ</h3><form autocomplete="off" onsubmit="window.scythedApp.adminAssignBadge(event)" class="grid grid-cols-1 md:grid-cols-4 gap-2"><input id="admin-badge-username" name="scythed-badge-target" autocomplete="off" autocorrect="off" spellcheck="false" required placeholder="Nazwa konta" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-sm" autocomplete="off" autocorrect="off" spellcheck="false"><select id="admin-badge-key" onchange="window.scythedApp.adminBadgeTypeChanged()" class="admin-badge-select rounded-lg border p-2 text-sm"><option value="owner">Właściciel</option><option value="admin">Administrator</option><option value="moderator">Moderator</option><option value="zasluzony">Zasłużony</option><option value="bug_hunter">Łowca błędów</option><option value="beta_tester">Beta Tester</option></select><select id="admin-badge-level" disabled class="admin-badge-select rounded-lg border p-2 text-sm opacity-50" aria-label="Poziom odznaki"><option value="1">Poziom 1</option><option value="2">Poziom 2</option><option value="3">Poziom 3</option></select><button class="rounded-lg bg-brand-red text-white p-2 text-xs font-bold">ZAKTUALIZUJ</button></form></div>
-          <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button type="button" onclick="window.scythedApp.closeAdminPanel()" class="admin-bottom-close w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-bold rounded-xl text-xs transition glow-effect"><i class="fas fa-xmark mr-2" aria-hidden="true"></i>ZAMKNIJ PANEL ADMINA</button></div>
+          <div class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-center"><button type="button" onclick="window.scythedApp.closeAdminPanel()" class="admin-bottom-close w-full py-2.5 bg-brand-red hover:bg-brand-hoverRed text-white font-orbitron font-bold rounded-xl text-xs transition glow-effect"><i class="fas fa-xmark mr-2" aria-hidden="true"></i>ZAMKNIJ PANEL ADMINA</button></div>
         </div>
       </section>
     </div>
@@ -9708,4 +9708,41 @@ html.dark #scythed-admin-modal #admin-create-password + button[onclick*="toggleP
 #scythed-admin-modal .admin-verified-status > i,
 #scythed-admin-modal .admin-verified-status:hover > i,
 #scythed-admin-modal .admin-verified-status:focus > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
+</style>
+
+
+<style id="scythed-v24-requested-polish-fixes">
+/* The generated password is intentionally visible in the administrator's account form. */
+#scythed-admin-modal #admin-create-password { padding-right: .625rem !important; }
+/* Clear session-specific copy when an administrator opens the management panel. */
+/* Keep the administrator close control identical to the settings close button. */
+#scythed-admin-modal .admin-bottom-close {
+  font-family: var(--font-orbitron, Orbitron, ui-sans-serif, sans-serif) !important;
+  font-weight: 700 !important;
+}
+/* Settings heading and gear are a little more prominent; the overlay icon follows the same accent as other settings icons. */
+#modal-settings .font-bold.flex.items-center.gap-1\.5 > i.fa-wand-magic-sparkles {
+  color: var(--brand-readable-accent, var(--brand-red, #ef4444)) !important;
+}
+#modal-settings #app-bg-effects-panel {
+  background-color: rgb(250 250 250 / .92) !important;
+  border-color: rgb(228 228 231) !important;
+}
+html.dark #modal-settings #app-bg-effects-panel {
+  background-color: rgb(9 9 11 / .30) !important;
+  border-color: rgb(39 39 42) !important;
+}
+#modal-settings #app-bg-effects-panel > span {
+  color: var(--brand-readable-accent, var(--brand-red, #ef4444)) !important;
+}
+/* Favorite and pin checkboxes use a steady neutral grey, avoiding delayed accent-color refreshes. */
+#modal-entry #entry-favorite,
+#modal-entry #entry-pinned {
+  accent-color: #71717a !important;
+  color-scheme: light dark;
+}
+#modal-entry #entry-favorite:checked,
+#modal-entry #entry-pinned:checked {
+  accent-color: #71717a !important;
+}
 </style>
