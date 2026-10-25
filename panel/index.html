@@ -193,7 +193,7 @@
         #profile-avatar-display {
             padding: 0 !important;
             box-sizing: border-box;
-            
+
             background-color: color-mix(in srgb, var(--brand-red, #ff0033) 55%, #000 45%) !important;
             transition: background-color 180ms ease;
         }
@@ -251,7 +251,6 @@
             aspect-ratio: 1 / 1;
         }
 
-        
         #profile-badges-container > div > i {
             display: inline-flex;
             align-items: center;
@@ -354,7 +353,7 @@
         }
 
         #badge-zasluzony {
-            
+
             box-sizing: border-box !important;
             padding: 0.375rem !important;
             background: linear-gradient(
@@ -700,8 +699,7 @@ html:not(.dark) #app-dialog {
 </style>
 
 <style id="badge-icon-visibility-enhancement">
-/* Subtle contrast outline makes badge symbols easier to distinguish without changing badge colors. */
-/* Jasny motyw: jasny kontur ikon odznak; ciemny motyw: ciemny kontur. */
+
 html:not(.dark) #profile-badges-container .profile-badge-tooltip > i {
     -webkit-text-stroke: 0.35px rgba(255, 255, 255, 0.88);
     text-shadow: 0 0 1px rgba(255, 255, 255, 0.65), 0 0 2px rgba(0,  0, 0, 0.12);
@@ -736,7 +734,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
       .admin-badge-select{background:#09090b;color:#f4f4f5;border-color:var(--brand-red,#ef4444)}
       .admin-badge-select option{background:#09090b;color:#f4f4f5}
       .admin-owner-row{background:linear-gradient(90deg,rgba(234,179,8,.09),transparent 75%)}
-      /* Panel odznak używa kolorów identycznych z odznakami profilu. */
+
       .admin-list-badge.admin-list-owner{background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55))!important;border-color:rgba(250,204,21,.9)!important;color:#facc15!important}
       .admin-list-badge.admin-list-owner>i{color:#facc15!important}
       .admin-list-badge.admin-list-zasluzony{background:linear-gradient(120deg,rgba(20,83,45,.42),rgba(34,197,94,.62),rgba(21,128,61,.42),rgba(74,222,128,.68))!important;border-color:rgba(74,222,128,.92)!important;color:#86efac!important}
@@ -749,9 +747,8 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
       @media(prefers-reduced-motion:reduce){.admin-list-badge,.admin-owner-status{animation:none!important}}
     </style>
 
-
 <style id="admin-theme-accessibility-fixes">
-  /* Odznaki administracyjne zachowują obrys symbolu tak jak odznaki profilu. */
+
   #scythed-admin-modal .admin-list-badge > i {
     -webkit-text-stroke: .45px rgba(255,255,255,.9);
     text-shadow: 0 0 1px rgba(255,255,255,.65), 0 0 2px rgba(0,0,0,.3);
@@ -762,14 +759,14 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     text-shadow: 0 0 1px rgba(0,0,0,.8), 0 0 2px rgba(255,255,255,.2);
     filter: drop-shadow(0 0 .7px rgba(0,0,0,.55));
   }
-  /* Tła kontrolek bazują na kolorze motywu zamiast pozostawać czarne. */
+
   #scythed-admin-modal .admin-badge-select,
   #scythed-admin-modal .admin-badge-select option {
     background-color: color-mix(in srgb, var(--brand-red, #ff0033) 20%, #09090b) !important;
     color: #f4f4f5 !important;
     border-color: var(--brand-red, #ff0033) !important;
   }
-  /* Neutralny kolor akcji zależy od jasnego/ciemnego motywu, nie od koloru akcentu. */
+
   #scythed-admin-modal .admin-theme-button {
     border-color: #a1a1aa !important;
     color: #27272a !important;
@@ -795,7 +792,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     border-color: #52525b !important;
     color: var(--brand-contrast-text, #fff) !important;
   }
-  /* Jeśli kolor akcentu jest biały/jasny, tekst i obramowania pozostają czytelne. */
+
   #scythed-admin-modal .text-brand-red,
   #scythed-admin-modal .text-red-500,
   #scythed-admin-modal .text-red-600 { color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important; }
@@ -839,7 +836,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 </script>
 
 <style id="admin-theme-final-tune">
-  /* Akcje korzystają z koloru głównego ustawionego przez użytkownika. */
+
   #scythed-admin-modal .admin-theme-button {
     background: var(--brand-red, #ff0033) !important;
     border-color: var(--brand-red, #ff0033) !important;
@@ -852,7 +849,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     color: #fff !important;
     filter: brightness(.96);
   }
-  /* Pola wyboru są neutralne i zależą od jasnego/ciemnego motywu, nie od koloru akcentu. */
+
   #scythed-admin-modal .admin-badge-select,
   #scythed-admin-modal .admin-badge-select option {
     background: #e4e4e7 !important;
@@ -867,7 +864,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
     border-color: #52525b !important;
     color-scheme: dark;
   }
-  /* Łowca błędów poziom 2 ma niebieską odznakę w panelu administracyjnym. */
+
   #scythed-admin-modal .admin-list-bug.bug-hunter-level-2 {
     background: rgba(59,130,246,.14) !important;
     border-color: rgba(96,165,250,.78) !important;
@@ -879,8 +876,7 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
 </style>
 
 <style id="admin-access-theme-live-fix">
-  /* Karta Panel Admina odwzorowuje układ Zarządzania Zabezpieczeniami.
-     Ikony i tekst natychmiast reagują na kolor akcentu; tło kontrolki zależy tylko od motywu. */
+
   #general-admin-open-panel-wrap {
     background-color: rgb(250 250 250 / .92);
     border-color: rgb(228 228 231);
@@ -928,16 +924,15 @@ html.dark #profile-badges-container .profile-badge-tooltip > i {
   #general-admin-open-panel-wrap .admin-access-action:hover .admin-access-logo {
     color: var(--brand-contrast-text, #fff) !important;
   }
-  /* Odświeżenie po zmianie akcentu/motywu bez przeładowania dokumentu. */
+
   #general-admin-open-panel-wrap,
   #general-admin-open-panel-wrap * {
     transition-property: color, background-color, border-color, box-shadow;
   }
 </style>
 
-
 <style id="scythed-unified-theme-controls">
-/* Spójne, zwarte kontrolki jak na przełączniku motywu z referencji. */
+
 :root { --control-surface-light:#e4e4e7; --control-surface-dark:#27272a; --control-border-light:#d4d4d8; --control-border-dark:#3f3f46; }
 #modal-settings .settings-password-action,
 #modal-settings .admin-master-action,
@@ -963,7 +958,7 @@ html.dark #general-admin-open-panel-wrap .admin-access-action {
 #modal-settings .settings-password-action:disabled { opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
 #general-admin-open-panel-wrap { border-radius:.85rem!important; }
 #general-admin-open-panel-wrap .admin-access-logo { flex:0 0 auto; }
-/* Formularze, przyciski i elementy dodane dynamicznie dziedziczą czytelne kolory motywu. */
+
 #scythed-admin-modal { color: #27272a; color-scheme:light; }
 html.dark #scythed-admin-modal { color:#f4f4f5; color-scheme:dark; }
 #scythed-admin-modal input:not([type=checkbox]):not([type=radio]),
@@ -997,7 +992,7 @@ html.dark #scythed-admin-modal input::placeholder,html.dark #scythed-admin-modal
   window.getReadableBrandAccent = function(hex,dark){
     const rgb=parseHex(hex), surface=dark?[9,9,11]:[255,255,255];
     if(contrast(rgb,surface)>=4.5) return toHex(rgb);
-    // Keep the hue recognizable while moving toward the contrast-safe end of the scale.
+
     const target=dark?[255,255,255]:[0,0,0];
     let best=rgb;
     for(let i=1;i<=100;i++){
@@ -1015,15 +1010,14 @@ html.dark #scythed-admin-modal input::placeholder,html.dark #scythed-admin-modal
     root.style.setProperty('--brand-contrast-text',window.getBrandContrastText(hex));
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',sync); else sync();
-  // The color picker calls applyBrandColor() to refresh accent variables; this observer
-  // only handles light/dark mode changes, avoiding style-mutation loops.
+
   new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
   window.addEventListener('scythed:brand-color-changed',sync);
 })();
 </script>
 
 <style id="scythed-settings-controls-final-fix">
-/* Neutralne, jednakowe kontrolki - kolor akcentu nie zmienia ich bazowej powierzchni. */
+
 :root{--control-surface-light:#f4f4f5;--control-surface-dark:#18181b;--control-border-light:#d4d4d8;--control-border-dark:#3f3f46;}
 #modal-settings #general-admin-open-panel-wrap,
 #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{background:#fafafa!important;border:1px solid #e4e4e7!important;border-radius:11px!important;}
@@ -1051,9 +1045,9 @@ html.dark #modal-settings .settings-password-action:hover:not(:disabled),html.da
 </style>
 
 <style id="scythed-final-neutral-theme-fix-v11">
-/* Ostateczne nadpisanie: akcent marki służy tylko do focus/małych ikon, nigdy jako tło wszystkich guzików. */
+
 :root{--sc-control-light:#f4f4f5;--sc-control-light-hover:#e4e4e7;--sc-control-light-border:#d4d4d8;--sc-control-dark:#18181b;--sc-control-dark-hover:#27272a;--sc-control-dark-border:#3f3f46;--sc-panel-light:#fafafa;--sc-panel-dark:#09090b;}
-/* Kafelki i wiersz panelu administracyjnego mają neutralne, zgodne z trybem tła. */
+
 #modal-settings #general-admin-open-panel-wrap,
 #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{
  background:var(--sc-panel-light)!important;border:1px solid #e4e4e7!important;color:#27272a!important;
@@ -1062,12 +1056,12 @@ html.dark #modal-settings #general-admin-open-panel-wrap,
 html.dark #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl{
  background:var(--sc-panel-dark)!important;border-color:#27272a!important;color:#f4f4f5!important;
 }
-/* Wyśrodkowane tytuły obu haseł. */
+
 #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl h5{
  width:100%!important;text-align:center!important;color:#27272a!important;margin-inline:auto!important;
 }
 html.dark #modal-settings .grid.grid-cols-2>div.p-3.rounded-xl h5{color:#f4f4f5!important;}
-/* Spójne kontrolki: kolor tła nie zależy od koloru głównego. */
+
 #modal-settings .settings-password-action,
 #modal-settings .admin-master-action,
 #general-admin-open-panel-wrap .admin-access-action,
@@ -1094,7 +1088,7 @@ html.dark #general-admin-open-panel-wrap .admin-access-action:hover:not(:disable
 html.dark #scythed-admin-modal button:hover:not(:disabled){
  background:var(--sc-control-dark-hover)!important;color:#fff!important;border-color:#52525b!important;filter:none!important;transform:none!important;box-shadow:none!important;
 }
-/* Przyciski główne wewnątrz panelu admina również nie przejmują koloru brand. */
+
 #scythed-admin-modal .admin-theme-button,
 #scythed-admin-modal button[class*="bg-brand-red"],
 #scythed-admin-modal button[class*="bg-red-"]{
@@ -1111,16 +1105,15 @@ html.dark #scythed-admin-modal button[class*="bg-red-"]{
 html.dark #scythed-admin-modal .admin-theme-button:hover,
 html.dark #scythed-admin-modal button[class*="bg-brand-red"]:hover,
 html.dark #scythed-admin-modal button[class*="bg-red-"]:hover{background:var(--sc-control-dark-hover)!important;color:#fff!important;border-color:#52525b!important;}
-/* Ikony na przyciskach zmiany haseł dziedziczą kolor tekstu. */
+
 #modal-settings .settings-password-action i{color:inherit!important;}
 #general-admin-open-panel-wrap .admin-access-logo{color:var(--brand-readable-accent,var(--brand-red,#ff0033))!important;}
 #modal-settings button:focus-visible,#scythed-admin-modal button:focus-visible{outline:2px solid var(--brand-readable-accent,var(--brand-red,#ff0033))!important;outline-offset:2px!important;}
 #modal-settings .settings-password-action:disabled{opacity:.48!important;cursor:not-allowed!important;}
 </style>
 
-
 <style id="scythed-security-controls-consistency-v13">
-/* Zabezpieczenia używają dokładnie tej samej neutralnej palety co kontrolki Tryb Wyglądu. */
+
 #modal-settings #security-settings-category #general-admin-open-panel-wrap,
 #modal-settings #security-settings-category .grid.grid-cols-2 > div.p-3.rounded-xl {
   background-color: rgb(244 244 245) !important;
@@ -1168,9 +1161,8 @@ html.dark #modal-settings #security-settings-category .admin-access-action:hover
 #modal-settings #security-settings-category .admin-access-logo { flex-shrink:0; }
 </style>
 
-
 <style id="scythed-v14-visual-fixes">
-/* Ikony zmiany hasła zawsze dziedziczą kolor tekstu - także po zmianie motywu. */
+
 #modal-settings .settings-password-action,
 #modal-settings .settings-password-action i,
 #modal-settings .settings-password-action span {
@@ -1216,7 +1208,7 @@ html.dark #scythed-admin-modal header > button { border:0; background:transparen
 </style>
 
 <style id="scythed-v15-primary-color-icons">
-/* Ikony przycisków zmiany hasła korzystają z głównego koloru aplikacji. */
+
 #modal-settings .settings-password-action i {
   color: var(--brand-red, #ff0033) !important;
   transition: color .2s ease;
@@ -1224,15 +1216,14 @@ html.dark #scythed-admin-modal header > button { border:0; background:transparen
 </style>
 
 <style id="scythed-v17-noninteractive-logo">
-/* Logo SCYTHED na ekranie logowania/ustawiania hasła jest wyłącznie animacją, nie przyciskiem. */
+
 #auth-overlay .brand-logo { pointer-events: none !important; cursor: default !important; }
 #auth-overlay .brand-logo:hover { transform: none !important; }
 #auth-overlay .brand-logo, #auth-overlay .brand-logo * { user-select: none !important; }
 </style>
 <script id="scythed-v21-disable-auth-logo-click-sound">
 (function () {
-  // Logo jest dekoracyjne. pointer-events:none sprawia, że targetem kliknięcia
-  // może być jego kontener, dlatego sprawdzamy cały obszar logo na ekranie auth.
+
   document.addEventListener('click', function (event) {
     const target = event.target;
     if (!target || !target.closest) return;
@@ -1244,7 +1235,7 @@ html.dark #scythed-admin-modal header > button { border:0; background:transparen
     if (!logo) return;
     const rect = logo.getBoundingClientRect();
     const x = event.clientX, y = event.clientY;
-    // Wycisz wyłącznie kliknięcie w animowane logo i jego bezpośrednią ramkę.
+
     const box = logo.parentElement.getBoundingClientRect();
     if (x < box.left || x > box.right || y < box.top || y > box.bottom) return;
     event.preventDefault();
@@ -1254,9 +1245,8 @@ html.dark #scythed-admin-modal header > button { border:0; background:transparen
 })();
 </script>
 
-
 <style id="scythed-v20-consolidated-primary-icon-fix">
-/* Final override: password icons track the user's current primary color. */
+
 #modal-settings .settings-password-action i,
 #modal-settings .settings-password-action .fa-lock,
 #modal-settings .settings-password-action .fa-user-shield {
@@ -1265,9 +1255,8 @@ html.dark #scythed-admin-modal header > button { border:0; background:transparen
 }
 </style>
 
-
 <style id="scythed-final-corrective-theme-icons-categories">
-/* Ikony przycisków zmiany hasła zawsze śledzą aktualny kolor główny wybrany przez użytkownika. */
+
 html body #modal-settings button.settings-password-action > i,
 html body #modal-settings button#settings-change-app-password > i,
 html body #modal-settings button#settings-change-name-password > i {
@@ -1276,12 +1265,12 @@ html body #modal-settings button#settings-change-name-password > i {
   opacity: 1 !important;
   transition: color .2s ease, -webkit-text-fill-color .2s ease !important;
 }
-/* Nagłówki kategorii w spójnym, wielkimi literami zapisanym formacie. */
+
 #modal-settings h4 { text-transform: uppercase !important; }
 </style>
 
 <style id="scythed-final-v26-contrast-and-unified-light-theme">
-/* Consistent, contrast-safe accent text and icons in the admin panel, including very bright/dark user colors. */
+
 #scythed-admin-modal .text-brand-red,
 #scythed-admin-modal .text-red-500,
 #scythed-admin-modal .text-red-600,
@@ -1316,7 +1305,7 @@ html body #modal-settings button#settings-change-name-password > i {
   background-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
   border-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
 }
-/* Keep theme accents uniform in the light theme: icons and text share the same contrast-safe accent. */
+
 html:not(.dark) #scythed-admin-modal .admin-list-badge > i,
 html:not(.dark) #scythed-admin-modal .text-brand-red,
 html:not(.dark) #scythed-admin-modal .text-red-500,
@@ -1677,7 +1666,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     <div class="flex justify-center min-w-0"><button id="settings-change-name-password" type="button" onclick="window.scythedApp.toggleNamePasswordSettings()" disabled title="Sprawdzanie statusu weryfikacji konta…" class="settings-password-action px-3 py-2 text-xs font-bold rounded-xl border transition opacity-50 cursor-not-allowed" aria-disabled="true"><i class="fas fa-user-shield" aria-hidden="true"></i><span>Zmień hasło</span></button></div>
                 </div>
             </div>
-            </div><!-- /security-settings-category -->
+            </div>
 
             <div class="space-y-2">
                 <h4 class="text-[11px] font-orbitron font-bold uppercase tracking-wider text-brand-red border-b border-zinc-200 dark:border-zinc-800 pb-1">
@@ -2054,8 +2043,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             }
 
             function openAppDialog({type = 'confirm', title = 'Potwierdzenie', message = '', inputValue = '', inputType = 'text', placeholder = '', confirmText = 'POTWIERDŹ', cancelText = 'ANULUJ', icon = 'fa-shield-halved', rememberMe = false} = {}) {
-                // Jeśli dwa równoległe wywołania proszą o dokładnie to samo, współdziel jeden dialog.
-                // Zapobiega to podwójnemu oknu weryfikacji nazwy podczas równoległego odświeżania odznak.
+
                 const dialogSignature = `${type}\u0000${title}\u0000${message}`;
                 if (activeAppDialog) {
                     if (activeAppDialog.signature === dialogSignature && activeAppDialog.promise) return activeAppDialog.promise;
@@ -2173,12 +2161,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 { id: 'x', name: 'X (Twitter)', icon: 'fa-brands fa-x-twitter', color: '#ffffff', logo: 'assets/logos/x.png', themeAdaptive: true },
                 { id: 'yahoo', name: 'Yahoo Mail', icon: 'fa-brands fa-yahoo', color: '#6001d2', logo: 'assets/logos/yahoo.png' },
 
-
-
-
-
-
-
                 { id: 'binance', name: 'Binance', icon: 'fa-solid fa-coins', color: '#F3BA2F', logo: 'assets/logos/binance.png' },
 
                 { id: 'g2a', name: 'G2A', icon: 'fa-solid fa-gamepad', color: '#ff5a00', logo: 'assets/logos/g2a.png' },
@@ -2190,9 +2172,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 { id: 'primevideo', name: 'Prime Video', icon: 'fa-solid fa-play', color: '#00A8E1', logo: 'assets/logos/primevideo.png' },
                 { id: 'disney', name: 'Disney', icon: 'fa-solid fa-wand-magic-sparkles', color: '#113CCF', logo: 'assets/logos/disney.png' },
                 { id: 'hbo', name: 'HBO', icon: 'fa-solid fa-tv', color: '#ffffff', logo: 'assets/logos/hbo.png', themeAdaptive: true },
-
-
-
 
                 { id: 'youtube', name: 'YouTube', icon: 'fa-brands fa-youtube', color: '#FF0000', logo: 'assets/logos/youtube.png' },
                 { id: 'google', name: 'Google', icon: 'fa-brands fa-google', color: '#4285F4', logo: 'assets/logos/google.png' },
@@ -6484,7 +6463,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 reader.readAsText(file);
             }
 
-
             let scythedAdminSession = null;
             let scythedAdminExpiryTimer = null;
             let scythedAdminCountdownInterval = null;
@@ -6968,7 +6946,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
       </section>
     </div>
 
-
 <style id="scythed-v20-size-buttons-and-range-fix">
 input[type="range"]{touch-action:none;pointer-events:auto;user-select:none;-webkit-user-select:none;cursor:pointer}
 input[type="range"]::-webkit-slider-thumb{cursor:grab}
@@ -6977,7 +6954,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 </style>
 <script id="scythed-v20-range-interaction-fix">
 (function(){
-  // Keep native range dragging responsive; isolate range pointer events from unrelated app gestures.
+
   document.addEventListener('pointerdown', function(e){
     if(e.target && e.target.matches && e.target.matches('input[type="range"]')) e.stopPropagation();
   }, true);
@@ -6996,10 +6973,8 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 })();
 </script>
 
-
-
 <style id="scythed-final-v24-admin-accent-dark">
-/* Przyciski LOGI, ODŚWIEŻ i WYLOGUJ mają zawsze aktywny kolor główny, także w ciemnym motywie. */
+
 #scythed-admin-modal .admin-primary-action,
 #scythed-admin-modal button[onclick*="adminToggleLogs"],
 #scythed-admin-modal button[onclick*="adminRefreshUsers"],
@@ -7018,8 +6993,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 </style>
 <script id="scythed-final-v24-auth-button-sounds-only">
 (function () {
-  // Zachowaj dźwięki przycisków, ale wycisz przypadkowe kliknięcia w tło,
-  // logo, tekst, pola i inne nieprzyciskowe elementy ekranu logowania/rejestracji.
+
   function classifyAuthInteraction(event) {
     const overlay = document.getElementById('auth-overlay');
     if (!overlay || overlay.classList.contains('hidden') || !overlay.contains(event.target)) return;
@@ -7043,9 +7017,8 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 })();
 </script>
 
-
 <style id="scythed-final-v25-accent-and-slider-fix">
-/* Match the bottom settings-close button's appearance, using the live theme accent. */
+
 #scythed-admin-modal .admin-bottom-close {
   appearance: none !important; -webkit-appearance: none !important;
   display: block !important; width: 100% !important; box-sizing: border-box !important;
@@ -7061,7 +7034,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
   background: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
   background-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
 }
-/* Admin quick actions always follow the same live accent in both light and dark themes. */
+
 #scythed-admin-modal button.admin-primary-action,
 #scythed-admin-modal button[onclick*="adminToggleLogs"],
 #scythed-admin-modal button[onclick*="adminRefreshUsers"],
@@ -7080,18 +7053,18 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
   background-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
   border-color: var(--brand-hover-red, var(--brand-red, #ff0033)) !important;
 }
-/* Keep 1.0x at the physical center of the speed slider. */
+
 #modal-settings #header-animation-speed { min-width: 0; touch-action: pan-y; }
 </style>
 <style id="scythed-v63-contrast-and-accent-consistency">
-/* Kolor akcentu jest spójny, ale nie ingeruje w indywidualne kolory odznak. */
+
 #modal-settings #general-admin-open-panel-wrap > span {
   color: var(--brand-red, #ff0033) !important;
 }
 #modal-settings #general-admin-open-panel-wrap .admin-access-logo {
   color: var(--brand-red, #ff0033) !important;
 }
-/* Tekst i ikony akcji admina dziedziczą kontrast wyliczony z koloru głównego. */
+
 #scythed-admin-modal .admin-bottom-close,
 #scythed-admin-modal .admin-primary-action,
 #scythed-admin-modal button[onclick*="adminToggleLogs"],
@@ -7108,7 +7081,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 #scythed-admin-modal #admin-create-user-form button[type="submit"] > i {
   color: inherit !important;
 }
-/* Zachowaj oryginalne, tematyczne kolory odznak i statusów - nie nadpisuj ich akcentem. */
+
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge > i,
 #scythed-admin-modal .admin-owner-status,
@@ -7145,13 +7118,13 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
     const css = getComputedStyle(root);
     const accent = css.getPropertyValue('--brand-red').trim() || '#ff0033';
     const rgb = parseColor(accent);
-    // Bright accents (e.g. yellow) need dark text; darker accents need white text.
+
     const contrast = rgb && luminance(rgb) > 0.43 ? '#18181b' : '#ffffff';
     root.style.setProperty('--scythed-accent-contrast', contrast);
     const admin = document.getElementById('scythed-admin-modal');
     if (!admin) return;
     admin.querySelectorAll('.admin-bottom-close, .admin-primary-action, button[onclick*="adminToggleLogs"], button[onclick*="adminRefreshUsers"], button[onclick*="adminLogout"], #admin-create-user-form button[type="submit"]').forEach(btn => {
-      // Set only foreground contrast; preserve each badge's independent palette.
+
       btn.style.setProperty('color', contrast, 'important');
       btn.querySelectorAll(':scope > i').forEach(icon => icon.style.setProperty('color', 'inherit', 'important'));
     });
@@ -7165,11 +7138,8 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
 })();
 </script>
 
-
-
-
 <style id="scythed-final-v22-admin-and-auth-fixes">
-/* Admin action buttons use the same live primary accent in light and dark themes. */
+
 #scythed-admin-modal .admin-primary-action,
 #scythed-admin-modal #admin-create-user-form button[type="submit"],
 #scythed-admin-modal button[onclick*="adminLogout"] {
@@ -7184,7 +7154,7 @@ input[type="range"]:active::-webkit-slider-thumb{cursor:grabbing}
   background-color: var(--brand-hover-red, var(--brand-red, #ef4444)) !important;
   border-color: var(--brand-hover-red, var(--brand-red, #ef4444)) !important;
 }
-/* Match the settings modal's top-right X: plain, borderless, transparent. */
+
 #scythed-admin-modal > section > header > button {
   appearance: none !important; -webkit-appearance: none !important;
   width: auto !important; height: auto !important; min-width: 0 !important; min-height: 0 !important;
@@ -7197,7 +7167,7 @@ html.dark #scythed-admin-modal > section > header > button { color: #9ca3af !imp
 #scythed-admin-modal > section > header > button:hover { color: #18181b !important; background: transparent !important; border: 0 !important; }
 html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !important; }
 #scythed-admin-modal > section > header > button i { font-size: 1.125rem !important; line-height: 1 !important; }
-/* Same dimensions and typography as the bottom settings close button. */
+
 #scythed-admin-modal .admin-bottom-close {
   display: block !important; width: 100% !important; box-sizing: border-box !important;
   padding: .625rem .75rem !important; background: var(--brand-red, #ef4444) !important;
@@ -7206,7 +7176,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
   line-height: 1.25rem !important; box-shadow: 0 0 15px var(--brand-red-glow, rgba(255,0,51,.35)) !important;
 }
 #scythed-admin-modal .admin-bottom-close:hover { background: var(--brand-hover-red, var(--brand-red, #ef4444)) !important; }
-/* Keep the size dropdown fully visible, including its selected option. */
+
 #modal-settings #ui-scale-slider {
   display: block !important; width: auto !important; max-width: 100% !important; min-width: 0 !important;
   flex: 0 1 11rem !important; box-sizing: border-box !important; white-space: nowrap !important;
@@ -7216,8 +7186,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 </style>
 <script id="scythed-final-v22-auth-logo-silencer">
 (function () {
-  // The animated logo and its frame on login/register are decorative. Intercept
-  // pointer and click events by coordinates because the image may have pointer-events:none.
+
   function isAuthLogoFrame(event) {
     const overlay = document.getElementById('auth-overlay');
     if (!overlay || overlay.classList.contains('hidden') || !overlay.contains(event.target)) return false;
@@ -7241,7 +7210,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 </script>
 
 <style id="scythed-final-v23-requested-tweaks">
-/* Keep the admin close button tied to the live user-selected primary color. */
+
 #scythed-admin-modal .admin-bottom-close {
   background-color: var(--brand-red, #ff0033) !important;
   border-color: var(--brand-red, #ff0033) !important;
@@ -7255,10 +7224,8 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 }
 </style>
 
-
-<!-- SCYTHED badge palette lock v64 -->
 <style id="scythed-v64-admin-badge-palette-lock">
-/* Odznaki w panelu admina mają własną, stałą paletę - niezależną od koloru głównego i jasnego/ciemnego motywu. */
+
 #scythed-admin-modal .admin-list-badge.admin-list-owner,
 #scythed-admin-modal .admin-list-badge.admin-list-owner:hover { background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)) !important; border-color:rgba(250,204,21,.9) !important; color:#facc15 !important; }
 #scythed-admin-modal .admin-list-badge.admin-list-owner > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
@@ -7284,7 +7251,7 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 </style>
 
 <style id="scythed-admin-badges-accent-fix">
-/* Admin badges follow the current primary accent rather than hard-coded colors. */
+
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge:hover,
 #scythed-admin-modal .admin-owner-status,
@@ -7331,9 +7298,8 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 })();
 </script>
 
-
 <style id="scythed-final-role-button-logo-fix">
-/* Status konta zachowuje własną, rozpoznawalną paletę - niezależnie od akcentu motywu. */
+
 #scythed-admin-modal .admin-owner-status,
 #scythed-admin-modal .admin-list-owner,
 #scythed-admin-modal .admin-owner-status > i,
@@ -7363,7 +7329,6 @@ html.dark #scythed-admin-modal > section > header > button:hover { color: #fff !
 #scythed-admin-modal .admin-moderator-status,
 #scythed-admin-modal .admin-list-moderator { border-color:rgba(59,130,246,.75) !important; background:rgba(59,130,246,.12) !important; }
 
-/* Nagłówek wejścia do panelu: czerwone pozostaje wyłącznie logo/ikona. */
 #modal-settings #general-admin-open-panel-wrap > span {
   color:#18181b !important;
 }
@@ -7372,7 +7337,6 @@ html.dark #modal-settings #general-admin-open-panel-wrap > span { color:#fff !im
   color:var(--brand-red,#ff0033) !important;
 }
 
-/* Przyciski akcji mają wyraźny tekst i spójne hover/focus/disabled jak „UTWÓRZ KONTO”. */
 #scythed-admin-modal .admin-primary-action,
 #scythed-admin-modal button[onclick*="adminToggleLogs"],
 #scythed-admin-modal button[onclick*="adminRefreshUsers"],
@@ -7415,7 +7379,6 @@ html.dark #modal-settings #general-admin-open-panel-wrap > span { color:#fff !im
 #scythed-admin-modal .admin-bottom-close:disabled,
 #scythed-admin-modal #admin-create-user-form button[type="submit"]:disabled { opacity:.5 !important; cursor:not-allowed !important; transform:none !important; }
 
-/* Napisy na przyciskach formularzy logowania/rejestracji: czytelny kontrast również po zmianie motywu. */
 button.bg-brand-red, button[class~="bg-brand-red"],
 form button[type="submit"].bg-brand-red,
 #scythed-admin-modal button.bg-brand-red {
@@ -7426,7 +7389,7 @@ form button[type="submit"].bg-brand-red > * { color:inherit !important; }
 </style>
 
 <style id="scythed-light-theme-readability-v64">
-/* W jasnym motywie ikony/akcenty mają kontrastową wersję wybranego koloru. */
+
 html:not(.dark) #modal-settings .text-brand-red,
 html:not(.dark) #modal-settings h4,
 html:not(.dark) #modal-settings [style*="color: var(--brand-red"],
@@ -7436,11 +7399,11 @@ html:not(.dark) #modal-settings .far.text-brand-red,
 html:not(.dark) #modal-settings .admin-access-logo {
   color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important;
 }
-/* Panel administracyjny: sam napis neutralny, ikona zostaje akcentowa. */
+
 #modal-settings #general-admin-open-panel-wrap > span { color:#fff !important; }
 html:not(.dark) #modal-settings #general-admin-open-panel-wrap > span { color:#111827 !important; }
 #modal-settings #general-admin-open-panel-wrap .admin-access-logo { color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important; }
-/* Szare, neutralne powierzchnie kontrolek - także próbnik i pole HEX. */
+
 #modal-settings #brand-color-picker,
 #modal-settings #brand-hex-input,
 #modal-settings #bg-overlay-color,
@@ -7462,7 +7425,7 @@ html:not(.dark) #modal-settings #bg-overlay-hex {
   background-color:#e5e7eb !important;
   border-color:#cbd5e1 !important;
 }
-/* Ikony w kontrolkach odzwierciedlają czytelny odcień wybranego akcentu. */
+
 #modal-settings button i:not(.fa-times),
 #modal-settings h4 i,
 #modal-settings label i,
@@ -7470,7 +7433,7 @@ html:not(.dark) #modal-settings #bg-overlay-hex {
 #modal-settings .settings-password-action i {
   color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important;
 }
-/* W jasnym motywie teksty pomocnicze nie mogą znikać na jasnym tle. */
+
 html:not(.dark) #modal-settings .text-zinc-400,
 html:not(.dark) #modal-settings .text-zinc-500,
 html:not(.dark) #modal-settings .text-gray-400,
@@ -7482,7 +7445,7 @@ html:not(.dark) #modal-settings [class*="text-gray-500"] { color:#4b5563 !import
 #modal-settings #auto-lock-mode,
 #modal-settings #ui-scale-slider { font-weight:800 !important; }
 #modal-settings #backup-reminder-status { font-weight:700 !important; }
-/* Jasne tła w ustawieniach spójne z neutralnym szarym tłem kontrolki dźwięku. */
+
 #modal-settings .bg-white:not(.dark\:bg-brand-card),
 #modal-settings .bg-zinc-50,
 #modal-settings .bg-zinc-100 { background-color:#f3f4f6; }
@@ -7514,16 +7477,14 @@ html.dark #modal-settings .bg-zinc-100 { background-color:rgba(0,0,0,.55); }
 })();
 </script>
 
-
-<!-- SCYTHED v65: restore theme-specific surfaces and original badge/icon styling -->
 <style id="scythed-v65-theme-and-badge-restoration">
-/* W ciemnym motywie okna i kafelki ustawień zachowują wcześniejsze, ciemne powierzchnie. */
+
 html.dark #modal-settings .bg-white:not(.dark\:bg-brand-card),
 html.dark #modal-settings .bg-zinc-50,
 html.dark #modal-settings .bg-zinc-100 {
   background-color: revert !important;
 }
-/* Próbnik koloru nakładki ma ten sam rozmiar, obramowanie i tło co próbnik koloru głównego. */
+
 #modal-settings #bg-overlay-color {
   width:1.25rem !important; height:1.25rem !important;
   padding:0 !important; border:0 !important; border-radius:0 !important;
@@ -7536,7 +7497,7 @@ html.dark #modal-settings .bg-zinc-100 {
 #modal-settings #brand-color-picker::-webkit-color-swatch { border:0 !important; border-radius:3px !important; }
 #modal-settings #bg-overlay-color::-moz-color-swatch,
 #modal-settings #brand-color-picker::-moz-color-swatch { border:0 !important; border-radius:3px !important; }
-/* Zmiana hasła: ikony kłódki/użytkownika mają czytelny odcień akcentu, także w jasnym motywie. */
+
 #modal-settings .settings-password-action i,
 #modal-settings [class*="password"] > i,
 #modal-settings [id*="password"] + i,
@@ -7547,14 +7508,14 @@ html.dark #modal-settings .bg-zinc-100 {
   color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important;
   -webkit-text-fill-color:var(--brand-readable-accent,var(--brand-red,#ff0033)) !important;
 }
-/* „Zweryfikowane” ma zawsze niebieską paletę, niezależnie od akcentu. */
+
 #scythed-admin-modal .admin-verified-status,
 #scythed-admin-modal .admin-verified-status:hover {
   color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important;
   border-color:#3b82f6 !important; background:rgba(59,130,246,.12) !important;
 }
 #scythed-admin-modal .admin-verified-status > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
-/* Przywrócenie animowanej, złotej odznaki właściciela również w panelu administracyjnym. */
+
 #scythed-admin-modal .admin-list-badge.admin-list-owner,
 #scythed-admin-modal .admin-owner-status {
   background-size:200% 100% !important;
@@ -7574,9 +7535,8 @@ html.dark #modal-settings .bg-zinc-100 {
 }
 </style>
 
-<!-- SCYTHED v66: targeted restoration based on supplied reference -->
 <style id="scythed-final-visual-fixes-v66">
-/* Stałe kolory statusów kont w panelu administracyjnym. */
+
 #scythed-admin-modal .admin-owner-status {
   color:#facc15 !important; -webkit-text-fill-color:#facc15 !important;
   border-color:rgba(250,204,21,.75) !important;
@@ -7609,7 +7569,6 @@ html.dark #modal-settings .bg-zinc-100 {
 }
 #scythed-admin-modal .admin-verified-status > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
 
-/* Przywróć wcześniejsze, animowane palety odznak w liście użytkowników. */
 #scythed-admin-modal .admin-list-badge.admin-list-owner {
   background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)) !important;
   background-size:220% 220% !important; border-color:rgba(250,204,21,.9) !important;
@@ -7640,13 +7599,11 @@ html.dark #modal-settings .bg-zinc-100 {
 #scythed-admin-modal .admin-list-badge.admin-list-beta { background:rgba(250,204,21,.10) !important; border-color:rgba(250,204,21,.55) !important; color:#facc15 !important; animation:badgePulseGlow 2.2s ease-in-out infinite !important; }
 #scythed-admin-modal .admin-list-badge.admin-list-beta > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
 
-/* Nie nadpisuj oryginalnych powierzchni ciemnego motywu; w jasnym utrzymaj neutralne kafelki. */
 html.dark #modal-settings .bg-white:not(.dark\\:bg-brand-card) { background-color:revert !important; }
 html.dark #modal-settings .bg-zinc-50, html.dark #modal-settings .bg-zinc-100 { background-color:revert !important; }
 html:not(.dark) #modal-settings .bg-white:not(.dark\\:bg-brand-card),
 html:not(.dark) #modal-settings .bg-zinc-50, html:not(.dark) #modal-settings .bg-zinc-100 { background-color:#f3f4f6 !important; }
 
-/* Próbnik nakładki ma taki sam rozmiar i oprawę jak próbnik koloru głównego. */
 #modal-settings #brand-color-picker, #modal-settings #bg-overlay-color {
   width:1.25rem !important; height:1.25rem !important; padding:0 !important;
   border:0 !important; border-radius:0 !important; background:transparent !important;
@@ -7656,7 +7613,6 @@ html:not(.dark) #modal-settings .bg-zinc-50, html:not(.dark) #modal-settings .bg
 #modal-settings #bg-overlay-color::-webkit-color-swatch, #modal-settings #brand-color-picker::-webkit-color-swatch,
 #modal-settings #bg-overlay-color::-moz-color-swatch, #modal-settings #brand-color-picker::-moz-color-swatch { border:0 !important; border-radius:3px !important; }
 
-/* Opcje list rozwijanych czytelne w obu motywach. */
 html.dark select, html.dark select option { background-color:#18181b !important; color:#f4f4f5 !important; }
 html:not(.dark) select, html:not(.dark) select option { background-color:#f4f4f5 !important; color:#18181b !important; }
 #modal-settings #app-bg-effects-panel > span { color:#111827 !important; }
@@ -7671,10 +7627,8 @@ html:not(.dark) #modal-settings #bg-overlay-hex, html:not(.dark) #modal-settings
 }
 </style>
 
-
-<!-- SCYTHED v67: final theme and visual consistency fixes -->
 <style id="scythed-final-visual-fixes-v67">
-/* Przyciski akcji: ten sam akcent co UTWÓRZ KONTO, niezależnie od motywu. */
+
 #scythed-admin-modal #admin-create-user-form button[type="submit"],
 #scythed-admin-modal #global-toggle-emails,
 #scythed-admin-modal #global-toggle-passwords,
@@ -7707,7 +7661,7 @@ html:not(.dark) #modal-settings #bg-overlay-hex, html:not(.dark) #modal-settings
 #scythed-admin-modal #admin-logs-refresh i,
 #scythed-admin-modal #admin-logout i,
 #scythed-admin-modal #admin-logs-clear i { color:#fff !important; -webkit-text-fill-color:#fff !important; }
-/* Elementy ustawień zmieniają kolory wraz z klasą html.dark, a nie pozostają w jasnej palecie. */
+
 html.dark #modal-settings select,
 html.dark #modal-settings select option,
 html.dark #scythed-admin-modal select,
@@ -7721,7 +7675,7 @@ html:not(.dark) #scythed-admin-modal select option {
   color:#18181b !important; background-color:#f4f4f5 !important;
 }
 html.dark #modal-settings select:focus, html.dark #scythed-admin-modal select:focus { outline-color:var(--brand-red,#ff0033) !important; }
-/* Próbnik koloru nakładki ma identyczny rozmiar i oprawę jak próbnik koloru głównego. */
+
 #modal-settings #brand-color-picker,
 #modal-settings #bg-overlay-color {
   box-sizing:border-box !important; display:block !important;
@@ -7738,11 +7692,11 @@ html.dark #modal-settings select:focus, html.dark #scythed-admin-modal select:fo
 #modal-settings #bg-overlay-color::-webkit-color-swatch { border:1px solid rgba(127,127,127,.55) !important; border-radius:3px !important; }
 #modal-settings #brand-color-picker::-moz-color-swatch,
 #modal-settings #bg-overlay-color::-moz-color-swatch { border:1px solid rgba(127,127,127,.55) !important; border-radius:3px !important; }
-/* Tytuł efektów nakładki ma być neutralny, a ikona nadal akcentowa. */
+
 #modal-settings #app-bg-effects-panel > span { color:#111827 !important; }
 html.dark #modal-settings #app-bg-effects-panel > span { color:#fff !important; }
 #modal-settings #app-bg-effects-panel > span > i { color:var(--brand-red,#ff0033) !important; -webkit-text-fill-color:var(--brand-red,#ff0033) !important; }
-/* Kolor ikony, tekstu i tła odznaki musi być zgodny; przywrócenie animacji właściciela. */
+
 #badge-owner {
   color:#facc15 !important; -webkit-text-fill-color:#facc15 !important;
   background:linear-gradient(120deg,rgba(120,74,0,.22),rgba(234,179,8,.48),rgba(133,77,14,.22),rgba(250,204,21,.55)) !important;
@@ -7767,9 +7721,8 @@ html.dark #modal-settings #app-bg-effects-panel > span { color:#fff !important; 
 }
 </style>
 
-
 <style id="scythed-settings-dropdown-dark-fix-v1">
-/* Ujednolicone listy wyboru w ustawieniach: szare w ciemnym motywie, z czytelną typografią. */
+
 #modal-settings #ui-scale-slider,
 #modal-settings #auto-lock-mode,
 #modal-settings #backup-reminder-days {
@@ -7805,10 +7758,8 @@ html.dark #modal-settings #backup-reminder-days:hover {
 }
 </style>
 
-
-
 <style id="scythed-final-hex-and-dropdown-typography-fix">
-/* Pola HEX i próbniki kolorów nie mogą pozostawać białe w ciemnym motywie. */
+
 #modal-settings #brand-hex-input,
 #modal-settings #bg-overlay-hex {
   background-color: #e4e4e7 !important;
@@ -7824,7 +7775,7 @@ html.dark #modal-settings #bg-overlay-hex {
   color: #f4f4f5 !important;
   color-scheme: dark;
 }
-/* Wybierane listy mają tę samą rodzinę i zbliżoną wielkość pisma co animowany nagłówek SCYTHED. */
+
 #modal-settings #ui-scale-slider,
 #modal-settings #auto-lock-mode,
 #modal-settings #backup-reminder-days {
@@ -7859,9 +7810,8 @@ html.dark #modal-settings #backup-reminder-days option {
 }
 </style>
 
-
 <style id="scythed-requested-admin-polish">
-/* Panel Admina: przycisk zamknięcia ma stały kolor akcentu, tak jak główne przyciski. */
+
 #scythed-admin-modal header > button[aria-label="Zamknij panel"] {
   color: var(--brand-contrast-text, #fff) !important;
   background: var(--brand-red, #ff0033) !important;
@@ -7878,14 +7828,13 @@ html.dark #modal-settings #backup-reminder-days option {
   border-color: var(--brand-red, #ff0033) !important;
   filter: none !important; opacity: 1 !important;
 }
-/* W panelu admina odznaki są statyczne w reakcji na kursor; tooltipy pozostają na profilu. */
+
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-owner-status { cursor: default !important; }
 #scythed-admin-modal .admin-list-badge:hover,
 #scythed-admin-modal .admin-owner-status:hover { filter: none !important; }
 #scythed-admin-modal .admin-list-badge:hover::after { opacity: 1; }
-/* Jasny motyw: przyciemnij kolory odznak i statusów dla lepszego kontrastu. */
-/* Odznaka właściciela: żółty gradient i animacja są niezależne od koloru marki. */
+
 #scythed-admin-modal .admin-list-owner,
 #scythed-admin-modal .admin-owner-status {
   background-size: 220% 220% !important;
@@ -7896,7 +7845,6 @@ html.dark #modal-settings #backup-reminder-days option {
   #scythed-admin-modal .admin-owner-status { animation:none !important; }
 }
 </style>
-
 
 <style id="scythed-final-close-x-and-badge-light-fix">
 #scythed-admin-modal header > button[aria-label="Zamknij panel"],
@@ -7911,7 +7859,7 @@ html.dark #modal-settings #backup-reminder-days option {
   transition: none !important;
 }
 #scythed-admin-modal header > button[aria-label="Zamknij panel"] i { color: #9aa0a6 !important; -webkit-text-fill-color: #9aa0a6 !important; }
-/* Jasny motyw zachowuje oryginalne kolory odznak i nie dodaje czerwonych obramowań. */
+
 html:not(.dark) #scythed-admin-modal .admin-list-badge,
 html:not(.dark) #scythed-admin-modal .admin-owner-status,
 html:not(.dark) #scythed-admin-modal .admin-admin-status,
@@ -7920,7 +7868,7 @@ html:not(.dark) #scythed-admin-modal .admin-verified-status { outline: none !imp
 </style>
 
 <style id="scythed-admin-x-exact-fix">
-/* Ostateczna reguła: sam szary X, bez tła, bez obramowania i bez reakcji na kolor marki. */
+
 #scythed-admin-modal header > button[aria-label="Zamknij panel"],
 #scythed-admin-modal header > button[aria-label="Zamknij panel"]:hover,
 #scythed-admin-modal header > button[aria-label="Zamknij panel"]:focus,
@@ -7954,7 +7902,7 @@ html:not(.dark) #scythed-admin-modal header > button[aria-label="Zamknij panel"]
 </style>
 
 <style id="scythed-admin-x-hover-and-admin-name-tag">
-/* Match the settings close icon: neutral gray at rest, lighter on hover; no background/accent color. */
+
 #scythed-admin-modal header > button { color:#a1a1aa !important; -webkit-text-fill-color:#a1a1aa !important; cursor:pointer; transition:color .16s ease, opacity .16s ease !important; }
 #scythed-admin-modal header > button svg, #scythed-admin-modal header > button svg *, #scythed-admin-modal header > button i { color:#a1a1aa !important; stroke:#a1a1aa !important; transition:color .16s ease, stroke .16s ease !important; }
 #scythed-admin-modal header > button:hover { background:transparent !important; background-color:transparent !important; color:#e4e4e7 !important; -webkit-text-fill-color:#e4e4e7 !important; }
@@ -7969,7 +7917,7 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 
 <script id="scythed-admin-button-click-sounds">
 (function () {
-  // Dźwięk kliknięcia dla przycisków panelu admina, zgodny z ustawieniem wyciszenia aplikacji.
+
   let ctx;
   function muted() {
     try {
@@ -7981,7 +7929,7 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
   document.addEventListener('click', function (event) {
     const target = event.target && event.target.closest ? event.target.closest('#scythed-admin-modal button, #scythed-admin-modal input[type="button"], #scythed-admin-modal input[type="submit"]') : null;
     if (!target || target.disabled || target.dataset.scythedSoundPlayed === '1' || muted()) return;
-    // Nie dubluj dźwięku, jeśli przycisk ma już własny handler dźwięku.
+
     if (target.hasAttribute('data-no-click-sound')) return;
     try {
       if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -7996,9 +7944,8 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 })();
 </script>
 
-
 <style id="scythed-admin-solid-red-status">
-/* Status ADMINISTRATOR: jednolity czerwony kolor, bez gradientu */
+
 #scythed-admin-modal .admin-admin-status {
   background: #dc2626 !important;
   background-image: none !important;
@@ -8010,9 +7957,6 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 }
 </style>
 
-
-
-<!-- SCYTHED: lighter red border for the Administrator badge, in profile and admin panel -->
 <style id="scythed-admin-lighter-border-v9">
 #profile-badges-container #badge-admin,
 #profile-badges-container #badge-admin:hover,
@@ -8026,9 +7970,8 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 }
 </style>
 
-
 <style id="scythed-v15-requested-fixes">
-/* Ikony potwierdzeń w panelach używają aktualnego koloru motywu, nie starej wartości po zmianie. */
+
 #modal-settings .fa-check,
 #modal-settings .fa-check-circle,
 #modal-settings .fa-circle-check,
@@ -8056,7 +7999,7 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
     }
     root.style.setProperty('--brand-readable-accent',readable);
     document.querySelectorAll('#modal-settings .fa-check, #modal-settings .fa-check-circle, #modal-settings .fa-circle-check, #modal-change-name-password .fa-check, #modal-change-name-password .fa-check-circle, #modal-change-name-password .fa-circle-check, #scythed-admin-modal .fa-check, #scythed-admin-modal .fa-check-circle, #scythed-admin-modal .fa-circle-check').forEach(icon=>{
-      // Stałe ikony statusów/odznak nie są kontrolkami użytkownika - nie nadpisujemy ich własnych kolorów.
+
       if (icon.closest('.admin-verified-status, .admin-moderator-status, .admin-list-badge, .profile-badge-tooltip, .profile-badge, .badge-icon')) return;
       icon.style.setProperty('color','var(--brand-readable-accent,var(--brand-red,#ff0033))','important');
       icon.style.setProperty('-webkit-text-fill-color','var(--brand-readable-accent,var(--brand-red,#ff0033))','important');
@@ -8072,9 +8015,8 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 })();
 </script>
 
-
 <style id="scythed-verified-icon-match-moderator-hammer">
-/* Ikona statusu zweryfikowanego ma ten sam stały niebieski kolor co młotek moderatora. */
+
 #scythed-admin-modal .admin-verified-status > i,
 #scythed-admin-modal .admin-verified-status > i:hover,
 #scythed-admin-modal .admin-moderator-status > i,
@@ -8088,7 +8030,7 @@ html:not(.dark) #scythed-admin-modal header > button:hover svg, html:not(.dark) 
 </style>
 
 <style id="scythed-overlay-frame-and-neutral-action-fix">
-/* Ramka wokół wyboru koloru nakładki dopasowana do powierzchni motywu. */
+
 #modal-settings .flex.items-center.gap-2:has(>#bg-overlay-color) {
   box-sizing: border-box;
   gap: .55rem !important;
@@ -8115,7 +8057,6 @@ html.dark #modal-settings .flex.items-center.gap-2:has(>#bg-overlay-color) {
   width: auto !important;
 }
 
-/* Przyciski haseł i wejścia do paneli mają tę samą neutralną powierzchnię co przełącznik motywu. */
 #modal-settings .settings-password-action,
 #modal-settings .admin-master-action,
 #general-admin-open-panel-wrap .admin-access-action,
@@ -8154,9 +8095,8 @@ html.dark #scythed-admin-modal .scythed-logs-close-button:hover:not(:disabled) {
 }
 </style>
 
-
 <style id="scythed-requested-control-colors-fix">
-/* Kolor nakładki: dokładnie taki sam, kompaktowy próbnik jak przy Kolorze Głównym. */
+
 #modal-settings #bg-overlay-color {
   width: 1.25rem !important;
   height: 1.25rem !important;
@@ -8167,7 +8107,7 @@ html.dark #scythed-admin-modal .scythed-logs-close-button:hover:not(:disabled) {
   background: transparent !important;
 }
 #modal-settings #bg-overlay-hex { width: 4rem !important; }
-/* Przyciski: hasło aplikacji, hasło nazwy oraz wejścia do paneli moderatora/administratora. */
+
 #modal-settings button.settings-password-action,
 #modal-settings button.admin-master-action,
 #general-admin-open-panel-wrap button.admin-access-action,
@@ -8211,9 +8151,8 @@ html.dark #general-admin-open-panel-wrap button.admin-access-action:hover:not(:d
 }
 </style>
 
-
 <style id="scythed-final-panel-and-overlay-fix">
-/* Ciemne powierzchnie paneli: nie używaj czerni #000, tylko neutralne #0c0c0e. */
+
 html.dark #modal-settings #general-admin-open-panel-wrap,
 html.dark #modal-settings #security-settings-category .grid.grid-cols-2 > div.p-3.rounded-xl,
 html.dark #scythed-admin-modal #admin-logs-section,
@@ -8224,7 +8163,7 @@ html.dark #scythed-admin-modal #admin-content-view .admin-user-row,
 html.dark #scythed-admin-modal section {
   background-color: #0c0c0e !important;
 }
-/* Ustawienia bezpieczeństwa: wyrównaj też powierzchnie kart z panelem Tryb Wyglądu. */
+
 html.dark #modal-settings #general-admin-open-panel-wrap,
 html.dark #modal-settings #security-settings-category .grid.grid-cols-2 > div.p-3.rounded-xl,
 html.dark #scythed-admin-modal #admin-logs-section,
@@ -8232,14 +8171,14 @@ html.dark #scythed-admin-modal #admin-content-view > section,
 html.dark #scythed-admin-modal #admin-content-view > .p-4.rounded-xl {
   border-color: #27272a !important;
 }
-/* Nakładka na stronę ma być całkowicie niewidoczna, dopóki użytkownik nie wybierze własnego tła. */
+
 #app-bg-overlay {
   background-color: transparent !important;
 }
 body.has-custom-bg #app-bg-overlay {
   background-color: var(--app-bg-overlay-color, rgba(0,0,0,.4)) !important;
 }
-/* Bez własnego tła nie pokazuj panelu efektów ani nie stosuj rozmycia/koloru nakładki. */
+
 body:not(.has-custom-bg) #app-custom-bg {
   background-image: none !important;
   filter: none !important;
@@ -8248,7 +8187,7 @@ body:not(.has-custom-bg) #app-bg-overlay {
   display: block;
   background: transparent !important;
 }
-/* Kompaktowy kontener wyboru koloru nakładki - taki sam charakter jak Kolor Główny. */
+
 html.dark #modal-settings #app-bg-effects-panel .flex.items-center.gap-1:has(#bg-overlay-color) {
   background: #0c0c0e !important;
   border-color: #27272a !important;
@@ -8259,9 +8198,8 @@ html:not(.dark) #modal-settings #app-bg-effects-panel .flex.items-center.gap-1:h
 }
 </style>
 
-
 <style id="scythed-v36-clarified-settings-fixes">
-/* Panel Administracyjny / Sprawdź logi: match the other dark setting buttons (e.g. Zmień hasło). */
+
 html.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
 body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
 .dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action {
@@ -8273,21 +8211,20 @@ body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-act
 .dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action:hover {
   background:#ff0033!important; background-color:var(--brand-red,#ff0033)!important; border-color:var(--brand-red,#ff0033)!important; color:var(--brand-contrast-text,#fff)!important;
 }
-/* The overlay-effects controls are hidden until an image is actually selected. */
+
 #modal-settings #app-bg-effects-panel[hidden],
 #modal-settings #app-bg-effects-panel.hidden { display:none!important; }
 </style>
 
-
 <style id="scythed-v38-light-toggle-icon-colors">
-/* In light mode, enabled sound/notifications keep the same accent color as other active icons. */
+
 html:not(.dark) body #sound-toggle-btn #sound-icon.text-brand-red,
 html:not(.dark) body #notifications-toggle-btn #notifications-icon.text-brand-red {
   color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
   -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
   opacity: 1 !important;
 }
-/* Muted/disabled states alone use gray icons, in both themes. */
+
 html:not(.dark) body #sound-toggle-btn #sound-icon.text-zinc-400,
 html:not(.dark) body #notifications-toggle-btn #notifications-icon.text-zinc-400 {
   color: #a1a1aa !important;
@@ -8295,9 +8232,8 @@ html:not(.dark) body #notifications-toggle-btn #notifications-icon.text-zinc-400
 }
 </style>
 
-
 <style id="scythed-v39-header-hide-icon-accent">
-/* UKRYJ: keep the icon in the active accent color in light mode, like other active controls. */
+
 html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
   -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
@@ -8308,9 +8244,8 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
 </body>
 </html>
 
-
 <style id="scythed-dropdown-font-match-image-button-and-overlay-hex-input">
-/* Listy mają typografię przycisku „WYBIERZ OBRAZ”: zwykły sans-serif, 12 px, bold. */
+
 #modal-settings #auto-lock-mode,
 #modal-settings #backup-reminder-days {
   font-family: inherit !important;
@@ -8338,7 +8273,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
 </style>
 
 <style id="scythed-fix-size-dropdown-font-match-reminder">
-/* „Wielkość” ma używać dokładnie tej samej typografii co lista „Przypomnienie” i przycisk „WYBIERZ OBRAZ”. */
+
 #modal-settings #ui-scale-slider,
 #modal-settings #ui-scale-slider option {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
@@ -8350,9 +8285,8 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
 }
 </style>
 
-
 <style id="scythed-admin-badge-hover-match-profile">
-/* Odznaki w panelu admina reagują na hover tak samo subtelnie jak odznaki na profilu. */
+
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge:hover,
 #scythed-admin-modal .admin-list-badge:focus,
@@ -8376,11 +8310,8 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
 }
 </style>
 
-
 <style id="scythed-admin-badge-hover-and-bughunter2-fix">
-/* Odznaki w panelu admina zachowują kolory, a efekty najechania pozostają aktywne. */
 
-/* Łowca błędów poziom 1 - zielony */
 #scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2),
 #scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2):hover {
   background: rgba(34,197,94,.14) !important;
@@ -8393,7 +8324,6 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   -webkit-text-fill-color: #4ade80 !important;
 }
 
-/* Łowca błędów poziom 2 - niebieski również po najechaniu */
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2,
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2:hover {
   background: rgba(59,130,246,.14) !important;
@@ -8407,9 +8337,8 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
 }
 </style>
 
-
 <style id="scythed-admin-badges-profile-animation-final">
-/* Admin badges: preserve the profile badge palette while keeping the same smooth animated surface. */
+
 #scythed-admin-modal .admin-list-badge {
   position: relative !important;
   overflow: hidden !important;
@@ -8424,7 +8353,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   filter: brightness(1.08) !important;
   transform: none !important;
 }
-/* Łowca błędów poziom 1 stays green, level 2 stays blue, including on hover. */
+
 #scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2),
 #scythed-admin-modal .admin-list-badge.admin-list-bug:not(.bug-hunter-level-2):hover {
   background: linear-gradient(120deg, rgba(20,83,45,.18), rgba(34,197,94,.28), rgba(21,128,61,.18), rgba(74,222,128,.32)) !important;
@@ -8445,9 +8374,8 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2 > i { color: #3b82f6 !important; -webkit-text-fill-color: #3b82f6 !important; }
 </style>
 
-
 <style id="scythed-password-button-icon-accent-sync">
-/* Ikony obu przycisków „Zmień hasło” korzystają z tego samego dynamicznego akcentu co pozostałe loga, w obu motywach. */
+
 html body #modal-settings button.settings-password-action > i,
 html body #modal-settings button.settings-password-action:hover:not(:disabled) > i,
 html.dark body #modal-settings button.settings-password-action > i,
@@ -8457,7 +8385,6 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
   opacity: 1 !important;
 }
 </style>
-
 
 <script id="scythed-password-icons-readable-accent-v2">
 (function(){
@@ -8480,7 +8407,7 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
     if(typeof window.getReadableBrandAccent==='function'){
       try { readable=window.getReadableBrandAccent(accent,dark) || accent; } catch(e) {}
     } else if(rgb){
-      // Keep the chosen hue when readable; shift extreme brightness toward a legible shade.
+
       if(lum(rgb)>.72) readable=dark?'#d1d5db':'#374151';
       else if(lum(rgb)<.055) readable=dark?'#d1d5db':'#374151';
     }
@@ -8511,9 +8438,8 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
 }
 </style>
 
-
 <style id="scythed-panel-icons-readable-accent-fix">
-/* Ikony akcji w panelach korzystają z tej samej wersji akcentu o czytelnym kontraście. */
+
 #scythed-admin-modal button i,
 #scythed-admin-modal a i,
 #modal-browser button i,
@@ -8550,10 +8476,8 @@ html:not(.dark) body #modal-settings button.settings-password-action > i {
 })();
 </script>
 
-
 <style id="scythed-admin-fixed-neutral-buttons-corrected">
-/* Tylko przyciski panelu: neutralne kolory zależne od motywu.
-   Nie dotykamy powierzchni panelu, pól formularzy ani kolorowych odznak. */
+
 #scythed-admin-modal button:not(header > button):not(.admin-list-badge) {
   background-color: #e4e4e7 !important;
   background-image: none !important;
@@ -8596,7 +8520,7 @@ html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge
   -webkit-text-fill-color: #ffffff !important;
   border-color: #52525b !important;
 }
-/* Krzyżyk zamknięcia nagłówka nie dostaje tła. */
+
 #scythed-admin-modal header > button,
 #scythed-admin-modal header > button:hover {
   background: transparent !important;
@@ -8606,7 +8530,7 @@ html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge
   border-color: transparent !important;
   box-shadow: none !important;
 }
-/* Tekst sesji administratora i licznik zawsze czerwone. */
+
 #scythed-admin-modal #admin-content-view p.text-brand-red,
 #scythed-admin-modal #admin-session-countdown {
   color: #ef4444 !important;
@@ -8615,7 +8539,7 @@ html.dark #scythed-admin-modal button:not(header > button):not(.admin-list-badge
 </style>
 
 <style id="scythed-admin-neutral-button-colors-final">
-/* Stable admin buttons. This overrides the previous live-accent rules; no JS re-colors buttons. */
+
 #scythed-admin-modal button.admin-primary-action,
 #scythed-admin-modal button.admin-bottom-close,
 #scythed-admin-modal #admin-create-user-form button[type="submit"],
@@ -8684,7 +8608,7 @@ html.dark #scythed-admin-modal #admin-login-view button:not(.admin-list-badge):n
   -webkit-text-fill-color: #ffffff !important;
   border-color: #52525b !important;
 }
-/* Keep the header X transparent and session text red. */
+
 #scythed-admin-modal header > button,
 #scythed-admin-modal header > button:hover {
   background: transparent !important;
@@ -8702,7 +8626,7 @@ html.dark #scythed-admin-modal #admin-login-view button:not(.admin-list-badge):n
 </style>
 
 <style id="scythed-admin-close-x-fixed-gray-final">
-/* Close X: transparent background, fixed neutral gray per theme, never uses brand/accent color. */
+
 #scythed-admin-modal header > button,
 #scythed-admin-modal header > button:hover,
 #scythed-admin-modal header > button:focus,
@@ -8740,12 +8664,12 @@ html:not(.dark) #scythed-admin-modal header > button i {
 </style>
 
 <style id="scythed-admin-final-user-request-corrections">
-/* Names stay plain; the red styling belongs to the Administrator badge, not the username. */
+
 #scythed-admin-modal .admin-name-admin-tag,
 #scythed-admin-modal .admin-name-owner-tag { display: contents !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; animation: none !important; box-shadow: none !important; color: inherit !important; }
 #scythed-admin-modal .admin-list-badge.admin-list-admin,
 #scythed-admin-modal .admin-list-badge.admin-list-admin:hover { background: linear-gradient(120deg,rgba(69,10,10,.32),rgba(185,28,28,.56),rgba(127,29,29,.28),rgba(220,38,38,.62)) !important; border-color: rgba(248,113,113,.92) !important; }
-/* The close X is always neutral gray regardless of theme/accent; it brightens on hover like Settings. */
+
 #scythed-admin-modal header > button,
 #scythed-admin-modal header > button svg,
 #scythed-admin-modal header > button svg *,
@@ -8775,7 +8699,7 @@ html:not(.dark) #scythed-admin-modal header > button i {
 </style>
 
 <style id="scythed-admin-close-x-match-settings-and-search-final">
-/* Match the Settings close icon: neutral theme-aware gray, brighter on hover, transparent background. */
+
 #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"],
 #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"] i { color: #71717a !important; -webkit-text-fill-color: #71717a !important; transition: color .16s ease !important; background: transparent !important; background-color: transparent !important; border: 0 !important; box-shadow: none !important; }
 html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"],
@@ -8786,9 +8710,8 @@ html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij p
 html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij panel"]:hover i { color: #e4e4e7 !important; -webkit-text-fill-color: #e4e4e7 !important; }
 </style>
 
-
 <style id="scythed-admin-status-animation-and-logs-close">
-/* Administrator: animowana odznaka w stylu statusu Właściciela. */
+
 #scythed-admin-modal .admin-admin-status {
   background: linear-gradient(110deg, rgba(69,10,10,.30), rgba(220,38,38,.55), rgba(127,29,29,.30), rgba(248,113,113,.55)) !important;
   background-size: 220% 220% !important;
@@ -8802,7 +8725,7 @@ html.dark #scythed-admin-modal > section > header > button[aria-label="Zamknij p
   0%,100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
-/* Przycisk zamykania sekcji logów: spójny, wyraźny i z delikatnym hoverem. */
+
 #scythed-admin-modal #admin-logs-section button[onclick*="admin-logs-section"] {
   display: inline-flex !important;
   align-items: center !important;
@@ -8834,9 +8757,8 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
 <style id="badge-unified-theme-and-level3-fixes">
-/* Odznaki profilu mają identyczne, nieprzezroczyste kolory w obu motywach. */
+
 #profile-badges-container .profile-badge-tooltip:not(#badge-admin) { background-image:none !important; animation:none !important; box-shadow:none !important; }
 #profile-badges-container .moderator-badge { background:#1e3a5f !important; border-color:#6087be !important; color:#a0bce3 !important; }
 #profile-badges-container .moderator-badge::after { content:none !important; animation:none !important; }
@@ -8850,16 +8772,15 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #profile-badges-container .beta-tester-badge { background:#713f12 !important; border-color:#eab308 !important; color:#facc15 !important; animation:none !important; box-shadow:none !important; }
 #profile-badges-container .beta-tester-badge::after { content:none !important; animation:none !important; }
 #profile-badges-container .profile-badge-tooltip > i { -webkit-text-stroke:0 !important; text-shadow:none !important; filter:none !important; }
-/* W panelu administracyjnym poziom 3 ma fioletowy gradient; Beta Tester jest statyczny. */
+
 #scythed-admin-modal .admin-list-bug.bug-hunter-level-3 { background:linear-gradient(120deg,#3b0764,#7e22ce,#581c87,#a855f7) !important; background-size:220% 220% !important; border-color:#c084fc !important; color:#e9d5ff !important; animation:badgeGradientShift 3.2s ease-in-out infinite,badgePulseGlow 2.2s ease-in-out infinite !important; }
 #scythed-admin-modal .admin-list-bug.bug-hunter-level-3 > i { color:#e9d5ff !important; -webkit-text-fill-color:#e9d5ff !important; }
 #scythed-admin-modal .admin-list-beta { animation:none !important; background:#713f12 !important; border-color:#eab308 !important; color:#facc15 !important; box-shadow:none !important; }
 #scythed-admin-modal .admin-list-beta::after { content:none !important; animation:none !important; }
 </style>
 
-
 <style id="scythed-admin-badges-final-fixes">
-/* Panel administratora: kryjące, pełne tła; bez starych półprzezroczystych gradientów. */
+
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge:hover,
 #scythed-admin-modal .admin-list-badge:focus,
@@ -8892,7 +8813,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-list-badge.admin-list-beta { background:#713f12 !important; border-color:#eab308 !important; color:#fef08a !important; }
 #scythed-admin-modal .admin-list-badge.admin-list-beta > i { color:#fef08a !important; -webkit-text-fill-color:#fef08a !important; }
 @keyframes scythedVioletGradient { 0%,100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
-/* Status Administrator ma wyglądać jak statyczny status Moderator. */
+
 #scythed-admin-modal .admin-admin-status,
 #scythed-admin-modal .admin-admin-status:hover {
   background:rgba(59,130,246,.12) !important;
@@ -8906,7 +8827,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-admin-status::before,
 #scythed-admin-modal .admin-admin-status::after { content:none !important; display:none !important; animation:none !important; background:none !important; }
 #scythed-admin-modal .admin-admin-status i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
-/* Poziom 3 na profilu: ciemnofioletowy, kryjący i animowany gradient. */
+
 #profile-badges-container .profile-badge-tooltip.bug-hunter-level-3,
 #profile-badges-container .bug-hunter-level-3 {
   background-color:#4c1d95 !important;
@@ -8925,10 +8846,8 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
-
 <style id="scythed-solid-badge-shine-request">
-/* Moderator, Zasłużony i Łowca błędów poziom 2: pełne jednolite tło z osobnym połyskiem, bez gradientu tła. */
+
 @keyframes scythedSolidBadgeShine {
   0% { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
   18% { opacity: .72; }
@@ -8985,10 +8904,8 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
-<!-- SCYTHED FINAL BADGE CONSISTENCY FIX -->
 <style id="scythed-final-badge-consistency-fix">
-/* Wspólny rytm animacji dla wszystkich odznak: bez szybszego pulsu Administratora ani Łowcy poziomu 3. */
+
 @keyframes scythedUnifiedBadgeGlow {
   0%, 100% { box-shadow: 0 0 3px rgba(255,255,255,.10); }
   50% { box-shadow: 0 0 7px rgba(255,255,255,.20); }
@@ -9009,7 +8926,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   background: linear-gradient(110deg,transparent 42%,rgba(254,202,202,.10) 47%,rgba(255,255,255,.48) 50%,rgba(248,113,113,.12) 53%,transparent 58%) !important;
   animation: badgeShine 3.1s ease-in-out infinite !important;
 }
-/* Poziom 3: kryjący, mocno fioletowy gradient i ten sam czas animacji co pozostałe odznaki. */
+
 #profile-badges-container .profile-badge-tooltip.bug-hunter-level-3,
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3,
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-3:hover {
@@ -9040,7 +8957,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   color: #ede9fe !important;
   -webkit-text-fill-color: #ede9fe !important;
 }
-/* Odznaki w panelu używają takich samych pełnych kolorów i efektów jak profil. */
+
 #scythed-admin-modal .admin-list-badge.admin-list-admin,
 #scythed-admin-modal .admin-list-badge.admin-list-admin:hover {
   background-color: #991b1b !important;
@@ -9058,7 +8975,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-list-badge.admin-list-zasluzony:hover { background:#14532d !important; background-image:none !important; }
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2,
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2:hover { background:#1e3a8a !important; background-image:none !important; }
-/* Status konta Administrator: czerwony, jednolity i statyczny - jak status Moderator pod względem formy. */
+
 #scythed-admin-modal .admin-admin-status,
 #scythed-admin-modal .admin-admin-status:hover {
   background: rgba(220,38,38,.12) !important;
@@ -9083,9 +9000,8 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
 <style id="scythed-admin-profile-badge-parity-final">
-/* Ostateczne wyrównanie: status/odznaki w panelu nie zmieniają się przy najechaniu. */
+
 @keyframes scythedBadgeGradientUnified {
   0%,100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -9100,7 +9016,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   48% { opacity: .5; }
   72% { opacity: 0; }
 }
-/* Administrator i Właściciel: jednakowe tempo animacji jak Łowca poziom 3, kolory odznak zachowane. */
+
 #profile-badges-container #badge-admin,
 #profile-badges-container #badge-owner,
 #profile-badges-container #badge-admin:hover,
@@ -9147,7 +9063,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-list-badge.admin-list-admin > i { color:#fecaca !important; -webkit-text-fill-color:#fecaca !important; }
 #profile-badges-container #badge-owner > i,
 #scythed-admin-modal .admin-list-badge.admin-list-owner > i { color:#facc15 !important; -webkit-text-fill-color:#facc15 !important; }
-/* Panelowe odznaki są dekoracyjne: brak hoverowych filtrów, zmian kolorów i tooltipów. */
+
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge:hover,
 #scythed-admin-modal .admin-list-badge:focus,
@@ -9193,8 +9109,6 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 })();
 </script>
 
-
-<!-- SCYTHED: final admin/owner badge parity and inert admin-panel badges -->
 <style id="scythed-final-admin-owner-parity">
 @keyframes scythedBadgeShineFinal {
   0%, 100% { transform: translateX(-155%) skewX(-18deg); opacity: 0; }
@@ -9202,7 +9116,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   48% { opacity: .5; }
   72% { opacity: 0; }
 }
-/* Moderator-like badge treatment: opaque solid base + one shared shimmer, no faster gradient/pulse. */
+
 #profile-badges-container #badge-admin,
 #profile-badges-container #badge-admin.fixed-owner-badge,
 #profile-badges-container #badge-owner,
@@ -9223,7 +9137,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   box-shadow: none !important;
   text-shadow: none !important;
 }
-/* Administrator: opaque red like Moderator's badge form, retaining its own icon/tooltip. */
+
 #profile-badges-container #badge-admin,
 #profile-badges-container #badge-admin.fixed-owner-badge,
 #profile-badges-container #badge-admin:hover,
@@ -9235,7 +9149,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   color: #fecaca !important;
   animation: none !important;
 }
-/* Owner: opaque gold, same structure and animation timing. */
+
 #profile-badges-container #badge-owner,
 #profile-badges-container #badge-owner:hover,
 #scythed-admin-modal .admin-list-badge.admin-list-owner,
@@ -9246,7 +9160,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   color: #facc15 !important;
   animation: none !important;
 }
-/* Identical shine speed on profile and admin-panel copies. */
+
 #profile-badges-container #badge-admin::after,
 #profile-badges-container #badge-owner::after,
 #scythed-admin-modal .admin-list-badge.admin-list-admin::after,
@@ -9275,7 +9189,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-list-badge.admin-list-owner::after {
   background: linear-gradient(90deg, transparent, rgba(254,240,138,.62), transparent) !important;
 }
-/* Icons must not get their own border/outline; only the badge tile has a border. */
+
 #profile-badges-container #badge-admin > i,
 #profile-badges-container #badge-owner > i,
 #scythed-admin-modal .admin-list-badge > i {
@@ -9291,7 +9205,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-list-badge.admin-list-admin > i { color: #fecaca !important; -webkit-text-fill-color: #fecaca !important; }
 #profile-badges-container #badge-owner > i,
 #scythed-admin-modal .admin-list-badge.admin-list-owner > i { color: #facc15 !important; -webkit-text-fill-color: #facc15 !important; }
-/* Match profile tile dimensions; admin-panel badges are decorative and do not react to the mouse. */
+
 #scythed-admin-modal .admin-list-badge {
   flex: 0 0 28px !important;
   width: 28px !important;
@@ -9340,10 +9254,8 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 })();
 </script>
 
-
-<!-- SCYTHED: final icon-outline cleanup and consistent badge shimmer -->
 <style id="scythed-final-shine-outline-fix">
-/* Use the exact same shimmer motion and timing as Moderator/Zasłużony. */
+
 #profile-badges-container #badge-admin::after,
 #profile-badges-container #badge-owner::after,
 #scythed-admin-modal .admin-list-badge.admin-list-admin::after,
@@ -9362,7 +9274,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-list-badge.admin-list-owner::after {
   background: linear-gradient(90deg, transparent, rgba(254,240,138,.72), transparent) !important;
 }
-/* Remove the Level 2 Bug Hunter shine only; keep its solid blue tile. */
+
 #profile-badges-container .profile-badge-tooltip.bug-hunter-level-2::after,
 #scythed-admin-modal .admin-list-badge.admin-list-bug.bug-hunter-level-2::after {
   content: none !important;
@@ -9373,7 +9285,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   border: 0 !important;
   outline: 0 !important;
 }
-/* The icon itself must not have a stroke/outline/shadow in the admin panel. */
+
 #scythed-admin-modal .admin-list-badge,
 #scythed-admin-modal .admin-list-badge:hover,
 #scythed-admin-modal .admin-list-badge:focus,
@@ -9400,8 +9312,6 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
-<!-- SCYTHED: administrator badge border matching its red logo -->
 <style id="scythed-admin-logo-colored-border">
 #profile-badges-container #badge-admin,
 #profile-badges-container #badge-admin:hover,
@@ -9414,8 +9324,6 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
-<!-- SCYTHED: warmer gold OWNER badge; keep ADMIN badge styling from v3 -->
 <style id="scythed-owner-badge-gold-final">
 #profile-badges-container #badge-owner,
 #profile-badges-container #badge-owner:hover,
@@ -9443,8 +9351,6 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
-<!-- SCYTHED: align administrator border with its logo; give Beta Tester a distinct light-yellow palette -->
 <style id="scythed-admin-border-beta-light-yellow-final">
 #profile-badges-container #badge-admin,
 #profile-badges-container #badge-admin:hover,
@@ -9481,10 +9387,8 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
-<!-- SCYTHED: enforce matching badge colors in the admin panel as well as the profile -->
 <style id="scythed-admin-panel-badge-colors-v7">
-/* Administrator: border matches the badge logo's red tone. */
+
 #scythed-admin-modal .admin-list-badge.admin-list-admin,
 #scythed-admin-modal .admin-list-badge.admin-list-admin:hover,
 #scythed-admin-modal .admin-list-badge.admin-list-admin:focus,
@@ -9498,7 +9402,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   color: #f87171 !important;
   -webkit-text-fill-color: #f87171 !important;
 }
-/* Beta Tester: brighter, light-yellow look, consistent with the profile badge. */
+
 #scythed-admin-modal .admin-list-badge.admin-list-beta,
 #scythed-admin-modal .admin-list-badge.admin-list-beta:hover,
 #scythed-admin-modal .admin-list-badge.admin-list-beta:focus,
@@ -9524,8 +9428,6 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
-<!-- SCYTHED: Beta Tester badge refreshed to a calm, matte blue-violet testing theme; no effects. -->
 <style id="scythed-beta-tester-matte-refresh">
 #profile-badges-container .beta-tester-badge,
 #profile-badges-container .beta-tester-badge:hover,
@@ -9571,10 +9473,8 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
-<!-- SCYTHED: consistent subtle hover feedback for every badge, matching the Zasluzony badge -->
 <style id="scythed-unified-badge-hover-feedback">
-/* Profile badges: a small lift and gentle brightness on hover, without shine/animation. */
+
 #profile-badges-container .profile-badge-tooltip,
 #profile-badges-container .profile-badge-tooltip > i,
 #scythed-admin-modal .admin-list-badge,
@@ -9592,7 +9492,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal .admin-list-badge:hover > svg {
   transform: scale(1.04) !important;
 }
-/* Beta Tester stays matte: no glow, shine, or animated effects. */
+
 #profile-badges-container .beta-tester-badge:hover,
 #scythed-admin-modal .admin-list-badge.admin-list-beta:hover {
   animation: none !important;
@@ -9615,9 +9515,8 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
 <style id="scythed-moderator-session-blue-final">
-/* Moderator session label and log title use a steady blue, never the admin red. */
+
 #scythed-admin-modal #admin-session-label.scythed-moderator-session,
 #scythed-admin-modal #admin-session-label.scythed-moderator-session #admin-session-countdown,
 #scythed-admin-modal .scythed-moderator-blue {
@@ -9629,13 +9528,12 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 </style>
 
-
 <style id="scythed-close-buttons-unified-v14">
-/* Tytuł logów: tekst pozostaje neutralny, a ikona może korzystać z koloru akcentu. */
+
 #scythed-admin-modal header h2 .scythed-logs-title-text { color: inherit !important; -webkit-text-fill-color: currentColor !important; }
 #scythed-admin-modal header h2 .scythed-logs-title-icon { color: var(--brand-readable-accent, var(--brand-red, #60a5fa)) !important; -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #60a5fa)) !important; transition: color .18s ease, -webkit-text-fill-color .18s ease !important; }
 #scythed-admin-modal header h2 .scythed-logs-title-icon:hover { color: var(--brand-red, #60a5fa) !important; -webkit-text-fill-color: var(--brand-red, #60a5fa) !important; }
-/* Zamknięcie sekcji logów ma tę samą typografię co LOGI / WYLOGUJ i wyraźną ikonę X. */
+
 #scythed-admin-modal .scythed-logs-close-button {
   display:inline-flex !important; align-items:center !important; justify-content:center !important; gap:.4rem !important;
   padding:.5rem .75rem !important; border:1px solid var(--brand-red, #ef4444) !important; border-radius:.55rem !important;
@@ -9645,14 +9543,13 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 }
 #scythed-admin-modal .scythed-logs-close-button i { color:inherit !important; font-size:12px !important; }
 #scythed-admin-modal .scythed-logs-close-button:hover { background:var(--brand-hover-red, var(--brand-red, #ef4444)) !important; transform:translateY(-1px) !important; }
-/* Dolny przycisk zamykania panelu używa tej samej czcionki i ma ikonę X. */
+
 #scythed-admin-modal .admin-bottom-close { font-family:inherit !important; letter-spacing:normal !important; display:inline-flex !important; align-items:center !important; justify-content:center !important; gap:.15rem !important; }
 #scythed-admin-modal .admin-bottom-close > i { display:inline-block !important; color:inherit !important; -webkit-text-fill-color:currentColor !important; }
 </style>
 
-
 <style id="scythed-v17-requested-final-fixes">
-/* Wszystkie przyciski użytkowe w panelu mają typografię jak LOGI/WYLOGUJ: zwykłą i jednakową. */
+
 #scythed-admin-modal .scythed-logs-close-button,
 #scythed-admin-modal .scythed-admin-utility-button,
 #scythed-admin-modal #admin-clear-logs-button {
@@ -9689,7 +9586,7 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
 #scythed-admin-modal #admin-clear-logs-button i { font-size: 12px !important; }
 #scythed-admin-modal #admin-create-password { padding-right: 2.5rem !important; }
 #scythed-admin-modal #admin-create-password + button { min-width: 28px !important; min-height: 28px !important; padding: .25rem !important; }
-/* Przyciski panelu (w tym zamknięcie panelu) mają zwykłą, jednolitą typografię jak LOGI/WYLOGUJ. */
+
 #scythed-admin-modal .admin-bottom-close,
 #scythed-admin-modal button[onclick*="adminToggleLogs"],
 #scythed-admin-modal button[onclick*="adminLogout"] {
@@ -9699,10 +9596,10 @@ html:not(.dark) #scythed-admin-modal .admin-admin-status {
   letter-spacing: 0 !important;
   text-transform: none !important;
 }
-/* Nie pozwalaj stylom przycisków nadpisać klasy hidden, szczególnie moderatorowi. */
+
 #scythed-admin-modal .scythed-admin-utility-button.hidden,
 #scythed-admin-modal #admin-clear-logs-button.hidden { display: none !important; }
-/* HEX nakładki wygląda jak główny HEX: mono 11px, zwykła grubość, bez toastów przy wpisywaniu. */
+
 #modal-settings #bg-overlay-hex {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
   font-size: 11px !important;
@@ -9714,9 +9611,8 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 #modal-settings h3 { font-size: 14px !important; }
 </style>
 
-
 <style id="scythed-v18-final-ui-fixes">
-/* Spójna typografia: ZAMKNIJ, WYCZYŚĆ LOGI, generator i przyciski paska jak LOGI/WYLOGUJ. */
+
 #scythed-admin-modal .admin-primary-action,
 #scythed-admin-modal .scythed-logs-close-button,
 #scythed-admin-modal .scythed-admin-utility-button,
@@ -9763,9 +9659,8 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 #scythed-admin-modal #admin-clear-logs-button.hidden { display: none !important; }
 </style>
 
-
 <style id="scythed-v19-targeted-fixes">
-/* Ikona zweryfikowanego konta ma stały niebieski kolor, niezależny od motywu. */
+
 #profile-verified-icon,
 #profile-verified-icon:hover,
 #profile-verified-icon:focus {
@@ -9774,18 +9669,17 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
   text-shadow: none !important;
   filter: none !important;
 }
-/* Przycisk zamknięcia całego panelu administratora jest pogrubiony jak „UTWÓRZ KONTO”. */
+
 #scythed-admin-modal .admin-bottom-close,
 #scythed-admin-modal .admin-bottom-close > * {
   font-weight: 700 !important;
 }
-/* W dzienniku zmian zostaje tylko górny przycisk zamknięcia, po prawej stronie nagłówka. */
+
 #scythed-admin-modal .scythed-logs-close-bottom { display: none !important; }
 </style>
 
-
 <style id="scythed-v20-password-eye-and-verified-status">
-/* Pole hasła: oczko jest stabilnie wycentrowane po prawej stronie i nie przesuwa się po najechaniu. */
+
 #scythed-admin-modal #admin-create-password { padding-right: 2.75rem !important; }
 #scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button {
   position: absolute !important;
@@ -9817,7 +9711,7 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
   transform: none !important;
   animation: none !important;
 }
-/* Status „ZWERYFIKOWANY” i jego checkmark mają zawsze stały niebieski kolor, niezależny od motywu. */
+
 #scythed-admin-modal .admin-verified-status,
 #scythed-admin-modal .admin-verified-status:hover,
 #scythed-admin-modal .admin-verified-status:focus {
@@ -9845,9 +9739,8 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 }
 </style>
 
-
 <style id="scythed-v22-moderator-and-stable-eye-fixes">
-/* Nazwa/login i hasło mają identyczne wymiary. */
+
 #scythed-admin-modal #admin-create-username,
 #scythed-admin-modal #admin-create-password {
   box-sizing: border-box !important;
@@ -9856,7 +9749,7 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
   min-height: 42px !important;
   line-height: 1.25rem !important;
 }
-/* Oczko pozostaje nieruchome przy najechaniu, fokusie i kliknięciu. */
+
 #scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button,
 #scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button:hover,
 #scythed-admin-modal #admin-create-password + button.scythed-admin-utility-button:focus,
@@ -9893,8 +9786,7 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
   animation: none !important;
   pointer-events: none !important;
 }
-/* Ikona w statusie zweryfikowanego konta ma taki sam niebieski kolor jak młotek moderatora,
-   niezależnie od motywu i reguł akcentu użytkownika. */
+
 #scythed-admin-modal .admin-verified-status > i,
 #scythed-admin-modal .admin-verified-status:hover > i,
 #scythed-admin-modal .admin-verified-status:focus > i {
@@ -9906,9 +9798,8 @@ html.dark #modal-settings #bg-overlay-hex { color: #e4e4e7 !important; }
 }
 </style>
 
-
 <style id="scythed-v23-eye-like-password-fields-and-checkmark-scope">
-/* Oczko generatora ma taki sam prosty wygląd jak oczka przy zmianie hasła - bez kafelka/przycisku. */
+
 #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"] ,
 #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"]:hover,
 #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"]:focus,
@@ -9922,23 +9813,21 @@ html.dark #scythed-admin-modal #admin-create-password + button[onclick*="toggleP
 #scythed-admin-modal #admin-create-password + button[onclick*="togglePasswordVisibility"] > i {
   color: inherit !important; -webkit-text-fill-color: currentColor !important; transform: none !important; animation: none !important;
 }
-/* Tylko status „ZWERYFIKOWANY” ma stały niebieski check; kontrolki z checkmarkiem nadal używają akcentu motywu. */
+
 #scythed-admin-modal .admin-verified-status > i,
 #scythed-admin-modal .admin-verified-status:hover > i,
 #scythed-admin-modal .admin-verified-status:focus > i { color:#60a5fa !important; -webkit-text-fill-color:#60a5fa !important; }
 </style>
 
-
 <style id="scythed-v24-requested-polish-fixes">
-/* The generated password is intentionally visible in the administrator's account form. */
+
 #scythed-admin-modal #admin-create-password { padding-right: .625rem !important; }
-/* Clear session-specific copy when an administrator opens the management panel. */
-/* Keep the administrator close control identical to the settings close button. */
+
 #scythed-admin-modal .admin-bottom-close {
   font-family: var(--font-orbitron, Orbitron, ui-sans-serif, sans-serif) !important;
   font-weight: 700 !important;
 }
-/* Settings heading and gear are a little more prominent; the overlay icon follows the same accent as other settings icons. */
+
 #modal-settings .font-bold.flex.items-center.gap-1\.5 > i.fa-wand-magic-sparkles {
   color: var(--brand-readable-accent, var(--brand-red, #ef4444)) !important;
 }
@@ -9953,7 +9842,7 @@ html.dark #modal-settings #app-bg-effects-panel {
 #modal-settings #app-bg-effects-panel > span {
   color: var(--brand-readable-accent, var(--brand-red, #ef4444)) !important;
 }
-/* Favorite and pin checkboxes use a steady neutral grey, avoiding delayed accent-color refreshes. */
+
 #modal-entry #entry-favorite,
 #modal-entry #entry-pinned {
   accent-color: #71717a !important;
@@ -9965,15 +9854,14 @@ html.dark #modal-settings #app-bg-effects-panel {
 }
 </style>
 
-
 <style id="scythed-v27-overlay-effects-light-theme-match">
-/* In light mode the overlay-effects icon follows the same dark text color as other labels, not the user's accent color. */
+
 html:not(.dark) #modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles,
 html:not(.dark) #modal-settings .font-bold.flex.items-center.gap-1\.5 > i.fa-wand-magic-sparkles {
   color: #27272a !important;
   -webkit-text-fill-color: #27272a !important;
 }
-/* Match the effects panel surface to the "Wielkość" select surface. */
+
 html:not(.dark) #modal-settings #app-bg-effects-panel {
   background-color: #ffffff !important;
 }
@@ -9982,9 +9870,8 @@ html.dark #modal-settings #app-bg-effects-panel {
 }
 </style>
 
-
 <style id="scythed-v28-overlay-effects-correct-theme-match">
-/* The effects heading text follows the theme's normal foreground color. */
+
 html:not(.dark) #modal-settings #app-bg-effects-panel > span {
   color: #111827 !important;
   -webkit-text-fill-color: #111827 !important;
@@ -9993,12 +9880,12 @@ html.dark #modal-settings #app-bg-effects-panel > span {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
-/* The wand icon remains dynamic and follows the same accent color as other themed icons. */
+
 #modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles {
   color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
   -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
 }
-/* Match the full effects panel to the "Wielkość" tile: zinc-100 in light mode, black/60 in dark mode. */
+
 html:not(.dark) #modal-settings #app-bg-effects-panel {
   background-color: #f4f4f5 !important;
   border-color: #e4e4e7 !important;
@@ -10009,9 +9896,8 @@ html.dark #modal-settings #app-bg-effects-panel {
 }
 </style>
 
-
 <style id="scythed-v29-wand-icon-dynamic-accent">
-/* Różdżka zawsze korzysta z tego samego dynamicznego akcentu co pozostałe ikony - również w ciemnym motywie. */
+
 #modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles,
 #modal-settings .font-bold.flex.items-center.gap-1\.5 > i.fa-wand-magic-sparkles {
   color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
@@ -10025,7 +9911,7 @@ html.dark #modal-settings #app-bg-effects-panel {
   function syncOverlayWand(){
     const icon = document.querySelector('#modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles');
     if (!icon) return;
-    // Use the same computed accent variable as the other themed icons; do not hardcode a light/dark color.
+
     icon.style.setProperty('color', 'var(--brand-readable-accent, var(--brand-red, #ff0033))', 'important');
     icon.style.setProperty('-webkit-text-fill-color', 'var(--brand-readable-accent, var(--brand-red, #ff0033))', 'important');
   }
@@ -10038,16 +9924,15 @@ html.dark #modal-settings #app-bg-effects-panel {
 })();
 </script>
 
-
 <style id="scythed-v30-overlay-effects-final-match">
-/* The overlay-effects heading uses the same normal (non-bold) weight as other setting labels. */
+
 #modal-settings #app-bg-effects-panel > span {
   font-weight: 400 !important;
 }
 #modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles {
   font-weight: 400 !important;
 }
-/* Match the complete effects tile to the other settings tiles in both themes. */
+
 html:not(.dark) #modal-settings #app-bg-effects-panel,
 body:not(.dark) #modal-settings #app-bg-effects-panel {
   background-color: #f4f4f5 !important;
@@ -10061,9 +9946,8 @@ body.dark #modal-settings #app-bg-effects-panel,
 }
 </style>
 
-
 <style id="scythed-v31-overlay-effects-precise-fix">
-/* Match the heading typography to the "Tryb Streamera" label: text-xs font-semibold. */
+
 #modal-settings #app-bg-effects-panel > span {
   font-size: 0.75rem !important;
   line-height: 1rem !important;
@@ -10077,7 +9961,7 @@ body.dark #modal-settings #app-bg-effects-panel > span,
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
-/* Keep the Font Awesome glyph intact (solid icons require weight 900), while its color follows the dynamic theme accent. */
+
 #modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles {
   font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
   font-weight: 900 !important;
@@ -10085,7 +9969,7 @@ body.dark #modal-settings #app-bg-effects-panel > span,
   -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
   filter: none !important;
 }
-/* Same panel surface as the other settings tiles; dark surface uses the requested #0c0c0e. */
+
 html:not(.dark) #modal-settings #app-bg-effects-panel,
 body:not(.dark) #modal-settings #app-bg-effects-panel {
   background-color: #f4f4f5 !important;
@@ -10099,20 +9983,18 @@ body.dark #modal-settings #app-bg-effects-panel,
 }
 </style>
 
-
 <style id="scythed-v35-exact-panel-surface-and-overlay-visibility">
-/* Bez własnego obrazu warstwa nakładki ma być całkowicie niewidoczna. */
+
 #app-bg-overlay,
 body:not(.has-custom-bg) #app-bg-overlay {
   background-color: transparent !important;
   background-image: none !important;
 }
-/* Nakładka jest aktywna wyłącznie po załadowaniu własnego tła aplikacji. */
+
 body.has-custom-bg #app-bg-overlay {
   background-color: var(--app-bg-overlay-color, rgba(0,0,0,.4)) !important;
 }
-/* Wiersz „Panel Administracyjny” albo „Logi SCYTHED” w ustawieniach.
-   Używa jawnego koloru, aby starsze klasy Tailwind i reguły motywu go nie nadpisywały. */
+
 html.dark body #modal-settings #general-admin-open-panel-wrap,
 html.dark body #modal-settings #security-settings-category #general-admin-open-panel-wrap,
 body.dark #modal-settings #general-admin-open-panel-wrap,
@@ -10129,7 +10011,7 @@ body:not(.dark) #modal-settings #general-admin-open-panel-wrap {
   border-color: #d4d4d8 !important;
   color: #27272a !important;
 }
-/* Przycisk w tym wierszu ma dokładnie powierzchnię #0c0c0e w ciemnym motywie. */
+
 html.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
 html.dark body #general-admin-open-panel-wrap button.admin-access-action,
 body.dark #general-admin-open-panel-wrap button.admin-access-action,
@@ -10176,9 +10058,8 @@ body.dark #general-admin-open-panel-wrap button.admin-access-action:hover,
 })();
 </script>
 
-
 <style id="scythed-v37-admin-button-gray-fix">
-/* Ujednolicenie przycisku OTWÓRZ PANEL / SPRAWDŹ LOGI z pozostałymi przyciskami ustawień w ciemnym motywie. */
+
 html.dark body #modal-settings #security-settings-category #general-admin-open-panel-wrap button.admin-access-action,
 html.dark body #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
 html.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-action,
@@ -10203,9 +10084,8 @@ body.dark #modal-settings #general-admin-open-panel-wrap button.admin-access-act
 }
 </style>
 
-
 <style id="scythed-v40-unified-toggle-icon-colors">
-/* DŹWIĘK/WYCISZONY, WŁĄCZONE/WYCISZONE and UKRYJ all use the same contrast-aware accent color. */
+
 html:not(.dark) body #sound-toggle-btn #sound-icon,
 html:not(.dark) body #notifications-toggle-btn #notifications-icon,
 html:not(.dark) #theme-toggle-icon.fa-eye-slash {
