@@ -9842,3 +9842,41 @@ body.dark #modal-settings #app-bg-effects-panel,
   border-color: #27272a !important;
 }
 </style>
+
+
+<style id="scythed-v31-overlay-effects-precise-fix">
+/* Match the heading typography to the "Tryb Streamera" label: text-xs font-semibold. */
+#modal-settings #app-bg-effects-panel > span {
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  font-weight: 600 !important;
+  color: #18181b !important;
+  -webkit-text-fill-color: #18181b !important;
+}
+html.dark #modal-settings #app-bg-effects-panel > span,
+body.dark #modal-settings #app-bg-effects-panel > span,
+.dark #modal-settings #app-bg-effects-panel > span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+/* Keep the Font Awesome glyph intact (solid icons require weight 900), while its color follows the dynamic theme accent. */
+#modal-settings #app-bg-effects-panel > span > i.fa-wand-magic-sparkles {
+  font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
+  font-weight: 900 !important;
+  color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  filter: none !important;
+}
+/* Same panel surface as the other settings tiles; dark surface uses the requested #0c0c0e. */
+html:not(.dark) #modal-settings #app-bg-effects-panel,
+body:not(.dark) #modal-settings #app-bg-effects-panel {
+  background-color: #f4f4f5 !important;
+  border-color: #e4e4e7 !important;
+}
+html.dark #modal-settings #app-bg-effects-panel,
+body.dark #modal-settings #app-bg-effects-panel,
+.dark #modal-settings #app-bg-effects-panel {
+  background-color: #0c0c0e !important;
+  border-color: #27272a !important;
+}
+</style>
