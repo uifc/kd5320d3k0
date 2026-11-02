@@ -2041,6 +2041,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             }
 
             const PLATFORMS = [
+                { id: 'allegro', name: 'Allegro', icon: 'fa-solid fa-bag-shopping', color: '#FF5A00', logo: 'assets/logos/allegro.png' },
                 { id: 'battlenet', name: 'Battle.net', icon: 'fa-solid fa-bolt', color: '#00aeef', logo: 'assets/logos/battlenet.png' },
                 { id: 'discord', name: 'Discord', icon: 'fa-brands fa-discord', color: '#5865F2', logo: 'assets/logos/discord.png' },
                 { id: 'ea', name: 'EA App', icon: 'fa-solid fa-gamepad', color: '#ff4500', logo: 'assets/logos/ea.png' },
@@ -2090,7 +2091,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 { id: 'linkedin', name: 'LinkedIn', icon: 'fa-brands fa-linkedin', color: '#0A66C2', logo: 'assets/logos/linkedin.png' },
                 { id: 'soundcloud', name: 'SoundCloud', icon: 'fa-brands fa-soundcloud', color: '#FF5500', logo: 'assets/logos/soundcloud.png' },
                 { id: 'bluesky', name: 'Bluesky', icon: 'fa-solid fa-cloud', color: '#1185FE', logo: 'assets/logos/bluesky.png' },
-                { id: 'allegro', name: 'Allegro', icon: 'fa-solid fa-bag-shopping', color: '#FF5A00', logo: 'assets/logos/allegro.png' },
                 { id: 'olx', name: 'OLX', icon: 'fa-solid fa-tag', color: '#002F34', logo: 'assets/logos/olx.png', themeAdaptive: true },
                 { id: 'ebay', name: 'eBay', icon: 'fa-brands fa-ebay', color: '#E53238', logo: 'assets/logos/ebay.png' },
                 { id: 'vinted', name: 'Vinted', icon: 'fa-solid fa-shirt', color: '#007782', logo: 'assets/logos/vinted.png' },
@@ -4959,7 +4959,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 }
                 document.getElementById('modal-entry-title').innerText = 'DODAJ NOWE KONTO';
                 document.getElementById('entry-id').value = '';
-                document.getElementById('entry-platform').value = 'battlenet';
+                document.getElementById('entry-platform').value = 'allegro';
                 document.getElementById('entry-custom-platform').value = '';
                 updateCustomPlatformFieldVisibility();
                 document.getElementById('entry-account').value = '';
