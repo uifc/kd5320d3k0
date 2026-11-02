@@ -10,7 +10,7 @@
 <meta content="https://scythed.xyz" property="og:url"/>
 <meta content="website" property="og:type"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<title>SCYTHED — Menedżer haseł</title>
+<title>SCYTHED - Menedżer haseł</title>
 <link href="/assets/logos/logo.png?v=2" rel="icon" type="image/png"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
@@ -1508,8 +1508,9 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 <p class="text-xs text-zinc-500 dark:text-gray-500 mt-1">Kliknij "DODAJ KONTO", aby utworzyć Twój pierwszy wpis.</p>
 </div>
 </main>
-<div class="fixed bottom-4 left-4 z-40 flex flex-col gap-2 max-w-[300px] w-full">
-<div class="bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md transition-all duration-300 glow-effect relative">
+<div class="fixed bottom-4 left-4 z-40 flex flex-col gap-2 max-w-[300px] w-full" id="corner-profile-wrap">
+<button aria-controls="corner-profile-card" aria-expanded="true" aria-label="Ukryj profil" class="hidden" id="corner-profile-toggle" onclick="window.scythedApp.toggleMobileProfile()" type="button"><i class="fas fa-chevron-down" id="corner-profile-toggle-icon"></i><span id="corner-profile-toggle-label">UKRYJ PROFIL</span></button>
+<div class="bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md transition-all duration-300 glow-effect relative" id="corner-profile-card">
 <div class="w-full h-16 bg-cover bg-center relative group default-banner transition-all duration-300" id="profile-card-banner">
 <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2 backdrop-blur-[2px]">
 <button class="p-1.5 bg-black/70 hover:bg-black text-white text-xs rounded-lg border border-white/20 transition flex items-center gap-1" onclick="document.getElementById('corner-banner-input').click()" title="Zmień Banner">
@@ -1569,7 +1570,7 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 <button class="w-12 h-12 rounded-2xl bg-white/95 dark:bg-black/95 border border-zinc-200 dark:border-brand-border text-brand-red hover:scale-105 active:scale-95 shadow-2xl backdrop-blur-md flex items-center justify-center text-xl transition-all glow-effect" onclick="window.scythedApp.openSettingsModal()" title="USTAWIENIA">
 <i class="fas fa-gear"></i>
 </button>
-<span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">v.7.2</span>
+<span class="text-[9px] font-mono text-zinc-500 dark:text-gray-500 pr-1 tracking-wider">v.7.4</span>
 </div>
 <footer class="w-full max-w-xl mx-auto text-center px-4 mt-8 space-y-1 relative z-10">
 <p class="text-[11px] md:text-xs text-zinc-600 dark:text-gray-400 font-mono leading-tight">
@@ -2773,8 +2774,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     void 0;
                 }
 
-                // Usunięcie obrazu przywraca bazowy wygląd tła i czyści efekty,
-                // aby nie wpływały na domyślne tło ani na kolejny obraz.
                 appBgBlur = 0;
                 appBgOverlayColor = '#000000';
                 appBgOverlayOpacity = 40;
@@ -2821,7 +2820,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const hex = String(value || '').trim().replace(/^#?/, '#');
                 if (!/^#[0-9a-fA-F]{6}$/.test(hex)) {
                     if (input) input.value = String(appBgOverlayColor || '#000000').toUpperCase();
-                    // Pole koloru nakładki aktualizuje się po cichu - bez toastów i dźwięków.
                     return;
                 }
                 const normalized = hex.toLowerCase();
@@ -2854,9 +2852,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 
                     const overlayColor = `rgba(${r}, ${g}, ${b}, ${alpha})`;
                     document.documentElement.style.setProperty('--app-bg-overlay-color', overlayColor);
-                    // Ustawiaj kolor bezpośrednio na warstwie nakładki. Samo CSS-owe
-                    // tło nie wystarcza, jeśli wcześniej usunięto obraz (pozostaje wtedy
-                    // inline backgroundColor: transparent).
                     if (overlayEl) overlayEl.style.backgroundColor = appBgUrl ? overlayColor : 'transparent';
 
                     if (appBgUrl) {
@@ -3463,7 +3458,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 renderVaultEntries();
                 startActivityMonitoring();
                 playSound('save');
-                // updateBadgesDisplay() already starts the privileged-name check; do not launch a second prompt here.
             }
 
             function clearSensitiveRuntimeState() {
@@ -3698,7 +3692,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 } catch(error) { showStatus(error.message || 'Błąd zmiany hasła.', true); }
             }
 
-            // Slider thumb midpoint is 1.0; map its two halves to 0.5x..1.0x and 1.0x..2.0x.
             function headerSliderValueToSpeed(value) {
                 const p = Math.min(1.5, Math.max(0.5, Number.isFinite(Number(value)) ? Number(value) : 1.0));
                 return p <= 1 ? 0.5 + (p - 0.5) : 1 + (p - 1) * 2;
@@ -3810,7 +3803,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     if (modeText) modeText.innerText = 'CIEMNY';
                     if (notify) showToast("Przełączono na tryb ciemny.", "info");
                 }
-                // Recalculate accent text contrast whenever the light/dark mode changes.
                 if (typeof activeBrandColor === 'string') applyBrandColor(activeBrandColor, false);
             }
 
@@ -4002,7 +3994,12 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 function createParticles() {
                     particles = [];
                     shootingStars = [];
-                    const count = Math.max(25, Math.floor((width * height) / 5000));
+                    const calculatedCount = Math.max(25, Math.floor((width * height) / 5000));
+                    const deviceMemory = Number(navigator.deviceMemory) || 0;
+                    const lowMemoryLimit = deviceMemory > 0 && deviceMemory <= 1 ? 80
+                        : deviceMemory > 1 && deviceMemory <= 2 ? 120
+                        : calculatedCount;
+                    const count = Math.min(calculatedCount, lowMemoryLimit);
                     for (let i = 0; i < count; i++) {
                         particles.push(new Particle());
                     }
@@ -4284,7 +4281,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const colorInput = document.getElementById('brand-hex-input');
                 if (colorInput) colorInput.value = hex;
                 document.documentElement.style.setProperty('--brand-red', hex);
-                // Accent text/icons use a contrast-safe shade of the selected primary color.
                 const root = document.documentElement;
                 const readableAccent = getReadableBrandAccent(hex, root.classList.contains('dark'));
                 const contrastText = getBrandContrastText(hex);
@@ -4432,8 +4428,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const badges = new Map((Array.isArray(profile.badges) ? profile.badges : [])
                     .map(item => [String(item.badge_key || ''), Number(item.badge_level) || 1]));
                 const hasPrivilegedBadge = ['owner', 'admin', 'moderator'].some(key => badges.has(key));
-                // Fail closed: nie pokazuj żadnych odznak ani znacznika weryfikacji,
-                // dopóki użytkownik nie potwierdzi hasłem nazwy konta uprzywilejowanego.
                 if (hasPrivilegedBadge && privilegedNameVerifiedFor !== u) {
                     void enforcePrivilegedNamePassword();
                     return;
@@ -4443,7 +4437,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 const isZasluzony = badges.has('zasluzony');
                 const bugLevel = badges.get('bug_hunter');
                 const isModerator = badges.has('moderator');
-                // Beta Tester jest nadawany wyłącznie jako jawna odznaka z API; data konta nie przydziela go automatycznie.
                 const showBeta = badges.has('beta_tester');
 
                 if (ownerBadge) ownerBadge.classList.toggle('hidden', !isOwner);
@@ -4474,8 +4467,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
 
             function playSound(type) {
                 if (isSoundMuted) return;
-                // Na ekranie logowania/tworzenia hasła dźwięk kliknięcia jest
-                // dozwolony wyłącznie dla świadomej aktywacji przycisku.
                 const authOverlayForSound = document.getElementById('auth-overlay');
                 if (authOverlayForSound && !authOverlayForSound.classList.contains('hidden') && window.__scythedAuthButtonSoundAllowed === false) return;
                 try {
@@ -4601,8 +4592,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                 if (scale == 1) { html.classList.add('size-small'); if (label) label.innerText = 'MAŁA'; }
                 else if (scale == 3) { html.classList.add('size-large'); if (label) label.innerText = 'DUŻA'; }
                 else { html.classList.add('size-medium'); if (label) label.innerText = 'NORMALNA'; }
-                // Font scaling changes layout metrics; refresh pointer-relative canvas effects
-                // so they do not remain offset until the next mouse movement.
                 requestAnimationFrame(() => {
                     window.dispatchEvent(new Event('resize'));
                     const card = document.querySelector('#app-card, .app-card, #main-card');
@@ -5004,7 +4993,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             }
 
             function generateNamePassword12() {
-                // Ten generator jest przeznaczony wyłącznie do tworzenia nowej zweryfikowanej nazwy w panelu administratora.
                 const field = document.getElementById('admin-create-password');
                 const adminPanel = document.getElementById('admin-content-view');
                 if (!field || !adminPanel || adminPanel.classList.contains('hidden')) return;
@@ -6512,7 +6500,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     adminBadgeTypeChanged();
                     adminRefreshUsers();
                 }
-                // Dostęp wynika z rangi: moderator widzi wyłącznie dziennik zmian.
             }
             function closeAdminPanel() { document.getElementById('scythed-admin-modal').classList.add('hidden'); }
             function adminLogout(showMessage = true) {
@@ -6615,7 +6602,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
                     }).join(' ') || '-';
                     const hasModeratorBadge = (u.badges || []).some(b => b.badge === 'moderator' || b.badge === 'mod');
                     const verifiedBox = u.verified ? '<span class="admin-verified-status" title="Konto zweryfikowane"><i class="fas fa-circle-check mr-1"></i>ZWERYFIKOWANY</span>' : '<span class="text-zinc-500">Niezweryfikowane</span>';
-                    // Konta uprzywilejowane pokazują wyłącznie rolę, bez osobnego statusu weryfikacji.
                     const status = isOwnerProfile
                         ? `<span class="admin-owner-status" title="Właściciel projektu"><i class="fas fa-crown mr-1"></i>WŁAŚCICIEL</span>`
                         : isAdminAccount
@@ -6676,7 +6662,6 @@ html:not(.dark) #scythed-admin-modal .text-red-600 {
             }
             let scythedAdminUndoAction = null;
             function showAdminUndo(message, undoAction) {
-                // Panel admina pokazuje wyłącznie wynik operacji - bez przycisku cofania.
                 scythedAdminUndoAction = null;
                 const el = document.getElementById('admin-action-message'); if (!el) return;
                 el.className = 'text-sm rounded-lg p-3 bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-100';
@@ -8118,7 +8103,7 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
 </style>
 
 <style id="scythed-badge-hover-unified">
-/* Ujednolicona reakcja wszystkich odznak na kursor */
+
 #profile-badges-container .profile-badge-tooltip {
   pointer-events: auto !important;
   cursor: help !important;
@@ -8146,6 +8131,83 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   }
 }
 </style>
+
+
+
+<style id="scythed-mobile-touch-improvements">
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+  button, a, label, input, select, textarea { touch-action: manipulation; }
+  button, label { -webkit-tap-highlight-color: transparent; }
+
+  @media (max-width: 640px) {
+    body > header {
+      box-sizing: border-box; min-height: 0; padding: .65rem .8rem !important;
+      gap: .65rem; flex-wrap: wrap; align-items: center;
+    }
+    body > header > div:first-child {
+      width: 100%; min-width: 0; justify-content: center; gap: .6rem;
+    }
+    body > header > div:first-child > div { width: 2.25rem; height: 2.25rem; flex: 0 0 2.25rem; }
+    body > header > div:first-child > span { font-size: 1.05rem; letter-spacing: .12em; }
+    body > header > div:nth-child(2) {
+      display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%; min-width: 0; gap: .4rem !important;
+    }
+    body > header > div:nth-child(2) > button,
+    body > header > div:nth-child(2) > label {
+      box-sizing: border-box; min-width: 0; min-height: 3.1rem; padding: .45rem .2rem !important;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .3rem; border-radius: .7rem; text-align: center; white-space: normal;
+    }
+    body > header > div:nth-child(2) > button i,
+    body > header > div:nth-child(2) > label i { margin: 0; font-size: .95rem; }
+    body > header > div:nth-child(2) > button span,
+    body > header > div:nth-child(2) > label span {
+      display: block !important; font-size: .53rem; line-height: 1.15;
+      letter-spacing: .015em; overflow-wrap: anywhere;
+    }
+    main { padding: .75rem !important; gap: 1rem !important; }
+    #header-card { padding: 1rem !important; gap: .85rem; border-radius: 1rem; }
+    #header-card h1 { font-size: 1rem !important; line-height: 1.35; gap: .5rem; }
+    #header-card p { font-size: .68rem; line-height: 1.55; }
+    #add-entry-btn { min-height: 2.9rem; padding: .75rem 1rem !important; font-size: .72rem !important; }
+    #vault-controls-row { gap: .55rem !important; }
+    #vault-search-wrap { flex: 1 1 100%; min-width: 0 !important; }
+    #vault-controls-row .vault-filter-control, #vault-search-input {
+      box-sizing: border-box; width: 100%; min-width: 0 !important; min-height: 2.8rem;
+      font-size: .82rem !important;
+    }
+    #vault-controls-row .vault-filter-control { flex: 1 1 calc(50% - .3rem); }
+    input:not([type="checkbox"]):not([type="radio"]), select, textarea { max-width: 100%; font-size: 16px; }
+    button { min-height: 2.65rem; }
+    .card-scale { min-width: 0; }
+    #global-toggle-emails, #global-toggle-passwords {
+      min-height: 2.65rem; padding: .55rem .65rem !important; font-size: .62rem !important;
+    }
+  }
+  @media (max-width: 370px) {
+    body > header > div:nth-child(2) { gap: .25rem !important; }
+    body > header > div:nth-child(2) > button,
+    body > header > div:nth-child(2) > label { padding-inline: .1rem !important; }
+    body > header > div:nth-child(2) > button span,
+    body > header > div:nth-child(2) > label span { font-size: .48rem; }
+  }
+  @media (hover: none) and (pointer: coarse) {
+    body > header button:hover, body > header label:hover {
+      transform: none !important; filter: none !important; box-shadow: none !important;
+    }
+    body > header .brand-logo:hover { transform: none !important; }
+    .badge-hover-tooltip { display: none !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body > header *, #header-card * {
+      scroll-behavior: auto !important; animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important; transition-duration: .01ms !important;
+    }
+  }
+</style>
+
 </body>
 </html>
 <style>
@@ -9937,5 +9999,341 @@ html:not(.dark) #theme-toggle-icon.fa-eye-slash {
   color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
   -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
   opacity: 1 !important;
+}
+</style>
+
+<script>
+(function () {
+  const app = window.scythedApp = window.scythedApp || {};
+  app.toggleMobileProfile = function () {
+    const wrap = document.getElementById('corner-profile-wrap');
+    const card = document.getElementById('corner-profile-card');
+    const btn = document.getElementById('corner-profile-toggle');
+    const icon = document.getElementById('corner-profile-toggle-icon');
+    const label = document.getElementById('corner-profile-toggle-label');
+    if (!wrap || !card || !btn) return;
+    const collapsed = wrap.classList.toggle('mobile-profile-collapsed');
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    btn.setAttribute('aria-label', collapsed ? 'Pokaż profil' : 'Ukryj profil');
+    if (icon) icon.className = collapsed ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+    if (label) label.textContent = collapsed ? 'POKAŻ PROFIL' : 'UKRYJ PROFIL';
+  };
+})();
+</script>
+<style>
+
+@media (max-width: 639px) {
+  body > header { gap: .65rem !important; align-items: center !important; }
+  body > header > div:first-child { flex: 0 0 auto !important; min-width: 0 !important; gap: .35rem !important; }
+  body > header > div:first-child > span { font-size: .88rem !important; letter-spacing: .025em !important; }
+  body > header > div:last-child {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-auto-rows: 40px !important;
+    gap: .35rem !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+  body > header > div:last-child > button,
+  body > header > div:last-child > label {
+    width: 100% !important; height: 40px !important; min-width: 0 !important;
+    padding: 0 !important; margin: 0 !important; border-radius: 9px !important;
+    display: flex !important; align-items: center !important; justify-content: center !important;
+    gap: 0 !important; font-size: 0 !important; line-height: 1 !important;
+  }
+  body > header > div:last-child > button i,
+  body > header > div:last-child > label i { font-size: 15px !important; margin: 0 !important; }
+  #corner-profile-wrap { max-width: min(300px, calc(100vw - 2rem)) !important; gap: .35rem !important; }
+  #corner-profile-toggle {
+    display: flex !important; align-items: center !important; justify-content: center !important;
+    gap: .55rem !important; width: 100% !important; min-height: 30px !important;
+    padding: .35rem .75rem !important; border-radius: 999px !important;
+    border: 1px solid rgba(239,68,68,.45) !important;
+    background: rgba(255,255,255,.96) !important; color: #dc2626 !important;
+    box-shadow: 0 5px 18px rgba(0,0,0,.18) !important;
+    font: 800 9px/1 ui-monospace, monospace !important; letter-spacing: .08em !important;
+    touch-action: manipulation !important;
+  }
+  html.dark #corner-profile-toggle { background: rgba(0,0,0,.96) !important; color: #ff5268 !important; }
+  #corner-profile-card { transition: opacity .18s ease, transform .18s ease !important; transform-origin: bottom left !important; }
+  #corner-profile-wrap.mobile-profile-collapsed #corner-profile-card { display: none !important; }
+}
+</style>
+<style>
+
+@media (max-width: 639px) {
+  body > header {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: .4rem !important;
+    padding: .45rem .5rem !important;
+    min-height: 48px !important;
+  }
+  body > header > div:first-child {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    gap: .25rem !important;
+    white-space: nowrap !important;
+  }
+  body > header > div:first-child > div {
+    width: 27px !important;
+    height: 27px !important;
+    flex: 0 0 27px !important;
+  }
+  body > header > div:first-child > span {
+    font-size: .78rem !important;
+    letter-spacing: 0 !important;
+    line-height: 1 !important;
+  }
+  body > header > div:last-child {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    grid-auto-flow: column !important;
+    grid-auto-rows: 30px !important;
+    gap: .2rem !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    width: 0 !important;
+  }
+  body > header > div:last-child > button,
+  body > header > div:last-child > label {
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 7px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    overflow: hidden !important;
+  }
+  body > header > div:last-child > button > span,
+  body > header > div:last-child > label > span { display: none !important; }
+  body > header > div:last-child > button > i,
+  body > header > div:last-child > label > i {
+    display: inline-block !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    line-height: 1 !important;
+  }
+
+  
+  #corner-profile-toggle {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+    -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+    border: 1px solid var(--brand-red, #ff0033) !important;
+    box-shadow: none !important;
+    transition: color .18s ease, border-color .18s ease, opacity .18s ease !important;
+  }
+  #corner-profile-toggle i {
+    color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+    -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+  }
+  #corner-profile-toggle:hover,
+  #corner-profile-toggle:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+    opacity: .82 !important;
+  }
+}
+</style>
+
+<style>
+
+@media (max-width: 639px) {
+  body > header > div:last-child {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: clamp(3px, 1.1vw, 6px) !important;
+  }
+  body > header > div:last-child > button,
+  body > header > div:last-child > label {
+    display: inline-flex !important;
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 38px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }
+  body > header > div:last-child > button > span,
+  body > header > div:last-child > label > span {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  body > header > div:last-child > button > i,
+  body > header > div:last-child > label > i {
+    display: inline-block !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+    line-height: 1 !important;
+  }
+}
+</style>
+
+<style>
+
+@media (max-width: 639px) {
+  body > header {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: .45rem !important;
+    padding: .55rem .75rem !important;
+  }
+  body > header > div:first-child {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: .4rem !important;
+  }
+  body > header > div:first-child > div {
+    width: 30px !important; height: 30px !important;
+    flex: 0 0 30px !important;
+  }
+  body > header > div:first-child > span {
+    font-size: .9rem !important; line-height: 1 !important;
+    letter-spacing: .025em !important;
+  }
+  body > header > div:last-child {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    grid-auto-rows: 34px !important;
+    gap: .35rem !important;
+    width: 100% !important;
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+  }
+  body > header > div:last-child > button,
+  body > header > div:last-child > label {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important; min-width: 0 !important;
+    height: 34px !important; min-height: 34px !important;
+    margin: 0 !important; padding: 0 !important;
+    gap: 0 !important; font-size: 0 !important; line-height: 1 !important;
+    border-radius: 9px !important;
+  }
+  body > header > div:last-child > button > span,
+  body > header > div:last-child > label > span {
+    display: none !important;
+  }
+  body > header > div:last-child > button > i,
+  body > header > div:last-child > label > i {
+    display: inline-block !important;
+    margin: 0 !important; font-size: 15px !important;
+  }
+}
+</style>
+
+<style>
+
+@media (max-width: 639px) {
+  body > header > div:last-child {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+    margin-inline: auto !important;
+  }
+  body > header > div:last-child > button,
+  body > header > div:last-child > label {
+    flex: 0 0 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+</style>
+
+<style>
+
+@media (max-width: 639px) {
+  #corner-profile-toggle,
+  #corner-profile-toggle:hover,
+  #corner-profile-toggle:active,
+  #corner-profile-toggle:focus,
+  #corner-profile-toggle:focus-visible {
+    border-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+    outline-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+}
+</style>
+
+<style>
+
+@media (max-width: 639px) {
+  html.dark #corner-profile-toggle,
+  html.dark #corner-profile-toggle:hover,
+  html.dark #corner-profile-toggle:active,
+  html.dark #corner-profile-toggle:focus,
+  html.dark #corner-profile-toggle:focus-visible,
+  body.dark #corner-profile-toggle,
+  body.dark #corner-profile-toggle:hover,
+  body.dark #corner-profile-toggle:active,
+  [data-theme="dark"] #corner-profile-toggle,
+  [data-theme="dark"] #corner-profile-toggle:hover,
+  [data-theme="dark"] #corner-profile-toggle:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+    -webkit-text-fill-color: var(--brand-readable-accent, var(--brand-red, #ff0033)) !important;
+    border-color: var(--brand-red, #ff0033) !important;
+  }
+  #corner-profile-toggle::before,
+  #corner-profile-toggle::after {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
 }
 </style>
